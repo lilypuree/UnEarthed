@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hextension_core:block/limestone"
+    }
+  }
+}
