@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "hextension_core:block/limestone"
-  }
+  "parent": "hextension_core:block/limestone"
 }
