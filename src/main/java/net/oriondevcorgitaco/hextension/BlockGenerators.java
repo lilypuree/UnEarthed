@@ -33,25 +33,20 @@ public class BlockGenerators {
             String polishedSlabID = polishedID + "_slab";
             String polishedStairID = polishedID + "_stairs";
 
-            Block baseBlock = new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F));
-            Block slabBlock = new SlabBlock(FabricBlockSettings.copyOf(baseBlock));
-            Block stairsBlock = new StairsBlockAccess(baseBlock.getDefaultState(), FabricBlockSettings.copyOf(baseBlock));
-
             //Base
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, id), baseBlock);
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, slabID), slabBlock);
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, stairID), stairsBlock);
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, id), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Hextension.MOD_ID, id)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
 
             //Cobble
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, cobbleID), baseBlock);
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, cobbleSlabID), slabBlock);
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, cobbleStairID), stairsBlock);
-
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, cobbleID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, cobbleSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, cobbleStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Hextension.MOD_ID, cobbleID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
 
             //Polished
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, polishedID), baseBlock);
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, polishedSlabID), slabBlock);
-            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, polishedStairID), stairsBlock);
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, polishedID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, polishedSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Hextension.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Hextension.MOD_ID, polishedID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
         });
     }
 
