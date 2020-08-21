@@ -40,22 +40,19 @@ public class Hextension implements ModInitializer {
     }
 
 
-
-
-
-        public static void addFeatureToBiome(Biome biome, GenerationStep.Feature feature, ConfiguredFeature<?, ?> configuredFeature) {
-            ConvertImmutableFeatures(biome);
-            List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.getGenerationSettings().features;
-            while (biomeFeatures.size() <= feature.ordinal()) {
-                biomeFeatures.add(Lists.newArrayList());
-            }
-            biomeFeatures.get(feature.ordinal()).add(() -> configuredFeature);
-
+    public static void addFeatureToBiome(Biome biome, GenerationStep.Feature feature, ConfiguredFeature<?, ?> configuredFeature) {
+        ConvertImmutableFeatures(biome);
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.getGenerationSettings().features;
+        while (biomeFeatures.size() <= feature.ordinal()) {
+            biomeFeatures.add(Lists.newArrayList());
         }
+        biomeFeatures.get(feature.ordinal()).add(() -> configuredFeature);
 
-        private static void ConvertImmutableFeatures(Biome biome) {
-            if (biome.getGenerationSettings().features instanceof ImmutableList) {
-                biome.getGenerationSettings().features = biome.getGenerationSettings().features.stream().map(Lists::newArrayList).collect(Collectors.toList());
-            }
+    }
+
+    private static void ConvertImmutableFeatures(Biome biome) {
+        if (biome.getGenerationSettings().features instanceof ImmutableList) {
+            biome.getGenerationSettings().features = biome.getGenerationSettings().features.stream().map(Lists::newArrayList).collect(Collectors.toList());
         }
+    }
 }
