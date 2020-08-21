@@ -12,7 +12,6 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.oriondevcorgitaco.hextension.BlockGeneratorReference;
 import net.oriondevcorgitaco.hextension.util.RegistrationHelper;
-import net.oriondevcorgitaco.hextension.util.noise.FastNoise;
 
 import java.util.Random;
 
@@ -23,14 +22,13 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
         super(configCodec);
     }
 
-    FastNoise fastNoise2D = null;
+//    FastNoise fastNoise2D = null;
 
     BlockState cachedBlockState = BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState();
 
     @Override
     public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, DefaultFeatureConfig featureConfig) {
-        setSeed(world.getSeed());
-
+//        setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
@@ -38,7 +36,7 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
                 mutable.set(pos.getX() + x, 0, pos.getZ() + z);
                 int topY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
-                double noise2D = fastNoise2D.GetNoise(mutable.getX(), mutable.getZ()) * 15;
+//                double noise2D = fastNoise2D.GetNoise(mutable.getX(), mutable.getZ()) * 15;
 
                 for (int y = 0; y < topY; y++) {
                     setStrataLayerBlock(y);
@@ -54,13 +52,13 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
     }
 
 
-    private void setSeed(long seed) {
-        if (fastNoise2D == null) {
-            fastNoise2D = new FastNoise((int) seed);
-            fastNoise2D.SetNoiseType(FastNoise.NoiseType.Simplex);
-            fastNoise2D.SetFrequency(0.004F);
-        }
-    }
+//    private void setSeed(long seed) {
+//        if (fastNoise2D == null) {
+//            fastNoise2D = new FastNoise((int) seed);
+//            fastNoise2D.SetNoiseType(FastNoise.NoiseType.Simplex);
+//            fastNoise2D.SetFrequency(0.004F);
+//        }
+//    }
 
     public void setStrataLayerBlock(int yPos) {
         if (yPos % 6 == 0)
@@ -69,7 +67,5 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
             cachedBlockState = BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState();
         else if (yPos % 9 == 0)
             cachedBlockState = BlockGeneratorReference.SLATE.getBlock().getDefaultState();
-
-
     }
 }

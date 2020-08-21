@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hextension:limestone",
+    "hextension:slate",
+    "hextension:marble",
+    "hextension:pumice",
+    "hextension:kimberlite"
+  ]
+}
