@@ -34,7 +34,7 @@ public class Hextension implements ModInitializer {
     public static void strataGeneratorForAllBiomes() {
         for (Biome biome : BuiltinRegistries.BIOME) {
             if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
-                addFeatureToBiome(biome, GenerationStep.Feature.UNDERGROUND_ORES, STRATA_GENERATOR2);
+                addFeatureToBiome(biome, GenerationStep.Feature.UNDERGROUND_ORES, STRATA_GENERATOR);
             }
         }
     }
