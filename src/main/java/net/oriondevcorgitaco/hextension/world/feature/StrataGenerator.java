@@ -44,9 +44,9 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                     if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD)) {
                         if (world.getBiome(mutable).getCategory() == Biome.Category.ICY) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, Blocks.PACKED_ICE.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBlock().getDefaultState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.SNOW_BLOCK.getDefaultState(), 2);
+                                world.setBlockState(mutable, Blocks.DIORITE.getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
                             else

@@ -9,7 +9,8 @@ public class BlockGeneratorReference {
     public static final BlockGeneratorHelper SLATE = new BlockGeneratorHelper("slate", true, true, true, true, true);
     public static final BlockGeneratorHelper MARBLE = new BlockGeneratorHelper("marble", true, true, true, true, true);
     public static final BlockGeneratorHelper PUMICE = new BlockGeneratorHelper("pumice", false, false, false, false, false);
-    public static final BlockGeneratorHelper KIMBERLITE = new BlockGeneratorHelper("kimberlite", false, false, false, false, false);
+    public static final BlockGeneratorHelper KIMBERLITE = new BlockGeneratorHelper("kimberlite", true, true, true, true, true);
+    public static final BlockGeneratorHelper RHYOLITE = new BlockGeneratorHelper("rhyolite", true, true, true, true, true);
 
     public static void init() {
     }
