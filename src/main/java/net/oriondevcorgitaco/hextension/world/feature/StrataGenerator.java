@@ -18,7 +18,7 @@ import net.oriondevcorgitaco.hextension.util.noise.FastNoise;
 import java.util.Random;
 
 public class StrataGenerator extends Feature<DefaultFeatureConfig> {
-    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE1 = RegistrationHelper.registerFeature("strata_gen1", new StrataGenerator(DefaultFeatureConfig.CODEC));
+    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("strata_gen1", new StrataGenerator(DefaultFeatureConfig.CODEC));
 
     public StrataGenerator(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
@@ -72,8 +72,7 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             else
                                 world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBlock().getDefaultState(), 2);
 
-                        }
-                        else if (world.getBiome(mutable).getCategory() == Biome.Category.DESERT) {
+                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.DESERT) {
                             if (noise3D > 0.5)
                                 world.setBlockState(mutable, Blocks.SMOOTH_RED_SANDSTONE.getDefaultState(), 2);
                             else if (noise3D > 0.0)
@@ -83,7 +82,7 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             else
                                 world.setBlockState(mutable, Blocks.SMOOTH_SANDSTONE.getDefaultState(), 2);
 
-                        }else {
+                        } else {
                             if (noise3D > 0.5)
                                 world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
                             else if (noise3D > 0.0)

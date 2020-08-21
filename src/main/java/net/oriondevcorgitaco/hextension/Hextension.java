@@ -12,6 +12,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.oriondevcorgitaco.hextension.util.RegistrationHelper;
 import net.oriondevcorgitaco.hextension.world.feature.StrataGenerator;
+import net.oriondevcorgitaco.hextension.world.feature.StrataGenerator2;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -26,13 +27,14 @@ public class Hextension implements ModInitializer {
         strataGeneratorForAllBiomes();
     }
 
-    public static final ConfiguredFeature<?, ?> STRATA_GENERATOR = RegistrationHelper.newConfiguredFeature("strata_generator", StrataGenerator.UNDERGROUND_STONE1.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    public static final ConfiguredFeature<?, ?> STRATA_GENERATOR = RegistrationHelper.newConfiguredFeature("strata_generator", StrataGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    public static final ConfiguredFeature<?, ?> STRATA_GENERATOR2 = RegistrationHelper.newConfiguredFeature("strata_generator2", StrataGenerator2.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
 
 
     public static void strataGeneratorForAllBiomes() {
         for (Biome biome : BuiltinRegistries.BIOME) {
             if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
-                addFeatureToBiome(biome, GenerationStep.Feature.UNDERGROUND_ORES, STRATA_GENERATOR);
+                addFeatureToBiome(biome, GenerationStep.Feature.UNDERGROUND_ORES, STRATA_GENERATOR2);
             }
         }
     }
