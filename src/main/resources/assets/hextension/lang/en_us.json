@@ -1,3 +1,7 @@
 {
-	"block.minecraft.limestone": "Limestone"
+	"block.hextension.limestone": "Limestone",
+	"block.hextension.slate": "Slate",
+	"block.hextension.marble": "Marble",
+	"block.hextension.pumice": "Pumice",
+	"block.hextension.kimberlite": "Kimberlite"
 }

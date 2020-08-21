@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hextension:block/marble"
+    }
+  }
+}
