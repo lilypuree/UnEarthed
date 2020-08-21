@@ -19,6 +19,10 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.18.0+build.397-1.16"
 }
 
+minecraft {
+	accessWidener = file("src/main/resources/hextension.aw")
+}
+
 processResources {
 	inputs.property "version", project.version
 

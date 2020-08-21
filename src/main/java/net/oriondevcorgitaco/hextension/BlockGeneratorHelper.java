@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BlockGeneratorHelper {
-    public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(Hextension.MOD_ID, "byg"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
+    public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(Hextension.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
 
     private final String id;
     private final boolean hasPolished;
@@ -172,8 +172,6 @@ public class BlockGeneratorHelper {
         String cobbleStairID = cobbleID + "_stairs";
         return Registry.ITEM.get(new Identifier(Hextension.MOD_ID, cobbleStairID));
     }
-
-
 
     public static class StairsBlockAccess extends StairsBlock {
         public StairsBlockAccess(BlockState baseBlockState, AbstractBlock.Settings settings) {
