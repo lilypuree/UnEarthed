@@ -22,22 +22,18 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
         super(configCodec);
     }
 
-//    FastNoise fastNoise2D = null;
 
     BlockState cachedBlockState = BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState();
 
     @Override
     public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, DefaultFeatureConfig featureConfig) {
-//        setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 mutable.set(pos.getX() + x, 0, pos.getZ() + z);
                 int topY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
-
-//                double noise2D = fastNoise2D.GetNoise(mutable.getX(), mutable.getZ()) * 15;
-
+                
                 for (int y = 0; y < topY; y++) {
                     setStrataLayerBlock(y);
                     if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD)) {
