@@ -41,7 +41,7 @@ public class BlockGeneratorHelper {
 //        generatePolishedVariant(hasPolishedVariant);
 //        generateCobbleVariant(hasCobbleVariant);
 
-        blockIdList.add("unearthed:" + id);
+        blockIdList.add(id);
     }
 
     private void generateBaseVariant() {

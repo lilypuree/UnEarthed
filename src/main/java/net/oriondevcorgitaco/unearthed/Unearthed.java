@@ -31,7 +31,7 @@ public class Unearthed implements ModInitializer {
         BlockGeneratorReference.init();
         strataGeneratorForAllBiomes();
 
-        BlockGeneratorHelper.blockIdList.forEach(LOGGER::info);
+        BlockGeneratorHelper.blockIdList.forEach(id -> LOGGER.info(MOD_ID + ":" + id));
     }
 
     public static final ConfiguredFeature<?, ?> STRATA_GENERATOR = RegistrationHelper.newConfiguredFeature("strata_generator", StrataGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
