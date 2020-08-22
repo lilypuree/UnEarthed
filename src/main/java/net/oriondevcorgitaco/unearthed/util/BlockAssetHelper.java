@@ -26,6 +26,12 @@ public class BlockAssetHelper {
         });
     }
 
+    public static void printBlockIDs() {
+        BlockGeneratorHelper.blockIdList.forEach(id -> {
+            Unearthed.LOGGER.info("unearthed: ");
+        });
+    }
+
 
     private static String capitalizeWord(String str){
         String[] words = str.split("\\s");

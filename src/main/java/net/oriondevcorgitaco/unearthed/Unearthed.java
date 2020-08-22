@@ -16,5 +16,6 @@ public class Unearthed implements ModInitializer {
         BlockGeneratorReference.init();
         FeatureAdder.strataGeneratorForAllBiomes();
         BlockAssetHelper.jsonPrinter();
+        BlockAssetHelper.printBlockIDs();
     }
 }
