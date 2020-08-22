@@ -22,7 +22,6 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
         super(configCodec);
     }
 
-
     BlockState cachedBlockState = BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState();
 
     @Override
@@ -46,15 +45,6 @@ public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
         }
         return true;
     }
-
-
-//    private void setSeed(long seed) {
-//        if (fastNoise2D == null) {
-//            fastNoise2D = new FastNoise((int) seed);
-//            fastNoise2D.SetNoiseType(FastNoise.NoiseType.Simplex);
-//            fastNoise2D.SetFrequency(0.004F);
-//        }
-//    }
 
     public void setStrataLayerBlock(int yPos) {
         if (yPos % 6 == 0)
