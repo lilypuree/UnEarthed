@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unearthed:block/marble_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/marble"
+    },
+    "type=top": {
+      "model": "unearthed:block/marble_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unearthed:block/pumice_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/pumice"
+    },
+    "type=top": {
+      "model": "unearthed:block/pumice_slab_top"
+    }
+  }
+}

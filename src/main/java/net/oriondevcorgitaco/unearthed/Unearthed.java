@@ -10,10 +10,13 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -21,11 +24,14 @@ import java.util.stream.Collectors;
 
 public class Unearthed implements ModInitializer {
     public static final String MOD_ID = "unearthed";
+    public static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void onInitialize() {
         BlockGeneratorReference.init();
         strataGeneratorForAllBiomes();
+
+        BlockGeneratorHelper.blockIdList.forEach(LOGGER::info);
     }
 
     public static final ConfiguredFeature<?, ?> STRATA_GENERATOR = RegistrationHelper.newConfiguredFeature("strata_generator", StrataGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));

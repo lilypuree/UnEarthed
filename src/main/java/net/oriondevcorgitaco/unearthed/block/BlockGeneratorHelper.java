@@ -12,6 +12,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BlockGeneratorHelper {
     public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
 
@@ -21,6 +24,8 @@ public class BlockGeneratorHelper {
     private final boolean hasMossy;
     private final boolean hasBricks;
     private final boolean hasMossyBricks;
+
+    public static List<String> blockIdList = new ArrayList<>();
 
 
     public BlockGeneratorHelper(String id, boolean hasPolishedVariant, boolean hasCobbleVariant, boolean hasMossyVariant, boolean hasBricksVariant, boolean hasMossyBricksVariant) {
@@ -33,13 +38,15 @@ public class BlockGeneratorHelper {
         BlockGeneratorReference.ROCK_TYPES.add(this);
 
         generateBaseVariant();
-        generatePolishedVariant(hasPolishedVariant);
-        generateCobbleVariant(hasCobbleVariant);
+//        generatePolishedVariant(hasPolishedVariant);
+//        generateCobbleVariant(hasCobbleVariant);
+
+        blockIdList.add("unearthed:" + id);
     }
 
     private void generateBaseVariant() {
         String slabID = id + "_slab";
-        String stairID = id + "_stair";
+        String stairID = id + "_stairs";
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
