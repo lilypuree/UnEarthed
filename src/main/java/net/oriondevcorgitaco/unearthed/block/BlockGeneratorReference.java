@@ -16,7 +16,7 @@ public class BlockGeneratorReference {
     public static final BlockGeneratorHelper MARBLE = new BlockGeneratorHelper("marble", true, true, true, true, true);
     public static final BlockGeneratorHelper QUARTZITE = new BlockGeneratorHelper("quartzite", true, true, true, true, true);
     public static final BlockGeneratorHelper PHYLLITE = new BlockGeneratorHelper("phyllite", true, true, true, true, true);
-    public static final BlockGeneratorHelper SCHIST = new BlockGeneratorHelper("schust", true, true, true, true, true);
+    public static final BlockGeneratorHelper SCHIST = new BlockGeneratorHelper("schist", true, true, true, true, true);
     //sedimentary
     public static final BlockGeneratorHelper LIMESTONE = new BlockGeneratorHelper("limestone", true, true, true, true, true);
     public static final BlockGeneratorHelper LIGNITE = new BlockGeneratorHelper("lignite", false, false, false, false, false);

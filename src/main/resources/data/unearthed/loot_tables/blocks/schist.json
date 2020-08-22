@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unearthed:schust_wall"
+          "name": "unearthed:schist"
         }
       ],
       "conditions": [

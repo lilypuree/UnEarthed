@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unearthed:schust_slab",
+          "name": "unearthed:schist_slab",
           "functions": [
             {
               "function": "minecraft:explosion_decay"

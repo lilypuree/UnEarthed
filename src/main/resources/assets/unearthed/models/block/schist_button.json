@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/button",
   "textures": {
-    "texture": "unearthed:block/schust"
+    "texture": "unearthed:block/schist"
   }
 }

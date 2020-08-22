@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "unearthed:block/schust",
-    "top": "unearthed:block/schust",
-    "side": "unearthed:block/schust"
-  }
-}
