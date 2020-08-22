@@ -23,7 +23,7 @@ dependencies {
 }
 
 minecraft {
-	accessWidener = file("src/main/resources/hextension.aw")
+	accessWidener = file("src/main/resources/unearthed.aw")
 }
 
 processResources {

@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BlockGeneratorHelper {
-    public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(UnEarthed.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
+    public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
 
     private final String id;
     private final boolean hasPolished;
@@ -39,12 +39,12 @@ public class BlockGeneratorHelper {
     private void generateBaseVariant() {
         String slabID = id + "_slab";
         String stairID = id + "_stair";
-        Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, id), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-        Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-        Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-        Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, id)), new Item.Settings().group(HEXTENSION_TAB)));
-        Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, slabID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, slabID)), new Item.Settings().group(HEXTENSION_TAB)));
-        Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, stairID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, stairID)), new Item.Settings().group(HEXTENSION_TAB)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(HEXTENSION_TAB)));
+        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, slabID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, slabID)), new Item.Settings().group(HEXTENSION_TAB)));
+        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, stairID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, stairID)), new Item.Settings().group(HEXTENSION_TAB)));
 
     }
 
@@ -53,12 +53,12 @@ public class BlockGeneratorHelper {
             String polishedID = "polished_" + this.id;
             String polishedSlabID = polishedID + "_slab";
             String polishedStairID = polishedID + "_stairs";
-            Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, polishedID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, polishedSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, polishedID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedID)), new Item.Settings().group(HEXTENSION_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, polishedSlabID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedSlabID)), new Item.Settings().group(HEXTENSION_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, polishedStairID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedStairID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, polishedID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, polishedSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, polishedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, polishedSlabID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedSlabID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, polishedStairID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedStairID)), new Item.Settings().group(HEXTENSION_TAB)));
 
         }
     }
@@ -68,109 +68,109 @@ public class BlockGeneratorHelper {
             String cobbleID = id + "_cobble";
             String cobbleSlabID = cobbleID + "_slab";
             String cobbleStairID = cobbleID + "_stairs";
-            Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, cobbleID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, cobbleSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(UnEarthed.MOD_ID, cobbleStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleID)), new Item.Settings().group(HEXTENSION_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, cobbleSlabID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleSlabID)), new Item.Settings().group(HEXTENSION_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(UnEarthed.MOD_ID, cobbleStairID), new BlockItem(Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleStairID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleSlabID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleSlabID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleStairID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleStairID)), new Item.Settings().group(HEXTENSION_TAB)));
         }
     }
 
     public Block getBlock() {
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, this.id));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, this.id));
     }
 
     public Block getSlabBlock() {
         String slabID = id + "_slab";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, slabID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, slabID));
     }
 
     public Block getStairBlock() {
         String stairID = id + "_stair";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, stairID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, stairID));
     }
 
     public Block getPolishedBlock() {
         String polishedID = "polished_" + this.id;
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedID));
     }
 
     public Block getPolishedSlabBlock() {
         String polishedID = "polished_" + this.id;
         String polishedSlabID = polishedID + "_slab";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedSlabID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedSlabID));
     }
 
     public Block getPolishedStairBlock() {
         String polishedID = "polished_" + id;
         String polishedStairID = polishedID + "_stairs";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, polishedStairID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedStairID));
     }
 
     public Block getCobbleBlock() {
         String cobbleID = id + "_cobble";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID));
     }
 
     public Block getCobbleSlabBlock() {
         String cobbleID = id + "_cobble";
         String cobbleSlabID = cobbleID + "_slab";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleSlabID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleSlabID));
     }
 
     public Block getCobbleStairBlock() {
         String cobbleID = id + "_cobble";
         String cobbleStairID = cobbleID + "_stairs";
-        return Registry.BLOCK.get(new Identifier(UnEarthed.MOD_ID, cobbleStairID));
+        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleStairID));
     }
 
     public Item getItem() {
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, this.id));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, this.id));
     }
 
     public Item getSlabItem() {
         String slabID = id + "_slab";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, slabID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, slabID));
     }
 
     public Item getStairItem() {
         String stairID = id + "_stair";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, stairID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, stairID));
     }
 
     public Item getPolishedItem() {
         String polishedID = "polished_" + this.id;
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, polishedID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, polishedID));
     }
 
     public Item getPolishedSlabItem() {
         String polishedID = "polished_" + this.id;
         String polishedSlabID = polishedID + "_slab";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, polishedSlabID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, polishedSlabID));
     }
 
     public Item getPolishedStairItem() {
         String polishedID = "polished_" + id;
         String polishedStairID = polishedID + "_stairs";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, polishedStairID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, polishedStairID));
     }
 
     public Item getCobbleItem() {
         String cobbleID = id + "_cobble";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, cobbleID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, cobbleID));
     }
 
     public Item getCobbleSlabItem() {
         String cobbleID = id + "_cobble";
         String cobbleSlabID = cobbleID + "_slab";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, cobbleSlabID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, cobbleSlabID));
     }
 
     public Item getCobbleStairItem() {
         String cobbleID = id + "_cobble";
         String cobbleStairID = cobbleID + "_stairs";
-        return Registry.ITEM.get(new Identifier(UnEarthed.MOD_ID, cobbleStairID));
+        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, cobbleStairID));
     }
 
     public static class StairsBlockAccess extends StairsBlock {

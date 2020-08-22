@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class UnEarthed implements ModInitializer {
+public class Unearthed implements ModInitializer {
     public static final String MOD_ID = "unearthed";
 
     @Override

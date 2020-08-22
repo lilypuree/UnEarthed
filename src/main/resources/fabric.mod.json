@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.oriondevcorgitaco.hextension.Hextension"
+      "net.oriondevcorgitaco.hextension.Unearthed"
     ]
   },
   "mixins": [
