@@ -26,7 +26,7 @@
 // off every 'zix'.)
 //
 
-package net.oriondevcorgitaco.hextension.util.noise;
+package net.oriondevcorgitaco.unearthed.util.noise;
 
 
 public class FastNoise {

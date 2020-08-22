@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.hextension.util.noise;
+package net.oriondevcorgitaco.unearthed.util.noise;
 
 public class FNVector3f {
     public float x, y, z;

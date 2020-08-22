@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "hextension",
+  "id": "unearthed",
   "version": "${version}",
 
   "name": "Example Mod",

@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.hextension;
+package net.oriondevcorgitaco.unearthed;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -10,16 +10,16 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
-import net.oriondevcorgitaco.hextension.util.RegistrationHelper;
-import net.oriondevcorgitaco.hextension.world.feature.StrataGenerator;
-import net.oriondevcorgitaco.hextension.world.feature.StrataGenerator2;
+import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
+import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator;
+import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator2;
 
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class Hextension implements ModInitializer {
-    public static final String MOD_ID = "hextension";
+public class UnEarthed implements ModInitializer {
+    public static final String MOD_ID = "unearthed";
 
     @Override
     public void onInitialize() {

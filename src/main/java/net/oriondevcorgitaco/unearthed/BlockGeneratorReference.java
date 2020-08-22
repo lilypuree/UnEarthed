@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.hextension;
+package net.oriondevcorgitaco.unearthed;
 
 import java.util.ArrayList;
 import java.util.List;

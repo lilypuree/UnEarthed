@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.hextension.world.feature;
+package net.oriondevcorgitaco.unearthed.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
@@ -11,9 +11,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.oriondevcorgitaco.hextension.BlockGeneratorReference;
-import net.oriondevcorgitaco.hextension.util.RegistrationHelper;
-import net.oriondevcorgitaco.hextension.util.noise.FastNoise;
+import net.oriondevcorgitaco.unearthed.BlockGeneratorReference;
+import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
+import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 
 import java.util.Random;
 
