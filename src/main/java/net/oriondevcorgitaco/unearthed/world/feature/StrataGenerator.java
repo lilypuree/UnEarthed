@@ -48,9 +48,9 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             else if (noise3D > 0.0)
                                 world.setBlockState(mutable, Blocks.DIORITE.getDefaultState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
+                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
                             else
-                                world.setBlockState(mutable, Blocks.SNOW_BLOCK.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBlock().getDefaultState(), 2);
 
                         } else if (world.getBiome(mutable).getCategory() == Biome.Category.MESA) {
                             if (noise3D > 0.5)
@@ -64,13 +64,23 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
 
                         } else if (world.getBiome(mutable).getCategory() == Biome.Category.EXTREME_HILLS) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.PUMICE.getBlock().getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBlock().getDefaultState(), 2);
                             else if (noise3D > 0.0)
                                 world.setBlockState(mutable, Blocks.GRANITE.getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
                             else
                                 world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBlock().getDefaultState(), 2);
+
+                        }  else if (world.getBiome(mutable).getCategory() == Biome.Category.OCEAN) {
+                            if (noise3D > 0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.PUMICE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > 0.0)
+                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBlock().getDefaultState(), 2);
+                            else
+                                world.setBlockState(mutable, BlockGeneratorReference.GRAY_BASALT.getBlock().getDefaultState(), 2);
 
                         } else if (world.getBiome(mutable).getCategory() == Biome.Category.DESERT) {
                             if (noise3D > 0.5)
@@ -82,7 +92,17 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             else
                                 world.setBlockState(mutable, Blocks.SMOOTH_SANDSTONE.getDefaultState(), 2);
 
-                        } else {
+                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.SWAMP) {
+                            if (noise3D > 0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.LIGNITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > 0.0)
+                                world.setBlockState(mutable, Blocks.SMOOTH_SANDSTONE.getDefaultState(), 2);
+                            else if (noise3D > -0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.LIGNITE.getBlock().getDefaultState(), 2);
+                            else
+                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
+
+                        }else {
                             if (noise3D > 0.5)
                                 world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
                             else if (noise3D > 0.0)

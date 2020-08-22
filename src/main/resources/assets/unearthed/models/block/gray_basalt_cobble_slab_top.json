@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "unearthed:block/gray_basalt_cobble",
+    "top": "unearthed:block/gray_basalt_cobble",
+    "side": "unearthed:block/gray_basalt_cobble"
+  }
+}

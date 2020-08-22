@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "unearthed:block/lignite",
+    "top": "unearthed:block/lignite",
+    "side": "unearthed:block/lignite"
+  }
+}
