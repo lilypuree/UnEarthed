@@ -28,7 +28,7 @@ public class BlockAssetHelper {
 
     public static void printBlockIDs() {
         BlockGeneratorHelper.blockIdList.forEach(id -> {
-            Unearthed.LOGGER.info("unearthed: ");
+            Unearthed.LOGGER.info("unearthed:" + id);
         });
     }
 

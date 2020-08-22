@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.oriondevcorgitaco.unearthed.Unearthed;
+import net.oriondevcorgitaco.unearthed.util.BlockAssetHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +48,21 @@ public class BlockGeneratorHelper {
     private void generateBaseVariant() {
         String slabID = id + "_slab";
         String stairID = id + "_stairs";
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(HEXTENSION_TAB)));
-        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, slabID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, slabID)), new Item.Settings().group(HEXTENSION_TAB)));
-        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, stairID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, stairID)), new Item.Settings().group(HEXTENSION_TAB)));
+        String buttonID = id + "_button";
+        String plateID = id + "_pressure_plate";
+        String wallID = id + "_wall";
 
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.copyOf(Blocks.STONE)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_SLAB)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_STAIRS)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
+        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(HEXTENSION_TAB)));
+        for (String type : BlockAssetHelper.TYPES) {
+            String modifiedID = id + type;
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(HEXTENSION_TAB)));
+        }
     }
 
     private void generatePolishedVariant(boolean generate) {
@@ -184,6 +193,18 @@ public class BlockGeneratorHelper {
     public static class StairsBlockAccess extends StairsBlock {
         public StairsBlockAccess(BlockState baseBlockState, AbstractBlock.Settings settings) {
             super(baseBlockState, settings);
+        }
+    }
+
+    public static class PressurePlateBlockAccess extends PressurePlateBlock {
+        public PressurePlateBlockAccess(AbstractBlock.Settings settings) {
+            super(ActivationRule.MOBS, settings);
+        }
+    }
+
+    public static class ButtonBlockAccess extends StoneButtonBlock {
+        public ButtonBlockAccess(AbstractBlock.Settings settings) {
+            super(settings);
         }
     }
 }
