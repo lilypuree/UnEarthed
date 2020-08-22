@@ -16,6 +16,9 @@ Extensions on the underground
 ### Initial release:
 ##### Slate
 ##### Marble
+##### Quartzite
+##### Phyllite
+##### Schist
 
 ## Sedimentary
 ### Initial release:
