@@ -1,7 +1,7 @@
 {
-	"block.hextension.limestone": "Limestone",
-	"block.hextension.slate": "Slate",
-	"block.hextension.marble": "Marble",
-	"block.hextension.pumice": "Pumice",
-	"block.hextension.kimberlite": "Kimberlite"
+	"block.unearthed.limestone": "Limestone",
+	"block.unearthed.slate": "Slate",
+	"block.unearthed.marble": "Marble",
+	"block.unearthed.pumice": "Pumice",
+	"block.unearthed.kimberlite": "Kimberlite"
 }

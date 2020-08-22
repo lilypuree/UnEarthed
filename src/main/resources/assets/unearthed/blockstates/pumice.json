@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hextension:block/pumice"
+      "model": "unearthed:block/pumice"
     }
   }
 }

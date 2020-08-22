@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hextension:block/slate"
+    "all": "unearthed:block/slate"
   }
 }
