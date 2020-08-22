@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unearthed:block/schust_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/schust"
+    },
+    "type=top": {
+      "model": "unearthed:block/schust_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unearthed:block/quartzite_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/quartzite"
+    },
+    "type=top": {
+      "model": "unearthed:block/quartzite_slab_top"
+    }
+  }
+}
