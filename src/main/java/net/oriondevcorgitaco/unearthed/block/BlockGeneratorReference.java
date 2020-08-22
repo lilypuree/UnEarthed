@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.unearthed;
+package net.oriondevcorgitaco.unearthed.block;
 
 import java.util.ArrayList;
 import java.util.List;

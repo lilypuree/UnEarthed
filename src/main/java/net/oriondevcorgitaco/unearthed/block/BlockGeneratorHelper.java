@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.unearthed;
+package net.oriondevcorgitaco.unearthed.block;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -10,6 +10,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 
 public class BlockGeneratorHelper {
     public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
