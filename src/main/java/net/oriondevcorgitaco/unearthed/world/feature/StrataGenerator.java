@@ -25,11 +25,11 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
     }
 
     FastNoise fastNoise3D = null;
+    FastNoise fastNoise3D2 = null;
 
     @Override
     public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, DefaultFeatureConfig featureConfig) {
         setSeed(world.getSeed());
-
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
@@ -102,15 +102,27 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             else
                                 world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
 
-                        }else {
-                            if (noise3D > 0.5)
+                        } else {
+                            double noise3D2 = fastNoise3D2.GetNoise(mutable.getX(), mutable.getY(), mutable.getZ());
+
+                            if (noise3D2 > 0.8)
                                 world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
-                            else if (noise3D > 0.0)
+                            else if (noise3D2 > 0.6)
                                 world.setBlockState(mutable, BlockGeneratorReference.MARBLE.getBlock().getDefaultState(), 2);
-                            else if (noise3D > -0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.SLATE.getBlock().getDefaultState(), 2);
+                            else if (noise3D2 > 0.4)
+                                world.setBlockState(mutable, BlockGeneratorReference.CONGLOMERATE.getBlock().getDefaultState(), 2);
+                            else if (noise3D2 > 0)
+                                world.setBlockState(mutable, BlockGeneratorReference.QUARTZITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D2 > -0.2)
+                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D2 > -0.4)
+                                world.setBlockState(mutable, BlockGeneratorReference.GRAY_BASALT.getBlock().getDefaultState(), 2);
+                            else if (noise3D2 > -0.6)
+                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBlock().getDefaultState(), 2);
+                            else if (noise3D2 > -0.8)
+                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBlock().getDefaultState(), 2);
                             else
-                                world.setBlockState(mutable, Blocks.POLISHED_BLACKSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
                         }
                     }
                     mutable.move(Direction.UP);
@@ -126,6 +138,12 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
             fastNoise3D = new FastNoise((int) seed);
             fastNoise3D.SetNoiseType(FastNoise.NoiseType.Simplex);
             fastNoise3D.SetFrequency(0.004F);
+        }
+
+        if (fastNoise3D2 == null) {
+            fastNoise3D2 = new FastNoise((int) seed);
+            fastNoise3D2.SetNoiseType(FastNoise.NoiseType.Simplex);
+            fastNoise3D2.SetFrequency(0.004F);
         }
     }
 }
