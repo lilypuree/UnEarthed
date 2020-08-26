@@ -49,6 +49,8 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                                 world.setBlockState(mutable, Blocks.DIORITE.getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, BlockGeneratorReference.BLUE_GRANITE.getBlock().getDefaultState(), 2);
                             else
                                 world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBlock().getDefaultState(), 2);
 
@@ -59,6 +61,14 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                                 world.setBlockState(mutable, Blocks.BLACK_TERRACOTTA.getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, Blocks.YELLOW_TERRACOTTA.getDefaultState(), 2);
+                            else if (noise3D > -0.6)
+                                world.setBlockState(mutable, Blocks.WHITE_TERRACOTTA.getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, Blocks.GRAY_TERRACOTTA.getDefaultState(), 2);
+                            else if (noise3D > -0.8)
+                                world.setBlockState(mutable, Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState(), 2);
+                            else if (noise3D > -0.9)
+                                world.setBlockState(mutable, Blocks.TERRACOTTA.getDefaultState(), 2);
                             else
                                 world.setBlockState(mutable, Blocks.ORANGE_TERRACOTTA.getDefaultState(), 2);
 
@@ -69,6 +79,25 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                                 world.setBlockState(mutable, Blocks.GRANITE.getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, BlockGeneratorReference.BLUE_GRANITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.9)
+                                world.setBlockState(mutable, BlockGeneratorReference.DOLOMITE.getBlock().getDefaultState(), 2);
+                            else
+                                world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBlock().getDefaultState(), 2);
+
+
+                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.EXTREME_HILLS) {
+                            if (noise3D > 0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > 0.0)
+                                world.setBlockState(mutable, Blocks.DIORITE.getDefaultState(), 2);
+                            else if (noise3D > -0.5)
+                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, BlockGeneratorReference.GRAY_BASALT.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.9)
+                                world.setBlockState(mutable, BlockGeneratorReference.DOLOMITE.getBlock().getDefaultState(), 2);
                             else
                                 world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBlock().getDefaultState(), 2);
 
@@ -76,7 +105,7 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             if (noise3D > 0.5)
                                 world.setBlockState(mutable, BlockGeneratorReference.PUMICE.getBlock().getDefaultState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.PERIDOTITE.getBlock().getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBlock().getDefaultState(), 2);
                             else
@@ -84,23 +113,41 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
 
                         } else if (world.getBiome(mutable).getCategory() == Biome.Category.DESERT) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, Blocks.SMOOTH_RED_SANDSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, Blocks.SANDSTONE.getDefaultState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.SMOOTH_SANDSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.CONGLOMERATE.getBlock().getDefaultState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, Blocks.SMOOTH_RED_SANDSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, BlockGeneratorReference.CHERT.getBlock().getDefaultState(), 2);
                             else
-                                world.setBlockState(mutable, Blocks.SMOOTH_SANDSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBlock().getDefaultState(), 2);
 
                         } else if (world.getBiome(mutable).getCategory() == Biome.Category.SWAMP) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIGNITE.getBlock().getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.SHALE.getBlock().getDefaultState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.SMOOTH_SANDSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBlock().getDefaultState(), 2);
                             else if (noise3D > -0.5)
                                 world.setBlockState(mutable, BlockGeneratorReference.LIGNITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, BlockGeneratorReference.CHALK.getBlock().getDefaultState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.MUDSTONE.getBlock().getDefaultState(), 2);
+
+                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.FOREST) {
+                            if (noise3D > 0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.MARBLE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > 0.0)
+                                world.setBlockState(mutable, BlockGeneratorReference.GNIESS.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.5)
+                                world.setBlockState(mutable, BlockGeneratorReference.SCHIST.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.7)
+                                world.setBlockState(mutable, BlockGeneratorReference.PHYLLITE.getBlock().getDefaultState(), 2);
+                            else if (noise3D > -0.9)
+                                world.setBlockState(mutable, BlockGeneratorReference.SKARN.getBlock().getDefaultState(), 2);
+                            else
+                                world.setBlockState(mutable, BlockGeneratorReference.QUARTZITE.getBlock().getDefaultState(), 2);
 
                         } else {
                             double noise3D2 = fastNoise3D2.GetNoise(mutable.getX(), mutable.getY(), mutable.getZ());
@@ -116,7 +163,7 @@ public class StrataGenerator extends Feature<DefaultFeatureConfig> {
                             else if (noise3D2 > -0.2)
                                 world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBlock().getDefaultState(), 2);
                             else if (noise3D2 > -0.4)
-                                world.setBlockState(mutable, BlockGeneratorReference.GRAY_BASALT.getBlock().getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.HORNFEL.getBlock().getDefaultState(), 2);
                             else if (noise3D2 > -0.6)
                                 world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBlock().getDefaultState(), 2);
                             else if (noise3D2 > -0.8)
