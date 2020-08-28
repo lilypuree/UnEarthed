@@ -11,6 +11,9 @@ Extensions on the underground
 ##### Pumice
 ##### Kimberlite
 ##### Rhyolite
+##### Peridotite
+##### Dolomite
+##### Blue Granite
 
 ## Metamorphic
 ### Initial release:
@@ -19,6 +22,9 @@ Extensions on the underground
 ##### Quartzite
 ##### Phyllite
 ##### Schist
+##### Hornfel
+##### Gniess
+##### Skarn
 
 ## Sedimentary
 ### Initial release:
@@ -27,6 +33,9 @@ Extensions on the underground
 ##### Siltstone
 ##### Mudstone
 ##### Conglomerate
+##### Chert
+##### Chalk
+##### Shale
 
 #More to come!
 
