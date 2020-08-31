@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.oriondevcorgitaco.unearthed.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "server.MixinMinecraftServer"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

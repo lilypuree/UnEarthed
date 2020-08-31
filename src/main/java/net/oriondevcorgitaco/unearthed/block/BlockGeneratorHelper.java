@@ -27,6 +27,7 @@ public class BlockGeneratorHelper {
     private final boolean hasMossyBricks;
 
     public static List<String> blockIdList = new ArrayList<>();
+    public static List<Block> baseStoneBlockArray = new ArrayList<>();
 
 
     public BlockGeneratorHelper(String id, boolean hasPolishedVariant, boolean hasCobbleVariant, boolean hasMossyVariant, boolean hasBricksVariant, boolean hasMossyBricksVariant) {
@@ -50,19 +51,22 @@ public class BlockGeneratorHelper {
         String stairID = id + "_stairs";
         String buttonID = id + "_button";
         String plateID = id + "_pressure_plate";
-        String wallID = id + "_wall";
+//        String wallID = id + "_wall";
 
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.copyOf(Blocks.STONE)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_SLAB)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_STAIRS)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
+//        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
         Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(HEXTENSION_TAB)));
+
         for (String type : BlockAssetHelper.TYPES) {
             String modifiedID = id + type;
             Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(HEXTENSION_TAB)));
         }
+
+        baseStoneBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
     }
 
     private void generatePolishedVariant(boolean generate) {
