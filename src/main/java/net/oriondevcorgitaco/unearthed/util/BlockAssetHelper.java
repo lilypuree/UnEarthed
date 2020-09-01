@@ -4,7 +4,7 @@ import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 
 public class BlockAssetHelper {
-    public static final String[] TYPES = {"_stairs", "_slab", "_button"/*, "_wall"*/};
+    public static final String[] TYPES = {"_stairs", "_slab", "_button", "_pressure_plate" /*, "_wall"*/};
 
     public static void jsonPrinter() {
         Unearthed.LOGGER.info("Starting Json Printer...");

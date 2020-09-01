@@ -11,6 +11,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.util.noise.FNVector3f;
@@ -34,8 +35,24 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
     FastNoise perturbSmall2 = null;
 
     public static float scaleFactor = 4.5F;
-    public static int perturbAmpStrength = 95;
-    public static int smallPerturbAmpStrength = 8;
+    public static float perturbAmpStrength = 95;
+    public static float smallPerturbAmpStrength = 8;
+    public static int perturbOctaves = 5;
+    public static int smallPerturbOctaves = 3;
+
+    double storedNoiseHigh = 0;
+    double storedNoiseLow = 0;
+
+    private void getHighestNoisePoint(double noise) {
+        if (noise > storedNoiseHigh) {
+            storedNoiseHigh = noise;
+            Unearthed.LOGGER.info("Highest Noise point: " + storedNoiseHigh);
+        }
+        if (noise < storedNoiseLow) {
+            storedNoiseLow = noise;
+            Unearthed.LOGGER.info("Lowest Noise point: " + storedNoiseLow);
+        }
+    }
 
 
     @Override
@@ -65,6 +82,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
                         double selectorNoiseValue = selectorNoise.GetValue(mutable.getX(), mutable.getY(), mutable.getZ()) * 12 + 0.5;
 
                         double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
+                        getHighestNoisePoint(clampedValue);
 
                             if (clampedValue > 0.8)
                                 world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
@@ -95,21 +113,18 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
 
 
     private void setSeed(long seed) {
-        //Selector
         if (selectorNoise == null) {
             selectorNoise = new FastNoise((int) seed);
             selectorNoise.SetNoiseType(FastNoise.NoiseType.Simplex);
             selectorNoise.SetFrequency(0.0008F * scaleFactor);
         }
 
-        //No perturb
         if (cellNoise1 == null) {
             cellNoise1 = new FastNoise((int) seed + 19495485);
             cellNoise1.SetNoiseType(FastNoise.NoiseType.Cellular);
             cellNoise1.SetFrequency(0.004F * scaleFactor);
         }
 
-        //No perturb
         if (cellNoise2 == null) {
             cellNoise2 = new FastNoise((int) seed + 9484585);
             cellNoise2.SetNoiseType(FastNoise.NoiseType.Cellular);
@@ -119,7 +134,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
         if (perturb1 == null) {
             perturb1 = new FastNoise((int) seed + 2838495);
             perturb1.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
-            perturb1.SetFractalOctaves(5);
+            perturb1.SetFractalOctaves(perturbOctaves);
             perturb1.SetGradientPerturbAmp(perturbAmpStrength);
             perturb1.SetFrequency(0.008F * scaleFactor);
         }
@@ -127,7 +142,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
         if (perturb2 == null) {
             perturb2 = new FastNoise((int) seed + 100);
             perturb2.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
-            perturb2.SetFractalOctaves(5);
+            perturb2.SetFractalOctaves(perturbOctaves);
             perturb2.SetGradientPerturbAmp(perturbAmpStrength);
             perturb2.SetFrequency(0.008F * scaleFactor);
         }
@@ -135,7 +150,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
         if (perturbSmall1 == null) {
             perturbSmall1 = new FastNoise((int) seed + 9475);
             perturbSmall1.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
-            perturbSmall1.SetFractalOctaves(3);
+            perturbSmall1.SetFractalOctaves(smallPerturbOctaves);
             perturbSmall1.SetGradientPerturbAmp(smallPerturbAmpStrength);
             perturbSmall1.SetFrequency(0.06F * scaleFactor);
         }
@@ -143,7 +158,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
         if (perturbSmall2 == null) {
             perturbSmall2 = new FastNoise((int) seed + 948556);
             perturbSmall2.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
-            perturbSmall2.SetFractalOctaves(3);
+            perturbSmall2.SetFractalOctaves(smallPerturbOctaves);
             perturbSmall2.SetGradientPerturbAmp(smallPerturbAmpStrength);
             perturbSmall2.SetFrequency(0.06F * scaleFactor);
         }
