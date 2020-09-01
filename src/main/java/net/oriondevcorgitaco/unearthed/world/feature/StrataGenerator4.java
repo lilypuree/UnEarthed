@@ -66,7 +66,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
 
                         double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
 
-
+///aaaa
                             if (clampedValue > 0.8)
                                 world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBlock().getDefaultState(), 2);
                             else if (clampedValue > 0.6)
@@ -76,7 +76,7 @@ public class StrataGenerator4 extends Feature<DefaultFeatureConfig> {
                             else if (clampedValue > 0)
                                 world.setBlockState(mutable, BlockGeneratorReference.QUARTZITE.getBlock().getDefaultState(), 2);
                             else if (clampedValue > -0.2)
-                                world.setBlockState(mutable, Blocks.SANDSTONE.getDefaultState(), 2);
+                                world.setBlockState(mutable, BlockGeneratorReference.GRAY_BASALT.getBlock().getDefaultState(), 2);
                             else if (clampedValue > -0.4)
                                 world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBlock().getDefaultState(), 2);
                             else if (clampedValue > -0.6)
