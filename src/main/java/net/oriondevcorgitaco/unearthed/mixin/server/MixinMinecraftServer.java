@@ -16,9 +16,15 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.SaveProperties;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.level.storage.LevelStorage;
-import net.oriondevcorgitaco.unearthed.Unearthed;
+import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
+import net.oriondevcorgitaco.unearthed.world.feature.NaturalGenerator;
+import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator2;
+import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,6 +40,10 @@ import java.util.stream.Collectors;
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
 
+    private final ConfiguredFeature<?, ?> STRATA_GENERATOR = RegistrationHelper.newConfiguredFeature("strata_generator", NaturalGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    private final ConfiguredFeature<?, ?> STRATA_GENERATOR2 = RegistrationHelper.newConfiguredFeature("strata_generator2", StrataGenerator2.UNDERGROUND_STONE2.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    private final ConfiguredFeature<?, ?> STRATA_GENERATOR3 = RegistrationHelper.newConfiguredFeature("strata_generator3", StrataGenerator3.UNDERGROUND_STONE3.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+
 
     @Shadow @Final protected DynamicRegistryManager.Impl registryManager;
 
@@ -42,11 +52,10 @@ public class MixinMinecraftServer {
         if(this.registryManager.getOptional(Registry.BIOME_KEY).isPresent()) {
             for (Biome biome : registryManager.getOptional(Registry.BIOME_KEY).get()) {
                 if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
-                    addFeatureToBiome(biome, GenerationStep.Feature.UNDERGROUND_ORES, Unearthed.STRATA_GENERATOR);
+                    addFeatureToBiome(biome, GenerationStep.Feature.UNDERGROUND_ORES, STRATA_GENERATOR);
                 }
             }
         }
-
     }
 
     private static void addFeatureToBiome(Biome biome, GenerationStep.Feature feature, ConfiguredFeature<?, ?> configuredFeature) {

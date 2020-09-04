@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "unearthed:block/skarn_redstone_ore"
+  }
+}

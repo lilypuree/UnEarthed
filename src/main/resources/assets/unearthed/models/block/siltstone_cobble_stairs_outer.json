@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "unearthed:block/siltstone_cobble",
+    "top": "unearthed:block/siltstone_cobble",
+    "side": "unearthed:block/siltstone_cobble"
+  }
+}

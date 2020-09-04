@@ -9,12 +9,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.util.BlockAssetHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class BlockGeneratorHelper {
     public static final ItemGroup HEXTENSION_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
@@ -26,8 +28,12 @@ public class BlockGeneratorHelper {
     private final boolean hasBricks;
     private final boolean hasMossyBricks;
 
-    public static List<String> blockIdList = new ArrayList<>();
+    public static List<String> baseBlockIdList = new ArrayList<>();
+    public static List<String> cobbleBlockIdList = new ArrayList<>();
+    public static List<String> oreBlockIdList = new ArrayList<>();
     public static List<Block> baseStoneBlockArray = new ArrayList<>();
+    public static List<Block> cobbleStoneBlockArray = new ArrayList<>();
+    public static List<Block> oreBlockArray = new ArrayList<>();
 
 
     public BlockGeneratorHelper(String id, boolean hasPolishedVariant, boolean hasCobbleVariant, boolean hasMossyVariant, boolean hasBricksVariant, boolean hasMossyBricksVariant) {
@@ -41,9 +47,10 @@ public class BlockGeneratorHelper {
 
         generateBaseVariant();
 //        generatePolishedVariant(hasPolishedVariant);
-//        generateCobbleVariant(hasCobbleVariant);
+        generateCobbleVariant(hasCobbleVariant);
+        generateOreVariants();
 
-        blockIdList.add(id);
+        baseBlockIdList.add(id);
     }
 
     private void generateBaseVariant() {
@@ -51,17 +58,17 @@ public class BlockGeneratorHelper {
         String stairID = id + "_stairs";
         String buttonID = id + "_button";
         String plateID = id + "_pressure_plate";
-//        String wallID = id + "_wall";
+        String wallID = id + "_wall";
 
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.copyOf(Blocks.STONE)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_SLAB)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_STAIRS)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
-//        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
         Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(HEXTENSION_TAB)));
 
-        for (String type : BlockAssetHelper.TYPES) {
+        for (String type : BlockAssetHelper.BASE_TYPES) {
             String modifiedID = id + type;
             Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(HEXTENSION_TAB)));
         }
@@ -84,22 +91,57 @@ public class BlockGeneratorHelper {
         }
     }
 
+    private void generateOreVariants() {
+        String coalOreID = this.id + "_coal_ore";
+        String ironOreID = this.id + "_iron_ore";
+        String goldOreID = this.id + "_gold_ore";
+        String lapisOreID = this.id + "_lapis_ore";
+        String redStoneOreID = this.id + "_redstone_ore";
+        String diamondOreID = this.id + "_diamond_ore";
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, coalOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.COAL_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, ironOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, goldOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.GOLD_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, lapisOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.LAPIS_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, redStoneOreID), new RedstoneOreBlock(FabricBlockSettings.copyOf(Blocks.REDSTONE_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, diamondOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        for (String type : BlockAssetHelper.VANILLA_ORE_TYPES) {
+            String modifiedID = this.id + type;
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(HEXTENSION_TAB)));
+            oreBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)));
+            oreBlockIdList.add(modifiedID);
+        }
+    }
+
     private void generateCobbleVariant(boolean generate) {
         if (generate) {
             String cobbleID = id + "_cobble";
-            String cobbleSlabID = cobbleID + "_slab";
-            String cobbleStairID = cobbleID + "_stairs";
+            String slabID = cobbleID + "_slab";
+            String stairID = cobbleID + "_stairs";
+            String buttonID = cobbleID + "_button";
+            String plateID = cobbleID + "_pressure_plate";
+            String wallID = cobbleID + "_wall";
             Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)), new Item.Settings().group(HEXTENSION_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleSlabID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleSlabID)), new Item.Settings().group(HEXTENSION_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleStairID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleStairID)), new Item.Settings().group(HEXTENSION_TAB)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_SLAB)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_STAIRS)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
+            for (String type : BlockAssetHelper.BASE_TYPES) {
+                String modifiedID = cobbleID + type;
+                Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(HEXTENSION_TAB)));
+            }
+            cobbleStoneBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
+            cobbleBlockIdList.add(cobbleID);
         }
     }
 
     public Block getBlock() {
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, this.id));
+        Block block = Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, this.id));
+        if (block == null) {
+            Unearthed.LOGGER.error("Block does not exist");
+            block = Blocks.STONE;
+        }
+        return block;
     }
 
     public Block getSlabBlock() {
@@ -209,6 +251,28 @@ public class BlockGeneratorHelper {
     public static class ButtonBlockAccess extends StoneButtonBlock {
         public ButtonBlockAccess(AbstractBlock.Settings settings) {
             super(settings);
+        }
+    }
+
+    public static class UEOreBlock extends OreBlock {
+        public UEOreBlock(AbstractBlock.Settings settings) {
+            super(settings);
+        }
+
+
+        @Override
+        protected int getExperienceWhenMined(Random random) {
+            if (this.isIn(BlockGeneratorReference.COAL_ORE_TAG)) {
+                return MathHelper.nextInt(random, 0, 2);
+            } else if (this.isIn(BlockGeneratorReference.DIAMOND_ORE_TAG)) {
+                return MathHelper.nextInt(random, 3, 7);
+            } else if (this.isIn(BlockGeneratorReference.EMERALD_ORE_TAG)) {
+                return MathHelper.nextInt(random, 3, 7);
+            } else if (this.isIn(BlockGeneratorReference.LAPIS_ORE_TAG)) {
+                return MathHelper.nextInt(random, 2, 5);
+            }
+            else
+                return 0;
         }
     }
 }

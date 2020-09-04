@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.oriondevcorgitaco.unearthed.Unearthed"
+    ],
+    "modmenu": [
+      "net.oriondevcorgitaco.unearthed.config.UEModMenuIntegration"
     ]
   },
   "mixins": [
