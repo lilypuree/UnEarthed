@@ -98,12 +98,14 @@ public class BlockGeneratorHelper {
         String lapisOreID = this.id + "_lapis_ore";
         String redStoneOreID = this.id + "_redstone_ore";
         String diamondOreID = this.id + "_diamond_ore";
+        String emeraldOreID = this.id + "_emerald_ore";
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, coalOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.COAL_ORE).breakByTool(FabricToolTags.PICKAXES)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, ironOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE).breakByTool(FabricToolTags.PICKAXES)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, goldOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.GOLD_ORE).breakByTool(FabricToolTags.PICKAXES)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, lapisOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.LAPIS_ORE).breakByTool(FabricToolTags.PICKAXES)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, redStoneOreID), new RedstoneOreBlock(FabricBlockSettings.copyOf(Blocks.REDSTONE_ORE).breakByTool(FabricToolTags.PICKAXES)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, diamondOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, emeraldOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE).breakByTool(FabricToolTags.PICKAXES)));
         for (String type : BlockAssetHelper.VANILLA_ORE_TYPES) {
             String modifiedID = this.id + type;
             Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(HEXTENSION_TAB)));

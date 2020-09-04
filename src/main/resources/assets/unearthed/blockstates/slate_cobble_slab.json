@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unearthed:block/slate_cobble_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/slate_cobble"
+    },
+    "type=top": {
+      "model": "unearthed:block/slate_cobble_slab_top"
+    }
+  }
+}
