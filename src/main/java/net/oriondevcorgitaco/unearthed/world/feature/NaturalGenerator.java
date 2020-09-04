@@ -5,9 +5,11 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -107,6 +109,14 @@ public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
 
                     if (mutableState == Blocks.EMERALD_ORE.getDefaultState())
                         world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
+
+                    //Modded ores
+                    if (mutableState == Registry.BLOCK.get(new Identifier("byg", "ametrine_ore")).getDefaultState())
+                        world.setBlockState(mutable, reader.getBYGAmetrineOre(mutableState).getDefaultState(), 2);
+
+                    if (mutableState == Registry.BLOCK.get(new Identifier("byg", "pendorite_ore")).getDefaultState())
+                        world.setBlockState(mutable, reader.getBYGPendoriteOre(mutableState).getDefaultState(), 2);
+
 
                     mutable.move(Direction.UP);
                 }

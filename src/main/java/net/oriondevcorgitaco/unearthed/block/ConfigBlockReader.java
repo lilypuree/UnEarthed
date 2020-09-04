@@ -141,4 +141,33 @@ public class ConfigBlockReader {
         }
         return block;
     }
+
+
+    /**************Modded Ores**************/
+
+    public Block getBYGAmetrineOre(BlockState originalState) {
+        String ametrineOreID = this.id + "_ametrine_ore";
+        Block block = Registry.BLOCK.get(new Identifier(ametrineOreID));
+        if (block == Blocks.AIR) {
+            if (emeraldIdx == 0) {
+                Unearthed.LOGGER.debug("Modded Ore: " + ametrineOreID + " does not exist.");
+                emeraldIdx++;
+            }
+            block = originalState.getBlock();
+        }
+        return block;
+    }
+
+    public Block getBYGPendoriteOre(BlockState originalState) {
+        String pendoriteOreID = this.id + "_pendorite_ore";
+        Block block = Registry.BLOCK.get(new Identifier(pendoriteOreID));
+        if (block == Blocks.AIR) {
+            if (emeraldIdx == 0) {
+                Unearthed.LOGGER.debug("Modded Ore: " + pendoriteOreID + " does not exist.");
+                emeraldIdx++;
+            }
+            block = originalState.getBlock();
+        }
+        return block;
+    }
 }

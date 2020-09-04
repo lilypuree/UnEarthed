@@ -6,6 +6,7 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 public class BlockAssetHelper {
     public static final String[] BASE_TYPES = {"_stairs", "_slab", "_button", "_pressure_plate", "_wall"};
     public static final String[] VANILLA_ORE_TYPES = {"_coal_ore" ,"_iron_ore", "_gold_ore", "_lapis_ore", "_redstone_ore", "_diamond_ore", "_emerald_ore"};
+    public static final String[] BYG_ORE_TYPES = {"_ametrine_ore" ,"_pendorite_ore"};
 
     public static void jsonPrinter() {
         Unearthed.LOGGER.info("Starting Json Printer...");

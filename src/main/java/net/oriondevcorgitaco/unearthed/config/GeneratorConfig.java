@@ -44,4 +44,16 @@ public class GeneratorConfig {
     @ConfigEntry.Gui.PrefixText
     @Comment(value = "\nUse Stone Block Tag? Could have performance impact!\nDefault: false")
     public boolean stoneTag = false;
+//
+//    @ConfigEntry.Gui.PrefixText
+//    @Comment(value = "\nAre vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true")
+//    public boolean trueMesas = false;
+//
+//    @ConfigEntry.Gui.PrefixText
+//    @Comment(value = "\nDo deserts use different blocks for cave generation?\nDefault: true")
+//    public boolean desertCaves = false;
+//
+//    @ConfigEntry.Gui.PrefixText
+//    @Comment(value = "\nDo icy/frozen biomes use different blocks for cave generation?\nDefault: true")
+//    public boolean icyCaves = false;
 }

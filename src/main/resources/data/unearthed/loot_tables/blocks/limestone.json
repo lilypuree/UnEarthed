@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unearthed:limestone"
+          "name": "unearthed:limestone_cobble"
         }
       ],
       "conditions": [

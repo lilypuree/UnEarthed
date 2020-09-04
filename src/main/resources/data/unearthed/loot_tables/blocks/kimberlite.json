@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unearthed:kimberlite"
+          "name": "unearthed:kimberlite_cobble"
         }
       ],
       "conditions": [
