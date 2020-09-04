@@ -80,8 +80,8 @@ public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
                     double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
                     if (FabricLoader.getInstance().isDevelopmentEnvironment())
                         getHighestNoisePoint(clampedValue);
-                    ConfigBlockReader reader = ConfigBlockReader.blocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.blocksFromConfig.size()));
 
+                    ConfigBlockReader reader = ConfigBlockReader.blocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.blocksFromConfig.size()));
                     BlockState mutableState = world.getBlockState(mutable);
 
                     if (useStoneTag(world, mutable))
@@ -107,7 +107,6 @@ public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
 
                     if (mutableState == Blocks.EMERALD_ORE.getDefaultState())
                         world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
-
 
                     mutable.move(Direction.UP);
                 }

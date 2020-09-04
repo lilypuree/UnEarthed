@@ -37,7 +37,7 @@ public class GeneratorConfig {
 
         @ConfigEntry.Gui.PrefixText
         @Comment(value = "\nList of blocks to use in world generation.")
-        public String blocksForGeneration = "unearthed:slate,unearthed:limestone,minecraft:andesite";
+        public String blocksForGeneration = "unearthed:gray_basalt,unearthed:gabbro,unearthed:pumice,unearthed:kimberlite,unearthed:rhyolite,unearthed:slate,unearthed:marble,unearthed:quartzite,unearthed:phyllite,unearthed:schist,unearthed:limestone,unearthed:lignite,unearthed:siltstone,unearthed:mudstone,unearthed:conglomerate";
     }
 
 

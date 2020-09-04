@@ -26,7 +26,7 @@ public class ConfigBlockReader {
         Block block = Registry.BLOCK.get(new Identifier(this.id));
         if (block == Blocks.AIR) {
             if (blockIdx == 0) {
-                Unearthed.LOGGER.error(id + " does not exist. Defaulting to stone!");
+                Unearthed.LOGGER.warn(id + " does not exist. Defaulting to stone!");
                 blockIdx++;
             }
             block = Blocks.STONE;
@@ -34,15 +34,15 @@ public class ConfigBlockReader {
         return block;
     }
 
-    static int coalidx = 0;
+    static int coalIdx = 0;
 
     public Block getCoalOre(BlockState originalState) {
         String ironOreID = this.id + "_coal_ore";
         Block block = Registry.BLOCK.get(new Identifier(ironOreID));
         if (block == Blocks.AIR) {
-            if (coalidx == 0) {
+            if (coalIdx == 0) {
                 Unearthed.LOGGER.debug(ironOreID + " does not exist.");
-                coalidx++;
+                coalIdx++;
             }
             block = originalState.getBlock();
         }

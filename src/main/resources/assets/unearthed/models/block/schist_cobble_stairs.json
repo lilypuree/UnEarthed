@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "unearthed:block/schist_cobble",
-    "top": "unearthed:block/schist_cobble",
-    "side": "unearthed:block/schist_cobble"
-  }
-}

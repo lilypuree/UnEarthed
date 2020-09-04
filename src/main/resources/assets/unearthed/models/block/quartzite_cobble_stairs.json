@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "unearthed:block/quartzite_cobble",
-    "top": "unearthed:block/quartzite_cobble",
-    "side": "unearthed:block/quartzite_cobble"
-  }
-}
