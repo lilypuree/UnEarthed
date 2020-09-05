@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped"
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
     "###"
@@ -10,7 +10,7 @@
     }
   },
   "result": {
-    "item": "unearthed:slate_cobble_wall"
+    "item": "unearthed:slate_cobble_wall",
     "count": 6
   }
 }

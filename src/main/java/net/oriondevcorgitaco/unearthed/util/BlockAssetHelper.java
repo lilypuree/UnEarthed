@@ -148,7 +148,7 @@ public class BlockAssetHelper {
                 Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
                 if (id.contains("_wall")) {
                     String recipe = "{\n" +
-                            "  \"type\": \"minecraft:crafting_shaped\"\n" +
+                            "  \"type\": \"minecraft:crafting_shaped\",\n" +
                             "  \"pattern\": [\n" +
                             "    \"###\",\n" +
                             "    \"###\"\n" +
@@ -159,7 +159,7 @@ public class BlockAssetHelper {
                             "    }\n" +
                             "  },\n" +
                             "  \"result\": {\n" +
-                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
                             "    \"count\": 6\n" +
                             "  }\n" +
                             "}";

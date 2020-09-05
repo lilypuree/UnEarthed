@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped"
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
     "###"
@@ -10,7 +10,7 @@
     }
   },
   "result": {
-    "item": "unearthed:conglomerate_wall"
+    "item": "unearthed:conglomerate_wall",
     "count": 6
   }
 }

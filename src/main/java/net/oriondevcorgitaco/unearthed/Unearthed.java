@@ -3,11 +3,9 @@ package net.oriondevcorgitaco.unearthed;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
-import net.oriondevcorgitaco.unearthed.util.BlockAssetHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,10 +13,6 @@ public class Unearthed implements ModInitializer {
     public static final String MOD_ID = "unearthed";
     public static final Logger LOGGER = LogManager.getLogger();
     public static UnearthedConfig UE_CONFIG;
-
-    public static boolean printLangJson = false;
-    public static boolean printRecipeJsons = false;
-    public static boolean printOreLootTableJsons = false;
 
     @Override
     public void onInitialize() {
@@ -37,15 +31,9 @@ public class Unearthed implements ModInitializer {
         if (ConfigBlockReader.blocksFromConfig.size() == 0)
             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
 
-        BlockAssetHelper.printBlockIDs();
+//        BlockAssetHelper.createUnearthedLangFile();
+//        BlockAssetHelper.createUnearthedCraftingRecipes();
+//        BlockAssetHelper.createUnearthedOreLootTableRecipes();
 
-
-        if (printRecipeJsons && FabricLoader.getInstance().isDevelopmentEnvironment())
-            BlockAssetHelper.createUnearthedCraftingRecipes();
-        if (printLangJson && FabricLoader.getInstance().isDevelopmentEnvironment())
-            BlockAssetHelper.createUnearthedLangFile();
-
-        if (printOreLootTableJsons && FabricLoader.getInstance().isDevelopmentEnvironment())
-            BlockAssetHelper.createUnearthedOreLootTableRecipes();
     }
 }

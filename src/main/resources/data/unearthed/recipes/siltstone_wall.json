@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped"
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
     "###"
@@ -10,7 +10,7 @@
     }
   },
   "result": {
-    "item": "unearthed:siltstone_wall"
+    "item": "unearthed:siltstone_wall",
     "count": 6
   }
 }
