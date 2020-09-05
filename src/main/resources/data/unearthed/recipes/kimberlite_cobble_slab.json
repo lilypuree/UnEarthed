@@ -1,8 +1,15 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
     "item": "unearthed:kimberlite_cobble"
+    }
   },
-  "result": "unearthed:kimberlite_cobble_slab",
-  "count": 1
+  "result": {
+    "item": "unearthed:kimberlite_cobble_slab",
+    "count": 6
+  }
 }

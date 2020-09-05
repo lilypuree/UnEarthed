@@ -3,7 +3,6 @@ package net.oriondevcorgitaco.unearthed.block;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -51,11 +50,11 @@ public class BlockGeneratorHelper {
         generateBaseVariant();
 //        generatePolishedVariant(hasPolishedVariant);
         generateCobbleVariant(hasCobbleVariant);
-//        generateVanillaOreVariants();
+        generateVanillaOreVariants();
 
         //Mod Support
-        if (FabricLoader.getInstance().isModLoaded("byg"))
-            generateBYGOreVariants();
+//        if (FabricLoader.getInstance().isModLoaded("byg"))
+//            generateBYGOreVariants();
 
         baseBlockIdList.add(id);
     }

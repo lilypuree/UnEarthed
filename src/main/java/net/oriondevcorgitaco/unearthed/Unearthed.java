@@ -17,7 +17,8 @@ public class Unearthed implements ModInitializer {
     public static UnearthedConfig UE_CONFIG;
 
     public static boolean printLangJson = false;
-    public static boolean printRecipeJsons = true;
+    public static boolean printRecipeJsons = false;
+    public static boolean printOreLootTableJsons = false;
 
     @Override
     public void onInitialize() {
@@ -37,9 +38,14 @@ public class Unearthed implements ModInitializer {
             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
 
         BlockAssetHelper.printBlockIDs();
+
+
         if (printRecipeJsons && FabricLoader.getInstance().isDevelopmentEnvironment())
             BlockAssetHelper.createUnearthedCraftingRecipes();
         if (printLangJson && FabricLoader.getInstance().isDevelopmentEnvironment())
             BlockAssetHelper.createUnearthedLangFile();
+
+        if (printOreLootTableJsons && FabricLoader.getInstance().isDevelopmentEnvironment())
+            BlockAssetHelper.createUnearthedOreLootTableRecipes();
     }
 }

@@ -31,12 +31,30 @@ public class BlockAssetHelper {
 
     public static void createUnearthedCraftingRecipes() {
         List<String> unearthedBlockItemIDs = new ArrayList<>();
+        List<String> unearthedSlabItemIDs = new ArrayList<>();
+        for (Block block : Registry.BLOCK) {
+            String blockID = Registry.BLOCK.getId(block).toString();
+            if (blockID.contains(Unearthed.MOD_ID)) {
+                if (blockID.contains("_slab") || blockID.contains("_button") || blockID.contains("_pressure_plate") || blockID.contains("_wall"))
+                    unearthedBlockItemIDs.add(blockID.replace("unearthed:", ""));
+                createRecipeFiles("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\recipes", unearthedBlockItemIDs);
+
+                if (blockID.contains("_slab"))
+                    unearthedSlabItemIDs.add(blockID.replace("unearthed:", ""));
+                createStoneCutterRecipes("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\recipes", unearthedSlabItemIDs);
+
+            }
+        }
+    }
+
+    public static void createUnearthedOreLootTableRecipes() {
+        List<String> unearthedBlockItemIDs = new ArrayList<>();
         for (Block block : Registry.BLOCK) {
             String blockID = Registry.BLOCK.getId(block).toString();
             if (blockID.contains(Unearthed.MOD_ID))
-                if (blockID.contains("_slab") || blockID.contains("_button") || blockID.contains("_pressure_plate") || blockID.contains("_wall"))
-                unearthedBlockItemIDs.add(blockID.replace(Unearthed.MOD_ID + ":", ""));
-            createRecipeFiles("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\recipes", unearthedBlockItemIDs);
+                if (blockID.contains("diamond") || blockID.contains("redstone") || blockID.contains("lapis") || blockID.contains("emerald") || blockID.contains("coal"))
+                    unearthedBlockItemIDs.add(blockID.replace("unearthed:", ""));
+            createOreLootTables("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\loot_tables\\blocks", unearthedBlockItemIDs);
         }
     }
 
@@ -128,29 +146,27 @@ public class BlockAssetHelper {
             try {
                 FileWriter fileWriter = new FileWriter(path + "\\" + id + ".json");
                 Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
-
                 if (id.contains("_wall")) {
                     String recipe = "{\n" +
-                        "  \"type\": \"minecraft:crafting_shaped\"\n" +
-                        "  \"pattern\": [\n" +
-                        "    \"###\",\n" +
-                        "    \"###\"\n" +
-                        "  ],\n" +
-                        "  \"key\": {\n" +
-                        "    \"#\": {\n" +
-                        "      \"item\": \"" + Unearthed.MOD_ID + ":" + id.replace("_wall", "") + "\"\n" +
-                        "    }\n" +
-                        "  },\n" +
-                        "  \"result\": {\n" +
-                        "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
-                        "    \"count\": 6\n" +
-                        "  }\n" +
-                        "}";
+                            "  \"type\": \"minecraft:crafting_shaped\"\n" +
+                            "  \"pattern\": [\n" +
+                            "    \"###\",\n" +
+                            "    \"###\"\n" +
+                            "  ],\n" +
+                            "  \"key\": {\n" +
+                            "    \"#\": {\n" +
+                            "      \"item\": \"" + Unearthed.MOD_ID + ":" + id.replace("_wall", "") + "\"\n" +
+                            "    }\n" +
+                            "  },\n" +
+                            "  \"result\": {\n" +
+                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "    \"count\": 6\n" +
+                            "  }\n" +
+                            "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
                     fileWriter.write(string);
-                }
-                else if (id.contains("_button")) {
+                } else if (id.contains("_button")) {
                     String recipe = "{\n" +
                             "  \"type\": \"minecraft:crafting_shapeless\",\n" +
                             "  \"group\": \"stone_button\",\n" +
@@ -166,8 +182,7 @@ public class BlockAssetHelper {
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
                     fileWriter.write(string);
-                }
-                else if (id.contains("_pressure_plate")) {
+                } else if (id.contains("_pressure_plate")) {
                     String recipe = "{\n" +
                             "  \"type\": \"minecraft:crafting_shaped\",\n" +
                             "  \"pattern\": [\n" +
@@ -179,21 +194,27 @@ public class BlockAssetHelper {
                             "    }\n" +
                             "  },\n" +
                             "  \"result\": {\n" +
-                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
+                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
                             "  }\n" +
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
                     fileWriter.write(string);
-                }
-                else if (id.contains("_slab")) {
+                } else if (id.contains("_slab")) {
                     String recipe = "{\n" +
-                            "  \"type\": \"minecraft:stonecutting\",\n" +
-                            "  \"ingredient\": {\n" +
+                            "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                            "  \"pattern\": [\n" +
+                            "    \"###\"\n" +
+                            "  ],\n" +
+                            "  \"key\": {\n" +
+                            "    \"#\": {\n" +
                             "    \"item\": \"" + Unearthed.MOD_ID + ":" + id.replace("_slab", "") + "\"\n" +
+                            "    }\n" +
                             "  },\n" +
-                            "  \"result\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
-                            "  \"count\": 1\n" +
+                            "  \"result\": {\n" +
+                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
+                            "    \"count\": 6\n" +
+                            "  }\n" +
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
@@ -208,6 +229,335 @@ public class BlockAssetHelper {
             }
 
 
+        });
+
+    }
+
+
+    public static void createStoneCutterRecipes(String path, List<String> idList) {
+        idList.forEach(id -> {
+            try {
+                FileWriter fileWriter = new FileWriter(path + "\\" + id + "_from_" + id.replace("slab", "") + "stonecutting.json");
+                Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
+                if (id.contains("_slab")) {
+                    String stoneCutterRecipe = "{\n" +
+                            "  \"type\": \"minecraft:stonecutting\",\n" +
+                            "  \"ingredient\": {\n" +
+                            "    \"item\": \"" + Unearthed.MOD_ID + ":" + id.replace("_slab", "") + "\"\n" +
+                            "  },\n" +
+                            "  \"result\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
+                            "  \"count\": 1\n" +
+                            "}";
+                    String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
+                    string = StringEscapeUtils.unescapeJava(string);
+                    fileWriter.write(string);
+                }
+
+                fileWriter.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        });
+
+    }
+
+
+    public static void createOreLootTables(String path, List<String> idList) {
+        idList.forEach(id -> {
+            try {
+                FileWriter fileWriter = new FileWriter(path + "\\" + id + ".json");
+                Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
+
+                if (id.contains("_lapis_ore")) {
+                    String recipe = "{\n" +
+                            "  \"type\": \"minecraft:block\",\n" +
+                            "  \"pools\": [\n" +
+                            "    {\n" +
+                            "      \"rolls\": 1,\n" +
+                            "      \"entries\": [\n" +
+                            "        {\n" +
+                            "          \"type\": \"minecraft:alternatives\",\n" +
+                            "          \"children\": [\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"conditions\": [\n" +
+                            "                {\n" +
+                            "                  \"condition\": \"minecraft:match_tool\",\n" +
+                            "                  \"predicate\": {\n" +
+                            "                    \"enchantments\": [\n" +
+                            "                      {\n" +
+                            "                        \"enchantment\": \"minecraft:silk_touch\",\n" +
+                            "                        \"levels\": {\n" +
+                            "                          \"min\": 1\n" +
+                            "                        }\n" +
+                            "                      }\n" +
+                            "                    ]\n" +
+                            "                  }\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "            },\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"functions\": [\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:set_count\",\n" +
+                            "                  \"count\": {\n" +
+                            "                    \"min\": 4.0,\n" +
+                            "                    \"max\": 9.0,\n" +
+                            "                    \"type\": \"minecraft:uniform\"\n" +
+                            "                  }\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:apply_bonus\",\n" +
+                            "                  \"enchantment\": \"minecraft:fortune\",\n" +
+                            "                  \"formula\": \"minecraft:ore_drops\"\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:explosion_decay\"\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"minecraft:lapis_lazuli\"\n" +
+                            "            }\n" +
+                            "          ]\n" +
+                            "        }\n" +
+                            "      ]\n" +
+                            "    }\n" +
+                            "  ]\n" +
+                            "}";
+                    String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
+                    string = StringEscapeUtils.unescapeJava(string);
+                    fileWriter.write(string);
+                } else if (id.contains("_diamond_ore")) {
+                    String recipe = "{\n" +
+                            "  \"type\": \"minecraft:block\",\n" +
+                            "  \"pools\": [\n" +
+                            "    {\n" +
+                            "      \"rolls\": 1,\n" +
+                            "      \"entries\": [\n" +
+                            "        {\n" +
+                            "          \"type\": \"minecraft:alternatives\",\n" +
+                            "          \"children\": [\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"conditions\": [\n" +
+                            "                {\n" +
+                            "                  \"condition\": \"minecraft:match_tool\",\n" +
+                            "                  \"predicate\": {\n" +
+                            "                    \"enchantments\": [\n" +
+                            "                      {\n" +
+                            "                        \"enchantment\": \"minecraft:silk_touch\",\n" +
+                            "                        \"levels\": {\n" +
+                            "                          \"min\": 1\n" +
+                            "                        }\n" +
+                            "                      }\n" +
+                            "                    ]\n" +
+                            "                  }\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "            },\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"functions\": [\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:apply_bonus\",\n" +
+                            "                  \"enchantment\": \"minecraft:fortune\",\n" +
+                            "                  \"formula\": \"minecraft:ore_drops\"\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:explosion_decay\"\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"minecraft:diamond\"\n" +
+                            "            }\n" +
+                            "          ]\n" +
+                            "        }\n" +
+                            "      ]\n" +
+                            "    }\n" +
+                            "  ]\n" +
+                            "}";
+                    String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
+                    string = StringEscapeUtils.unescapeJava(string);
+                    fileWriter.write(string);
+                } else if (id.contains("_redstone_ore")) {
+                    String recipe = "{\n" +
+                            "  \"type\": \"minecraft:block\",\n" +
+                            "  \"pools\": [\n" +
+                            "    {\n" +
+                            "      \"rolls\": 1,\n" +
+                            "      \"entries\": [\n" +
+                            "        {\n" +
+                            "          \"type\": \"minecraft:alternatives\",\n" +
+                            "          \"children\": [\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"conditions\": [\n" +
+                            "                {\n" +
+                            "                  \"condition\": \"minecraft:match_tool\",\n" +
+                            "                  \"predicate\": {\n" +
+                            "                    \"enchantments\": [\n" +
+                            "                      {\n" +
+                            "                        \"enchantment\": \"minecraft:silk_touch\",\n" +
+                            "                        \"levels\": {\n" +
+                            "                          \"min\": 1\n" +
+                            "                        }\n" +
+                            "                      }\n" +
+                            "                    ]\n" +
+                            "                  }\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "            },\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"functions\": [\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:set_count\",\n" +
+                            "                  \"count\": {\n" +
+                            "                    \"min\": 4.0,\n" +
+                            "                    \"max\": 5.0,\n" +
+                            "                    \"type\": \"minecraft:uniform\"\n" +
+                            "                  }\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:apply_bonus\",\n" +
+                            "                  \"enchantment\": \"minecraft:fortune\",\n" +
+                            "                  \"formula\": \"minecraft:uniform_bonus_count\",\n" +
+                            "                  \"parameters\": {\n" +
+                            "                    \"bonusMultiplier\": 1\n" +
+                            "                  }\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:explosion_decay\"\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"minecraft:redstone\"\n" +
+                            "            }\n" +
+                            "          ]\n" +
+                            "        }\n" +
+                            "      ]\n" +
+                            "    }\n" +
+                            "  ]\n" +
+                            "}";
+                    String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
+                    string = StringEscapeUtils.unescapeJava(string);
+                    fileWriter.write(string);
+                } else if (id.contains("_coal_ore")) {
+                    String recipe = "{\n" +
+                            "  \"type\": \"minecraft:block\",\n" +
+                            "  \"pools\": [\n" +
+                            "    {\n" +
+                            "      \"rolls\": 1,\n" +
+                            "      \"entries\": [\n" +
+                            "        {\n" +
+                            "          \"type\": \"minecraft:alternatives\",\n" +
+                            "          \"children\": [\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"conditions\": [\n" +
+                            "                {\n" +
+                            "                  \"condition\": \"minecraft:match_tool\",\n" +
+                            "                  \"predicate\": {\n" +
+                            "                    \"enchantments\": [\n" +
+                            "                      {\n" +
+                            "                        \"enchantment\": \"minecraft:silk_touch\",\n" +
+                            "                        \"levels\": {\n" +
+                            "                          \"min\": 1\n" +
+                            "                        }\n" +
+                            "                      }\n" +
+                            "                    ]\n" +
+                            "                  }\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "            },\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"functions\": [\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:apply_bonus\",\n" +
+                            "                  \"enchantment\": \"minecraft:fortune\",\n" +
+                            "                  \"formula\": \"minecraft:ore_drops\"\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:explosion_decay\"\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"minecraft:coal\"\n" +
+                            "            }\n" +
+                            "          ]\n" +
+                            "        }\n" +
+                            "      ]\n" +
+                            "    }\n" +
+                            "  ]\n" +
+                            "}";
+                    String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
+                    string = StringEscapeUtils.unescapeJava(string);
+                    fileWriter.write(string);
+                } else if (id.contains("_emerald_ore")) {
+                    String recipe = "{\n" +
+                            "  \"type\": \"minecraft:block\",\n" +
+                            "  \"pools\": [\n" +
+                            "    {\n" +
+                            "      \"rolls\": 1,\n" +
+                            "      \"entries\": [\n" +
+                            "        {\n" +
+                            "          \"type\": \"minecraft:alternatives\",\n" +
+                            "          \"children\": [\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"conditions\": [\n" +
+                            "                {\n" +
+                            "                  \"condition\": \"minecraft:match_tool\",\n" +
+                            "                  \"predicate\": {\n" +
+                            "                    \"enchantments\": [\n" +
+                            "                      {\n" +
+                            "                        \"enchantment\": \"minecraft:silk_touch\",\n" +
+                            "                        \"levels\": {\n" +
+                            "                          \"min\": 1\n" +
+                            "                        }\n" +
+                            "                      }\n" +
+                            "                    ]\n" +
+                            "                  }\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"" + Unearthed.MOD_ID + ":" + id + "\"\n" +
+                            "            },\n" +
+                            "            {\n" +
+                            "              \"type\": \"minecraft:item\",\n" +
+                            "              \"functions\": [\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:apply_bonus\",\n" +
+                            "                  \"enchantment\": \"minecraft:fortune\",\n" +
+                            "                  \"formula\": \"minecraft:ore_drops\"\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                  \"function\": \"minecraft:explosion_decay\"\n" +
+                            "                }\n" +
+                            "              ],\n" +
+                            "              \"name\": \"minecraft:emerald\"\n" +
+                            "            }\n" +
+                            "          ]\n" +
+                            "        }\n" +
+                            "      ]\n" +
+                            "    }\n" +
+                            "  ]\n" +
+                            "}";
+                    String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
+                    string = StringEscapeUtils.unescapeJava(string);
+                    fileWriter.write(string);
+                }
+
+                //close the writer
+                fileWriter.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
     }

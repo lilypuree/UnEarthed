@@ -1,8 +1,15 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
     "item": "unearthed:pumice"
+    }
   },
-  "result": "unearthed:pumice_slab",
-  "count": 1
+  "result": {
+    "item": "unearthed:pumice_slab",
+    "count": 6
+  }
 }
