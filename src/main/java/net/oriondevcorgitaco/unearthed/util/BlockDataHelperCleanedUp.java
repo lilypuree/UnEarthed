@@ -461,15 +461,18 @@ public class BlockDataHelperCleanedUp {
 
         String sign = "{\n" +
                 "  \"type\": \"minecraft:crafting_shaped\",\n" +
-                "  \"group\": \"wooden_door\",\n" +
+                "  \"group\": \"sign\",\n" +
                 "  \"pattern\": [\n" +
-                "    \"##\",\n" +
-                "    \"##\",\n" +
-                "    \"##\"\n" +
+                "    \"###\",\n" +
+                "    \"###\",\n" +
+                "    \" X \"\n" +
                 "  ],\n" +
                 "  \"key\": {\n" +
                 "    \"#\": {\n" +
                 "      \"item\": \"key\"\n" +
+                "    },\n" +
+                "    \"X\": {\n" +
+                "      \"item\": \"minecraft:stick\"\n" +
                 "    }\n" +
                 "  },\n" +
                 "  \"result\": {\n" +

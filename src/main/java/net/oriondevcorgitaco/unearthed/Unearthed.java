@@ -37,15 +37,15 @@ public class Unearthed implements ModInitializer {
         for (String id : BlockGeneratorHelper.cobbleBlockIdList)
             BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);
 
-        List<String> stringList = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
         for (Block block : Registry.BLOCK) {
             String blockID = Registry.BLOCK.getId(block).toString();
 
             if (blockID.contains("unearthed"))
                 if (blockID.contains("diamond"))
-                    stringList.add(blockID.replace(MOD_ID + ":", ""));
+                    idList.add(blockID.replace(MOD_ID + ":", ""));
 
-            BlockDataHelperCleanedUp.createOreRecipe(path, MOD_ID, stringList, BlockDataHelperCleanedUp.OreType.REDSTONE, "minecraft:iron_ingot");
+            BlockDataHelperCleanedUp.createOreRecipe(path, MOD_ID, idList, BlockDataHelperCleanedUp.OreType.DIAMOND, "minecraft:iron_ingot");
 
         }
     }
