@@ -31,7 +31,7 @@ public class BlockAssetHelper {
 
     public static void createUnearthedCraftingRecipes() {
         List<String> unearthedBlockItemIDs = new ArrayList<>();
-        List<String> unearthedSlabItemIDs = new ArrayList<>();
+        List<String> stoneCutterBlockItemsIDs = new ArrayList<>();
         for (Block block : Registry.BLOCK) {
             String blockID = Registry.BLOCK.getId(block).toString();
             if (blockID.contains(Unearthed.MOD_ID)) {
@@ -39,9 +39,9 @@ public class BlockAssetHelper {
                     unearthedBlockItemIDs.add(blockID.replace("unearthed:", ""));
                 createRecipeFiles("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\recipes", unearthedBlockItemIDs);
 
-                if (blockID.contains("_slab"))
-                    unearthedSlabItemIDs.add(blockID.replace("unearthed:", ""));
-                createStoneCutterRecipes("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\recipes", unearthedSlabItemIDs);
+                if (blockID.contains("_slab") || blockID.contains("_stairs") || blockID.contains("_wall"))
+                    stoneCutterBlockItemsIDs.add(blockID.replace("unearthed:", ""));
+                createStoneCutterRecipes("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\data\\unearthed\\recipes", stoneCutterBlockItemsIDs);
 
             }
         }
@@ -236,10 +236,10 @@ public class BlockAssetHelper {
 
     public static void createStoneCutterRecipes(String path, List<String> idList) {
         idList.forEach(id -> {
-            try {
-                FileWriter fileWriter = new FileWriter(path + "\\" + id + "_from_" + id.replace("slab", "") + "stonecutting.json");
-                Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
-                if (id.contains("_slab")) {
+            if (id.contains("_slab")) {
+                try {
+                    FileWriter fileWriter = new FileWriter(path + "\\" + id + "_from_" + id.replace("slab", "") + "stonecutting.json");
+                    Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
                     String stoneCutterRecipe = "{\n" +
                             "  \"type\": \"minecraft:stonecutting\",\n" +
                             "  \"ingredient\": {\n" +
@@ -251,15 +251,53 @@ public class BlockAssetHelper {
                     String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
                     string = StringEscapeUtils.unescapeJava(string);
                     fileWriter.write(string);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                fileWriter.close();
+                if (id.contains("_stairs")) {
+                    try {
+                        FileWriter fileWriter = new FileWriter(path + "\\" + id + "_from_" + id.replace("stairs", "") + "stonecutting.json");
+                        Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
+                        String stoneCutterRecipe = "{\n" +
+                                "  \"type\": \"minecraft:stonecutting\",\n" +
+                                "  \"ingredient\": {\n" +
+                                "    \"item\": \"" + Unearthed.MOD_ID + ":" + id.replace("_stairs", "") + "\"\n" +
+                                "  },\n" +
+                                "  \"result\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
+                                "  \"count\": 1\n" +
+                                "}";
+                        String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
+                        string = StringEscapeUtils.unescapeJava(string);
+                        fileWriter.write(string);
+                        fileWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                if (id.contains("_wall")) {
+                    try {
+                        FileWriter fileWriter = new FileWriter(path + "\\" + id + "_from_" + id.replace("wall", "") + "stonecutting.json");
+                        Gson prettyPrinting = new GsonBuilder().setPrettyPrinting().create();
+                        String stoneCutterRecipe = "{\n" +
+                                "  \"type\": \"minecraft:stonecutting\",\n" +
+                                "  \"ingredient\": {\n" +
+                                "    \"item\": \"" + Unearthed.MOD_ID + ":" + id.replace("_wall", "") + "\"\n" +
+                                "  },\n" +
+                                "  \"result\": \"" + Unearthed.MOD_ID + ":" + id + "\",\n" +
+                                "  \"count\": 1\n" +
+                                "}";
+                        String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
+                        string = StringEscapeUtils.unescapeJava(string);
+                        fileWriter.write(string);
+                        fileWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
-
         });
 
     }

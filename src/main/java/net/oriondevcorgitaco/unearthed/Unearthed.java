@@ -6,6 +6,7 @@ import net.fabricmc.api.ModInitializer;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
+import net.oriondevcorgitaco.unearthed.util.BlockAssetHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +33,7 @@ public class Unearthed implements ModInitializer {
             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
 
 //        BlockAssetHelper.createUnearthedLangFile();
-//        BlockAssetHelper.createUnearthedCraftingRecipes();
+        BlockAssetHelper.createUnearthedCraftingRecipes();
 //        BlockAssetHelper.createUnearthedOreLootTableRecipes();
 
     }
