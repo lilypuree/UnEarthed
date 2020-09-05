@@ -165,6 +165,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_button")) {
                     String recipe = "{\n" +
@@ -181,6 +183,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_pressure_plate")) {
                     String recipe = "{\n" +
@@ -199,6 +203,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_slab")) {
                     String recipe = "{\n" +
@@ -218,6 +224,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 }
 
@@ -250,7 +258,10 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
+                    fileWriter.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -270,6 +281,8 @@ public class BlockAssetHelper {
                                 "}";
                         String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
                         string = StringEscapeUtils.unescapeJava(string);
+                        string = string.replace("\"{", "{");
+                        string = string.replace("}\"", "}");
                         fileWriter.write(string);
                         fileWriter.close();
                     } catch (IOException e) {
@@ -291,6 +304,8 @@ public class BlockAssetHelper {
                                 "}";
                         String string = prettyPrinting.toJson(new JsonPrimitive(stoneCutterRecipe));
                         string = StringEscapeUtils.unescapeJava(string);
+                        string = string.replace("\"{", "{");
+                        string = string.replace("}\"", "}");
                         fileWriter.write(string);
                         fileWriter.close();
                     } catch (IOException e) {
@@ -368,6 +383,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_diamond_ore")) {
                     String recipe = "{\n" +
@@ -420,6 +437,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_redstone_ore")) {
                     String recipe = "{\n" +
@@ -483,6 +502,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_coal_ore")) {
                     String recipe = "{\n" +
@@ -535,6 +556,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 } else if (id.contains("_emerald_ore")) {
                     String recipe = "{\n" +
@@ -587,6 +610,8 @@ public class BlockAssetHelper {
                             "}";
                     String string = prettyPrinting.toJson(new JsonPrimitive(recipe));
                     string = StringEscapeUtils.unescapeJava(string);
+                    string = string.replace("\"{", "{");
+                    string = string.replace("}\"", "}");
                     fileWriter.write(string);
                 }
 
