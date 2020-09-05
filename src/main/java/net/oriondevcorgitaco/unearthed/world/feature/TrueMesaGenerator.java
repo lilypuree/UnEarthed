@@ -15,10 +15,10 @@ import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 
 import java.util.Random;
 
-public class StrataGenerator2 extends Feature<DefaultFeatureConfig> {
-    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE2 = RegistrationHelper.registerFeature("strata_gen2", new StrataGenerator2(DefaultFeatureConfig.CODEC));
+public class TrueMesaGenerator extends Feature<DefaultFeatureConfig> {
+    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE2 = RegistrationHelper.registerFeature("strata_gen2", new TrueMesaGenerator(DefaultFeatureConfig.CODEC));
 
-    public StrataGenerator2(Codec<DefaultFeatureConfig> configCodec) {
+    public TrueMesaGenerator(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
 

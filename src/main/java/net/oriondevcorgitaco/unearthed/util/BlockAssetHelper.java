@@ -25,7 +25,7 @@ public class BlockAssetHelper {
             String blockID = Registry.BLOCK.getId(block).toString();
             if (blockID.contains(Unearthed.MOD_ID))
                 unearthedBlockItemIDs.add(blockID.replace(Unearthed.MOD_ID + ":", ""));
-            createLangFile("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\assets\\unearthed\\lang\\en_us.json", unearthedBlockItemIDs, true, true);
+            createLangFile("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\assets\\unearthed\\lang\\en_us.json", Unearthed.MOD_ID, unearthedBlockItemIDs, true, true);
         }
     }
 
@@ -59,7 +59,7 @@ public class BlockAssetHelper {
     }
 
 
-    public static void createLangFile(String langPath, List<String> idList, boolean isBlockList, boolean isItemList) {
+    public static void createLangFile(String langPath, String modid, List<String> idList, boolean isBlockList, boolean isItemList) {
 
         try {
             FileWriter fileWriter = new FileWriter(langPath);
@@ -69,12 +69,10 @@ public class BlockAssetHelper {
             for (int idx = 0; idx < idList.size(); idx++) {
                 String id = idList.get(idx);
 
-                String blockPath = "\"block." + Unearthed.MOD_ID + "." + id;
-                String itemPath = "\"item." + Unearthed.MOD_ID + "." + id;
+                String blockPath = "\"block." + modid + "." + id;
+                String itemPath = "\"item." + modid + "." + id;
                 if (isBlockList) {
                     String blockLangLine = blockPath + "\":\"" + capitalizeWord(id.replace("_", " ")) + "\",\n";
-                    if (idx == idList.size() - 1)
-                        blockLangLine = itemPath + "\":\"" + capitalizeWord(id.replace("_", " ")) + "\"\n";
                     String blockTranslation = prettyPrinting.toJson(new JsonPrimitive(blockLangLine));
                     blockTranslation = StringEscapeUtils.unescapeJava(blockTranslation);
                     blockTranslation = StringEscapeUtils.unescapeJava(blockTranslation.replace("\"\"", ""));
@@ -95,11 +93,10 @@ public class BlockAssetHelper {
 
 
                     itemTranslation = StringEscapeUtils.unescapeJava(itemTranslation.replace("\"\"", ""));
-                    try {
-                        fileWriter.write(itemTranslation);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    itemTranslation = itemTranslation.replace("{", "\",\n}");
+                    itemTranslation = itemTranslation.replace("\" \n\"\"}", "\",\n}");
+
+                    fileWriter.write(itemTranslation);
                 }
             }
 

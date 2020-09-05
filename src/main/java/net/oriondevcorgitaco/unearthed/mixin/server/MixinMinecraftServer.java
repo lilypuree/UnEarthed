@@ -23,7 +23,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.level.storage.LevelStorage;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.world.feature.NaturalGenerator;
-import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator2;
+import net.oriondevcorgitaco.unearthed.world.feature.TrueMesaGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.StrataGenerator3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 public class MixinMinecraftServer {
 
     private final ConfiguredFeature<?, ?> STRATA_GENERATOR = RegistrationHelper.newConfiguredFeature("strata_generator", NaturalGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
-    private final ConfiguredFeature<?, ?> STRATA_GENERATOR2 = RegistrationHelper.newConfiguredFeature("strata_generator2", StrataGenerator2.UNDERGROUND_STONE2.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    private final ConfiguredFeature<?, ?> STRATA_GENERATOR2 = RegistrationHelper.newConfiguredFeature("strata_generator2", TrueMesaGenerator.UNDERGROUND_STONE2.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
     private final ConfiguredFeature<?, ?> STRATA_GENERATOR3 = RegistrationHelper.newConfiguredFeature("strata_generator3", StrataGenerator3.UNDERGROUND_STONE3.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
 
 

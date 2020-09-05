@@ -32,8 +32,8 @@ public class Unearthed implements ModInitializer {
         if (ConfigBlockReader.blocksFromConfig.size() == 0)
             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
 
-//        BlockAssetHelper.createUnearthedLangFile();
-        BlockAssetHelper.createUnearthedCraftingRecipes();
+        BlockAssetHelper.createUnearthedLangFile();
+//        BlockAssetHelper.createUnearthedCraftingRecipes();
 //        BlockAssetHelper.createUnearthedOreLootTableRecipes();
 
     }
