@@ -23,6 +23,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+
+	implementation 'com.github.cliftonlabs:json-simple:3.1.0'
 }
 
 minecraft {

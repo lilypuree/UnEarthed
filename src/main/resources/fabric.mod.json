@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "unearthed",
   "version": "${version}",
-
   "name": "Example Mod",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
@@ -12,10 +11,8 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-
   "license": "LGPLv3",
   "icon": "assets/hextension_core/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -28,7 +25,6 @@
   "mixins": [
     "unearthed.mixin.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
@@ -37,5 +33,5 @@
   "suggests": {
     "flamingo": "*"
   },
-  "accessWidener" : "yeet.aw"
+  "accessWidener": "yeet.aw"
 }

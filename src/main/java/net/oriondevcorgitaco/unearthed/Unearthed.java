@@ -3,6 +3,7 @@ package net.oriondevcorgitaco.unearthed;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
@@ -15,6 +16,9 @@ public class Unearthed implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger();
     public static UnearthedConfig UE_CONFIG;
 
+    public static boolean printLangJson = false;
+    public static boolean printRecipeJsons = true;
+
     @Override
     public void onInitialize() {
         AutoConfig.register(UnearthedConfig.class, JanksonConfigSerializer::new);
@@ -26,14 +30,16 @@ public class Unearthed implements ModInitializer {
         String[] blockRegistryList = removeSpaces.split(",");
 
         for (String s : blockRegistryList) {
-             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader(s));
+            ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader(s));
         }
 
         if (ConfigBlockReader.blocksFromConfig.size() == 0)
             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
 
-//        FeatureAdder.strataGeneratorForAllBiomes();
-        BlockAssetHelper.jsonPrinter();
         BlockAssetHelper.printBlockIDs();
+        if (printRecipeJsons && FabricLoader.getInstance().isDevelopmentEnvironment())
+            BlockAssetHelper.createUnearthedCraftingRecipes();
+        if (printLangJson && FabricLoader.getInstance().isDevelopmentEnvironment())
+            BlockAssetHelper.createUnearthedLangFile();
     }
 }

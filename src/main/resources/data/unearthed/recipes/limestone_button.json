@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "stone_button",
+  "ingredients": [
+    {
+      "item": "unearthed:limestone"
+    }
+  ],
+  "result": {
+    "item": "unearthed:limestone_button"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:schist"
+    }
+  },
+  "result": {
+    "item": "unearthed:schist_pressure_plate"
+  }
+}

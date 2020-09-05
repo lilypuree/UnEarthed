@@ -36,6 +36,8 @@ public class BlockGeneratorHelper {
     public static List<Block> cobbleStoneBlockArray = new ArrayList<>();
     public static List<Block> oreBlockArray = new ArrayList<>();
 
+    public static List<String> getCobbleBlockIdList = new ArrayList<>();
+
 
     public BlockGeneratorHelper(String id, boolean hasPolishedVariant, boolean hasCobbleVariant, boolean hasMossyVariant, boolean hasBricksVariant, boolean hasMossyBricksVariant) {
         this.id = id;
@@ -150,9 +152,11 @@ public class BlockGeneratorHelper {
             Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
             Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
             Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)), new Item.Settings().group(UNEARTHED_TAB)));
+            cobbleBlockIdList.add(cobbleID);
 
             for (String type : BlockAssetHelper.BASE_TYPES) {
                 String modifiedID = cobbleID + type;
+                cobbleBlockIdList.add(modifiedID);
                 Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
             }
             cobbleStoneBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
