@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
-import net.oriondevcorgitaco.unearthed.Unearthed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +52,7 @@ public class BlockGeneratorReference {
 
 
     public static Tag<Block> blockTagRegister(String id) {
-        return TagRegistry.block(new Identifier(Unearthed.MOD_ID, id));
+        return TagRegistry.block(new Identifier("c", id));
 
     }
 }

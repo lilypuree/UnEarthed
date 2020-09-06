@@ -75,7 +75,7 @@ public class Unearthed implements ModInitializer {
         }
 
         if (ConfigBlockReader.desertBlocksFromConfig.size() == 0)
-            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader("minecraft:packed_ice"));
+            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader("minecraft:smooth_sandstone"));
 
     }
 }

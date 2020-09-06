@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gray_basalt_emerald_ore",
+    "unearthed:gabbro_emerald_ore",
+    "unearthed:pumice_emerald_ore",
+    "unearthed:kimberlite_emerald_ore",
+    "unearthed:rhyolite_emerald_ore",
+    "unearthed:slate_emerald_ore",
+    "unearthed:marble_emerald_ore",
+    "unearthed:quartzite_emerald_ore",
+    "unearthed:phyllite_emerald_ore",
+    "unearthed:schist_emerald_ore",
+    "unearthed:limestone_emerald_ore",
+    "unearthed:lignite_emerald_ore",
+    "unearthed:siltstone_emerald_ore",
+    "unearthed:mudstone_emerald_ore",
+    "unearthed:conglomerate_emerald_ore"
+  ]
+}

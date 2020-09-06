@@ -16,7 +16,7 @@ import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import java.util.Random;
 
 public class TrueMesaGenerator extends Feature<DefaultFeatureConfig> {
-    public static final Feature<DefaultFeatureConfig> MESA = RegistrationHelper.registerFeature("strata_gen2", new TrueMesaGenerator(DefaultFeatureConfig.CODEC));
+    public static final Feature<DefaultFeatureConfig> MESA = RegistrationHelper.registerFeature("true_mesa_generator", new TrueMesaGenerator(DefaultFeatureConfig.CODEC));
 
     public TrueMesaGenerator(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
