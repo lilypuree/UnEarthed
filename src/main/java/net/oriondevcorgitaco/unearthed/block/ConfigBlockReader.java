@@ -14,6 +14,8 @@ public class ConfigBlockReader {
     private final String id;
 
     public static List<ConfigBlockReader> blocksFromConfig = new ArrayList<>();
+    public static List<ConfigBlockReader> iceBlocksFromConfig = new ArrayList<>();
+    public static List<ConfigBlockReader> desertBlocksFromConfig = new ArrayList<>();
 
     public ConfigBlockReader(String id) {
         this.id = id;

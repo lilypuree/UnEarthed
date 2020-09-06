@@ -37,23 +37,34 @@ public class GeneratorConfig {
 
         @ConfigEntry.Gui.PrefixText
         @Comment(value = "\nList of blocks to use in world generation.")
-        public String blocksForGeneration = "unearthed:gray_basalt,unearthed:gabbro,unearthed:pumice,unearthed:kimberlite,unearthed:rhyolite,unearthed:slate,unearthed:marble,unearthed:quartzite,unearthed:phyllite,unearthed:schist,unearthed:limestone,unearthed:lignite,unearthed:siltstone,unearthed:mudstone,unearthed:conglomerate";
+        public String blocksForGeneration = "unearthed:gray_basalt,unearthed:gabbro,unearthed:pumice,unearthed:kimberlite,unearthed:rhyolite,unearthed:slate,unearthed:quartzite,unearthed:phyllite,unearthed:schist,unearthed:limestone,unearthed:lignite,unearthed:conglomerate";
+
+
+        @ConfigEntry.Gui.PrefixText
+        @Comment(value = "\nList of blocks to use in icy biome world generation.")
+        public String iceBlocksForGeneration = "unearthed:marble,minecraft:packed_ice";
+
+        @ConfigEntry.Gui.PrefixText
+        @Comment(value = "\nList of blocks to use in desert biome world generation.")
+        public String desertBlocksForGeneration = "unearthed:siltstone,unearthed:mudstone,minecraft:smooth_sandstone,minecraft:sandstone";
+
+
     }
 
 
     @ConfigEntry.Gui.PrefixText
     @Comment(value = "\nUse Stone Block Tag? Could have performance impact!\nDefault: false")
-    public boolean stoneTag = false;
-//
-//    @ConfigEntry.Gui.PrefixText
-//    @Comment(value = "\nAre vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true")
-//    public boolean trueMesas = false;
-//
-//    @ConfigEntry.Gui.PrefixText
-//    @Comment(value = "\nDo deserts use different blocks for cave generation?\nDefault: true")
-//    public boolean desertCaves = false;
-//
-//    @ConfigEntry.Gui.PrefixText
-//    @Comment(value = "\nDo icy/frozen biomes use different blocks for cave generation?\nDefault: true")
-//    public boolean icyCaves = false;
+    public boolean stoneTag = true;
+
+    @ConfigEntry.Gui.PrefixText
+    @Comment(value = "\nAre vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true")
+    public boolean trueMesas = true;
+
+    @ConfigEntry.Gui.PrefixText
+    @Comment(value = "\nDo deserts use different blocks for cave generation?\nDefault: true")
+    public boolean desertCaves = true;
+
+    @ConfigEntry.Gui.PrefixText
+    @Comment(value = "\nDo icy/frozen biomes use different blocks for cave generation?\nDefault: true")
+    public boolean icyCaves = false;
 }

@@ -3,18 +3,11 @@ package net.oriondevcorgitaco.unearthed;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.block.Block;
-import net.minecraft.util.registry.Registry;
-import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
-import net.oriondevcorgitaco.unearthed.util.BlockDataHelperCleanedUp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Unearthed implements ModInitializer {
     public static final String MOD_ID = "unearthed";
@@ -31,23 +24,23 @@ public class Unearthed implements ModInitializer {
         BlockGeneratorReference.init();
         configReader();
 
-        for (String id : BlockGeneratorHelper.baseBlockIdList)
-            BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);
+//        for (String id : BlockGeneratorHelper.baseBlockIdList)
+//            BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);
+//
+//        for (String id : BlockGeneratorHelper.cobbleBlockIdList)
+//            BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);
 
-        for (String id : BlockGeneratorHelper.cobbleBlockIdList)
-            BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);
+//        List<String> idList = new ArrayList<>();
+//        for (Block block : Registry.BLOCK) {
+//            String blockID = Registry.BLOCK.getId(block).toString();
+//
+//            if (blockID.contains("unearthed"))
+//                if (blockID.contains("diamond"))
+//                    idList.add(blockID.replace(MOD_ID + ":", ""));
+//
+//            BlockDataHelperCleanedUp.createOreRecipe(path, MOD_ID, idList, BlockDataHelperCleanedUp.OreType.DIAMOND, "minecraft:iron_ingot");
 
-        List<String> idList = new ArrayList<>();
-        for (Block block : Registry.BLOCK) {
-            String blockID = Registry.BLOCK.getId(block).toString();
-
-            if (blockID.contains("unearthed"))
-                if (blockID.contains("diamond"))
-                    idList.add(blockID.replace(MOD_ID + ":", ""));
-
-            BlockDataHelperCleanedUp.createOreRecipe(path, MOD_ID, idList, BlockDataHelperCleanedUp.OreType.DIAMOND, "minecraft:iron_ingot");
-
-        }
+//        }
     }
 
     public static void configReader() {
@@ -61,5 +54,28 @@ public class Unearthed implements ModInitializer {
 
         if (ConfigBlockReader.blocksFromConfig.size() == 0)
             ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
+
+        String iceBlockRegistries = UE_CONFIG.generation.naturalgeneratorv1.iceBlocksForGeneration;
+        String removeIcySpaces = iceBlockRegistries.trim().toLowerCase().replace(" ", "");
+        String[] iceBlockRegistryList = removeIcySpaces.split(",");
+
+        for (String s : iceBlockRegistryList) {
+            ConfigBlockReader.iceBlocksFromConfig.add(new ConfigBlockReader(s));
+        }
+
+        if (ConfigBlockReader.iceBlocksFromConfig.size() == 0)
+            ConfigBlockReader.iceBlocksFromConfig.add(new ConfigBlockReader("minecraft:packed_ice"));
+
+        String desertBlockRegistries = UE_CONFIG.generation.naturalgeneratorv1.desertBlocksForGeneration;
+        String removeDesertSpaces = desertBlockRegistries.trim().toLowerCase().replace(" ", "");
+        String[] desertBlockRegistryList = removeDesertSpaces.split(",");
+
+        for (String s : desertBlockRegistryList) {
+            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader(s));
+        }
+
+        if (ConfigBlockReader.desertBlocksFromConfig.size() == 0)
+            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader("minecraft:packed_ice"));
+
     }
 }

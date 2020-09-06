@@ -1,4 +1,4 @@
-package net.oriondevcorgitaco.unearthed.world.feature;
+package net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators;
 
 import com.mojang.serialization.Codec;
 import net.fabricmc.loader.api.FabricLoader;
@@ -23,10 +23,10 @@ import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 
 import java.util.Random;
 
-public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
-    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("strata_gen4", new NaturalGenerator(DefaultFeatureConfig.CODEC));
+public class NaturalIcyGenerator extends Feature<DefaultFeatureConfig> {
+    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("natural_icy_generator", new NaturalIcyGenerator(DefaultFeatureConfig.CODEC));
 
-    public NaturalGenerator(Codec<DefaultFeatureConfig> configCodec) {
+    public NaturalIcyGenerator(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
 
@@ -40,6 +40,7 @@ public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
 
     double storedNoiseHigh = 0;
     double storedNoiseLow = 0;
+
 
 
     private void getHighestNoisePoint(double noise) {
@@ -65,72 +66,76 @@ public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
                 int topY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 for (int y = 0; y < topY; y++) {
-                    FNVector3f perturb3f = new FNVector3f(mutable.getX(), mutable.getY(), mutable.getZ());
-                    perturb1.GradientPerturb(perturb3f);
-                    perturbSmall1.GradientPerturb(perturb3f);
+                    if (topY < 2)
+                        topY = 256;
 
-                    FNVector3f perturb3f2 = new FNVector3f(mutable.getX(), mutable.getY(), mutable.getZ());
-                    perturb2.GradientPerturb(perturb3f2);
-                    perturbSmall2.GradientPerturb(perturb3f2);
+                        FNVector3f perturb3f = new FNVector3f(mutable.getX(), mutable.getY(), mutable.getZ());
+                        perturb1.GradientPerturb(perturb3f);
+                        perturbSmall1.GradientPerturb(perturb3f);
+
+                        FNVector3f perturb3f2 = new FNVector3f(mutable.getX(), mutable.getY(), mutable.getZ());
+                        perturb2.GradientPerturb(perturb3f2);
+                        perturbSmall2.GradientPerturb(perturb3f2);
+
+                        double cellNoise1 = this.cellNoise1.GetNoise(perturb3f.x, perturb3f.y, perturb3f.z);
+                        double cellNoise2 = this.cellNoise2.GetNoise(perturb3f2.x, perturb3f2.y, perturb3f2.z);
+
+                        double selectorNoiseValue = selectorNoise.GetValue(mutable.getX(), mutable.getY(), mutable.getZ()) * 12 + 0.5;
+
+                        double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
+                        if (FabricLoader.getInstance().isDevelopmentEnvironment())
+                            getHighestNoisePoint(clampedValue);
+
+                        ConfigBlockReader reader = ConfigBlockReader.iceBlocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.iceBlocksFromConfig.size()));
 
 
-                    double cellNoise1 = this.cellNoise1.GetNoise(perturb3f.x, perturb3f.y, perturb3f.z);
-                    double cellNoise2 = this.cellNoise2.GetNoise(perturb3f2.x, perturb3f2.y, perturb3f2.z);
+                        BlockState mutableState = world.getBlockState(mutable);
 
-                    double selectorNoiseValue = selectorNoise.GetValue(mutable.getX(), mutable.getY(), mutable.getZ()) * 12 + 0.5;
+                        if (useStoneTag(world, mutable))
+                            world.setBlockState(mutable, reader.getBlock().getDefaultState(), 2);
 
-                    double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
-                    if (FabricLoader.getInstance().isDevelopmentEnvironment())
-                        getHighestNoisePoint(clampedValue);
+                        if (mutableState == Blocks.COAL_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getCoalOre(mutableState).getDefaultState(), 2);
 
-                    ConfigBlockReader reader = ConfigBlockReader.blocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.blocksFromConfig.size()));
-                    BlockState mutableState = world.getBlockState(mutable);
+                        if (mutableState == Blocks.IRON_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getIronOre(mutableState).getDefaultState(), 2);
 
-                    if (useStoneTag(world, mutable))
-                        world.setBlockState(mutable, reader.getBlock().getDefaultState(), 2);
+                        if (mutableState == Blocks.GOLD_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getGoldOre(mutableState).getDefaultState(), 2);
 
-                    if (mutableState == Blocks.COAL_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getCoalOre(mutableState).getDefaultState(), 2);
+                        if (mutableState == Blocks.LAPIS_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getLapisOre(mutableState).getDefaultState(), 2);
 
-                    if (mutableState == Blocks.IRON_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getIronOre(mutableState).getDefaultState(), 2);
+                        if (mutableState == Blocks.REDSTONE_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getRedstoneOre(mutableState).getDefaultState(), 2);
 
-                    if (mutableState == Blocks.GOLD_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getGoldOre(mutableState).getDefaultState(), 2);
+                        if (mutableState == Blocks.DIAMOND_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getDiamondOre(mutableState).getDefaultState(), 2);
 
-                    if (mutableState == Blocks.LAPIS_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getLapisOre(mutableState).getDefaultState(), 2);
+                        if (mutableState == Blocks.EMERALD_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
 
-                    if (mutableState == Blocks.REDSTONE_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getRedstoneOre(mutableState).getDefaultState(), 2);
+                        //Modded ores
+                        if (mutableState == Registry.BLOCK.get(new Identifier("byg", "ametrine_ore")).getDefaultState())
+                            world.setBlockState(mutable, reader.getBYGAmetrineOre(mutableState).getDefaultState(), 2);
 
-                    if (mutableState == Blocks.DIAMOND_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getDiamondOre(mutableState).getDefaultState(), 2);
-
-                    if (mutableState == Blocks.EMERALD_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
-
-                    //Modded ores
-                    if (mutableState == Registry.BLOCK.get(new Identifier("byg", "ametrine_ore")).getDefaultState())
-                        world.setBlockState(mutable, reader.getBYGAmetrineOre(mutableState).getDefaultState(), 2);
-
-                    if (mutableState == Registry.BLOCK.get(new Identifier("byg", "pendorite_ore")).getDefaultState())
-                        world.setBlockState(mutable, reader.getBYGPendoriteOre(mutableState).getDefaultState(), 2);
-
+                        if (mutableState == Registry.BLOCK.get(new Identifier("byg", "pendorite_ore")).getDefaultState())
+                            world.setBlockState(mutable, reader.getBYGPendoriteOre(mutableState).getDefaultState(), 2);
 
                     mutable.move(Direction.UP);
+
+                }
                 }
             }
-        }
         return true;
     }
 
     public static boolean useStoneTag(StructureWorldAccess world, BlockPos mutable) {
         boolean stoneTag = Unearthed.UE_CONFIG.generation.stoneTag;
         if (stoneTag)
-            return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
-        else
             return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
+        else
+            return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
 
     }
 
