@@ -24,7 +24,7 @@ public class Unearthed implements ModInitializer {
         UE_CONFIG = AutoConfig.getConfigHolder(UnearthedConfig.class).getConfig();
         BlockGeneratorReference.init();
         configReader();
-        createTagLists();
+//        createTagLists();
 
 //        for (String id : BlockGeneratorHelper.baseBlockIdList)
 //            BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);

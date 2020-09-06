@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockGeneratorHelper {
-    public static final ItemGroup UNEARTHED_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "hextension"), () -> new ItemStack(BlockGeneratorReference.LIMESTONE.getItem()));
+    public static final ItemGroup UNEARTHED_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "unearthed"), () -> new ItemStack(Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, "kimberlite_diamond_ore"))));
 
     private final String id;
     private final boolean hasPolished;

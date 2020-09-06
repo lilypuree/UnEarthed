@@ -448,5 +448,7 @@
   "item.unearthed.slate_redstone_ore": "Slate Redstone Ore",
   "item.unearthed.slate_slab": "Slate Slab",
   "item.unearthed.slate_stairs": "Slate Stairs",
-  "item.unearthed.slate_wall": "Slate Wall"
+  "item.unearthed.slate_wall": "Slate Wall",
+  "itemGroup.unearthed.unearthed": "Unearthed"
+
 }
