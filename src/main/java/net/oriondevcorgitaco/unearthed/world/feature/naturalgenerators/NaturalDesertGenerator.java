@@ -86,7 +86,7 @@ public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
                         if (FabricLoader.getInstance().isDevelopmentEnvironment())
                             getHighestNoisePoint(clampedValue);
 
-                        ConfigBlockReader reader = ConfigBlockReader.iceBlocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.iceBlocksFromConfig.size()));
+                        ConfigBlockReader reader = ConfigBlockReader.desertBlocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.iceBlocksFromConfig.size()));
 
 
                         BlockState mutableState = world.getBlockState(mutable);

@@ -66,5 +66,5 @@ public class GeneratorConfig {
 
     @ConfigEntry.Gui.PrefixText
     @Comment(value = "\nDo icy/frozen biomes use different blocks for cave generation?\nDefault: true")
-    public boolean icyCaves = false;
+    public boolean icyCaves = true;
 }
