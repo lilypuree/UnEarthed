@@ -3,6 +3,7 @@ package net.oriondevcorgitaco.unearthed;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
@@ -23,6 +24,7 @@ public class Unearthed implements ModInitializer {
         UE_CONFIG = AutoConfig.getConfigHolder(UnearthedConfig.class).getConfig();
         BlockGeneratorReference.init();
         configReader();
+        createTagLists();
 
 //        for (String id : BlockGeneratorHelper.baseBlockIdList)
 //            BlockDataHelperCleanedUp.generateAllStoneRecipes(path, MOD_ID, id);
@@ -41,6 +43,13 @@ public class Unearthed implements ModInitializer {
 //            BlockDataHelperCleanedUp.createOreRecipe(path, MOD_ID, idList, BlockDataHelperCleanedUp.OreType.DIAMOND, "minecraft:iron_ingot");
 
 //        }
+    }
+
+    public static void createTagLists() {
+        BlockGeneratorHelper.stairsList.forEach(LOGGER::info);
+        BlockGeneratorHelper.slabList.forEach(LOGGER::info);
+        BlockGeneratorHelper.buttonList.forEach(LOGGER::info);
+        BlockGeneratorHelper.wallIDList.forEach(LOGGER::info);
     }
 
     public static void configReader() {

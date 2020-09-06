@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gray_basalt_slab",
+    "unearthed:gabbro_slab",
+    "unearthed:gabbro_cobble_slab",
+    "unearthed:pumice_slab",
+    "unearthed:kimberlite_slab",
+    "unearthed:kimberlite_cobble_slab",
+    "unearthed:rhyolite_slab",
+    "unearthed:slate_slab",
+    "unearthed:slate_cobble_slab",
+    "unearthed:marble_slab",
+    "unearthed:marble_cobble_slab",
+    "unearthed:quartzite_slab",
+    "unearthed:phyllite_slab",
+    "unearthed:schist_slab",
+    "unearthed:limestone_slab",
+    "unearthed:limestone_cobble_slab",
+    "unearthed:lignite_slab",
+    "unearthed:siltstone_slab",
+    "unearthed:mudstone_slab",
+    "unearthed:conglomerate_slab"
+  ]
+}

@@ -32,6 +32,13 @@ public class BlockGeneratorHelper {
     public static List<String> baseBlockIdList = new ArrayList<>();
     public static List<String> cobbleBlockIdList = new ArrayList<>();
     public static List<String> oreBlockIdList = new ArrayList<>();
+
+    public static List<String> wallIDList = new ArrayList<>();
+    public static List<String> slabList = new ArrayList<>();
+    public static List<String> buttonList = new ArrayList<>();
+    public static List<String> stairsList = new ArrayList<>();
+
+
     public static List<Block> baseStoneBlockArray = new ArrayList<>();
     public static List<Block> cobbleStoneBlockArray = new ArrayList<>();
     public static List<Block> oreBlockArray = new ArrayList<>();
@@ -74,6 +81,12 @@ public class BlockGeneratorHelper {
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
         Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
         Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(UNEARTHED_TAB)));
+
+        slabList.add("\"unearthed:" + slabID + "\",");
+        wallIDList.add("\"unearthed:" + wallID + "\",");
+        buttonList.add("\"unearthed:" + buttonID + "\",");
+        stairsList.add("\"unearthed:" + stairID + "\",");
+
 
         for (String type : BlockDataHelper.BASE_TYPES) {
             String modifiedID = id + type;
@@ -153,7 +166,10 @@ public class BlockGeneratorHelper {
             Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
             Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)), new Item.Settings().group(UNEARTHED_TAB)));
             cobbleBlockIdList.add(cobbleID);
-
+            slabList.add("\"unearthed:" + slabID + "\",");
+            wallIDList.add("\"unearthed:" + wallID + "\",");
+            buttonList.add("\"unearthed:" + buttonID + "\",");
+            stairsList.add("\"unearthed:" + stairID + "\",");
             for (String type : BlockDataHelper.BASE_TYPES) {
                 String modifiedID = cobbleID + type;
                 Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
