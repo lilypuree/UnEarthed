@@ -48,6 +48,7 @@ public class UnearthedConfig {
         trueMesas = COMMON_BUILDER.comment("Are vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true").define("trueMesas", true);
         desertCaves = COMMON_BUILDER.comment("Do deserts use different blocks for cave generation?\nDefault: true").define("desertCaves", true);
         icyCaves = COMMON_BUILDER.comment("Do icy/frozen biomes use different blocks for cave generation?\nDefault: true").define("icyCaves", true);
+        COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
