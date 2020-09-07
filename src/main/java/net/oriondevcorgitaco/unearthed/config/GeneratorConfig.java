@@ -21,7 +21,7 @@ public class GeneratorConfig {
         public double perturbAmpStrength = 95;
 
         @ConfigEntry.Gui.PrefixText
-        @Comment(value = "\nPerturb Octaves. Bigger values = slower world gen\nDefault: 8")
+        @Comment(value = "\nPerturb Octaves. Bigger values = slower world gen\nDefault: 5")
         @ConfigEntry.BoundedDiscrete(min = 1, max = 10000)
         public int perturbAmpOctaves = 5;
 
@@ -31,21 +31,21 @@ public class GeneratorConfig {
         public double smallPerturbAmpStrength = 8;
 
         @ConfigEntry.Gui.PrefixText
-        @Comment(value = "\nPerturb Octaves. Bigger values = slower world gen\nDefault: 8")
+        @Comment(value = "\nSmall Perturb Octaves. Bigger values = slower world gen\nDefault: 3")
         @ConfigEntry.BoundedDiscrete(min = 1, max = 10000)
         public int smallPerturbAmpOctaves = 3;
 
         @ConfigEntry.Gui.PrefixText
-        @Comment(value = "\nList of blocks to use in world generation.")
-        public String blocksForGeneration = "unearthed:gray_basalt,unearthed:gabbro,unearthed:pumice,unearthed:kimberlite,unearthed:rhyolite,unearthed:slate,unearthed:quartzite,unearthed:phyllite,unearthed:schist,unearthed:limestone,unearthed:lignite,unearthed:conglomerate";
+        @Comment(value = "\nList of blocks to use in world generation.\nDefault: \"unearthed:gray_basalt,unearthed:gabbro,unearthed:pumice,unearthed:kimberlite,unearthed:rhyolite,unearthed:slate,unearthed:quartzite,unearthed:phyllite,unearthed:schist,unearthed:limestone,unearthed:lignite,unearthed:conglomerate,minecraft:stone\"")
+        public String blocksForGeneration = "unearthed:gray_basalt,unearthed:gabbro,unearthed:pumice,unearthed:kimberlite,unearthed:rhyolite,unearthed:slate,unearthed:quartzite,unearthed:phyllite,unearthed:schist,unearthed:limestone,unearthed:lignite,unearthed:conglomerate,minecraft:stone";
 
 
         @ConfigEntry.Gui.PrefixText
-        @Comment(value = "\nList of blocks to use in icy biome world generation.")
+        @Comment(value = "\nList of blocks to use in icy biome world generation.\nDefault: \"unearthed:marble,minecraft:packed_ice\"")
         public String iceBlocksForGeneration = "unearthed:marble,minecraft:packed_ice";
 
         @ConfigEntry.Gui.PrefixText
-        @Comment(value = "\nList of blocks to use in desert biome world generation.")
+        @Comment(value = "\nList of blocks to use in desert biome world generation.\nDefault: \"unearthed:siltstone,unearthed:mudstone,minecraft:smooth_sandstone,minecraft:sandstone\"")
         public String desertBlocksForGeneration = "unearthed:siltstone,unearthed:mudstone,minecraft:smooth_sandstone,minecraft:sandstone";
 
 
@@ -59,10 +59,6 @@ public class GeneratorConfig {
     @ConfigEntry.Gui.PrefixText
     @Comment(value = "\nReplace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true")
     public boolean replaceCobble = true;
-
-//    @ConfigEntry.Gui.PrefixText
-//    @Comment(value = "\nReplace stone brick? Replaces stronghold stone bricks for example.\nDefault: true")
-//    public boolean replaceStoneBrick = true;
 
     @ConfigEntry.Gui.PrefixText
     @Comment(value = "\nAre vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true")
