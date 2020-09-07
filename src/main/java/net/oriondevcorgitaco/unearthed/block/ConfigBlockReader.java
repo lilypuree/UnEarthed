@@ -35,6 +35,24 @@ public class ConfigBlockReader {
         }
         return block;
     }
+    static int cobbleIdx = 0;
+
+    public Block getCobbleBlock(BlockState originalState) {
+        String cobbleID = this.id + "_cobble";
+        Block block = Registry.BLOCK.get(new Identifier(cobbleID));
+        if (block == Blocks.AIR) {
+            if (blockIdx == 0) {
+                Unearthed.LOGGER.warn(cobbleID + " does not exist. Defaulting to stone!");
+                blockIdx++;
+            }
+            block = originalState.getBlock();
+
+            if (id.contains("minecraft:sand"))
+                block = Blocks.SANDSTONE;
+        }
+
+        return block;
+    }
 
     static int coalIdx = 0;
 

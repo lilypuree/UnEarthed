@@ -35,10 +35,9 @@ public class TrueMesaGenerator extends Feature<DefaultFeatureConfig> {
 
                 for (int y = 0; y < topY; y++) {
                     setStrataLayerBlock(y);
-                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD)) {
-
+                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD))
                         world.setBlockState(mutable, mesaBlockState, 2);
-                    }
+
                     mutable.move(Direction.UP);
                 }
             }

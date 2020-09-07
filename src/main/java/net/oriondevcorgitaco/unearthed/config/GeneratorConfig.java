@@ -57,6 +57,14 @@ public class GeneratorConfig {
     public boolean stoneTag = true;
 
     @ConfigEntry.Gui.PrefixText
+    @Comment(value = "\nReplace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true")
+    public boolean replaceCobble = true;
+
+//    @ConfigEntry.Gui.PrefixText
+//    @Comment(value = "\nReplace stone brick? Replaces stronghold stone bricks for example.\nDefault: true")
+//    public boolean replaceStoneBrick = true;
+
+    @ConfigEntry.Gui.PrefixText
     @Comment(value = "\nAre vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true")
     public boolean trueMesas = true;
 
