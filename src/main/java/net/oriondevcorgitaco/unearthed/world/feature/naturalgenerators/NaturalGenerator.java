@@ -86,7 +86,6 @@ public class NaturalGenerator extends Feature<DefaultFeatureConfig> {
 
                         ConfigBlockReader reader = ConfigBlockReader.blocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.blocksFromConfig.size()));
 
-
                         BlockState mutableState = world.getBlockState(mutable);
 
                         if (useStoneTag(world, mutable))

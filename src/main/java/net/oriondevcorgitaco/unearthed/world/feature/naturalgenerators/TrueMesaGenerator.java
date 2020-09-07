@@ -11,6 +11,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 
 import java.util.Random;
@@ -35,7 +36,7 @@ public class TrueMesaGenerator extends Feature<DefaultFeatureConfig> {
 
                 for (int y = 0; y < topY; y++) {
                     setStrataLayerBlock(y);
-                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD))
+                    if (useStoneTag(world, mutable))
                         world.setBlockState(mutable, mesaBlockState, 2);
 
                     mutable.move(Direction.UP);
@@ -43,6 +44,15 @@ public class TrueMesaGenerator extends Feature<DefaultFeatureConfig> {
             }
         }
         return true;
+    }
+
+    public static boolean useStoneTag(StructureWorldAccess world, BlockPos mutable) {
+        boolean stoneTag = Unearthed.UE_CONFIG.generation.stoneTag;
+        if (stoneTag)
+            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
+        else
+            return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
+
     }
 
     public void setStrataLayerBlock(int yPos) {
