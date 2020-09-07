@@ -1,30 +1,30 @@
 package net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators;
 
 import com.mojang.serialization.Codec;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.ISeedReader;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
+import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.util.noise.FNVector3f;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 
 import java.util.Random;
 
-public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
-    public static final Feature<DefaultFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("natural_desert_generator", new NaturalDesertGenerator(DefaultFeatureConfig.CODEC));
+public class NaturalDesertGenerator extends Feature<NoFeatureConfig> {
+    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("natural_desert_generator", new NaturalDesertGenerator(NoFeatureConfig.field_236558_a_));
 
-    public NaturalDesertGenerator(Codec<DefaultFeatureConfig> configCodec) {
+    public NaturalDesertGenerator(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);
     }
 
@@ -53,14 +53,14 @@ public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
 
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, DefaultFeatureConfig featureConfig) {
+    public boolean func_241855_a(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                mutable.set(pos.getX() + x, 0, pos.getZ() + z);
-                int topY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
+                mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
+                int topY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 for (int y = 0; y < topY; y++) {
                     if (topY < 2)
@@ -80,8 +80,8 @@ public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
                     double selectorNoiseValue = selectorNoise.GetValue(mutable.getX(), mutable.getY(), mutable.getZ()) * 12 + 0.5;
 
                     double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
-                    if (FabricLoader.getInstance().isDevelopmentEnvironment())
-                        getHighestNoisePoint(clampedValue);
+//                    if (FabricLoader.getInstance().isDevelopmentEnvironment())
+//                        getHighestNoisePoint(clampedValue);
 
                     ConfigBlockReader reader = ConfigBlockReader.desertBlocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.desertBlocksFromConfig.size()));
 
@@ -91,7 +91,7 @@ public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
                     if (useStoneTag(world, mutable))
                         world.setBlockState(mutable, reader.getBlock().getDefaultState(), 2);
 
-                    else if (Unearthed.UE_CONFIG.generation.replaceCobble && mutableState.getBlock() == Blocks.COBBLESTONE)
+                    else if (UnearthedConfig.replaceCobble.get() && mutableState.getBlock() == Blocks.COBBLESTONE)
                         world.setBlockState(mutable, reader.getCobbleBlock(mutableState).getDefaultState(), 2);
 
                     else if (mutableState == Blocks.COAL_ORE.getDefaultState())
@@ -116,10 +116,10 @@ public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
                         world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
 
 //                        //Modded ores
-//                        if (mutableState == Registry.BLOCK.get(new Identifier("byg", "ametrine_ore")).getDefaultState())
+//                        if (mutableState == Registry.BLOCK.get(new ResourceLocation("byg", "ametrine_ore")).getDefaultState())
 //                            world.setBlockState(mutable, reader.getBYGAmetrineOre(mutableState).getDefaultState(), 2);
 //
-//                        if (mutableState == Registry.BLOCK.get(new Identifier("byg", "pendorite_ore")).getDefaultState())
+//                        if (mutableState == Registry.BLOCK.get(new ResourceLocation("byg", "pendorite_ore")).getDefaultState())
 //                            world.setBlockState(mutable, reader.getBYGPendoriteOre(mutableState).getDefaultState(), 2);
 
                     mutable.move(Direction.UP);
@@ -130,21 +130,21 @@ public class NaturalDesertGenerator extends Feature<DefaultFeatureConfig> {
         return true;
     }
 
-    public static boolean useStoneTag(StructureWorldAccess world, BlockPos mutable) {
-        boolean stoneTag = Unearthed.UE_CONFIG.generation.stoneTag;
+    public static boolean useStoneTag(ISeedReader world, BlockPos mutable) {
+        boolean stoneTag = UnearthedConfig.stoneTag.get();
         if (stoneTag)
-            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
+            return world.getBlockState(mutable).isIn(BlockTags.field_242172_aH);
         else
             return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
 
     }
 
     private void setSeed(long seed) {
-        float scaleFactor = (float) Unearthed.UE_CONFIG.generation.naturalgeneratorv1.stoneVeinScaleFactor;
-        float perturbAmpStrength = (float) Unearthed.UE_CONFIG.generation.naturalgeneratorv1.perturbAmpStrength;
-        float smallPerturbAmpStrength = (float) Unearthed.UE_CONFIG.generation.naturalgeneratorv1.smallPerturbAmpStrength;
-        int perturbOctaves = Unearthed.UE_CONFIG.generation.naturalgeneratorv1.perturbAmpOctaves;
-        int smallPerturbOctaves = Unearthed.UE_CONFIG.generation.naturalgeneratorv1.smallPerturbAmpOctaves;
+        float scaleFactor = UnearthedConfig.stoneVeinScaleFactor.get().floatValue();
+        float perturbAmpStrength = UnearthedConfig.perturbAmpStrength.get().floatValue();
+        float smallPerturbAmpStrength = UnearthedConfig.smallPerturbAmpStrength.get().floatValue();
+        int perturbOctaves = UnearthedConfig.perturbAmpOctaves.get();
+        int smallPerturbOctaves = UnearthedConfig.smallPerturbAmpOctaves.get();
 
         if (selectorNoise == null) {
             selectorNoise = new FastNoise((int) seed);

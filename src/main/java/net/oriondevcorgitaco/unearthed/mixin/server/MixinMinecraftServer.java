@@ -6,27 +6,27 @@ import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.datafixers.DataFixer;
-import net.minecraft.resource.ResourcePackManager;
-import net.minecraft.resource.ServerResourceManager;
+import net.minecraft.resources.DataPackRegistries;
+import net.minecraft.resources.ResourcePackList;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.WorldGenerationProgressListenerFactory;
-import net.minecraft.util.UserCache;
-import net.minecraft.util.registry.DynamicRegistryManager;
+import net.minecraft.server.management.PlayerProfileCache;
+import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.SaveProperties;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.chunk.listener.IChunkStatusListenerFactory;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.level.storage.LevelStorage;
-import net.oriondevcorgitaco.unearthed.Unearthed;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.placement.NoPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.storage.IServerConfiguration;
+import net.minecraft.world.storage.SaveFormat;
+import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
-import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.TrueMesaGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalDesertGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalIcyGenerator;
+import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.TrueMesaGenerator;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -42,37 +42,37 @@ import java.util.stream.Collectors;
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
 
-    private final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", NaturalGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
-    private final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", NaturalIcyGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
-    private final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", NaturalDesertGenerator.UNDERGROUND_STONE.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    private final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", NaturalGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+    private final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", NaturalIcyGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+    private final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", NaturalDesertGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
-    private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", TrueMesaGenerator.MESA.configure(FeatureConfig.DEFAULT).decorate(Decorator.NOPE.configure(new NopeDecoratorConfig())));
+    private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", TrueMesaGenerator.MESA.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
 
-    @Shadow @Final protected DynamicRegistryManager.Impl registryManager;
+    @Shadow @Final protected DynamicRegistries.Impl field_240767_f_;
 
-    @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistryManager$Impl;Lnet/minecraft/world/level/storage/LevelStorage$Session;Lnet/minecraft/world/SaveProperties;Lnet/minecraft/resource/ResourcePackManager;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resource/ServerResourceManager;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/util/UserCache;Lnet/minecraft/server/WorldGenerationProgressListenerFactory;)V", cancellable = true)
-    private void implementUnearthedStones(Thread thread, DynamicRegistryManager.Impl impl, LevelStorage.Session session, SaveProperties saveProperties, ResourcePackManager resourcePackManager, Proxy proxy, DataFixer dataFixer, ServerResourceManager serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, UserCache userCache, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-        if(this.registryManager.getOptional(Registry.BIOME_KEY).isPresent()) {
-            for (Biome biome : registryManager.getOptional(Registry.BIOME_KEY).get()) {
+    @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistries$Impl;Lnet/minecraft/world/storage/SaveFormat$LevelSave;Lnet/minecraft/world/storage/IServerConfiguration;Lnet/minecraft/resources/ResourcePackList;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resources/DataPackRegistries;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/server/management/PlayerProfileCache;Lnet/minecraft/world/chunk/listener/IChunkStatusListenerFactory;)V", cancellable = true)
+    private void implementUnearthedStones(Thread thread, DynamicRegistries.Impl impl, SaveFormat.LevelSave session, IServerConfiguration saveProperties, ResourcePackList resourcePackManager, Proxy proxy, DataFixer dataFixer, DataPackRegistries serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, PlayerProfileCache userCache, IChunkStatusListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
+        if(this.field_240767_f_.func_230521_a_(Registry.BIOME_KEY).isPresent()) {
+            for (Biome biome : field_240767_f_.func_230521_a_(Registry.BIOME_KEY).get()) {
                 if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
                     if (useDesertCaves(biome))
-                        addFeatureToBiome(biome, GenerationStep.Feature.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
+                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
                     else if (useIceCaves(biome))
-                        addFeatureToBiome(biome, GenerationStep.Feature.TOP_LAYER_MODIFICATION, NATURAL_ICY_GENERATOR);
+                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_ICY_GENERATOR);
                     else if (useTrueMesas(biome))
-                        addFeatureToBiome(biome, GenerationStep.Feature.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
+                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
                     else
-                        addFeatureToBiome(biome, GenerationStep.Feature.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
+                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
 
                 }
             }
         }
     }
 
-    private static void addFeatureToBiome(Biome biome, GenerationStep.Feature feature, ConfiguredFeature<?, ?> configuredFeature) {
+    private static void addFeatureToBiome(Biome biome, GenerationStage.Decoration feature, ConfiguredFeature<?, ?> configuredFeature) {
         ConvertImmutableFeatures(biome);
-        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.getGenerationSettings().features;
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.func_242440_e().field_242484_f;
         while (biomeFeatures.size() <= feature.ordinal()) {
             biomeFeatures.add(Lists.newArrayList());
         }
@@ -81,14 +81,14 @@ public class MixinMinecraftServer {
     }
 
     private static void ConvertImmutableFeatures(Biome biome) {
-        if (biome.getGenerationSettings().features instanceof ImmutableList) {
-            biome.getGenerationSettings().features = biome.getGenerationSettings().features.stream().map(Lists::newArrayList).collect(Collectors.toList());
+        if (biome.func_242440_e().field_242484_f instanceof ImmutableList) {
+            biome.func_242440_e().field_242484_f = biome.func_242440_e().field_242484_f.stream().map(Lists::newArrayList).collect(Collectors.toList());
         }
     }
 
 
     private static boolean useTrueMesas(Biome biome) {
-        boolean trueMesas = Unearthed.UE_CONFIG.generation.trueMesas;
+        boolean trueMesas = UnearthedConfig.trueMesas.get();
         if (trueMesas) {
             return biome.getCategory() == Biome.Category.MESA;
         }
@@ -98,7 +98,7 @@ public class MixinMinecraftServer {
 
 
     private static boolean useIceCaves(Biome biome) {
-        boolean icyCaves = Unearthed.UE_CONFIG.generation.icyCaves;
+        boolean icyCaves = UnearthedConfig.icyCaves.get();
         if (icyCaves) {
             return biome.getCategory() == Biome.Category.ICY;
         }
@@ -107,7 +107,7 @@ public class MixinMinecraftServer {
     }
 
     private static boolean useDesertCaves(Biome biome) {
-        boolean desertCaves = Unearthed.UE_CONFIG.generation.desertCaves;
+        boolean desertCaves = UnearthedConfig.desertCaves.get();
         if (desertCaves) {
             return biome.getCategory() == Biome.Category.DESERT;
         }

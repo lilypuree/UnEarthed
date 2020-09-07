@@ -1,16 +1,14 @@
 package net.oriondevcorgitaco.unearthed.block;
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.Tags;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.util.BlockDataHelper;
 
@@ -19,8 +17,24 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockGeneratorHelper {
-    public static final ItemGroup UNEARTHED_TAB = FabricItemGroupBuilder.build(new Identifier(Unearthed.MOD_ID, "unearthed"), () -> new ItemStack(Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, "kimberlite_diamond_ore"))));
+    public static ItemGroup UNEARTHED_TAB = new ItemGroup(Unearthed.MOD_ID) {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, "kimberlite_diamond_ore")));
+        }
 
+        @Override
+        public boolean hasSearchBar() {
+            return true;
+        }
+
+        @Override
+        public boolean hasScrollbar() {
+            return true;
+        }
+    };
+    
+    
     private final String id;
     private final boolean hasPolished;
     private final boolean hasCobble;
@@ -73,13 +87,13 @@ public class BlockGeneratorHelper {
         String plateID = id + "_pressure_plate";
         String wallID = id + "_wall";
 
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, id), new Block(FabricBlockSettings.copyOf(Blocks.STONE)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_SLAB)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_STAIRS)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
-        Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)), new Item.Settings().group(UNEARTHED_TAB)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, id), new Block(AbstractBlock.Properties.from(Blocks.STONE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, slabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.STONE_SLAB)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)).getDefaultState(), AbstractBlock.Properties.from(Blocks.STONE_STAIRS)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_BUTTON)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_PRESSURE_PLATE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, wallID), new WallBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICK_WALL)));
+        Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)), new Item.Properties().group(UNEARTHED_TAB)));
 
         slabList.add("\"unearthed:" + slabID + "\",");
         wallIDList.add("\"unearthed:" + wallID + "\",");
@@ -89,10 +103,10 @@ public class BlockGeneratorHelper {
 
         for (String type : BlockDataHelper.BASE_TYPES) {
             String modifiedID = id + type;
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
         }
 
-        baseStoneBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
+        baseStoneBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)));
     }
 
     private void generatePolishedVariant(boolean generate) {
@@ -100,12 +114,12 @@ public class BlockGeneratorHelper {
             String polishedID = "polished_" + this.id;
             String polishedSlabID = polishedID + "_slab";
             String polishedStairID = polishedID + "_stairs";
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, polishedID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, polishedSlabID), new SlabBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedID)).getDefaultState(), FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, polishedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedID)), new Item.Settings().group(UNEARTHED_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, polishedSlabID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedSlabID)), new Item.Settings().group(UNEARTHED_TAB)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, polishedStairID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedStairID)), new Item.Settings().group(UNEARTHED_TAB)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, polishedID), new Block(AbstractBlock.Properties.from(Blocks.POLISHED_ANDESITE)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, polishedSlabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.POLISHED_ANDESITE_STAIRS)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID)).getDefaultState(), AbstractBlock.Properties.from(Blocks.COBBLESTONE)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, polishedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID)), new Item.Properties().group(UNEARTHED_TAB)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, polishedSlabID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID)), new Item.Properties().group(UNEARTHED_TAB)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, polishedStairID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedStairID)), new Item.Properties().group(UNEARTHED_TAB)));
 
         }
     }
@@ -118,17 +132,17 @@ public class BlockGeneratorHelper {
         String redStoneOreID = this.id + "_redstone_ore";
         String diamondOreID = this.id + "_diamond_ore";
         String emeraldOreID = this.id + "_emerald_ore";
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, coalOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.COAL_ORE).breakByTool(FabricToolTags.PICKAXES)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, ironOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE).breakByTool(FabricToolTags.PICKAXES)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, goldOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.GOLD_ORE).breakByTool(FabricToolTags.PICKAXES)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, lapisOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.LAPIS_ORE).breakByTool(FabricToolTags.PICKAXES)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, redStoneOreID), new RedstoneOreBlock(FabricBlockSettings.copyOf(Blocks.REDSTONE_ORE).breakByTool(FabricToolTags.PICKAXES)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, diamondOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE).breakByTool(FabricToolTags.PICKAXES)));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, emeraldOreID), new UEOreBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE).breakByTool(FabricToolTags.PICKAXES)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, coalOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.COAL_ORE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, ironOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.IRON_ORE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, goldOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.GOLD_ORE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, lapisOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.LAPIS_ORE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, redStoneOreID), new RedstoneOreBlock(AbstractBlock.Properties.from(Blocks.REDSTONE_ORE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, diamondOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, emeraldOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE)));
         for (String type : BlockDataHelper.VANILLA_ORE_TYPES) {
             String modifiedID = this.id + type;
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
-            oreBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
+            oreBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)));
             oreBlockIdList.add(modifiedID);
         }
     }
@@ -137,12 +151,12 @@ public class BlockGeneratorHelper {
         String bygID = "byg";
         String ametrineOreID = this.id + "_ametrine_ore";
         String pendoriteOreID = this.id + "_pendorite_ore";
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, ametrineOreID), new UEOreBlock(FabricBlockSettings.copyOf(Registry.BLOCK.get(new Identifier(bygID, "ametrine_ore")))));
-        Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, pendoriteOreID), new UEOreBlock(FabricBlockSettings.copyOf(Registry.BLOCK.get(new Identifier(bygID, "pendorite_ore")))));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, ametrineOreID), new UEOreBlock(AbstractBlock.Properties.from(Registry.BLOCK.getOrDefault(new ResourceLocation(bygID, "ametrine_ore")))));
+        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, pendoriteOreID), new UEOreBlock(AbstractBlock.Properties.from(Registry.BLOCK.getOrDefault(new ResourceLocation(bygID, "pendorite_ore")))));
         for (String type : BlockDataHelper.BYG_ORE_TYPES) {
             String modifiedID = this.id + type;
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
-//            oreBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
+//            oreBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)));
 //            oreBlockIdList.add(modifiedID);
         }
     }
@@ -157,13 +171,13 @@ public class BlockGeneratorHelper {
             String buttonID = cobbleID + "_button";
             String plateID = cobbleID + "_pressure_plate";
             String wallID = cobbleID + "_wall";
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, cobbleID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, slabID), new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_SLAB)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)).getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_STAIRS)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE)));
-            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, wallID), new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)));
-            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID)), new Item.Settings().group(UNEARTHED_TAB)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, cobbleID), new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, slabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.STONE_SLAB)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)).getDefaultState(), AbstractBlock.Properties.from(Blocks.STONE_STAIRS)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_BUTTON)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_PRESSURE_PLATE)));
+            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, wallID), new WallBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICK_WALL)));
+            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleID)), new Item.Properties().group(UNEARTHED_TAB)));
             cobbleBlockIdList.add(cobbleID);
             slabList.add("\"unearthed:" + slabID + "\",");
             wallIDList.add("\"unearthed:" + wallID + "\",");
@@ -171,15 +185,15 @@ public class BlockGeneratorHelper {
             stairsList.add("\"unearthed:" + stairID + "\",");
             for (String type : BlockDataHelper.BASE_TYPES) {
                 String modifiedID = cobbleID + type;
-                Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
+                Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
             }
-            cobbleStoneBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
+            cobbleStoneBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)));
             cobbleBlockIdList.add(cobbleID);
         }
     }
 
     public Block getBlock() {
-        Block block = Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, this.id));
+        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, this.id));
         if (block == null) {
             Unearthed.LOGGER.error("Block does not exist");
             block = Blocks.STONE;
@@ -189,133 +203,157 @@ public class BlockGeneratorHelper {
 
     public Block getSlabBlock() {
         String slabID = id + "_slab";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, slabID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, slabID));
     }
 
     public Block getStairBlock() {
         String stairID = id + "_stair";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, stairID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, stairID));
     }
 
     public Block getPolishedBlock() {
         String polishedID = "polished_" + this.id;
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID));
     }
 
     public Block getPolishedSlabBlock() {
         String polishedID = "polished_" + this.id;
         String polishedSlabID = polishedID + "_slab";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedSlabID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID));
     }
 
     public Block getPolishedStairBlock() {
         String polishedID = "polished_" + id;
         String polishedStairID = polishedID + "_stairs";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, polishedStairID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedStairID));
     }
 
     public Block getCobbleBlock() {
         String cobbleID = id + "_cobble";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleID));
     }
 
     public Block getCobbleSlabBlock() {
         String cobbleID = id + "_cobble";
         String cobbleSlabID = cobbleID + "_slab";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleSlabID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleSlabID));
     }
 
     public Block getCobbleStairBlock() {
         String cobbleID = id + "_cobble";
         String cobbleStairID = cobbleID + "_stairs";
-        return Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, cobbleStairID));
+        return Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleStairID));
     }
 
     public Item getItem() {
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, this.id));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, this.id));
     }
 
     public Item getSlabItem() {
         String slabID = id + "_slab";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, slabID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, slabID));
     }
 
     public Item getStairItem() {
         String stairID = id + "_stair";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, stairID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, stairID));
     }
 
     public Item getPolishedItem() {
         String polishedID = "polished_" + this.id;
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, polishedID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID));
     }
 
     public Item getPolishedSlabItem() {
         String polishedID = "polished_" + this.id;
         String polishedSlabID = polishedID + "_slab";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, polishedSlabID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID));
     }
 
     public Item getPolishedStairItem() {
         String polishedID = "polished_" + id;
         String polishedStairID = polishedID + "_stairs";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, polishedStairID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedStairID));
     }
 
     public Item getCobbleItem() {
         String cobbleID = id + "_cobble";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, cobbleID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleID));
     }
 
     public Item getCobbleSlabItem() {
         String cobbleID = id + "_cobble";
         String cobbleSlabID = cobbleID + "_slab";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, cobbleSlabID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleSlabID));
     }
 
     public Item getCobbleStairItem() {
         String cobbleID = id + "_cobble";
         String cobbleStairID = cobbleID + "_stairs";
-        return Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, cobbleStairID));
+        return Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleStairID));
     }
 
     public static class StairsBlockAccess extends StairsBlock {
-        public StairsBlockAccess(BlockState baseBlockState, AbstractBlock.Settings settings) {
-            super(baseBlockState, settings);
+        public StairsBlockAccess(BlockState baseBlockState, AbstractBlock.Properties Properties) {
+            super(baseBlockState, Properties);
         }
     }
 
     public static class PressurePlateBlockAccess extends PressurePlateBlock {
-        public PressurePlateBlockAccess(AbstractBlock.Settings settings) {
-            super(ActivationRule.MOBS, settings);
+        public PressurePlateBlockAccess(AbstractBlock.Properties Properties) {
+            super(Sensitivity.MOBS, Properties);
         }
     }
 
     public static class ButtonBlockAccess extends StoneButtonBlock {
-        public ButtonBlockAccess(AbstractBlock.Settings settings) {
-            super(settings);
+        public ButtonBlockAccess(AbstractBlock.Properties Properties) {
+            super(Properties);
         }
     }
 
     public static class UEOreBlock extends OreBlock {
-        public UEOreBlock(AbstractBlock.Settings settings) {
-            super(settings);
+        public UEOreBlock(AbstractBlock.Properties Properties) {
+            super(Properties);
         }
 
 
         @Override
-        protected int getExperienceWhenMined(Random random) {
-            if (this.isIn(BlockGeneratorReference.COAL_ORE_TAG)) {
+        protected int getExperience(Random random) {
+            if (this.isIn(Tags.Blocks.ORES_COAL)) {
                 return MathHelper.nextInt(random, 0, 2);
-            } else if (this.isIn(BlockGeneratorReference.DIAMOND_ORE_TAG)) {
+            } else if (this.isIn(Tags.Blocks.ORES_DIAMOND)) {
                 return MathHelper.nextInt(random, 3, 7);
-            } else if (this.isIn(BlockGeneratorReference.EMERALD_ORE_TAG)) {
+            } else if (this.isIn(Tags.Blocks.ORES_EMERALD)) {
                 return MathHelper.nextInt(random, 3, 7);
-            } else if (this.isIn(BlockGeneratorReference.LAPIS_ORE_TAG)) {
+            } else if (this.isIn(Tags.Blocks.ORES_LAPIS)) {
                 return MathHelper.nextInt(random, 2, 5);
             }
             else
                 return 0;
         }
     }
+
+    public static class UECreativeTab {
+        public static ItemGroup ueCreativeTab = new ItemGroup(Unearthed.MOD_ID) {
+            @Override
+            public ItemStack createIcon() {
+                return new ItemStack(Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, "kimberlite_diamond_ore")));
+            }
+
+            @Override
+            public boolean hasSearchBar() {
+                return true;
+            }
+
+            @Override
+            public boolean hasScrollbar() {
+                return true;
+            }
+        };
+
+        public static void init() {
+            Unearthed.LOGGER.debug("Unearthed: Item Group Created!");
+        }
+    }
+
 }

@@ -22,7 +22,7 @@ public class BlockDataHelper {
     public static void createUnearthedLangFile() {
         List<String> unearthedBlockItemIDs = new ArrayList<>();
         for (Block block : Registry.BLOCK) {
-            String blockID = Registry.BLOCK.getId(block).toString();
+            String blockID = Registry.BLOCK.getKey(block).toString();
             if (blockID.contains(Unearthed.MOD_ID))
                 unearthedBlockItemIDs.add(blockID.replace(Unearthed.MOD_ID + ":", ""));
             createLangFile("D:\\Coding\\Hextension-Fabric 1.16.X\\src\\main\\resources\\assets\\unearthed\\lang\\en_us.json", Unearthed.MOD_ID, unearthedBlockItemIDs, true, true);
@@ -33,7 +33,7 @@ public class BlockDataHelper {
         List<String> unearthedBlockItemIDs = new ArrayList<>();
         List<String> stoneCutterBlockItemsIDs = new ArrayList<>();
         for (Block block : Registry.BLOCK) {
-            String blockID = Registry.BLOCK.getId(block).toString();
+            String blockID = Registry.BLOCK.getKey(block).toString();
             if (blockID.contains(Unearthed.MOD_ID)) {
                 if (blockID.contains("_slab") || blockID.contains("_button") || blockID.contains("_pressure_plate") || blockID.contains("_wall"))
                     unearthedBlockItemIDs.add(blockID.replace("unearthed:", ""));
@@ -50,7 +50,7 @@ public class BlockDataHelper {
     public static void createUnearthedOreLootTableRecipes() {
         List<String> unearthedBlockItemIDs = new ArrayList<>();
         for (Block block : Registry.BLOCK) {
-            String blockID = Registry.BLOCK.getId(block).toString();
+            String blockID = Registry.BLOCK.getKey(block).toString();
             if (blockID.contains(Unearthed.MOD_ID))
                 if (blockID.contains("diamond") || blockID.contains("redstone") || blockID.contains("lapis") || blockID.contains("emerald") || blockID.contains("coal"))
                     unearthedBlockItemIDs.add(blockID.replace("unearthed:", ""));

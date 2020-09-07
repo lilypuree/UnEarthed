@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "c:coal_ores"
+    "tag": "forge:ores/coal"
   },
   "result": "minecraft:coal",
   "experience": 0.1,

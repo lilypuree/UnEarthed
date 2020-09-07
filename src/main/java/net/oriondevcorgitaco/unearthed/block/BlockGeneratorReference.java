@@ -1,9 +1,9 @@
 package net.oriondevcorgitaco.unearthed.block;
 
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.tag.Tag;
-import net.minecraft.util.Identifier;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +42,28 @@ public class BlockGeneratorReference {
     public static void init() {
     }
 
+//
+//    public static final Tag<Block> IRON_ORE_TAG = blockTagRegister("iron_ores");
+//    public static final Tag<Block> DIAMOND_ORE_TAG = blockTagRegister("diamond_ores");
+//    public static final Tag<Block> LAPIS_ORE_TAG = blockTagRegister("lapis_ores");
+//    public static final Tag<Block> REDSTONE_ORE_TAG = blockTagRegister("redstone_ores");
+//    public static final Tag<Block> COAL_ORE_TAG = blockTagRegister("coal_ores");
+//    public static final Tag<Block> EMERALD_ORE_TAG = blockTagRegister("emerald_ores");
+//
+//
+//    public static Tag<Block> blockTagRegister(String id) {
+//        return TagRegistry.block(new ResourceLocation("c", id));
+//
+//    }
 
-    public static final Tag<Block> IRON_ORE_TAG = blockTagRegister("iron_ores");
-    public static final Tag<Block> DIAMOND_ORE_TAG = blockTagRegister("diamond_ores");
-    public static final Tag<Block> LAPIS_ORE_TAG = blockTagRegister("lapis_ores");
-    public static final Tag<Block> REDSTONE_ORE_TAG = blockTagRegister("redstone_ores");
-    public static final Tag<Block> COAL_ORE_TAG = blockTagRegister("coal_ores");
-    public static final Tag<Block> EMERALD_ORE_TAG = blockTagRegister("emerald_ores");
 
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class InitUEBlocks {
 
-    public static Tag<Block> blockTagRegister(String id) {
-        return TagRegistry.block(new Identifier("c", id));
+        @SubscribeEvent
+        public static void registerBlocks(final RegistryEvent.Register<Block> event) {
+            init();
+        }
 
     }
 }

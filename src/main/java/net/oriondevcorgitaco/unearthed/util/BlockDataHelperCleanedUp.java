@@ -3,7 +3,7 @@ package net.oriondevcorgitaco.unearthed.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonPrimitive;
-import net.minecraft.util.Pair;
+import com.mojang.datafixers.util.Pair;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.LogManager;
@@ -533,8 +533,8 @@ public class BlockDataHelperCleanedUp {
     public static void createCustomJsonRecipeGenerator(String absolutePath, String modID, List<String> idList, String replaceInKey, String replaceInResult, List<Pair<String, String>> filterRecipeList, boolean isWood) {
         idList.forEach(id -> {
             for (Pair<String, String> pair : filterRecipeList) {
-                String filter = pair.getLeft();
-                String recipe = pair.getRight();
+                String filter = pair.getFirst();
+                String recipe = pair.getSecond();
 
                 if (isWood) {
                     if (filter.equals("_planks"))
@@ -572,9 +572,9 @@ public class BlockDataHelperCleanedUp {
     public static void createCustomJsonRecipeGenerator(String absolutePath, String modID, List<String> idList, String replaceInKey, String replaceInResult, String replaceCount, List<Triple<String, String, String>> filterRecipeList) {
         idList.forEach(id -> {
             for (Triple<String, String, String> pair : filterRecipeList) {
-                String filter = pair.getLeft();
+                String filter = pair.getFirst();
                 String count = pair.getMiddle();
-                String recipe = pair.getRight();
+                String recipe = pair.getSecond();
 
                 recipe = recipe.replace(replaceInKey, modID + ":" + id);
 
@@ -663,9 +663,9 @@ public class BlockDataHelperCleanedUp {
     public static void createStoneCutterRecipeGenerator(String absolutePath, String modID, List<String> idList, String replaceInKey, String replaceInResult, String replaceCount, List<Triple<String, String, String>> filterRecipeList) {
         idList.forEach(id -> {
             for (Triple<String, String, String> pair : filterRecipeList) {
-                String filter = pair.getLeft();
+                String filter = pair.getFirst();
                 String count = pair.getMiddle();
-                String recipe = pair.getRight();
+                String recipe = pair.getSecond();
 
                 recipe = recipe.replace(replaceInKey, modID + ":" + id);
 
@@ -984,7 +984,7 @@ public class BlockDataHelperCleanedUp {
             this.right = right;
         }
 
-        public A getLeft() {
+        public A getFirst() {
             return this.left;
         }
 
@@ -992,7 +992,7 @@ public class BlockDataHelperCleanedUp {
             return this.middle;
         }
 
-        public C getRight() {
+        public C getSecond() {
             return this.right;
         }
 

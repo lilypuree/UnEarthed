@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "c:emerald_ores"
+    "tag": "forge:ores/emerald"
   },
   "result": "minecraft:emerald",
   "experience": 1.0,
