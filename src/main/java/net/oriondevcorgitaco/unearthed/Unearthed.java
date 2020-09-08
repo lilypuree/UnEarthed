@@ -26,7 +26,6 @@ public class Unearthed {
     }
 
     public void ueCommonSetup(FMLCommonSetupEvent event) {
-        BlockGeneratorHelper.UECreativeTab.init();
         configReader();
     }
     public static void createTagLists() {
