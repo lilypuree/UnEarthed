@@ -85,6 +85,7 @@ public class NaturalDesertGenerator extends Feature<NoFeatureConfig> {
 
                     BlockState mutableState = world.getBlockState(mutable);
 
+                    //Why replace stone with stone?
                     if (reader.getBlock() != Blocks.STONE) {
                         if (useStoneTag(world, mutable))
                             world.setBlockState(mutable, reader.getBlock().getDefaultState(), 2);

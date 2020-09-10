@@ -94,6 +94,7 @@ public class NaturalIcyGenerator extends Feature<NoFeatureConfig> {
 
                         else if (UnearthedConfig.replaceCobble.get() && mutableState.getBlock() == Blocks.COBBLESTONE)
                             world.setBlockState(mutable, reader.getCobbleBlock(mutableState).getDefaultState(), 2);
+
                         else if (mutableState == Blocks.COAL_ORE.getDefaultState())
                             world.setBlockState(mutable, reader.getCoalOre(mutableState).getDefaultState(), 2);
 
