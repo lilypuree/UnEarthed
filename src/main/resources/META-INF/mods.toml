@@ -4,7 +4,7 @@ license="LGPLv3"
 issueTrackerURL="https://github.com/HexBugOrion/UnEarthed/issues"
 [[mods]]
 modId="unearthed"
-version="1.0.0"
+version="1.0.2"
 displayName="Unearthed"
 displayURL="N/A"
 logoFile="Logo.png"
