@@ -80,50 +80,39 @@ public class NaturalDesertGenerator extends Feature<NoFeatureConfig> {
                     double selectorNoiseValue = selectorNoise.GetValue(mutable.getX(), mutable.getY(), mutable.getZ()) * 12 + 0.5;
 
                     double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
-//                    if (FabricLoader.getInstance().isDevelopmentEnvironment())
-//                        getHighestNoisePoint(clampedValue);
 
                     ConfigBlockReader reader = ConfigBlockReader.desertBlocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.desertBlocksFromConfig.size()));
 
-
                     BlockState mutableState = world.getBlockState(mutable);
 
-                    if (useStoneTag(world, mutable))
-                        world.setBlockState(mutable, reader.getBlock().getDefaultState(), 2);
+                    if (reader.getBlock() != Blocks.STONE) {
+                        if (useStoneTag(world, mutable))
+                            world.setBlockState(mutable, reader.getBlock().getDefaultState(), 2);
 
-                    else if (UnearthedConfig.replaceCobble.get() && mutableState.getBlock() == Blocks.COBBLESTONE)
-                        world.setBlockState(mutable, reader.getCobbleBlock(mutableState).getDefaultState(), 2);
+                        else if (UnearthedConfig.replaceCobble.get() && mutableState.getBlock() == Blocks.COBBLESTONE)
+                            world.setBlockState(mutable, reader.getCobbleBlock(mutableState).getDefaultState(), 2);
+                        else if (mutableState == Blocks.COAL_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getCoalOre(mutableState).getDefaultState(), 2);
 
-                    else if (mutableState == Blocks.COAL_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getCoalOre(mutableState).getDefaultState(), 2);
+                        else if (mutableState == Blocks.IRON_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getIronOre(mutableState).getDefaultState(), 2);
 
-                    else if (mutableState == Blocks.IRON_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getIronOre(mutableState).getDefaultState(), 2);
+                        else if (mutableState == Blocks.GOLD_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getGoldOre(mutableState).getDefaultState(), 2);
 
-                    else if (mutableState == Blocks.GOLD_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getGoldOre(mutableState).getDefaultState(), 2);
+                        else if (mutableState == Blocks.LAPIS_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getLapisOre(mutableState).getDefaultState(), 2);
 
-                    else if (mutableState == Blocks.LAPIS_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getLapisOre(mutableState).getDefaultState(), 2);
+                        else if (mutableState == Blocks.REDSTONE_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getRedstoneOre(mutableState).getDefaultState(), 2);
 
-                    else if (mutableState == Blocks.REDSTONE_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getRedstoneOre(mutableState).getDefaultState(), 2);
+                        else if (mutableState == Blocks.DIAMOND_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getDiamondOre(mutableState).getDefaultState(), 2);
 
-                    else if (mutableState == Blocks.DIAMOND_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getDiamondOre(mutableState).getDefaultState(), 2);
-
-                    else if (mutableState == Blocks.EMERALD_ORE.getDefaultState())
-                        world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
-
-//                        //Modded ores
-//                        if (mutableState == Registry.BLOCK.get(new ResourceLocation("byg", "ametrine_ore")).getDefaultState())
-//                            world.setBlockState(mutable, reader.getBYGAmetrineOre(mutableState).getDefaultState(), 2);
-//
-//                        if (mutableState == Registry.BLOCK.get(new ResourceLocation("byg", "pendorite_ore")).getDefaultState())
-//                            world.setBlockState(mutable, reader.getBYGPendoriteOre(mutableState).getDefaultState(), 2);
-
+                        else if (mutableState == Blocks.EMERALD_ORE.getDefaultState())
+                            world.setBlockState(mutable, reader.getEmeraldOre(mutableState).getDefaultState(), 2);
+                    }
                     mutable.move(Direction.UP);
-
                 }
             }
         }
