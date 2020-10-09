@@ -23,6 +23,7 @@ import net.minecraft.world.storage.IServerConfiguration;
 import net.minecraft.world.storage.SaveFormat;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
+import net.oriondevcorgitaco.unearthed.world.feature.layergenerators.LayeredGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalDesertGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalIcyGenerator;
@@ -42,9 +43,10 @@ import java.util.stream.Collectors;
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
 
-    private final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", NaturalGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-    private final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", NaturalIcyGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-    private final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", NaturalDesertGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+    private static final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", NaturalGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+    private static final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", NaturalIcyGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+    private static final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", NaturalDesertGenerator.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+    private static final ConfiguredFeature<?, ?> NATURAL_LAYERS_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_layers_generator", LayeredGenerator.LAYERED_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
     private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", TrueMesaGenerator.MESA.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
@@ -77,7 +79,6 @@ public class MixinMinecraftServer {
             biomeFeatures.add(Lists.newArrayList());
         }
         biomeFeatures.get(feature.ordinal()).add(() -> configuredFeature);
-
     }
 
     private static void ConvertImmutableFeatures(Biome biome) {

@@ -4,7 +4,7 @@ license="LGPLv3"
 issueTrackerURL="https://github.com/HexBugOrion/UnEarthed/issues"
 [[mods]]
 modId="unearthed"
-version="1.0.2"
+version="1.0.4"
 displayName="Unearthed"
 displayURL="N/A"
 logoFile="Logo.png"
@@ -13,9 +13,9 @@ authors="Corgi Taco"
 description='''
 A mod that makes exploring underground interesting. Adds 15 new rocks!
 '''
-[[dependencies.byg]]
+[[dependencies.unearthed]]
     modId="forge"
     mandatory=true
-    versionRange="[33.0.0,)"
+    versionRange="[32.0.0,)"
     ordering="NONE"
     side="BOTH"
