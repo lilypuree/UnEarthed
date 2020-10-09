@@ -11,12 +11,14 @@ import net.oriondevcorgitaco.unearthed.Unearthed;
 public class RegistrationHelper {
 
     public static ConfiguredFeature<?, ?> newConfiguredFeature(String registryName, ConfiguredFeature<?, ?> configuredFeature) {
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(Unearthed.MOD_ID, registryName), configuredFeature);
+        if(!BuiltinRegistries.CONFIGURED_FEATURE.containsId(new Identifier(Unearthed.MOD_ID, registryName)))
+            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(Unearthed.MOD_ID, registryName), configuredFeature);
         return configuredFeature;
     }
 
     public static <T extends FeatureConfig, G extends Feature<T>> G registerFeature(String registryName, G feature) {
-        Registry.register(Registry.FEATURE, new Identifier(Unearthed.MOD_ID, registryName), feature);
+        if (!Registry.FEATURE.containsId(new Identifier(Unearthed.MOD_ID, registryName)))
+            Registry.register(Registry.FEATURE, new Identifier(Unearthed.MOD_ID, registryName), feature);
         return feature;
     }
 }
