@@ -60,24 +60,24 @@ public class NaturalDesertGenerator extends ChunkCoordinatesFeature<DefaultFeatu
         int zPos = z & 15;
         BlockPos.Mutable mutable = new BlockPos.Mutable(xPos, 0, zPos);
 
-        int topY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
+        int topY = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
 
         for (int y = 0; y < topY; y++) {
             if (topY < 2)
                 topY = 256;
 
-            FNVector3f perturb3f = new FNVector3f(mutable.getX(), mutable.getY(), mutable.getZ());
+            FNVector3f perturb3f = new FNVector3f(x, mutable.getY(), z);
             perturb1.GradientPerturb(perturb3f);
             perturbSmall1.GradientPerturb(perturb3f);
 
-            FNVector3f perturb3f2 = new FNVector3f(mutable.getX(), mutable.getY(), mutable.getZ());
+            FNVector3f perturb3f2 = new FNVector3f(x, mutable.getY(), z);
             perturb2.GradientPerturb(perturb3f2);
             perturbSmall2.GradientPerturb(perturb3f2);
 
             double cellNoise1 = this.cellNoise1.GetNoise(perturb3f.x, perturb3f.y, perturb3f.z);
             double cellNoise2 = this.cellNoise2.GetNoise(perturb3f2.x, perturb3f2.y, perturb3f2.z);
 
-            double selectorNoiseValue = selectorNoise.GetValue(mutable.getX(), mutable.getY(), mutable.getZ()) * 12 + 0.5;
+            double selectorNoiseValue = selectorNoise.GetValue(z, mutable.getY(), x) * 12 + 0.5;
 
             double clampedValue = MathHelper.clampedLerp(cellNoise1, cellNoise2, selectorNoiseValue);
             if (FabricLoader.getInstance().isDevelopmentEnvironment())
@@ -85,9 +85,9 @@ public class NaturalDesertGenerator extends ChunkCoordinatesFeature<DefaultFeatu
 
             ConfigBlockReader reader = ConfigBlockReader.desertBlocksFromConfig.get((int) ((clampedValue / 2.0 + 0.5) * ConfigBlockReader.desertBlocksFromConfig.size()));
 
-            BlockState mutableState = world.getBlockState(mutable);
+            BlockState mutableState = chunk.getBlockState(mutable);
 
-            if (useStoneTag(world, mutable))
+            if (useStoneTag(chunk, mutable))
                 chunk.setBlockState(mutable, reader.getBlock().getDefaultState(), false);
 
             else if (Unearthed.UE_CONFIG.generation.replaceCobble && mutableState.getBlock() == Blocks.COBBLESTONE)
@@ -119,12 +119,12 @@ public class NaturalDesertGenerator extends ChunkCoordinatesFeature<DefaultFeatu
         return true;
     }
 
-    public static boolean useStoneTag(StructureWorldAccess world, BlockPos mutable) {
+    public static boolean useStoneTag(Chunk chunk, BlockPos mutable) {
         boolean stoneTag = Unearthed.UE_CONFIG.generation.stoneTag;
         if (stoneTag)
-            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
+            return chunk.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
         else
-            return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
+            return chunk.getBlockState(mutable) == Blocks.STONE.getDefaultState();
 
     }
 

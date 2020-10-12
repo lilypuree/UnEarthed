@@ -32,11 +32,11 @@ public class TrueMesaGenerator extends ChunkCoordinatesFeature<DefaultFeatureCon
         int zPos = z & 15;
         BlockPos.Mutable mutable = new BlockPos.Mutable(xPos, 0, zPos);
 
-        int topY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
+        int topY = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
 
         for (int y = 0; y < topY; y++) {
             setStrataLayerBlock(y);
-            if (useStoneTag(world, mutable))
+            if (useStoneTag(chunk, mutable))
                 chunk.setBlockState(mutable, mesaBlockState, false);
 
             mutable.move(Direction.UP);
@@ -44,12 +44,12 @@ public class TrueMesaGenerator extends ChunkCoordinatesFeature<DefaultFeatureCon
         return true;
     }
 
-    public static boolean useStoneTag(StructureWorldAccess world, BlockPos mutable) {
+    public static boolean useStoneTag(Chunk chunk, BlockPos mutable) {
         boolean stoneTag = Unearthed.UE_CONFIG.generation.stoneTag;
         if (stoneTag)
-            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
+            return chunk.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
         else
-            return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
+            return chunk.getBlockState(mutable) == Blocks.STONE.getDefaultState();
 
     }
 
