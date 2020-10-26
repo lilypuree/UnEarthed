@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gray_basalt",
+    "unearthed:gabbro",
+    "unearthed:pumice",
+    "unearthed:kimberlite",
+    "unearthed:rhyolite",
+    "unearthed:slate",
+    "unearthed:marble",
+    "unearthed:quartzite",
+    "unearthed:phyllite",
+    "unearthed:schist",
+    "unearthed:limestone",
+    "unearthed:lignite",
+    "unearthed:siltstone",
+    "unearthed:mudstone",
+    "unearthed:conglomerate"
+  ]
+}

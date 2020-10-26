@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:conglomerate"
+  },
+  "result": "unearthed:conglomerate_slab",
+  "count": 1
+}

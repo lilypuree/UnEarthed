@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:siltstone"
+    }
+  },
+  "result": {
+    "item": "unearthed:siltstone_pressure_plate"
+  }
+}

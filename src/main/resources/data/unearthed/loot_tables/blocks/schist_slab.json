@@ -14,7 +14,7 @@
               "function": "minecraft:set_count",
               "conditions": [
                 {
-                  "block": "unearthed:schust_slab",
+                  "block": "unearthed:schist_slab",
                   "properties": {
                     "type": "double"
                   },

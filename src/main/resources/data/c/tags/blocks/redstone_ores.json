@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gray_basalt_redstone_ore",
+    "unearthed:gabbro_redstone_ore",
+    "unearthed:pumice_redstone_ore",
+    "unearthed:kimberlite_redstone_ore",
+    "unearthed:rhyolite_redstone_ore",
+    "unearthed:slate_redstone_ore",
+    "unearthed:marble_redstone_ore",
+    "unearthed:quartzite_redstone_ore",
+    "unearthed:phyllite_redstone_ore",
+    "unearthed:schist_redstone_ore",
+    "unearthed:limestone_redstone_ore",
+    "unearthed:lignite_redstone_ore",
+    "unearthed:siltstone_redstone_ore",
+    "unearthed:mudstone_redstone_ore",
+    "unearthed:conglomerate_redstone_ore"
+  ]
+}

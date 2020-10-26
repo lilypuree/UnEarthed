@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gray_basalt_coal_ore",
+    "unearthed:gabbro_coal_ore",
+    "unearthed:pumice_coal_ore",
+    "unearthed:kimberlite_coal_ore",
+    "unearthed:rhyolite_coal_ore",
+    "unearthed:slate_coal_ore",
+    "unearthed:marble_coal_ore",
+    "unearthed:quartzite_coal_ore",
+    "unearthed:phyllite_coal_ore",
+    "unearthed:schist_coal_ore",
+    "unearthed:limestone_coal_ore",
+    "unearthed:lignite_coal_ore",
+    "unearthed:siltstone_coal_ore",
+    "unearthed:mudstone_coal_ore",
+    "unearthed:conglomerate_coal_ore"
+  ]
+}

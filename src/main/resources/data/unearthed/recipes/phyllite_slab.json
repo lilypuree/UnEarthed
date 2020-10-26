@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+    "item": "unearthed:phyllite"
+    }
+  },
+  "result": {
+    "item": "unearthed:phyllite_slab",
+    "count": 6
+  }
+}

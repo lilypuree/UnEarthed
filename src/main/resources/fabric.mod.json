@@ -2,20 +2,18 @@
   "schemaVersion": 1,
   "id": "unearthed",
   "version": "${version}",
-
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Unearthed",
+  "description": "A geologically focused mod that adds several new stone/rock types to the underground generation and is also a builder's best friend!",
   "authors": [
-    "Me!"
+    "HexBugOrion",
+    "Corgi_Taco"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/unearthed-fabric",
+    "sources": "https://github.com/HexBugOrion/UnEarthed"
   },
-
   "license": "LGPLv3",
   "icon": "assets/hextension_core/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -25,14 +23,10 @@
   "mixins": [
     "unearthed.mixin.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.16.2"
+    "minecraft": ">=1.16.2"
   },
-  "suggests": {
-    "flamingo": "*"
-  },
-  "accessWidener" : "yeet.aw"
+  "accessWidener": "yeet.aw"
 }

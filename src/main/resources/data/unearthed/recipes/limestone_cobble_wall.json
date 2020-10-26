@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:limestone_cobble"
+    }
+  },
+  "result": {
+    "item": "unearthed:limestone_cobble_wall",
+    "count": 6
+  }
+}

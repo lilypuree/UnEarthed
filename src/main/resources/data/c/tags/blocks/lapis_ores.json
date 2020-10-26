@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gray_basalt_lapis_ore",
+    "unearthed:gabbro_lapis_ore",
+    "unearthed:pumice_lapis_ore",
+    "unearthed:kimberlite_lapis_ore",
+    "unearthed:rhyolite_lapis_ore",
+    "unearthed:slate_lapis_ore",
+    "unearthed:marble_lapis_ore",
+    "unearthed:quartzite_lapis_ore",
+    "unearthed:phyllite_lapis_ore",
+    "unearthed:schist_lapis_ore",
+    "unearthed:limestone_lapis_ore",
+    "unearthed:lignite_lapis_ore",
+    "unearthed:siltstone_lapis_ore",
+    "unearthed:mudstone_lapis_ore",
+    "unearthed:conglomerate_lapis_ore"
+  ]
+}

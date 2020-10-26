@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "stone_button",
+  "ingredients": [
+    {
+      "item": "unearthed:marble_cobble"
+    }
+  ],
+  "result": {
+    "item": "unearthed:marble_cobble_button"
+  }
+}
