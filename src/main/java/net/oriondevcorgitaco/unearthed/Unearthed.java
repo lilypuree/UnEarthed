@@ -17,8 +17,6 @@ public class Unearthed {
     public static final String MOD_ID = "unearthed";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    String path = "D:\\Coding\\Recipe Jsons";
-
 
     public Unearthed() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::ueCommonSetup);

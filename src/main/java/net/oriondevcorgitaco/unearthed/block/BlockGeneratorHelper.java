@@ -88,13 +88,13 @@ public class BlockGeneratorHelper {
         String plateID = id + "_pressure_plate";
         String wallID = id + "_wall";
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, id), new Block(AbstractBlock.Properties.from(Blocks.STONE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, slabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.STONE_SLAB).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)).getDefaultState(), AbstractBlock.Properties.from(Blocks.STONE_STAIRS).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_BUTTON).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_PRESSURE_PLATE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, wallID), new WallBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICK_WALL).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)), new Item.Properties().group(UNEARTHED_TAB)));
+         createBlock(new ResourceLocation(Unearthed.MOD_ID, id), new Block(AbstractBlock.Properties.from(Blocks.STONE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+         createBlock(new ResourceLocation(Unearthed.MOD_ID, slabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.STONE_SLAB).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+         createBlock(new ResourceLocation(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)).getDefaultState(), AbstractBlock.Properties.from(Blocks.STONE_STAIRS).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+         createBlock(new ResourceLocation(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_BUTTON).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+         createBlock(new ResourceLocation(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_PRESSURE_PLATE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+         createBlock(new ResourceLocation(Unearthed.MOD_ID, wallID), new WallBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICK_WALL).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+         createItem(new ResourceLocation(Unearthed.MOD_ID, id), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)), new Item.Properties().group(UNEARTHED_TAB)));
 
         slabList.add("\"unearthed:" + slabID + "\",");
         wallIDList.add("\"unearthed:" + wallID + "\",");
@@ -104,7 +104,7 @@ public class BlockGeneratorHelper {
 
         for (String type : BlockDataHelper.BASE_TYPES) {
             String modifiedID = id + type;
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
         }
 
         baseStoneBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)));
@@ -115,12 +115,12 @@ public class BlockGeneratorHelper {
             String polishedID = "polished_" + this.id;
             String polishedSlabID = polishedID + "_slab";
             String polishedStairID = polishedID + "_stairs";
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, polishedID), new Block(AbstractBlock.Properties.from(Blocks.POLISHED_ANDESITE)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, polishedSlabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.POLISHED_ANDESITE_STAIRS)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID)).getDefaultState(), AbstractBlock.Properties.from(Blocks.COBBLESTONE)));
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, polishedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID)), new Item.Properties().group(UNEARTHED_TAB)));
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, polishedSlabID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID)), new Item.Properties().group(UNEARTHED_TAB)));
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, polishedStairID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedStairID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, polishedID), new Block(AbstractBlock.Properties.from(Blocks.POLISHED_ANDESITE)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.POLISHED_ANDESITE_STAIRS)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, polishedStairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID)).getDefaultState(), AbstractBlock.Properties.from(Blocks.COBBLESTONE)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, polishedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedSlabID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, polishedStairID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, polishedStairID)), new Item.Properties().group(UNEARTHED_TAB)));
 
         }
     }
@@ -133,16 +133,16 @@ public class BlockGeneratorHelper {
         String redStoneOreID = this.id + "_redstone_ore";
         String diamondOreID = this.id + "_diamond_ore";
         String emeraldOreID = this.id + "_emerald_ore";
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, coalOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.COAL_ORE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, ironOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, goldOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.GOLD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, lapisOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.LAPIS_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, redStoneOreID), new RedstoneOreBlock(AbstractBlock.Properties.from(Blocks.REDSTONE_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, diamondOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, emeraldOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, coalOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.COAL_ORE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, ironOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, goldOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.GOLD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, lapisOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.LAPIS_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, redStoneOreID), new RedstoneOreBlock(AbstractBlock.Properties.from(Blocks.REDSTONE_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, diamondOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, emeraldOreID), new UEOreBlock(AbstractBlock.Properties.from(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
         for (String type : BlockDataHelper.VANILLA_ORE_TYPES) {
             String modifiedID = this.id + type;
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
             oreBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)));
             oreBlockIdList.add(modifiedID);
         }
@@ -152,11 +152,11 @@ public class BlockGeneratorHelper {
         String bygID = "byg";
         String ametrineOreID = this.id + "_ametrine_ore";
         String pendoriteOreID = this.id + "_pendorite_ore";
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, ametrineOreID), new UEOreBlock(AbstractBlock.Properties.from(Registry.BLOCK.getOrDefault(new ResourceLocation(bygID, "ametrine_ore")))));
-        Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, pendoriteOreID), new UEOreBlock(AbstractBlock.Properties.from(Registry.BLOCK.getOrDefault(new ResourceLocation(bygID, "pendorite_ore")))));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, ametrineOreID), new UEOreBlock(AbstractBlock.Properties.from(Registry.BLOCK.getOrDefault(new ResourceLocation(bygID, "ametrine_ore")))));
+        createBlock(new ResourceLocation(Unearthed.MOD_ID, pendoriteOreID), new UEOreBlock(AbstractBlock.Properties.from(Registry.BLOCK.getOrDefault(new ResourceLocation(bygID, "pendorite_ore")))));
         for (String type : BlockDataHelper.BYG_ORE_TYPES) {
             String modifiedID = this.id + type;
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
 //            oreBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)));
 //            oreBlockIdList.add(modifiedID);
         }
@@ -172,13 +172,13 @@ public class BlockGeneratorHelper {
             String buttonID = cobbleID + "_button";
             String plateID = cobbleID + "_pressure_plate";
             String wallID = cobbleID + "_wall";
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, cobbleID), new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, slabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.STONE_SLAB).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)).getDefaultState(), AbstractBlock.Properties.from(Blocks.STONE_STAIRS).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_BUTTON).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_PRESSURE_PLATE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-            Registry.register(Registry.BLOCK, new ResourceLocation(Unearthed.MOD_ID, wallID), new WallBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICK_WALL).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
-            Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleID)), new Item.Properties().group(UNEARTHED_TAB)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, cobbleID), new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, slabID), new SlabBlock(AbstractBlock.Properties.from(Blocks.STONE_SLAB).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, stairID), new StairsBlockAccess(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)).getDefaultState(), AbstractBlock.Properties.from(Blocks.STONE_STAIRS).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, buttonID), new ButtonBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_BUTTON).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, plateID), new PressurePlateBlockAccess(AbstractBlock.Properties.from(Blocks.STONE_PRESSURE_PLATE).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+            createBlock(new ResourceLocation(Unearthed.MOD_ID, wallID), new WallBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICK_WALL).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+            createItem(new ResourceLocation(Unearthed.MOD_ID, cobbleID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, cobbleID)), new Item.Properties().group(UNEARTHED_TAB)));
             cobbleBlockIdList.add(cobbleID);
             slabList.add("\"unearthed:" + slabID + "\",");
             wallIDList.add("\"unearthed:" + wallID + "\",");
@@ -186,7 +186,7 @@ public class BlockGeneratorHelper {
             stairsList.add("\"unearthed:" + stairID + "\",");
             for (String type : BlockDataHelper.BASE_TYPES) {
                 String modifiedID = cobbleID + type;
-                Registry.register(Registry.ITEM, new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
+                createItem(new ResourceLocation(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, modifiedID)), new Item.Properties().group(UNEARTHED_TAB)));
             }
             cobbleStoneBlockArray.add(Registry.BLOCK.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, id)));
             cobbleBlockIdList.add(cobbleID);
@@ -310,6 +310,14 @@ public class BlockGeneratorHelper {
         public ButtonBlockAccess(AbstractBlock.Properties Properties) {
             super(Properties);
         }
+    }
+
+    private static void createBlock(ResourceLocation resourceLocation, Block block) {
+        block.setRegistryName(resourceLocation);
+    }
+
+    private static void createItem(ResourceLocation resourceLocation, Item item) {
+        item.setRegistryName(resourceLocation);
     }
 
     public static class UEOreBlock extends OreBlock {
