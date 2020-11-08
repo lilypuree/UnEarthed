@@ -1,10 +1,5 @@
 package net.oriondevcorgitaco.unearthed.block;
 
-import net.minecraft.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,15 +50,4 @@ public class BlockGeneratorReference {
 //        return TagRegistry.block(new ResourceLocation("c", id));
 //
 //    }
-
-
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class InitUEBlocks {
-
-        @SubscribeEvent
-        public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-            init();
-        }
-
-    }
 }

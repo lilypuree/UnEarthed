@@ -10,7 +10,6 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.Random;
 
 public class LayeredGenerator extends Feature<NoFeatureConfig> {
-    public static final Feature<NoFeatureConfig> LAYERED_GENERATOR = RegistrationHelper.registerFeature("layered_generator", new LayeredGenerator(NoFeatureConfig.field_236558_a_));
 
     public LayeredGenerator(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);

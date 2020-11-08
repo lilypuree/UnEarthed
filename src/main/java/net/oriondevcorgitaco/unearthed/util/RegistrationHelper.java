@@ -8,7 +8,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegistrationHelper {
+
+    public static List<Feature<?>> features = new ArrayList<>();
 
     public static ConfiguredFeature<?, ?> newConfiguredFeature(String registryName, ConfiguredFeature<?, ?> configuredFeature) {
         if (!WorldGenRegistries.field_243653_e.keySet().contains(new ResourceLocation(Unearthed.MOD_ID, registryName)))
@@ -19,6 +24,7 @@ public class RegistrationHelper {
     public static <T extends IFeatureConfig, G extends Feature<T>> G registerFeature(String registryName, G feature) {
         if (!Registry.FEATURE.keySet().contains(new ResourceLocation(Unearthed.MOD_ID, registryName)))
             feature.setRegistryName(new ResourceLocation(Unearthed.MOD_ID, registryName));
+        features.add(feature);
         return feature;
     }
 }

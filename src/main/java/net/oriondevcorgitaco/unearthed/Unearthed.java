@@ -1,12 +1,17 @@
 package net.oriondevcorgitaco.unearthed;
 
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
+import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import org.apache.logging.log4j.LogManager;
@@ -67,5 +72,23 @@ public class Unearthed {
         if (ConfigBlockReader.desertBlocksFromConfig.size() == 0)
             ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader("minecraft:smooth_sandstone"));
 
+    }
+
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class BYGRegistries {
+        @SubscribeEvent
+        public static void registerBlocks(RegistryEvent.Register<Block> event) {
+            LOGGER.debug("UE: Registering blocks...");
+            BlockGeneratorReference.init();
+            BlockGeneratorHelper.blockList.forEach(block -> event.getRegistry().register(block));
+            LOGGER.info("UE: Blocks registered!");
+        }
+
+        @SubscribeEvent
+        public static void registerItems(RegistryEvent.Register<Item> event) {
+            LOGGER.debug("UE: Registering items...");
+            BlockGeneratorHelper.itemList.forEach(item -> event.getRegistry().register(item));
+            LOGGER.info("UE: Items registered!");
+        }
     }
 }

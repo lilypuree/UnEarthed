@@ -22,7 +22,6 @@ import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 import java.util.Random;
 
 public class NaturalGenerator extends Feature<NoFeatureConfig> {
-    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("natural_generator", new NaturalGenerator(NoFeatureConfig.field_236558_a_));
 
     public NaturalGenerator(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);

@@ -18,6 +18,13 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockGeneratorHelper {
+
+    public static List<Block> blockList = new ArrayList<>();
+
+    public static List<Item> itemList = new ArrayList<>();
+
+
+
     public static ItemGroup UNEARTHED_TAB = new ItemGroup(Unearthed.MOD_ID) {
         @Override
         public ItemStack createIcon() {
@@ -314,10 +321,12 @@ public class BlockGeneratorHelper {
 
     private static void createBlock(ResourceLocation resourceLocation, Block block) {
         block.setRegistryName(resourceLocation);
+        blockList.add(block);
     }
 
     private static void createItem(ResourceLocation resourceLocation, Item item) {
         item.setRegistryName(resourceLocation);
+        itemList.add(item);
     }
 
     public static class UEOreBlock extends OreBlock {

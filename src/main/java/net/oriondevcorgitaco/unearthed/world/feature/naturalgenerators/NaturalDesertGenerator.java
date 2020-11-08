@@ -15,14 +15,12 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
-import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.util.noise.FNVector3f;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 
 import java.util.Random;
 
 public class NaturalDesertGenerator extends Feature<NoFeatureConfig> {
-    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("natural_desert_generator", new NaturalDesertGenerator(NoFeatureConfig.field_236558_a_));
 
     public NaturalDesertGenerator(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);
