@@ -30,6 +30,7 @@ public class BlockGeneratorHelper {
 
     public static List<String> baseBlockIdList = new ArrayList<>();
     public static List<String> cobbleBlockIdList = new ArrayList<>();
+    public static List<String> brickBlockIdList = new ArrayList<>();
     public static List<String> oreBlockIdList = new ArrayList<>();
 
     public static List<String> wallIDList = new ArrayList<>();
@@ -40,6 +41,7 @@ public class BlockGeneratorHelper {
 
     public static List<Block> baseStoneBlockArray = new ArrayList<>();
     public static List<Block> cobbleStoneBlockArray = new ArrayList<>();
+    public static List<Block> brickBlockArray = new ArrayList<>();
     public static List<Block> oreBlockArray = new ArrayList<>();
 
     public static List<String> getCobbleBlockIdList = new ArrayList<>();
@@ -58,6 +60,7 @@ public class BlockGeneratorHelper {
 //        generatePolishedVariant(hasPolishedVariant);
         generateCobbleVariant(hasCobbleVariant);
         generateVanillaOreVariants();
+        generateBrickVariant(hasBricksVariant);
 
 //        Mod Support
 //        if (FabricLoader.getInstance().isModLoaded("byg"))
@@ -175,6 +178,22 @@ public class BlockGeneratorHelper {
             }
             cobbleStoneBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
             cobbleBlockIdList.add(cobbleID);
+        }
+    }
+
+    private void generateBrickVariant(boolean generate) {
+        if (generate) {
+            String brickID = id + "_bricks";
+            
+            Registry.register(Registry.BLOCK, new Identifier(Unearthed.MOD_ID, brickID), new Block(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(1, 4.5F)));
+            Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, brickID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, brickID)), new Item.Settings().group(UNEARTHED_TAB)));
+            brickBlockIdList.add(brickID);
+            for (String type : BlockDataHelper.BASE_TYPES) {
+                String modifiedID = brickID + type;
+                Registry.register(Registry.ITEM, new Identifier(Unearthed.MOD_ID, modifiedID), new BlockItem(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, modifiedID)), new Item.Settings().group(UNEARTHED_TAB)));
+            }
+            brickBlockArray.add(Registry.BLOCK.get(new Identifier(Unearthed.MOD_ID, id)));
+            brickBlockIdList.add(brickID);
         }
     }
 

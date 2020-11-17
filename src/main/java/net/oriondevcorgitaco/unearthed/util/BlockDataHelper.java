@@ -120,6 +120,10 @@ public class BlockDataHelper {
         BlockGeneratorHelper.cobbleBlockIdList.forEach(id -> {
             Unearthed.LOGGER.info("unearthed:" + id);
         });
+        
+        BlockGeneratorHelper.brickBlockIdList.forEach(id -> {
+            Unearthed.LOGGER.info("unearthed:" + id);
+        });
 
         BlockGeneratorHelper.oreBlockIdList.forEach(id -> {
             Unearthed.LOGGER.info("unearthed:" + id);

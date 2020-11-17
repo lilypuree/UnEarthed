@@ -32,7 +32,7 @@ public class BlockGeneratorReference {
 
     //sedimentary
     public static final BlockGeneratorHelper LIMESTONE = new BlockGeneratorHelper("limestone", true, true, true, true, true);
-    public static final BlockGeneratorHelper LIGNITE = new BlockGeneratorHelper("lignite", false, false, false, false, false);
+    public static final BlockGeneratorHelper LIGNITE = new BlockGeneratorHelper("lignite", false, false, false, true, false);
     public static final BlockGeneratorHelper SILTSTONE = new BlockGeneratorHelper("siltstone", true, false, true, true, true);
     public static final BlockGeneratorHelper MUDSTONE = new BlockGeneratorHelper("mudstone", true, false, true, true, true);
     public static final BlockGeneratorHelper CONGLOMERATE = new BlockGeneratorHelper("conglomerate", true, false, true, true, true);
