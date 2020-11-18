@@ -13,7 +13,7 @@ public class BlockGeneratorReference {
     //igneous
     public static final BlockGeneratorHelper GRAY_BASALT = new BlockGeneratorHelper("gray_basalt", true, false, true, true, true);
     public static final BlockGeneratorHelper GABBRO = new BlockGeneratorHelper("gabbro", true, true, true, true, true);
-    public static final BlockGeneratorHelper PUMICE = new BlockGeneratorHelper("pumice", false, false, false, false, false);
+    public static final BlockGeneratorHelper PUMICE = new BlockGeneratorHelper("pumice", false, false, false, true, false);
     public static final BlockGeneratorHelper KIMBERLITE = new BlockGeneratorHelper("kimberlite", true, true, true, true, true);
     public static final BlockGeneratorHelper RHYOLITE = new BlockGeneratorHelper("rhyolite", true, false, true, true, true);
 //    public static final BlockGeneratorHelper PERIDOTITE = new BlockGeneratorHelper("peridotite", true, true, true, true, true);
