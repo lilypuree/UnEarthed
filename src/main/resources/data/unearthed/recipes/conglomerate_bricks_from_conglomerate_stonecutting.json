@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "unearthed:conglomerate"
   },
-  "result": "unearthed:conglomerate_slab",
-  "count": 2
+  "result": "unearthed:conglomerate_bricks",
+  "count": 1
 }
