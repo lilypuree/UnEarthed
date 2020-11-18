@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "##",
+        "##"
+    ],
+    "key": {
+        "#": {
+            "item": "unearthed:pumice"
+        }
+    },
+    "result": {
+        "item": "unearthed:pumice_bricks",
+        "count": 4
+    }
+}

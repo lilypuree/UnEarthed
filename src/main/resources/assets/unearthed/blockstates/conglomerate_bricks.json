@@ -1,7 +1,1 @@
-{
-  "variants": {
-    "": {
-      "model": "unearthed:block/conglomerate_bricks"
-    }
-  }
-}
+{"variants": {"": {"model": "unearthed:block/conglomerate_bricks"}}}
