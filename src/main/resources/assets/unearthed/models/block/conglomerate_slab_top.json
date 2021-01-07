@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "unearthed:block/conglomerate",
-    "top": "unearthed:block/conglomerate",
-    "side": "unearthed:block/conglomerate"
-  }
-}

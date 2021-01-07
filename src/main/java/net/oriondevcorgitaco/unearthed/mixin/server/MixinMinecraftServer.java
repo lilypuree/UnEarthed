@@ -68,7 +68,7 @@ public class MixinMinecraftServer {
 
     private static void addFeatureToBiome(Biome biome, GenerationStage.Decoration feature, ConfiguredFeature<?, ?> configuredFeature) {
         ConvertImmutableFeatures(biome);
-        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.func_242440_e().field_242484_f;
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.getGenerationSettings().features;
         while (biomeFeatures.size() <= feature.ordinal()) {
             biomeFeatures.add(Lists.newArrayList());
         }
@@ -76,8 +76,8 @@ public class MixinMinecraftServer {
     }
 
     private static void ConvertImmutableFeatures(Biome biome) {
-        if (biome.func_242440_e().field_242484_f instanceof ImmutableList) {
-            biome.func_242440_e().field_242484_f = biome.func_242440_e().field_242484_f.stream().map(Lists::newArrayList).collect(Collectors.toList());
+        if (biome.getGenerationSettings().features instanceof ImmutableList) {
+            biome.getGenerationSettings().features = biome.getGenerationSettings().features.stream().map(Lists::newArrayList).collect(Collectors.toList());
         }
     }
 

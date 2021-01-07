@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:schist"
-  },
-  "result": "unearthed:schist_wall",
-  "count": 1
-}

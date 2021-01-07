@@ -24,7 +24,7 @@ archivesBaseName = "${modid}"
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: "snapshot", version: "${mapping}-1.16.1"
+    mappings channel: "snapshot", version: "${mapping}-1.16.3"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -56,9 +56,20 @@ minecraft {
                 }
             }
         }
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'unearthed', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
+
+            source sourceSets.main
+        }
     }
 }
-
+sourceSets {
+    main.resources.srcDirs += 'src/generated/resources'
+}
 repositories{
     maven {
         // location of the maven that hosts JEI files

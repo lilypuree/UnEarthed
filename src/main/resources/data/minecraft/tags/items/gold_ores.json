@@ -1,20 +1,6 @@
 {
   "replace": false,
   "values": [
-    "unearthed:gray_basalt_gold_ore",
-    "unearthed:gabbro_gold_ore",
-    "unearthed:pumice_gold_ore",
-    "unearthed:kimberlite_gold_ore",
-    "unearthed:rhyolite_gold_ore",
-    "unearthed:slate_gold_ore",
-    "unearthed:marble_gold_ore",
-    "unearthed:quartzite_gold_ore",
-    "unearthed:phyllite_gold_ore",
-    "unearthed:schist_gold_ore",
-    "unearthed:limestone_gold_ore",
-    "unearthed:lignite_gold_ore",
-    "unearthed:siltstone_gold_ore",
-    "unearthed:mudstone_gold_ore",
-    "unearthed:conglomerate_gold_ore"
+    "#unearthed:gold_ores"
   ]
 }

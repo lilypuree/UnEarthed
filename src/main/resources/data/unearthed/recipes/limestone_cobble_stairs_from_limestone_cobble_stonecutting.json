@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:limestone_cobble"
-  },
-  "result": "unearthed:limestone_cobble_stairs",
-  "count": 1
-}

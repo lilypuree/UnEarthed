@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:kimberlite_cobble"
-  },
-  "result": "unearthed:kimberlite_cobble_stairs",
-  "count": 1
-}

@@ -30,7 +30,7 @@ public class LayeredGenerator extends Feature<NoFeatureConfig> {
     public static BlockState mesaBlockState = Blocks.STONE.getDefaultState();
 
     @Override
-    public boolean func_241855_a(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();

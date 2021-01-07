@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "unearthed:block/rhyolite",
-    "top": "unearthed:block/rhyolite",
-    "side": "unearthed:block/rhyolite"
-  }
-}

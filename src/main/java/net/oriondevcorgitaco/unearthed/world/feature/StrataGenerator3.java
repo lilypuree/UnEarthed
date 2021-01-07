@@ -22,7 +22,7 @@ public class StrataGenerator3 extends Feature<NoFeatureConfig> {
     }
 
     @Override
-    public boolean func_241855_a(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -30,7 +30,7 @@ public class StrataGenerator3 extends Feature<NoFeatureConfig> {
                 int topY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 for (int y = 0; y < topY; y++) {
-                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.field_242172_aH)) {
+                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD)) {
 
                         world.setBlockState(mutable, BlockGeneratorHelper.baseStoneBlockArray.get(random.nextInt(BlockGeneratorHelper.baseStoneBlockArray.size())).getDefaultState(), 2);
                     }

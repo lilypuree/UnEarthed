@@ -2,7 +2,12 @@ package net.oriondevcorgitaco.unearthed;
 
 
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -10,7 +15,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
@@ -29,14 +33,15 @@ public class Unearthed {
     }
 
     public void ueCommonSetup(FMLCommonSetupEvent event) {
+        BlockGeneratorReference.init();
         configReader();
     }
-    public static void createTagLists() {
-        BlockGeneratorHelper.stairsList.forEach(LOGGER::info);
-        BlockGeneratorHelper.slabList.forEach(LOGGER::info);
-        BlockGeneratorHelper.buttonList.forEach(LOGGER::info);
-        BlockGeneratorHelper.wallIDList.forEach(LOGGER::info);
-    }
+//    public static void createTagLists() {
+//        BlockGeneratorHelperOld.stairsList.forEach(LOGGER::info);
+//        BlockGeneratorHelperOld.slabList.forEach(LOGGER::info);
+//        BlockGeneratorHelperOld.buttonList.forEach(LOGGER::info);
+//        BlockGeneratorHelperOld.wallIDList.forEach(LOGGER::info);
+//    }
 
     public static void configReader() {
         String blockRegistries = UnearthedConfig.blocksForGeneration.get();
@@ -79,16 +84,23 @@ public class Unearthed {
         @SubscribeEvent
         public static void registerBlocks(RegistryEvent.Register<Block> event) {
             LOGGER.debug("UE: Registering blocks...");
-            BlockGeneratorReference.init();
-            BlockGeneratorHelper.blockList.forEach(block -> event.getRegistry().register(block));
+            BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> event.getRegistry().register(entry.createBlock(type).setRegistryName(entry.getId()))));
             LOGGER.info("UE: Blocks registered!");
         }
 
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
             LOGGER.debug("UE: Registering items...");
-            BlockGeneratorHelper.itemList.forEach(item -> event.getRegistry().register(item));
+            BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry ->
+                    event.getRegistry().register(new BlockItem(entry.getBlock(), new Item.Properties().group(UNEARTHED_TAB)).setRegistryName(entry.getId()))));
             LOGGER.info("UE: Items registered!");
         }
     }
+
+    public static ItemGroup UNEARTHED_TAB = new ItemGroup(Unearthed.MOD_ID) {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, "kimberlite_diamond_ore")));
+        }
+    };
 }

@@ -1,21 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:iron_ore",
-    "unearthed:gray_basalt_iron_ore",
-    "unearthed:gabbro_iron_ore",
-    "unearthed:pumice_iron_ore",
-    "unearthed:kimberlite_iron_ore",
-    "unearthed:rhyolite_iron_ore",
-    "unearthed:slate_iron_ore",
-    "unearthed:marble_iron_ore",
-    "unearthed:quartzite_iron_ore",
-    "unearthed:phyllite_iron_ore",
-    "unearthed:schist_iron_ore",
-    "unearthed:limestone_iron_ore",
-    "unearthed:lignite_iron_ore",
-    "unearthed:siltstone_iron_ore",
-    "unearthed:mudstone_iron_ore",
-    "unearthed:conglomerate_iron_ore"
+    "#unearthed:iron_ores"
   ]
 }

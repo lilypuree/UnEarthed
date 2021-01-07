@@ -16,8 +16,8 @@ public class RegistrationHelper {
     public static List<Feature<?>> features = new ArrayList<>();
 
     public static ConfiguredFeature<?, ?> newConfiguredFeature(String registryName, ConfiguredFeature<?, ?> configuredFeature) {
-        if (!WorldGenRegistries.field_243653_e.keySet().contains(new ResourceLocation(Unearthed.MOD_ID, registryName)))
-            Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(Unearthed.MOD_ID, registryName), configuredFeature);
+        if (!WorldGenRegistries.CONFIGURED_FEATURE.keySet().contains(new ResourceLocation(Unearthed.MOD_ID, registryName)))
+            Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Unearthed.MOD_ID, registryName), configuredFeature);
         return configuredFeature;
     }
 

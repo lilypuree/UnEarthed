@@ -15,7 +15,6 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
-import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import net.oriondevcorgitaco.unearthed.util.noise.FNVector3f;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 
@@ -52,7 +51,7 @@ public class NaturalIcyGenerator extends Feature<NoFeatureConfig> {
 
 
     @Override
-    public boolean func_241855_a(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -125,7 +124,7 @@ public class NaturalIcyGenerator extends Feature<NoFeatureConfig> {
     public static boolean useStoneTag(ISeedReader world, BlockPos mutable) {
         boolean stoneTag = UnearthedConfig.stoneTag.get();
         if (stoneTag)
-            return world.getBlockState(mutable).isIn(BlockTags.field_242172_aH);
+            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
         else
             return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
 

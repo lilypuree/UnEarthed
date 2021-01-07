@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "unearthed:block/phyllite",
-    "top": "unearthed:block/phyllite",
-    "side": "unearthed:block/phyllite"
-  }
-}
