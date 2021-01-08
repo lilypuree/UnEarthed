@@ -8,6 +8,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
+import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -25,10 +26,15 @@ public class Languages extends LanguageProvider {
                 addBlockItem(entry.getBlock(), cap(entry.getId()));
             }
         }
-
+        add(UEBlocks.LIGNITE_BRIQUETTES, UEBlocks.LIGNITE_BRIQUETTES.getRegistryName().getPath());
 //        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALACTITE, "Beige Limestone Stalactite");
 //        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALAGMITE, "Beige Limestone Stalagmite");
     }
+
+//    public void addItem(Block block) {
+//        add(block, cap(block.getRegistryName().getPath()));
+//        add(block.asItem(), cap(block.getRegistryName().getPath()));
+//    }
 
     public void addBlockItem(Block block, String name) {
         add(block.getTranslationKey(), name);

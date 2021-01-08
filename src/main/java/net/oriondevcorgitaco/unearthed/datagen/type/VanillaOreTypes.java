@@ -17,6 +17,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.oriondevcorgitaco.unearthed.Unearthed;
+import net.oriondevcorgitaco.unearthed.core.UEItems;
 import net.oriondevcorgitaco.unearthed.datagen.BlockLootTableAccessor;
 
 import java.util.function.Consumer;
@@ -50,8 +51,18 @@ public enum VanillaOreTypes implements IOreType {
         public Function<Block, LootTable.Builder> createLootFactory() {
             return emeraldOre -> BlockLootTableAccessor.droppingItemWithFortune(emeraldOre, Items.EMERALD);
         }
-    }, IRON(Items.IRON_INGOT, 0.7f, 200, 1),
-    GOLD(Items.GOLD_INGOT, 1.0f, 200, 2);
+    }, IRON(Items.IRON_INGOT, 0.7f, 200, 1) {
+        @Override
+        public Function<Block, LootTable.Builder> createLootFactory() {
+            return ironOre -> BlockLootTableAccessor.droppingWithSilkTouch(ironOre, UEItems.IRON_ORE);
+        }
+    },
+    GOLD(Items.GOLD_INGOT, 1.0f, 200, 2) {
+        @Override
+        public Function<Block, LootTable.Builder> createLootFactory() {
+            return goldOre -> BlockLootTableAccessor.droppingWithSilkTouch(goldOre, UEItems.GOLD_ORE);
+        }
+    };
 
 
     private final Item smeltResult;

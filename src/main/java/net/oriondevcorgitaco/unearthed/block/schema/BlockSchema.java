@@ -1,5 +1,6 @@
 package net.oriondevcorgitaco.unearthed.block.schema;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
@@ -15,6 +16,10 @@ public class BlockSchema {
         this.variants = variants;
     }
 
+    public BlockSchema(Variant... variants) {
+        this.variants = Lists.newArrayList(variants);
+    }
+
     public List<Variant> getVariants() {
         return variants;
     }
@@ -22,10 +27,16 @@ public class BlockSchema {
     public static class Variant {
         private String name;
         private List<Form> forms;
+        private boolean derivative = false;
 
         public Variant(String name, List<Form> forms) {
             this.name = name;
             this.forms = forms;
+        }
+
+        public Variant(String name, Form... forms) {
+            this.name = name;
+            this.forms = Lists.newArrayList(forms);
         }
 
         public String getName() {
@@ -44,6 +55,15 @@ public class BlockSchema {
                 baseName = baseName + "_" + suffix;
             }
             return baseName;
+        }
+
+        public Variant setDerivative(){
+            this.derivative = true;
+            return this;
+        }
+
+        public boolean isDerivative() {
+            return derivative;
         }
 
         public boolean isBaseVariant() {

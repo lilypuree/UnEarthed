@@ -12,7 +12,6 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
-import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
@@ -31,13 +30,13 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
             }
             switch (type.getClassification()) {
                 case IGNEOUS:
-                    getOrCreateBuilder(BlockGeneratorReference.IGNEOUS).add(type.getBaseBlock());
+                    getOrCreateBuilder(BlockGeneratorReference.IGNEOUS_TAG).add(type.getBaseBlock());
                     break;
                 case METAMORPHIC:
-                    getOrCreateBuilder(BlockGeneratorReference.METAMORPHIC).add(type.getBaseBlock());
+                    getOrCreateBuilder(BlockGeneratorReference.METAMORPHIC_TAG).add(type.getBaseBlock());
                     break;
                 case SEDIMENTARY:
-                    getOrCreateBuilder(BlockGeneratorReference.SEDIMENTARY).add(type.getBaseBlock());
+                    getOrCreateBuilder(BlockGeneratorReference.SEDIMENTARY_TAG).add(type.getBaseBlock());
                     break;
             }
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
@@ -78,8 +77,8 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
                 }
             }
         }
-        getOrCreateBuilder(BlockGeneratorReference.SEDIMENTARY).add(Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
-        getOrCreateBuilder(BlockGeneratorReference.IGNEOUS).add(Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.BASALT);
-        getOrCreateBuilder(BlockGeneratorReference.METAMORPHIC).add(Blocks.BLACKSTONE);
+        getOrCreateBuilder(BlockGeneratorReference.SEDIMENTARY_TAG).add(Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
+        getOrCreateBuilder(BlockGeneratorReference.IGNEOUS_TAG).add(Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.BASALT);
+        getOrCreateBuilder(BlockGeneratorReference.METAMORPHIC_TAG).add(Blocks.BLACKSTONE);
     }
 }

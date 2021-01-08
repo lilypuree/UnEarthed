@@ -4,6 +4,7 @@ package net.oriondevcorgitaco.unearthed.datagen;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -14,6 +15,8 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
+import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UEItems;
 
 import java.util.List;
 
@@ -37,6 +40,9 @@ public class Items extends ItemModelProvider {
                 }
             }
         }
+        simpleItem(UEItems.GOLD_ORE);
+        simpleItem(UEItems.IRON_ORE);
+        blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
 //
 //        caveWallModel(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_CAVE_WALL);
 //
@@ -47,6 +53,11 @@ public class Items extends ItemModelProvider {
 //        generated(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALAGMITE.getRegistryName().
 //
 //                getPath(), modLoc("block/beige_limestone_stalagmite"));
+    }
+
+    private void simpleItem(IItemProvider provider) {
+        String name = provider.asItem().getRegistryName().getPath();
+        generated(name, modLoc("item/" + name));
     }
 
     private void generated(String path, ResourceLocation texture) {

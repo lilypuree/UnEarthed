@@ -1,25 +1,34 @@
 package net.oriondevcorgitaco.unearthed;
 
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
+import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UEItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.reflect.Reflection;
+
+import java.lang.reflect.Field;
 
 @Mod(Unearthed.MOD_ID)
 public class Unearthed {
@@ -29,6 +38,7 @@ public class Unearthed {
 
     public Unearthed() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::ueCommonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UnearthedConfig.COMMON_CONFIG);
     }
 
@@ -85,14 +95,39 @@ public class Unearthed {
         public static void registerBlocks(RegistryEvent.Register<Block> event) {
             LOGGER.debug("UE: Registering blocks...");
             BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> event.getRegistry().register(entry.createBlock(type).setRegistryName(entry.getId()))));
+            event.getRegistry().registerAll(
+                    UEBlocks.LIGNITE_BRIQUETTES = new Block(AbstractBlock.Properties.from(Blocks.COAL_BLOCK)).setRegistryName("lignite_briquettes")
+            );
             LOGGER.info("UE: Blocks registered!");
         }
 
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
             LOGGER.debug("UE: Registering items...");
+            Item.Properties properties = new Item.Properties().group(UNEARTHED_TAB);
             BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry ->
-                    event.getRegistry().register(new BlockItem(entry.getBlock(), new Item.Properties().group(UNEARTHED_TAB)).setRegistryName(entry.getId()))));
+            {
+                if (entry.getId().equals("lignite")) {
+                    event.getRegistry().register(new BlockItem(entry.getBlock(), properties) {
+                        @Override
+                        public int getBurnTime(ItemStack itemStack) {
+                            return 200;
+                        }
+                    }.setRegistryName(entry.getId()));
+                } else {
+                    event.getRegistry().register(new BlockItem(entry.getBlock(), properties).setRegistryName(entry.getId()));
+                }
+            }));
+            event.getRegistry().registerAll(
+                    UEItems.IRON_ORE = new Item(properties).setRegistryName("iron_ore"),
+                    UEItems.GOLD_ORE = new Item(properties).setRegistryName("gold_ore"),
+                    UEItems.LIGNITE_BRIQUETTES = new BlockItem(UEBlocks.LIGNITE_BRIQUETTES, properties) {
+                        @Override
+                        public int getBurnTime(ItemStack itemStack) {
+                            return 2000;
+                        }
+                    }.setRegistryName("lignite_briquettes")
+            );
             LOGGER.info("UE: Items registered!");
         }
     }

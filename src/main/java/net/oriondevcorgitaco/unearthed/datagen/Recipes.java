@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -15,6 +16,7 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
+import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
@@ -35,6 +37,7 @@ public class Recipes extends RecipeProvider {
         for (IOreType oreType : VanillaOreTypes.values()) {
             oreType.addCookingRecipes(consumer);
         }
+
         for (BlockGeneratorHelper type : BlockGeneratorReference.ROCK_TYPES) {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
@@ -84,6 +87,10 @@ public class Recipes extends RecipeProvider {
                 }
             }
         }
+
+        ShapedRecipeBuilder.shapedRecipe(UEBlocks.LIGNITE_BRIQUETTES).key('#', BlockGeneratorReference.LIGNITE.getBaseBlock())
+                .key('*', Blocks.CLAY)
+                .patternLine("###").patternLine("#*#").patternLine("###").addCriterion("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).build(consumer);
     }
 
     private void stoneRecipe() {
@@ -154,14 +161,15 @@ public class Recipes extends RecipeProvider {
 
 //    private List<BlockSchema.Variant> derivativeStones = Lists.newArrayList(Variants.BRICK, Variants. Variants.BRICKS, Variants.CHISELED_BRICKS, Variants.CHISELED, Variants.CUT, Variants.POLISHED, Variants.POLISHED_NOWALL, Variants.POLISHED_BRICKS, Variants.CHISELED_POLISHED);
 
-    private List<BlockSchema.Variant> nonDerivativeStones = Lists.newArrayList(Variants.SMOOTH, Variants.COBBLED, Variants.MOSSY_COBBLED, Variants.MOSSY_BRICKS, Variants.SEDIMENTARY, Variants.BASIC, Variants.STONE_LIKE, Variants.SECONDARY_STONE, Variants.PILLAR);
+//    private List<BlockSchema.Variant> nonDerivativeStones = Lists.newArrayList(Variants.SMOOTH, Variants.COBBLED, Variants.MOSSY_COBBLED, Variants.MOSSY_BRICKS, Variants.SEDIMENTARY, Variants.BASIC, Variants.STONE_LIKE, Variants.SECONDARY_STONE, Variants.PILLAR, Variants.);
+//    private List<BlockSchema.Variant> derivativeStones = Lists.newArrayList(Variants.SMOOTH, Variants.COBBLED, Variants.MOSSY_COBBLED, Variants.MOSSY_BRICKS, Variants.SEDIMENTARY, Variants.BASIC, Variants.STONE_LIKE, Variants.SECONDARY_STONE, Variants.PILLAR, Variants.);
 
     private void stoneCuttingRecipes(BlockGeneratorHelper type, BlockSchema.Variant variant, BlockSchema.Form form, int count) {
         IItemProvider result = type.getEntry(variant, form).getBlock();
         if (!form.isBaseForm()) {
             singleStoneCuttingRecipe(result, count, type.getBaseBlock(variant));
         }
-        if (!nonDerivativeStones.contains(variant)) {
+        if (variant.isDerivative()) {
             singleStoneCuttingRecipe(result, count, type.getBaseBlock());
         }
         if (variant == Variants.POLISHED_BRICKS || variant == Variants.CHISELED_POLISHED) {

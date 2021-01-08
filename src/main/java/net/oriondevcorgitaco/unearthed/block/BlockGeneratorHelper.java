@@ -200,9 +200,10 @@ public class BlockGeneratorHelper {
 
         public Builder createRegolithProperties() {
             AbstractBlock.Properties regolithProp = AbstractBlock.Properties.from(new Block(defaultProperty));
+            AbstractBlock.Properties grassProp = AbstractBlock.Properties.from(Blocks.GRASS_BLOCK);
             regolithProp.hardnessAndResistance(0.6f).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).setRequiresTool();
             setProperty(Forms.REGOLITH, regolithProp);
-            setProperty(Forms.GRASSY_REGOLITH, regolithProp);
+            setProperty(Forms.GRASSY_REGOLITH, grassProp);
             return this;
         }
 

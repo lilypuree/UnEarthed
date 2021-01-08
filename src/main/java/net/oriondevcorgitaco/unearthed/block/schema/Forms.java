@@ -2,6 +2,8 @@ package net.oriondevcorgitaco.unearthed.block.schema;
 
 import net.minecraft.block.*;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
+import net.oriondevcorgitaco.unearthed.block.RegolithBlock;
+import net.oriondevcorgitaco.unearthed.block.RegolithGrassBlock;
 import net.oriondevcorgitaco.unearthed.block.UEOreBlock;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
@@ -34,8 +36,9 @@ public class Forms {
         }
     }
 
-    public static class OreForm extends BlockSchema.Form{
+    public static class OreForm extends BlockSchema.Form {
         private IOreType oreType;
+
         public OreForm(String name, IOreType oreType) {
             super(name);
             this.oreType = oreType;
@@ -54,8 +57,13 @@ public class Forms {
     public static final BlockSchema.Form BLOCK = new SimpleForm("", Block::new);
     public static final BlockSchema.Form AXISBLOCK = new SimpleForm("", RotatedPillarBlock::new);
     public static final BlockSchema.Form SIDETOP_BLOCK = new SimpleForm("", Block::new).sideTopBlock();
-    public static final BlockSchema.Form REGOLITH = new SimpleForm("regolith", Block::new);
-    public static final BlockSchema.Form GRASSY_REGOLITH = new SimpleForm("grassy_regolith", Block::new);
+    public static final BlockSchema.Form REGOLITH = new SimpleForm("regolith", RegolithBlock::new);
+    public static final BlockSchema.Form GRASSY_REGOLITH = new BlockSchema.Form("grassy_regolith") {
+        @Override
+        public Function<AbstractBlock.Properties, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
+            return properties -> new RegolithGrassBlock(schema.getEntry(variant, Forms.REGOLITH).getBlock(), properties);
+        }
+    };
     public static final BlockSchema.Form SLAB = new SimpleForm("slab", SlabBlock::new);
     public static final BlockSchema.Form SIDETOP_SLAB = new SimpleForm("slab", SlabBlock::new).sideTopBlock();
     public static final BlockSchema.Form STAIRS = new StairForm("stairs");
@@ -85,4 +93,5 @@ public class Forms {
     public static final BlockSchema.Form SIDETOP_DIAMOND_ORE = new OreForm("diamond_ore", VanillaOreTypes.DIAMOND).sideTopBlock();
     public static final BlockSchema.Form SIDETOP_EMERALD_ORE = new OreForm("emerald_ore", VanillaOreTypes.EMERALD).sideTopBlock();
 
+    public static final BlockSchema.Form KIMBERLITE_DIAMOND_ORE = new OreForm("diamond_ore", VanillaOreTypes.DIAMOND);
 }
