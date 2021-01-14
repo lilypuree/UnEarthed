@@ -43,6 +43,8 @@ public class Items extends ItemModelProvider {
         simpleItem(UEItems.GOLD_ORE);
         simpleItem(UEItems.IRON_ORE);
         blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
+        blockItemModel(UEBlocks.PUDDLE);
+        blockItemModel(UEBlocks.LICHEN);
 //
 //        caveWallModel(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_CAVE_WALL);
 //

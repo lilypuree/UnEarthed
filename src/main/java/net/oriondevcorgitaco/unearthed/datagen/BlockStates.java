@@ -35,7 +35,7 @@ public class BlockStates extends BlockStateProvider {
                 dir = dir.getOpposite();
                 xrot = 180;
             } else if (face == AttachFace.WALL) {
-                xrot = 90;
+                xrot = 270;
             }
             return ConfiguredModel.builder().modelFile(buttonModel)
                     .rotationY((int) dir.getHorizontalAngle())
@@ -102,6 +102,30 @@ public class BlockStates extends BlockStateProvider {
                 .texture("overlay", overlay);
     }
 
+    private void sixWayBlock(Block block, float apothem, ResourceLocation texture) {
+        String name = "block/" + block.getRegistryName().getPath();
+        ModelFile baseCube = models().getBuilder(name)
+                .parent(new ModelFile.UncheckedModelFile(mcLoc("block/block")))
+                .element().allFaces(($, f) -> {
+                    f.texture("#texture").tintindex(0);
+                    if ($ != Direction.UP) f.cullface($);
+                }).from(0, 0, 0).to(16, apothem, 16).end()
+                .texture("texture", texture).texture("particle", "#texture");
+//        ModelFile sideCube = models().getBuilder(name + "_side")
+//                .parent(new ModelFile.UncheckedModelFile(mcLoc("block/block")))
+//                .element().allFaces(($, f) -> {
+//                    f.texture("#texture").tintindex(0);
+//                    if ($.getAxis() == Direction.Axis.Y)
+//                }).from(0, 0, 0).to(16, 16, apothem).end()
+//                .texture("texture", texture).texture("particle", "#texture");
+        getMultipartBuilder(block)
+                .part().modelFile(baseCube).addModel().condition(SixWayBlock.DOWN, true).end()
+                .part().modelFile(baseCube).rotationX(180).addModel().condition(SixWayBlock.UP, true).end()
+                .part().modelFile(baseCube).rotationX(270).addModel().condition(SixWayBlock.NORTH, true).end()
+                .part().modelFile(baseCube).rotationX(270).rotationY(270).addModel().condition(SixWayBlock.WEST, true).end()
+                .part().modelFile(baseCube).rotationX(270).rotationY(180).addModel().condition(SixWayBlock.SOUTH, true).end()
+                .part().modelFile(baseCube).rotationX(270).rotationY(90).addModel().condition(SixWayBlock.EAST, true).end();
+    }
 
     @Override
     protected void registerStatesAndModels() {
@@ -148,6 +172,7 @@ public class BlockStates extends BlockStateProvider {
             }
         }
         sideTopBlock(UEBlocks.LIGNITE_BRIQUETTES);
+        sixWayBlock(UEBlocks.LICHEN, 0.5f, modLoc("block/lichen"));
     }
 
     private void sideTopBlock(Block block) {

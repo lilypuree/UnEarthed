@@ -78,15 +78,15 @@ public class BlockGeneratorReference {
         QUARTZITE = new BlockGeneratorHelper.Builder("quartzite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(METAMORPHIC)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.QUARTZ).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
-        GABBRO = new BlockGeneratorHelper.Builder("gabbro", BlockSchemas.BLACKSTONE_LIKE_IGNEOUS).setTier(PRIMARY).setClassification(IGNEOUS)
+        GABBRO = new BlockGeneratorHelper.Builder("gabbro", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(stoneProperty).createMiscProperties().createOreProperties().build();
-        GRANODIORITE = new BlockGeneratorHelper.Builder("granodiorite", BlockSchemas.BLACKSTONE_LIKE_IGNEOUS).setTier(PRIMARY).setClassification(IGNEOUS)
+        GRANODIORITE = new BlockGeneratorHelper.Builder("granodiorite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.LIGHT_GRAY).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
-        WHITE_GRANITE = new BlockGeneratorHelper.Builder("white_granite", BlockSchemas.BLACKSTONE_LIKE_IGNEOUS).setTier(PRIMARY).setClassification(IGNEOUS)
+        WHITE_GRANITE = new BlockGeneratorHelper.Builder("white_granite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.from(Blocks.DIORITE))
                 .createMiscProperties().createOreProperties().build();
-        RHYOLITE = new BlockGeneratorHelper.Builder("rhyolite", BlockSchemas.BLACKSTONE_LIKE_IGNEOUS).setTier(PRIMARY).setClassification(IGNEOUS)
+        RHYOLITE = new BlockGeneratorHelper.Builder("rhyolite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
 

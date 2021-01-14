@@ -52,6 +52,7 @@ public class LootTables extends LootTableProvider {
             }
         }
         addBlockLoot(UEBlocks.LIGNITE_BRIQUETTES);
+        addBlockLoot(UEBlocks.LICHEN);
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
         for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {
             tables.put(entry.getKey().getLootTable(), entry.getValue().setParameterSet(LootParameterSets.BLOCK).build());

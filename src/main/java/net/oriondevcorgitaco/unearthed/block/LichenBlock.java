@@ -1,0 +1,204 @@
+package net.oriondevcorgitaco.unearthed.block;
+
+import com.google.common.collect.ImmutableMap;
+import net.minecraft.block.*;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class LichenBlock extends Block {
+    public static BooleanProperty WET = ModBlockProperties.WET;
+    public static final BooleanProperty UP = SixWayBlock.UP;
+    public static final BooleanProperty DOWN = SixWayBlock.DOWN;
+    public static final BooleanProperty NORTH = SixWayBlock.NORTH;
+    public static final BooleanProperty EAST = SixWayBlock.EAST;
+    public static final BooleanProperty SOUTH = SixWayBlock.SOUTH;
+    public static final BooleanProperty WEST = SixWayBlock.WEST;
+    public static final Map<Direction, BooleanProperty> FACING_TO_PROPERTY_MAP = SixWayBlock.FACING_TO_PROPERTY_MAP;
+    private static final VoxelShape UP_AABB = Block.makeCuboidShape(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    private static final VoxelShape DOWN_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+    private static final VoxelShape EAST_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
+    private static final VoxelShape WEST_AABB = Block.makeCuboidShape(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    private static final VoxelShape SOUTH_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D);
+    private static final VoxelShape NORTH_AABB = Block.makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
+    private final Map<BlockState, VoxelShape> stateToShapeMap;
+
+
+    public LichenBlock(AbstractBlock.Properties properties) {
+        super(properties);
+        this.setDefaultState(this.getStateContainer().getBaseState()
+                .with(UP, false).with(DOWN, false).with(WEST, false).with(EAST, false).with(NORTH, false).with(SOUTH, false));
+        this.stateToShapeMap = ImmutableMap.copyOf(this.stateContainer.getValidStates().stream().collect(Collectors.toMap(Function.identity(), LichenBlock::getShapeForState)));
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(WET, UP, DOWN, NORTH, SOUTH, EAST, WEST);
+    }
+
+    private static VoxelShape getShapeForState(BlockState state) {
+        boolean hasValue = false;
+        VoxelShape voxelshape = VoxelShapes.empty();
+        if (state.get(UP)) {
+            voxelshape = UP_AABB;
+            hasValue = true;
+        }
+        if (state.get(DOWN)) {
+            voxelshape = VoxelShapes.or(voxelshape, DOWN_AABB);
+            hasValue = true;
+        }
+        if (state.get(NORTH)) {
+            voxelshape = VoxelShapes.or(voxelshape, SOUTH_AABB);
+            hasValue = true;
+        }
+        if (state.get(SOUTH)) {
+            voxelshape = VoxelShapes.or(voxelshape, NORTH_AABB);
+            hasValue = true;
+        }
+        if (state.get(EAST)) {
+            voxelshape = VoxelShapes.or(voxelshape, WEST_AABB);
+            hasValue = true;
+        }
+        if (state.get(WEST)) {
+            voxelshape = VoxelShapes.or(voxelshape, EAST_AABB);
+            hasValue = true;
+        }
+        if (!hasValue) {
+            return VoxelShapes.fullCube();
+        }
+
+        return voxelshape;
+    }
+
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return this.stateToShapeMap.get(state);
+    }
+
+    @Override
+    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        return this.getBlocksAttachedTo(this.updateState(state, worldIn, pos));
+    }
+
+    private boolean getBlocksAttachedTo(BlockState state) {
+        return this.countBlocksLichenIsAttachedTo(state) > 0;
+    }
+
+    private int countBlocksLichenIsAttachedTo(BlockState state) {
+        int i = 0;
+        for (BooleanProperty booleanproperty : FACING_TO_PROPERTY_MAP.values()) {
+            if (state.get(booleanproperty)) {
+                ++i;
+            }
+        }
+        return i;
+    }
+
+    private BlockState updateState(BlockState state, IBlockReader blockReader, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            if (state.get(getPropertyFor(direction))) {
+                BlockPos neighbor = pos.offset(direction);
+                state = state.with(getPropertyFor(direction), canAttachTo(blockReader, neighbor, direction));
+            }
+        }
+        return state;
+    }
+
+    public static boolean canAttachTo(IBlockReader blockReader, BlockPos posIn, Direction neighborPos) {
+        BlockState blockstate = blockReader.getBlockState(posIn);
+        return Block.doesSideFillSquare(blockstate.getCollisionShape(blockReader, posIn), neighborPos.getOpposite());
+    }
+
+
+    @Override
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        BlockState blockstate = this.updateState(stateIn, worldIn, currentPos);
+        return !this.getBlocksAttachedTo(blockstate) ? Blocks.AIR.getDefaultState() : blockstate;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        Direction face = context.getFace();
+        World world = context.getWorld();
+        BlockPos pos = context.getPos();
+        BlockState originalState = world.getBlockState(pos);
+
+        boolean isLichen = originalState.isIn(this);
+        BlockState blockstate = isLichen ? originalState : this.getDefaultState();
+
+        for (Direction direction : context.getNearestLookingDirections()) {
+            BooleanProperty booleanProperty = getPropertyFor(direction);
+            boolean exists = isLichen && originalState.get(booleanProperty);
+            if (!exists && canAttachTo(world, pos.offset(direction), direction)) {
+                return blockstate.with(booleanProperty, true);
+            }
+        }
+        return isLichen ? blockstate : null;
+    }
+
+    @Override
+    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+        BlockState blockstate = useContext.getWorld().getBlockState(useContext.getPos());
+        if (blockstate.isIn(this)) {
+            return this.countBlocksLichenIsAttachedTo(blockstate) < FACING_TO_PROPERTY_MAP.size();
+        } else {
+            return super.isReplaceable(state, useContext);
+        }
+    }
+
+    @Override
+    public boolean ticksRandomly(BlockState state) {
+        return super.ticksRandomly(state);
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        if (state.get(WET)) {
+
+        } else {
+
+        }
+    }
+
+    public static BooleanProperty getPropertyFor(Direction side) {
+        return FACING_TO_PROPERTY_MAP.get(side);
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.NORTH)), state.get(NORTH))
+                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.SOUTH)), state.get(SOUTH))
+                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.EAST)), state.get(EAST))
+                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.WEST)), state.get(WEST))
+                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.UP)), state.get(UP))
+                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.DOWN)), state.get(DOWN));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.NORTH)), state.get(NORTH))
+                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.SOUTH)), state.get(SOUTH))
+                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.EAST)), state.get(EAST))
+                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.WEST)), state.get(WEST))
+                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.UP)), state.get(UP))
+                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.DOWN)), state.get(DOWN));
+    }
+}
