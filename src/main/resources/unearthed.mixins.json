@@ -4,7 +4,8 @@
   "package": "net.oriondevcorgitaco.unearthed.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "server.MixinMinecraftServer"
+    "server.MixinMinecraftServer",
+    "server.MixinEntity"
   ],
   "client": [
     "client.MixinClientWorld"

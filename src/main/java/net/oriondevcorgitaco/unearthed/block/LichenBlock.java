@@ -1,10 +1,13 @@
 package net.oriondevcorgitaco.unearthed.block;
 
 import com.google.common.collect.ImmutableMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -17,8 +20,10 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
@@ -41,6 +46,7 @@ public class LichenBlock extends Block {
     private static final VoxelShape NORTH_AABB = Block.makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
     private final Map<BlockState, VoxelShape> stateToShapeMap;
 
+    private static Map<Block, Block> lichenErosionMap = new Object2ObjectOpenHashMap<>();
 
     public LichenBlock(AbstractBlock.Properties properties) {
         super(properties);
@@ -98,10 +104,10 @@ public class LichenBlock extends Block {
     }
 
     private boolean getBlocksAttachedTo(BlockState state) {
-        return this.countBlocksLichenIsAttachedTo(state) > 0;
+        return countBlocksLichenIsAttachedTo(state) > 0;
     }
 
-    private int countBlocksLichenIsAttachedTo(BlockState state) {
+    public static int countBlocksLichenIsAttachedTo(BlockState state) {
         int i = 0;
         for (BooleanProperty booleanproperty : FACING_TO_PROPERTY_MAP.values()) {
             if (state.get(booleanproperty)) {
@@ -126,6 +132,11 @@ public class LichenBlock extends Block {
         return Block.doesSideFillSquare(blockstate.getCollisionShape(blockReader, posIn), neighborPos.getOpposite());
     }
 
+    public static boolean canGrowOn(IBlockReader blockReader, BlockPos posIn) {
+        BlockState blockstate = blockReader.getBlockState(posIn);
+        return lichenErosionMap.containsKey(blockstate.getBlock()) || lichenErosionMap.containsValue(blockstate.getBlock());
+//        return Block.doesSideFillSquare(blockstate.getCollisionShape(blockReader, posIn), neighborPos.getOpposite());
+    }
 
     @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -166,15 +177,115 @@ public class LichenBlock extends Block {
 
     @Override
     public boolean ticksRandomly(BlockState state) {
-        return super.ticksRandomly(state);
+        return true;
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (state.get(WET)) {
+        boolean isWet = state.get(WET);
+        if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
+            worldIn.setBlockState(pos, state.with(WET, false), 2);
+            isWet = false;
+        } else if (!isWet) {
+            worldIn.setBlockState(pos, state.with(WET, true), 2);
+            isWet = true;
+        }
+        if (isWet) {
+            if (random.nextInt(4) == 0) {
+                growToConnectedBlockFace(state, worldIn, pos, random);
+            }
+            if (random.nextInt(5) == 0) {
+                for (Direction dir : Direction.values()) {
+                    if (state.get(getPropertyFor(dir))) {
+                        tryErodeBlock(worldIn, pos.offset(dir));
+                    }
+                }
+            }
+        }
+    }
 
-        } else {
+    private static boolean hasWater(IWorldReader worldIn, BlockPos pos) {
+        for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-2, -2, -2), pos.add(2, 2, 2))) {
+            if (worldIn.getFluidState(blockpos).isTagged(FluidTags.WATER) || worldIn.getBlockState(blockpos).isIn(UEBlocks.PUDDLE)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private static void growToConnectedBlockFace(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        int count = 0;
+        Direction face;
+        do {
+            face = Direction.getRandomDirection(random);
+            if (count++ > 20) {
+                return;
+            }
+        } while (!state.get(getPropertyFor(face)));
+
+        Direction growthDir;
+        do {
+            growthDir = Direction.getRandomDirection(random);
+        } while (growthDir == face || growthDir == face.getOpposite());
+
+        BlockPos newPos = pos.offset(growthDir);
+        if (canGrowOn(world, newPos)) {
+            world.setBlockState(pos, state.with(getPropertyFor(growthDir), true), 2);
+        } else if (!tryGrowIntoBlock(world, newPos, face, false)) {
+            if (world.getBlockState(newPos).isAir()) {
+                tryGrowIntoBlock(world, newPos.offset(face), growthDir.getOpposite(), false);
+            }
+        }
+
+    }
+
+    public static boolean tryGrowIntoBlock(World world, BlockPos pos, Direction side, boolean fromPuddle) {
+        BlockState block = world.getBlockState(pos);
+        BlockState newBlock = null;
+        if (block.isAir()) {
+            newBlock = UEBlocks.LICHEN.getDefaultState();
+        } else if (block.isIn(UEBlocks.LICHEN)) {
+            newBlock = block;
+        }
+        if (newBlock != null && (fromPuddle ? canAttachTo(world, pos.offset(side), side) : canGrowOn(world, pos.offset(side)))) {
+            world.setBlockState(pos, newBlock.with(getPropertyFor(side), true));
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hasEnoughLichen(IBlockReader blockReader, BlockPos pos, int max, int range, int vertRange) {
+        Iterable<BlockPos> iterable = BlockPos.getAllInBoxMutable(pos.getX() - range, pos.getY() - vertRange, pos.getZ() - range, pos.getX() + range, pos.getY() + vertRange, pos.getZ() + range);
+        int j = max;
+        for (BlockPos blockpos : iterable) {
+            BlockState state = blockReader.getBlockState(blockpos);
+            if (state.isIn(UEBlocks.LICHEN)) {
+                j -= LichenBlock.countBlocksLichenIsAttachedTo(state);
+                if (j <= 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void addErosionMap(Block block, Block eroded) {
+        lichenErosionMap.put(block, eroded);
+    }
+
+    public void tryErodeBlock(World world, BlockPos pos) {
+        BlockState block = world.getBlockState(pos);
+        if (lichenErosionMap.containsKey(block.getBlock())) {
+            int coveredSides = 0;
+            for (Direction dir : Direction.values()) {
+                BlockState newBlock = world.getBlockState(pos.offset(dir));
+                if (newBlock.isIn(this) && newBlock.get(getPropertyFor(dir.getOpposite()))) {
+                    coveredSides++;
+                }
+            }
+            if (coveredSides >= 5) {
+                world.setBlockState(pos, lichenErosionMap.get(block.getBlock()).getDefaultState());
+            }
         }
     }
 
@@ -201,4 +312,6 @@ public class LichenBlock extends Block {
                 .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.UP)), state.get(UP))
                 .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.DOWN)), state.get(DOWN));
     }
+
+
 }

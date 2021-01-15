@@ -82,10 +82,15 @@ public class LichenColors {
                 colNoise * colNoise * hueshift_range + 5, 0, 0);
     }
 
-    public static int shiftSaturation(int color, BlockPos pos) {
+    public static int shiftSaturation(int color, BlockPos pos, boolean wet) {
         float satNoise = NOISE_LICHEN_SAT.GetNoise(pos.getX(), pos.getZ());
-        return ColorHelper.shiftColorHSL(color, 0,
-                (float) hyperbolicRemap(satNoise * satNoise, -1.1f, 1.1f, -0.25f, 0.2f, -1.2f), 0);
+        if (wet) {
+            return ColorHelper.shiftColorHSL(color, 0,
+                    (float) hyperbolicRemap(satNoise * satNoise, -1.1f, 1.1f, -0.25f, 0.2f, -1.2f), 0);
+        } else {
+            return ColorHelper.shiftColorHSL(color, -10,
+                    (float) hyperbolicRemap(satNoise * satNoise, -1.0f, 1.0f, -0.4f, -0.2f, -1.2f), 0.04f);
+        }
     }
 
     public static float hyperbolicRemap(float value, float minX, float maxX, float minY, float maxY, float curvature) {

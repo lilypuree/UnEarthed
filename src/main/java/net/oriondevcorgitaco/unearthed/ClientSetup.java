@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
+import net.oriondevcorgitaco.unearthed.block.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
@@ -59,7 +60,7 @@ public class ClientSetup {
             }
         }
         event.getBlockColors().register((blockstate, reader, pos, i) -> {
-            return reader != null && pos != null ? LichenColors.shiftSaturation(reader.getBlockColor(pos, LichenColors.LICHEN_COLOR), pos) : LichenColors.getLichen();
+            return reader != null && pos != null ? LichenColors.shiftSaturation(reader.getBlockColor(pos, LichenColors.LICHEN_COLOR), pos, blockstate.get(ModBlockProperties.WET)) : LichenColors.getLichen();
         }, UEBlocks.LICHEN);
 //        event.getBlockColors().register((blockstate, reader, pos, i) -> {
 //            return reader != null && pos != null ? LichenColors.get2(pos.getX(), pos.getZ()) : LichenColors.getLichen();

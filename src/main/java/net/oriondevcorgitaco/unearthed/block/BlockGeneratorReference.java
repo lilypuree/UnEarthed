@@ -14,6 +14,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchemas;
+import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.StoneClassification;
 import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
 
@@ -65,6 +66,13 @@ public class BlockGeneratorReference {
     public static final BlockGeneratorHelper LIGNITE;
 
     public static void init() {
+        for (BlockGeneratorHelper schema : BlockGeneratorReference.ROCK_TYPES) {
+            for (BlockGeneratorHelper.Entry entry : schema.getEntries()) {
+                if (entry.getForm() == Forms.REGOLITH) {
+                    LichenBlock.addErosionMap(schema.getBaseBlock(), entry.getBlock());
+                }
+            }
+        }
     }
 
     static {
@@ -153,4 +161,5 @@ public class BlockGeneratorReference {
     public static final ITag.INamedTag<Item> IGNEOUS_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
     public static final ITag.INamedTag<Item> METAMORPHIC_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");
 
+//    public static final ITag.INamedTag<Block> LICHEN_SUBSTRATE = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lichen_substrate"))
 }
