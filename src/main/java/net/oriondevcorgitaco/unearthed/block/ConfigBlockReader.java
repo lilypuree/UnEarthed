@@ -22,8 +22,6 @@ public class ConfigBlockReader {
     }
 
     static int blockIdx = 0;
-
-
     public Block getBlock() {
         Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(this.id));
         if (block == Blocks.AIR) {

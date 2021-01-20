@@ -4,14 +4,12 @@ package net.oriondevcorgitaco.unearthed.block;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.schema.*;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BlockGeneratorHelper {
@@ -23,6 +21,7 @@ public class BlockGeneratorHelper {
     private List<Entry> blocks;
     private Entry baseEntry;
     private Map<BlockSchema.Variant, Entry> variantBaseEntries;
+    //    private Map<IOreType, BlockState> oreMap;
     private StoneTiers tier;
     private StoneClassification classification;
 
@@ -37,6 +36,7 @@ public class BlockGeneratorHelper {
         baseEntry = blocks.stream().filter(Entry::isBaseEntry).findAny().get();
         variantBaseEntries = blocks.stream().filter(entry -> entry.getForm().isBaseForm()).collect(Collectors.toMap(Entry::getVariant, entry -> entry));
         BlockGeneratorReference.ROCK_TYPES.add(this);
+        StoneWrapper.allStoneWrappers.add(new StoneWrapper(Unearthed.MOD_ID + ":" + name));
     }
 
     public List<Entry> getEntries() {
@@ -62,6 +62,23 @@ public class BlockGeneratorHelper {
     public Entry getEntry(BlockSchema.Variant variant, BlockSchema.Form form) {
         return blocks.stream().filter(entry -> entry.form == form && entry.variant == variant).findAny().get();
     }
+
+//    public BlockState getOreBlock(IOreType oreType) {
+//        if (!oreMap.containsKey(oreType)) {
+//            Optional<Entry> optional = blocks.stream().filter(entry -> {
+//                return entry.getForm() instanceof Forms.OreForm && ((Forms.OreForm) entry.getForm()).getOreType() == oreType;
+//            }).findAny();
+//            if (optional.isPresent()) {
+//                BlockState oreBlock = optional.get().getBlock().getDefaultState();
+//                oreMap.put(oreType, oreBlock);
+//                return oreBlock;
+//            } else {
+//                oreMap.put(oreType, null);
+//                return null;
+//            }
+//        }
+//        return oreMap.get(oreType);
+//    }
 
     public PressurePlateBlock.Sensitivity getPressurePlateSensitivity() {
         return pressurePlateSensitivity;

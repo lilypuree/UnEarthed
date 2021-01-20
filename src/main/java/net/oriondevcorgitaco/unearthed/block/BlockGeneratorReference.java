@@ -157,6 +157,8 @@ public class BlockGeneratorReference {
     public static final ITag.INamedTag<Block> IGNEOUS_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
     public static final ITag.INamedTag<Block> METAMORPHIC_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");
 
+    public static final ITag.INamedTag<Block> REPLACABLE = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":replaceable");
+
     public static final ITag.INamedTag<Item> SEDIMENTARY_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":sedimentary");
     public static final ITag.INamedTag<Item> IGNEOUS_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
     public static final ITag.INamedTag<Item> METAMORPHIC_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");

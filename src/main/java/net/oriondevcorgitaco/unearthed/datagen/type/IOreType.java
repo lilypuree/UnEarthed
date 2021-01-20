@@ -8,6 +8,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public interface IOreType {
+    Block getBlock();
+
     String getName();
 
     Function<Block, LootTable.Builder> createLootFactory();

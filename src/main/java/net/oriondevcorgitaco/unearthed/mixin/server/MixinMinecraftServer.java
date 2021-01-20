@@ -45,12 +45,16 @@ public class MixinMinecraftServer {
     private static final ConfiguredFeature<?, ?> NATURAL_LAYERS_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_layers_generator", UEFeatures.LAYERED_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
     private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", UEFeatures.MESA.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
+//    private static final ConfiguredFeature<?, ?> NEW_GENERATOR = RegistrationHelper.newConfiguredFeature("new_generator", UEFeatures.NEW_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
-    @Shadow @Final protected DynamicRegistries.Impl field_240767_f_;
+
+    @Shadow
+    @Final
+    protected DynamicRegistries.Impl field_240767_f_;
 
     @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistries$Impl;Lnet/minecraft/world/storage/SaveFormat$LevelSave;Lnet/minecraft/world/storage/IServerConfiguration;Lnet/minecraft/resources/ResourcePackList;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resources/DataPackRegistries;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/server/management/PlayerProfileCache;Lnet/minecraft/world/chunk/listener/IChunkStatusListenerFactory;)V", cancellable = true)
     private void implementUnearthedStones(Thread thread, DynamicRegistries.Impl impl, SaveFormat.LevelSave session, IServerConfiguration saveProperties, ResourcePackList resourcePackManager, Proxy proxy, DataFixer dataFixer, DataPackRegistries serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, PlayerProfileCache userCache, IChunkStatusListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-        if(this.field_240767_f_.func_230521_a_(Registry.BIOME_KEY).isPresent()) {
+        if (this.field_240767_f_.func_230521_a_(Registry.BIOME_KEY).isPresent()) {
             for (Biome biome : field_240767_f_.func_230521_a_(Registry.BIOME_KEY).get()) {
                 if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
                     if (useDesertCaves(biome))
@@ -86,8 +90,7 @@ public class MixinMinecraftServer {
         boolean trueMesas = UnearthedConfig.trueMesas.get();
         if (trueMesas) {
             return biome.getCategory() == Biome.Category.MESA;
-        }
-        else
+        } else
             return false;
     }
 
@@ -96,8 +99,7 @@ public class MixinMinecraftServer {
         boolean icyCaves = UnearthedConfig.icyCaves.get();
         if (icyCaves) {
             return biome.getCategory() == Biome.Category.ICY;
-        }
-        else
+        } else
             return false;
     }
 
@@ -105,8 +107,7 @@ public class MixinMinecraftServer {
         boolean desertCaves = UnearthedConfig.desertCaves.get();
         if (desertCaves) {
             return biome.getCategory() == Biome.Category.DESERT;
-        }
-        else
+        } else
             return false;
     }
 }

@@ -8,6 +8,7 @@ import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalDe
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.NaturalIcyGenerator;
 import net.oriondevcorgitaco.unearthed.world.feature.naturalgenerators.TrueMesaGenerator;
+import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.NewGenerator;
 
 public class UEFeatures {
     public static final Feature<NoFeatureConfig> UNDERGROUND_SANDSTONE = RegistrationHelper.registerFeature("natural_desert_generator", new NaturalDesertGenerator(NoFeatureConfig.field_236558_a_));
@@ -15,6 +16,8 @@ public class UEFeatures {
     public static final Feature<NoFeatureConfig> LAYERED_GENERATOR = RegistrationHelper.registerFeature("layered_generator", new LayeredGenerator(NoFeatureConfig.field_236558_a_));
     public static final Feature<NoFeatureConfig> ICY_GENERATOR = RegistrationHelper.registerFeature("natural_icy_generator", new NaturalIcyGenerator(NoFeatureConfig.field_236558_a_));
     public static final Feature<NoFeatureConfig> MESA = RegistrationHelper.registerFeature("true_mesa_generator", new TrueMesaGenerator(NoFeatureConfig.field_236558_a_));
+
+    public static final Feature<NoFeatureConfig> NEW_STONE = RegistrationHelper.registerFeature("new_generator", new NewGenerator(NoFeatureConfig.field_236558_a_));
 
 
 }

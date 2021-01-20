@@ -1,6 +1,7 @@
 package net.oriondevcorgitaco.unearthed.datagen.type;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.enchantment.Enchantments;
@@ -26,58 +27,60 @@ import java.util.function.Function;
 import static net.oriondevcorgitaco.unearthed.datagen.Recipes.hasTaggedItem;
 
 public enum VanillaOreTypes implements IOreType {
-    COAL(Items.COAL, 0.1f, 200, 0) {
+    COAL(Blocks.COAL_ORE, Items.COAL, 0.1f, 200, 0) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return block -> BlockLootTableAccessor.droppingItemWithFortune(block, Items.COAL);
         }
-    }, LAPIS(Items.LAPIS_LAZULI, 0.2f, 200, 2) {
+    }, LAPIS(Blocks.LAPIS_ORE, Items.LAPIS_LAZULI, 0.2f, 200, 2) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return block -> BlockLootTableAccessor.droppingWithSilkTouch(block, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(block, ItemLootEntry.builder(Items.LAPIS_LAZULI).acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 9.0F))).acceptFunction(ApplyBonus.oreDrops(Enchantments.FORTUNE))));
         }
-    }, REDSTONE(Items.REDSTONE, 0.7f, 200, 2) {
+    }, REDSTONE(Blocks.REDSTONE_ORE, Items.REDSTONE, 0.7f, 200, 2) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return redstoneOre -> BlockLootTableAccessor.droppingWithSilkTouch(redstoneOre, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(redstoneOre, ItemLootEntry.builder(Items.REDSTONE).acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 5.0F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE))));
         }
-    }, DIAMOND(Items.DIAMOND, 1.0f, 200, 2) {
+    }, DIAMOND(Blocks.DIAMOND_ORE, Items.DIAMOND, 1.0f, 200, 2) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return diamondOre -> BlockLootTableAccessor.droppingItemWithFortune(diamondOre, Items.DIAMOND);
         }
-    }, EMERALD(Items.EMERALD, 1.0f, 200, 2) {
+    }, EMERALD(Blocks.EMERALD_ORE, Items.EMERALD, 1.0f, 200, 2) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return emeraldOre -> BlockLootTableAccessor.droppingItemWithFortune(emeraldOre, Items.EMERALD);
         }
-    }, IRON(Items.IRON_INGOT, 0.7f, 200, 1) {
+    }, IRON(Blocks.IRON_ORE, Items.IRON_INGOT, 0.7f, 200, 1) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return ironOre -> BlockLootTableAccessor.droppingWithSilkTouch(ironOre, UEItems.IRON_ORE);
         }
     },
-    GOLD(Items.GOLD_INGOT, 1.0f, 200, 2) {
+    GOLD(Blocks.GOLD_ORE, Items.GOLD_INGOT, 1.0f, 200, 2) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return goldOre -> BlockLootTableAccessor.droppingWithSilkTouch(goldOre, UEItems.GOLD_ORE);
         }
     };
 
-
+    private final Block block;
     private final Item smeltResult;
     private final float experience;
     private final int smeltTime;
     private final int blastTime;
     private final int harvestLevel;
 
-    VanillaOreTypes(Item smeltResult, float experience, int smeltTime, int harvestLevel) {
+    VanillaOreTypes(Block block, Item smeltResult, float experience, int smeltTime, int harvestLevel) {
+        this.block = block;
         this.smeltResult = smeltResult;
         this.experience = experience;
         this.smeltTime = smeltTime;
         this.blastTime = smeltTime / 2;
         this.harvestLevel = harvestLevel;
     }
+
 
     @Override
     public void addCookingRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -103,5 +106,8 @@ public enum VanillaOreTypes implements IOreType {
         return harvestLevel;
     }
 
-
+    @Override
+    public Block getBlock() {
+        return block;
+    }
 }
