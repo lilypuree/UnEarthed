@@ -26,6 +26,10 @@ public class TargetedRandom extends Random {
         return super.next(bits);
     }
 
+    public void skip(){
+        next(1);
+    }
+
     public void multiply() {
         usageCount = 0;
         loopingLimit *= 2;

@@ -1,5 +1,6 @@
 package net.oriondevcorgitaco.unearthed.block;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
@@ -14,15 +15,22 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class RegolithGrassBlock extends GrassBlock {
-
+    public static Map<Block, Block> regolithToGrassMap = new Object2ObjectOpenHashMap<>();
     private Block regolithBlock;
+
+    static {
+        regolithToGrassMap.put(Blocks.DIRT, Blocks.GRASS_BLOCK);
+    }
 
     public RegolithGrassBlock(Block regolithBlock, Properties properties) {
         super(properties);
         this.regolithBlock = regolithBlock;
+        regolithToGrassMap.put(regolithBlock, this);
     }
 
     @Override
@@ -33,20 +41,12 @@ public class RegolithGrassBlock extends GrassBlock {
             worldIn.setBlockState(pos, regolithBlock.getDefaultState());
         } else {
             if (worldIn.getLight(pos.up()) >= 9) {
-                BlockState blockstate = this.getDefaultState();
                 for (int i = 0; i < 4; ++i) {
                     BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 2, random.nextInt(3) - 1);
                     BlockState blockState = worldIn.getBlockState(blockpos);
-                    if (blockState.isIn(Blocks.DIRT) && canPropagate(blockstate, worldIn, blockpos)) {
-                        worldIn.setBlockState(blockpos, blockstate);
-                    }
-                    if (blockState.isIn(BlockGeneratorReference.REGOLITH_TAG) && canPropagate(blockstate, worldIn, blockpos)) {
-                        ResourceLocation regolithName = blockState.getBlock().getRegistryName();
-                        Block grassyRegolithBlock = Registry.BLOCK.getOrDefault(new ResourceLocation(regolithName.getNamespace(), regolithName.getPath().replaceAll("regolith", "grassy_regolith")));
-                        if (grassyRegolithBlock != Blocks.AIR) {
-                            worldIn.setBlockState(blockpos, grassyRegolithBlock.getDefaultState());
-                            worldIn.setBlockState(blockpos.up(), Blocks.AIR.getDefaultState());
-                        }
+                    if (regolithToGrassMap.containsKey(blockState.getBlock()) && canPropagate(blockState, worldIn, blockpos)) {
+                        worldIn.setBlockState(blockpos, regolithToGrassMap.get(blockState.getBlock()).getDefaultState());
+                        worldIn.setBlockState(blockpos.up(), Blocks.AIR.getDefaultState());
                     }
                 }
             }

@@ -13,6 +13,7 @@ public interface IAutomata {
     int randomInt(int bound);
 
     default State selectStates(State state1, State state2) {
+        if (state1 == state2) return state1;
         return randomInt(2) == 0 ? state1 : state2;
     }
 
@@ -45,7 +46,7 @@ public interface IAutomata {
 //            randomInt(3);
 //            return stateGetter.get();
 //        }
-        randomInt(3);
+        randomInt(2);
         Optional<State> state = Stream.of(up, down, x1, x2, z1, z2)
 //                .sorted()
                 .collect(Collectors.groupingBy(Functions.identity(), Collectors.counting()))

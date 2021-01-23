@@ -9,7 +9,7 @@ public class BlockSchemas {
     public static BlockSchema STONE_LIKE = new BlockSchema(Lists.newArrayList(Variants.STONE_LIKE, Variants.COBBLED));
     //    public static BlockSchema BLACKSTONE_LIKE = new BlockSchema(Lists.newArrayList(Variants.STONE_LIKE, Variants.POLISHED, Variants.POLISHED_BRICKS, Variants.CHISELED_POLISHED));
     public static BlockSchema BLACKSTONE_LIKE = new BlockSchema(Lists.newArrayList(Variants.STONE_LIKE));
-//    public static BlockSchema BLACKSTONE_LIKE_IGNEOUS = new BlockSchema(Variants.IGNEOUS);
+    //    public static BlockSchema BLACKSTONE_LIKE_IGNEOUS = new BlockSchema(Variants.IGNEOUS);
     //    public static BlockSchema
     public static BlockSchema BASALT_LIKE = new BlockSchema(Variants.PILLAR, Variants.POLISHED_PILLAR);
     //    public static BlockSchema SANDSTONE_LIKE = new BlockSchema(Lists.newArrayList(Variants.SEDIMENTARY, Variants.SMOOTH, Variants.CUT, Variants.CHISELED));
@@ -28,5 +28,7 @@ public class BlockSchemas {
     public static BlockSchema BEIGE_LIMESTONE = new BlockSchema(Variants.SEDIMENTARY, Variants.COBBLED);
 
     public static BlockSchema KIMBERLITE = new BlockSchema(new BlockSchema.Variant("", Forms.BLOCK, Forms.SLAB, Forms.STAIRS, Forms.WALLS, Forms.KIMBERLITE_DIAMOND_ORE, Forms.REGOLITH, Forms.GRASSY_REGOLITH));
+
+    public static BlockSchema INTRUSIVE = new BlockSchema(Variants.VANILLA, Variants.OVERGROWN);
 
 }

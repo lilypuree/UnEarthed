@@ -2,17 +2,10 @@ package net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data;
 
 import net.minecraft.block.BlockState;
 
-public interface State extends Comparable<State>{
+public interface State{
 
     Type getType();
 
+    BlockState getDefaultState();
 
-
-    //    public static State getStateFromBlockState(BlockState block){
-//
-//    }
-
-//    public static boolean isMarker(BlockState blockState){
-//
-//    }
 }

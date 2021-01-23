@@ -10,8 +10,8 @@ public class AutomataFiller extends AutomataBase {
 
     private State[][] subChunkStates = new State[5][yHeight];
 
-    public AutomataFiller(ISeedReader world, BlockPos basePos, final int maxHeight) {
-        super(world, basePos, 16, 2, 2, (int) Math.ceil((maxHeight - 1.0f) / 16) + 1);
+    public AutomataFiller(long seed, BlockPos basePos, final int maxHeight) {
+        super(seed, basePos, 16, 2, 2, (int) Math.ceil((maxHeight - 1.0f) / 16) + 1);
 
     }
 
@@ -87,8 +87,8 @@ public class AutomataFiller extends AutomataBase {
 //    protected State getState(int x, int z, int y) {
 //        return stateGetter.apply(new Vector3i(x * 4, z * 4, y * 4));
 //    }
-
-    //    /**
+//
+//    /**
 //     * x and z are chunk position offsets
 //     */
 //    private State getSubChunkState(int xOff, int zOff, int yOff) {

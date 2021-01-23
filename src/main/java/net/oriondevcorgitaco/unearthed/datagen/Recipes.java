@@ -1,6 +1,5 @@
 package net.oriondevcorgitaco.unearthed.datagen;
 
-import com.google.common.collect.Lists;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.block.Block;
@@ -9,6 +8,7 @@ import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
@@ -17,10 +17,10 @@ import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UETags;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
@@ -65,6 +65,8 @@ public class Recipes extends RecipeProvider {
                     pressurePlateRecipeOf(type, variant);
                 } else if (form == Forms.BUTTON) {
                     buttonRecipeOf(type, variant);
+                } else if (form == Forms.REGOLITH) {
+                    regolithConversionRecipe(block, typeBaseBlock);
                 } else if (entry.isBaseEntry()) {
                     if (type.getSchema().getVariants().contains(Variants.COBBLED)) {
                         stoneSmeltingRecipeOf(block, type.getBaseBlock(Variants.COBBLED));
@@ -93,8 +95,15 @@ public class Recipes extends RecipeProvider {
                 .patternLine("###").patternLine("#*#").patternLine("###").addCriterion("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).build(consumer);
     }
 
+    private void regolithConversionRecipe(IItemProvider result, IItemProvider baseBlock) {
+        ShapelessRecipeBuilder.shapelessRecipe(result)
+                .addIngredient(Ingredient.fromTag(UETags.Items.REGOLITH_TAG), 8)
+                .addIngredient(baseBlock)
+                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+    }
+
     private void stoneRecipe() {
-        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(BlockGeneratorReference.IGNEOUS_ITEM).addIngredient(BlockGeneratorReference.METAMORPHIC_ITEM).addIngredient(BlockGeneratorReference.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(UETags.Items.IGNEOUS_ITEM).addIngredient(UETags.Items.METAMORPHIC_ITEM).addIngredient(UETags.Items.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer);
     }
 
     private void brickRecipeOf(IItemProvider result, IItemProvider ingredient) {

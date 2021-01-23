@@ -27,6 +27,7 @@ import net.oriondevcorgitaco.unearthed.block.PuddleBlock;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.core.UEItems;
+import net.oriondevcorgitaco.unearthed.core.UETags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,7 +45,8 @@ public class Unearthed {
 
     public void ueCommonSetup(FMLCommonSetupEvent event) {
         BlockGeneratorReference.init();
-        configReader();
+        UETags.init();
+//        configReader();
     }
 //    public static void createTagLists() {
 //        BlockGeneratorHelperOld.stairsList.forEach(LOGGER::info);
@@ -53,41 +55,41 @@ public class Unearthed {
 //        BlockGeneratorHelperOld.wallIDList.forEach(LOGGER::info);
 //    }
 
-    public static void configReader() {
-        String blockRegistries = UnearthedConfig.blocksForGeneration.get();
-        String removeSpaces = blockRegistries.trim().toLowerCase().replace(" ", "");
-        String[] blockRegistryList = removeSpaces.split(",");
-
-        for (String s : blockRegistryList) {
-            ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader(s));
-        }
-
-        if (ConfigBlockReader.blocksFromConfig.size() == 0)
-            ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
-
-        String iceBlockRegistries = UnearthedConfig.iceBlocksForGeneration.get();
-        String removeIcySpaces = iceBlockRegistries.trim().toLowerCase().replace(" ", "");
-        String[] iceBlockRegistryList = removeIcySpaces.split(",");
-
-        for (String s : iceBlockRegistryList) {
-            ConfigBlockReader.iceBlocksFromConfig.add(new ConfigBlockReader(s));
-        }
-
-        if (ConfigBlockReader.iceBlocksFromConfig.size() == 0)
-            ConfigBlockReader.iceBlocksFromConfig.add(new ConfigBlockReader("minecraft:packed_ice"));
-
-        String desertBlockRegistries = UnearthedConfig.desertBlocksForGeneration.get();
-        String removeDesertSpaces = desertBlockRegistries.trim().toLowerCase().replace(" ", "");
-        String[] desertBlockRegistryList = removeDesertSpaces.split(",");
-
-        for (String s : desertBlockRegistryList) {
-            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader(s));
-        }
-
-        if (ConfigBlockReader.desertBlocksFromConfig.size() == 0)
-            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader("minecraft:smooth_sandstone"));
-
-    }
+//    public static void configReader() {
+//        String blockRegistries = UnearthedConfig.blocksForGeneration.get();
+//        String removeSpaces = blockRegistries.trim().toLowerCase().replace(" ", "");
+//        String[] blockRegistryList = removeSpaces.split(",");
+//
+//        for (String s : blockRegistryList) {
+//            ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader(s));
+//        }
+//
+//        if (ConfigBlockReader.blocksFromConfig.size() == 0)
+//            ConfigBlockReader.blocksFromConfig.add(new ConfigBlockReader("minecraft:stone"));
+//
+//        String iceBlockRegistries = UnearthedConfig.iceBlocksForGeneration.get();
+//        String removeIcySpaces = iceBlockRegistries.trim().toLowerCase().replace(" ", "");
+//        String[] iceBlockRegistryList = removeIcySpaces.split(",");
+//
+//        for (String s : iceBlockRegistryList) {
+//            ConfigBlockReader.iceBlocksFromConfig.add(new ConfigBlockReader(s));
+//        }
+//
+//        if (ConfigBlockReader.iceBlocksFromConfig.size() == 0)
+//            ConfigBlockReader.iceBlocksFromConfig.add(new ConfigBlockReader("minecraft:packed_ice"));
+//
+//        String desertBlockRegistries = UnearthedConfig.desertBlocksForGeneration.get();
+//        String removeDesertSpaces = desertBlockRegistries.trim().toLowerCase().replace(" ", "");
+//        String[] desertBlockRegistryList = removeDesertSpaces.split(",");
+//
+//        for (String s : desertBlockRegistryList) {
+//            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader(s));
+//        }
+//
+//        if (ConfigBlockReader.desertBlocksFromConfig.size() == 0)
+//            ConfigBlockReader.desertBlocksFromConfig.add(new ConfigBlockReader("minecraft:smooth_sandstone"));
+//
+//    }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class BYGRegistries {

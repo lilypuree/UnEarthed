@@ -39,11 +39,11 @@ import java.util.stream.Collectors;
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
 
-    private static final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", UEFeatures.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-    private static final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", UEFeatures.ICY_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-    private static final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", UEFeatures.UNDERGROUND_SANDSTONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-    private static final ConfiguredFeature<?, ?> NATURAL_LAYERS_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_layers_generator", UEFeatures.LAYERED_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-    private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", UEFeatures.MESA.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+//    private static final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", UEFeatures.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+//    private static final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", UEFeatures.ICY_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+//    private static final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", UEFeatures.UNDERGROUND_SANDSTONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+//    private static final ConfiguredFeature<?, ?> NATURAL_LAYERS_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_layers_generator", UEFeatures.LAYERED_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+//    private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", UEFeatures.MESA.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
 //    private static final ConfiguredFeature<?, ?> NEW_GENERATOR = RegistrationHelper.newConfiguredFeature("new_generator", UEFeatures.NEW_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
 
@@ -57,14 +57,18 @@ public class MixinMinecraftServer {
         if (this.field_240767_f_.func_230521_a_(Registry.BIOME_KEY).isPresent()) {
             for (Biome biome : field_240767_f_.func_230521_a_(Registry.BIOME_KEY).get()) {
                 if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
-                    if (useDesertCaves(biome))
-                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
-                    else if (useIceCaves(biome))
-                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_ICY_GENERATOR);
-                    else if (useTrueMesas(biome))
-                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
-                    else
-                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
+//                    if (useDesertCaves(biome))
+//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
+//                    else if (useIceCaves(biome))
+//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_ICY_GENERATOR);
+//                    else if (useTrueMesas(biome))
+//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
+//                    else
+//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
+                    addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, UEFeatures.NEW_GENERATOR);
+                    if (biome.getCategory() == Biome.Category.EXTREME_HILLS) {
+                        addFeatureToBiome(biome, GenerationStage.Decoration.VEGETAL_DECORATION, UEFeatures.LICHEN_FEATURE);
+                    }
                 }
             }
         }
@@ -86,28 +90,28 @@ public class MixinMinecraftServer {
     }
 
 
-    private static boolean useTrueMesas(Biome biome) {
-        boolean trueMesas = UnearthedConfig.trueMesas.get();
-        if (trueMesas) {
-            return biome.getCategory() == Biome.Category.MESA;
-        } else
-            return false;
-    }
-
-
-    private static boolean useIceCaves(Biome biome) {
-        boolean icyCaves = UnearthedConfig.icyCaves.get();
-        if (icyCaves) {
-            return biome.getCategory() == Biome.Category.ICY;
-        } else
-            return false;
-    }
-
-    private static boolean useDesertCaves(Biome biome) {
-        boolean desertCaves = UnearthedConfig.desertCaves.get();
-        if (desertCaves) {
-            return biome.getCategory() == Biome.Category.DESERT;
-        } else
-            return false;
-    }
+//    private static boolean useTrueMesas(Biome biome) {
+//        boolean trueMesas = UnearthedConfig.trueMesas.get();
+//        if (trueMesas) {
+//            return biome.getCategory() == Biome.Category.MESA;
+//        } else
+//            return false;
+//    }
+//
+//
+//    private static boolean useIceCaves(Biome biome) {
+//        boolean icyCaves = UnearthedConfig.icyCaves.get();
+//        if (icyCaves) {
+//            return biome.getCategory() == Biome.Category.ICY;
+//        } else
+//            return false;
+//    }
+//
+//    private static boolean useDesertCaves(Biome biome) {
+//        boolean desertCaves = UnearthedConfig.desertCaves.get();
+//        if (desertCaves) {
+//            return biome.getCategory() == Biome.Category.DESERT;
+//        } else
+//            return false;
+//    }
 }

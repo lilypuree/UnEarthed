@@ -16,6 +16,7 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
+import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 
@@ -70,9 +71,10 @@ public class BlockStates extends BlockStateProvider {
         String stoneTexture = "block/" + getPath(baseBlock);
         String modelName = getPath(baseBlock) + "_" + oreType.getName() + "_ore";
         ResourceLocation mask = modLoc("block/ore/" + oreType.getName() + "_ore_mask");
-        ResourceLocation baseStoneTexture = modLoc(stoneTexture);
+        String namespace = baseBlock.getRegistryName().getNamespace();
+        ResourceLocation baseStoneTexture = new ResourceLocation(namespace, stoneTexture);
         if (form.isSideTopBlock()) {
-            return overlayBlock(modelName, baseStoneTexture, modLoc(stoneTexture + "_top"), baseStoneTexture, mask);
+            return overlayBlock(modelName, baseStoneTexture, new ResourceLocation(namespace, stoneTexture + "_top"), baseStoneTexture, mask, false);
         } else {
             return models().getBuilder(modelName)
                     .parent(new ModelFile.UncheckedModelFile(modLoc("block/ore/ore_base")))
@@ -85,8 +87,8 @@ public class BlockStates extends BlockStateProvider {
         ResourceLocation grass_top = mcLoc("block/grass_block_top");
         ResourceLocation grass_overlay = modLoc("block/grass_block_side_overlay");
         ResourceLocation snow_overlay = modLoc("block/grass_block_snow");
-        ModelFile grassyBlock = overlayBlock(block.getRegistryName().getPath(), baseTexture, grass_top, baseTexture, grass_overlay);
-        ModelFile snowyBlock = overlayBlock(block.getRegistryName().getPath() + "_snow", baseTexture, grass_top, baseTexture, snow_overlay);
+        ModelFile grassyBlock = overlayBlock(block.getRegistryName().getPath(), baseTexture, grass_top, baseTexture, grass_overlay, true);
+        ModelFile snowyBlock = overlayBlock(block.getRegistryName().getPath() + "_snow", baseTexture, grass_top, baseTexture, snow_overlay, false);
 
         getVariantBuilder(block).partialState().with(BlockStateProperties.SNOWY, false).modelForState()
                 .modelFile(grassyBlock).nextModel().modelFile(grassyBlock).rotationY(90).nextModel().modelFile(grassyBlock).rotationY(180).modelFile(grassyBlock).rotationY(270).addModel()
@@ -94,8 +96,9 @@ public class BlockStates extends BlockStateProvider {
                 .modelFile(snowyBlock).addModel();
     }
 
-    private ModelFile overlayBlock(String name, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation overlay) {
-        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/ore/overlay_horizontal")))
+    private ModelFile overlayBlock(String name, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation overlay, boolean tint) {
+        ModelFile parent = tint ? new ModelFile.UncheckedModelFile(modLoc("block/ore/tinted_overlay_horizontal")) : new ModelFile.UncheckedModelFile(modLoc("block/ore/overlay_horizontal"));
+        return models().getBuilder(name).parent(parent)
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom)
@@ -168,6 +171,8 @@ public class BlockStates extends BlockStateProvider {
                     } else {
                         simpleBlock(block, oreModel(schema.getBaseBlock(), (Forms.OreForm) form));
                     }
+                } else if (form == Forms.OVERGROWN_ROCK) {
+                    grassyBlock(block, blockTexture(schema.getBaseBlock()));
                 }
             }
         }

@@ -10,13 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.oriondevcorgitaco.unearthed.Unearthed;
-import net.oriondevcorgitaco.unearthed.block.schema.BlockSchemas;
-import net.oriondevcorgitaco.unearthed.block.schema.Forms;
-import net.oriondevcorgitaco.unearthed.block.schema.StoneClassification;
-import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
+import net.oriondevcorgitaco.unearthed.block.schema.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +20,8 @@ import java.util.List;
 import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.IGNEOUS;
 import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.METAMORPHIC;
 import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.SEDIMENTARY;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.PRIMARY;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.SECONDARY;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.TERTIARY;
+import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.*;
+import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.VANILLA;
 
 public class BlockGeneratorReference {
 
@@ -64,6 +59,13 @@ public class BlockGeneratorReference {
     public static final BlockGeneratorHelper SILTSTONE;
     public static final BlockGeneratorHelper MUDSTONE;
     public static final BlockGeneratorHelper LIGNITE;
+
+    //vanilla
+    public static final BlockGeneratorHelper GRANITE;
+    public static final BlockGeneratorHelper DIORITE;
+    public static final BlockGeneratorHelper ANDESITE;
+    public static final BlockGeneratorHelper SANDSTONE;
+    public static final BlockGeneratorHelper STONE;
 
     public static void init() {
         for (BlockGeneratorHelper schema : BlockGeneratorReference.ROCK_TYPES) {
@@ -142,26 +144,21 @@ public class BlockGeneratorReference {
                 .defaultProperty(stoneProperty).build();
         PILLOW_BASALT = new BlockGeneratorHelper.Builder("pillow_basalt", BlockSchemas.BASIC).setTier(TERTIARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.STONE).setRequiresTool().hardnessAndResistance(3.0f, 6.0f)).build();
+
+        GRANITE = new BlockGeneratorHelper.Builder("granite", BlockSchemas.INTRUSIVE).setTier(VANILLA).setClassification(IGNEOUS)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.GRANITE)).createOreProperties().build();
+        GRANITE.setDefaultBlock(Blocks.GRANITE);
+        DIORITE = new BlockGeneratorHelper.Builder("diorite", BlockSchemas.INTRUSIVE).setTier(VANILLA).setClassification(IGNEOUS)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.DIORITE)).createOreProperties().build();
+        DIORITE.setDefaultBlock(Blocks.DIORITE);
+        ANDESITE = new BlockGeneratorHelper.Builder("andesite", BlockSchemas.INTRUSIVE).setTier(VANILLA).setClassification(IGNEOUS)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.ANDESITE)).createOreProperties().build();
+        ANDESITE.setDefaultBlock(Blocks.ANDESITE);
+        SANDSTONE = new BlockGeneratorHelper.Builder("sandstone", new BlockSchema(Variants.SANDSTONE)).setTier(VANILLA).setClassification(SEDIMENTARY)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.SANDSTONE)).createOreProperties().createRegolithProperties().build();
+        SANDSTONE.setDefaultBlock(Blocks.SANDSTONE);
+        STONE = new BlockGeneratorHelper.Builder("stone", new BlockSchema(Variants.REGOLITHS)).setTier(VANILLA).setClassification(SEDIMENTARY)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.STONE)).createRegolithProperties().build();
+        STONE.setDefaultBlock(Blocks.STONE);
     }
-
-    public static final ITag.INamedTag<Block> IRON_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "iron_ores").toString());
-    public static final ITag.INamedTag<Block> COAL_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "coal_ores").toString());
-    public static final ITag.INamedTag<Block> GOLD_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "gold_ores").toString());
-    public static final ITag.INamedTag<Block> LAPIS_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lapis_ores").toString());
-    public static final ITag.INamedTag<Block> REDSTONE_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "redstone_ores").toString());
-    public static final ITag.INamedTag<Block> DIAMOND_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "diamond_ores").toString());
-    public static final ITag.INamedTag<Block> EMERALD_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "emerald_ores").toString());
-    public static final ITag.INamedTag<Block> REGOLITH_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "regolith").toString());
-
-    public static final ITag.INamedTag<Block> SEDIMENTARY_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":sedimentary");
-    public static final ITag.INamedTag<Block> IGNEOUS_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
-    public static final ITag.INamedTag<Block> METAMORPHIC_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");
-
-    public static final ITag.INamedTag<Block> REPLACABLE = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":replaceable");
-
-    public static final ITag.INamedTag<Item> SEDIMENTARY_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":sedimentary");
-    public static final ITag.INamedTag<Item> IGNEOUS_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
-    public static final ITag.INamedTag<Item> METAMORPHIC_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");
-
-//    public static final ITag.INamedTag<Block> LICHEN_SUBSTRATE = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lichen_substrate"))
 }

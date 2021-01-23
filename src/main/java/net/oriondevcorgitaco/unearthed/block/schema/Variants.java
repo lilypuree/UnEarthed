@@ -31,6 +31,11 @@ public class Variants {
     public static BlockSchema.Variant BASIC;
     public static BlockSchema.Variant PILLAR_BLOCK;
 
+    public static BlockSchema.Variant VANILLA;
+    public static BlockSchema.Variant REGOLITHS;
+    public static BlockSchema.Variant SANDSTONE;
+    public static BlockSchema.Variant OVERGROWN;
+
     static {
         List<BlockSchema.Form> all_ores = Lists.newArrayList(Forms.IRON_ORE, Forms.COAL_ORE, Forms.GOLD_ORE, Forms.LAPIS_ORE, Forms.REDSTONE_ORE, Forms.DIAMOND_ORE, Forms.EMERALD_ORE);
         List<BlockSchema.Form> ores = Lists.newArrayList(Forms.IRON_ORE, Forms.COAL_ORE, Forms.GOLD_ORE, Forms.LAPIS_ORE, Forms.REDSTONE_ORE, Forms.EMERALD_ORE);
@@ -40,13 +45,13 @@ public class Variants {
         List<BlockSchema.Form> noWall = Lists.newArrayList(Forms.BLOCK, Forms.SLAB, Forms.STAIRS);
         List<BlockSchema.Form> singleBlock = Lists.newArrayList(Forms.BLOCK);
         List<BlockSchema.Form> sideTopBlock = Lists.newArrayList(Forms.SIDETOP_BLOCK, Forms.SIDETOP_SLAB, Forms.SIDETOP_STAIRS, Forms.WALLS);
-        List<BlockSchema.Form> sideTopOres = Lists.newArrayList(Forms.SIDETOP_IRON_ORE, Forms.SIDETOP_COAL_ORE, Forms.SIDETOP_GOLD_ORE, Forms.SIDETOP_LAPIS_ORE, Forms.SIDETOP_REDSTONE_ORE, Forms.SIDETOP_EMERALD_ORE);
+        List<BlockSchema.Form> sideTopOres = Lists.newArrayList(Forms.SIDETOP_IRON_ORE, Forms.SIDETOP_COAL_ORE, Forms.SIDETOP_GOLD_ORE, Forms.SIDETOP_LAPIS_ORE, Forms.SIDETOP_REDSTONE_ORE, Forms.SIDETOP_EMERALD_ORE, Forms.SIDETOP_DIAMOND_ORE);
         List<BlockSchema.Form> regoliths = Lists.newArrayList(Forms.REGOLITH, Forms.GRASSY_REGOLITH);
 
 
         List<BlockSchema.Form> stoneLike = new ArrayList<>();
         stoneLike.addAll(fullBlocks);
-        stoneLike.addAll(ores);
+        stoneLike.addAll(all_ores);
         stoneLike.addAll(regoliths);
         STONE_LIKE = new BlockSchema.Variant("", stoneLike);
         COBBLED = new BlockSchema.Variant("cobbled", baseBlocks);
@@ -61,13 +66,13 @@ public class Variants {
 
         List<BlockSchema.Form> secondary = new ArrayList<>();
         secondary.addAll(baseBlocks);
-        secondary.addAll(ores);
+        secondary.addAll(all_ores);
         secondary.addAll(regoliths);
         SECONDARY_STONE = new BlockSchema.Variant("", secondary);
 
         List<BlockSchema.Form> igneous = new ArrayList<>();
         igneous.addAll(baseBlocks);
-        igneous.addAll(igneous_ores);
+        igneous.addAll(all_ores);
         igneous.addAll(regoliths);
         IGNEOUS = new BlockSchema.Variant("", igneous);
 
@@ -80,12 +85,20 @@ public class Variants {
         CHISELED = new BlockSchema.Variant("chiseled", Lists.newArrayList(Forms.SIDETOP_BLOCK)).setDerivative();
         SMOOTH = new BlockSchema.Variant("smooth", noWall);
 
-        PILLAR = new BlockSchema.Variant("", Lists.newArrayList(Forms.AXISBLOCK));
+        PILLAR = new BlockSchema.Variant("", Forms.AXISBLOCK);
         POLISHED_PILLAR = new BlockSchema.Variant("polished", Lists.newArrayList(Forms.AXISBLOCK)).setDerivative();
 
         BASIC = new BlockSchema.Variant("", baseBlocks);
         BRICK = new ComplexVariant("", "bricks", false, Lists.newArrayList(Forms.BLOCK)).setDerivative();
         PILLAR_BLOCK = new ComplexVariant("", "pillar", false, Lists.newArrayList(Forms.AXISBLOCK)).setDerivative();
+
+        VANILLA = new BlockSchema.Variant("", all_ores);
+        List<BlockSchema.Form> sandstone = new ArrayList<>();
+        sandstone.addAll(sideTopOres);
+        sandstone.addAll(regoliths);
+        SANDSTONE = new BlockSchema.Variant("", sandstone);
+        OVERGROWN = new BlockSchema.Variant("overgrown", Forms.OVERGROWN_ROCK);
+        REGOLITHS = new BlockSchema.Variant("", regoliths);
     }
 
     public static class ComplexVariant extends BlockSchema.Variant {

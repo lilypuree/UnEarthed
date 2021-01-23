@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -22,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(Entity.class)
 public class MixinEntity {
 
-    @Inject(method = "Lnet/minecraft/entity/Entity;doWaterSplashEffect()V", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "doWaterSplashEffect()V", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void makePuddlesAfterSplash(CallbackInfo ci, Entity entity, float f, Vector3d vector3d, float f1, float f2) {
         if (f1 > 0.20f) {
             World world = entity.getEntityWorld();

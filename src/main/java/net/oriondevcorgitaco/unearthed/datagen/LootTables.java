@@ -3,6 +3,7 @@ package net.oriondevcorgitaco.unearthed.datagen;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
@@ -43,7 +44,11 @@ public class LootTables extends LootTableProvider {
                 } else if (form instanceof Forms.OreForm) {
                     lootTables.put(block, ((Forms.OreForm) form).getOreType().createLootFactory().apply(block));
                 } else if (form == Forms.GRASSY_REGOLITH) {
-                    lootTables.put(block, BlockLootTableAccessor.droppingWithSilkTouch(block, type.getEntry(entry.getVariant(), Forms.REGOLITH).getBlock()));
+                    lootTables.put(block, BlockLootTableAccessor.regolithGrassBlock(block, type.getEntry(entry.getVariant(), Forms.REGOLITH).getBlock(), Blocks.DIRT));
+                } else if (form == Forms.REGOLITH) {
+                    lootTables.put(block, BlockLootTableAccessor.droppingWithHoe(block, Blocks.DIRT));
+                } else if (form == Forms.OVERGROWN_ROCK) {
+                    lootTables.put(block, BlockLootTableAccessor.droppingWithSilkTouch(block, type.getBaseBlock()));
                 } else if (entry.isBaseEntry() && type.getSchema().getVariants().contains(Variants.COBBLED)) {
                     lootTables.put(block, BlockLootTableAccessor.droppingWithSilkTouch(block, type.getBaseBlock(Variants.COBBLED)));
                 } else {
@@ -52,7 +57,7 @@ public class LootTables extends LootTableProvider {
             }
         }
         addBlockLoot(UEBlocks.LIGNITE_BRIQUETTES);
-        addBlockLoot(UEBlocks.LICHEN);
+        lootTables.put(UEBlocks.LICHEN, BlockLootTableAccessor.onlyWithShears(UEBlocks.LICHEN));
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
         for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {
             tables.put(entry.getKey().getLootTable(), entry.getValue().setParameterSet(LootParameterSets.BLOCK).build());

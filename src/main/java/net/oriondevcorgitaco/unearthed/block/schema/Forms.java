@@ -64,6 +64,12 @@ public class Forms {
             return properties -> new RegolithGrassBlock(schema.getEntry(variant, Forms.REGOLITH).getBlock(), properties);
         }
     };
+    public static final BlockSchema.Form OVERGROWN_ROCK = new BlockSchema.Form("") {
+        @Override
+        public Function<AbstractBlock.Properties, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
+            return properties -> new RegolithGrassBlock(schema.getBaseBlock().getBlock(), properties);
+        }
+    };
     public static final BlockSchema.Form SLAB = new SimpleForm("slab", SlabBlock::new);
     public static final BlockSchema.Form SIDETOP_SLAB = new SimpleForm("slab", SlabBlock::new).sideTopBlock();
     public static final BlockSchema.Form STAIRS = new StairForm("stairs");
@@ -94,4 +100,6 @@ public class Forms {
     public static final BlockSchema.Form SIDETOP_EMERALD_ORE = new OreForm("emerald_ore", VanillaOreTypes.EMERALD).sideTopBlock();
 
     public static final BlockSchema.Form KIMBERLITE_DIAMOND_ORE = new OreForm("diamond_ore", VanillaOreTypes.DIAMOND);
+
+
 }

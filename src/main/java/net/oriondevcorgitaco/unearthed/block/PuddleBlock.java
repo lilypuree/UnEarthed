@@ -69,7 +69,7 @@ public class PuddleBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (worldIn.canBlockSeeSky(pos) && worldIn.isDaytime() && worldIn.getLight(pos) >= 14) {
+        if (worldIn.canBlockSeeSky(pos) && worldIn.isDaytime() || worldIn.getLight(pos) >= 14) {
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
         } else {
             if (random.nextInt(4) == 0 && worldIn.isAreaLoaded(pos, 4)) {
@@ -77,7 +77,10 @@ public class PuddleBlock extends Block {
                 BlockPos randomPos = new BlockPos(pos.getX() - range + random.nextInt(range * 2 + 1), pos.getY() - range + random.nextInt(range * 2 + 1), pos.getZ() - range + random.nextInt(range * 2 + 1));
                 Direction direction = Direction.getRandomDirection(random);
                 if (!LichenBlock.hasEnoughLichen(worldIn, pos, 6, 3, 2)) {
-                    LichenBlock.tryGrowIntoBlock(worldIn, randomPos, direction, true);
+                    BlockState newState = ((LichenBlock) UEBlocks.LICHEN).tryPlaceOnto(state, worldIn, randomPos, direction);
+                    if (newState != null) {
+                        worldIn.setBlockState(randomPos, newState);
+                    }
                 }
             }
         }

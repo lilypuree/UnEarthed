@@ -44,7 +44,7 @@ public class Items extends ItemModelProvider {
         simpleItem(UEItems.IRON_ORE);
         blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
         blockItemModel(UEBlocks.PUDDLE);
-        blockItemModel(UEBlocks.LICHEN);
+        simpleItem(UEBlocks.LICHEN, modLoc("block/lichen"));
 //
 //        caveWallModel(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_CAVE_WALL);
 //
@@ -60,6 +60,11 @@ public class Items extends ItemModelProvider {
     private void simpleItem(IItemProvider provider) {
         String name = provider.asItem().getRegistryName().getPath();
         generated(name, modLoc("item/" + name));
+    }
+
+    private void simpleItem(IItemProvider provider, ResourceLocation texture) {
+        String name = provider.asItem().getRegistryName().getPath();
+        generated(name, texture);
     }
 
     private void generated(String path, ResourceLocation texture) {
