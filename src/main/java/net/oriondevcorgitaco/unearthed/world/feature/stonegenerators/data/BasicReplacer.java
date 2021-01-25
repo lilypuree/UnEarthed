@@ -5,23 +5,23 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 public class BasicReplacer implements CellularOre {
-    private State state;
-    private List<State> replaceable;
+    private Cell cell;
+    private List<Cell> replaceable;
     private float accWeight;
 
-    public BasicReplacer(State state, State... replaceable) {
-        this.state = state;
+    public BasicReplacer(Cell cell, Cell... replaceable) {
+        this.cell = cell;
         this.replaceable = ImmutableList.copyOf(replaceable);
     }
 
     @Override
     public boolean canReplace(State existing) {
-        return replaceable.contains(existing);
+        return replaceable.contains(existing.getCell());
     }
 
     @Override
     public State apply(State existing) {
-        return state;
+        return cell.getState(existing.getType());
     }
 
     @Override

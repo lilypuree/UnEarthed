@@ -11,16 +11,12 @@ public class RegolithReplacer implements CellularOre {
 
     @Override
     public boolean canReplace(State existing) {
-        if (existing instanceof StoneState) {
-            return ((StoneState) existing).getWrapper().getDirtReplacer(Blocks.DIRT.getDefaultState()) != Blocks.DIRT.getDefaultState();
-        }
-        return false;
+        return existing.getCell().getDirtReplacement() != Blocks.DIRT.getDefaultState();
     }
 
     @Override
     public State apply(State existing) {
-        BlockState state = ((StoneState) existing).getWrapper().getDirtReplacer(Blocks.DIRT.getDefaultState());
-        return new BaseState(existing.getType(), state);
+        return new State(existing.getType(), new Cell(existing.getCell().getDirtReplacement(), existing.getCell().getDirtReplacement(), existing.getCell().getGrassReplacementDefault(), true));
     }
 
     @Override

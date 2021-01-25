@@ -13,8 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.registry.Registry;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -24,6 +26,8 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
 import net.oriondevcorgitaco.unearthed.block.LichenBlock;
 import net.oriondevcorgitaco.unearthed.block.PuddleBlock;
+import net.oriondevcorgitaco.unearthed.client.ClientConstruction;
+import net.oriondevcorgitaco.unearthed.client.UETextureStitcher;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.core.UEItems;
@@ -38,6 +42,9 @@ public class Unearthed {
 
 
     public Unearthed() {
+//        UETextureStitcher.setupFolders();
+//        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientConstruction::run);
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::ueCommonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UnearthedConfig.COMMON_CONFIG);

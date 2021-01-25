@@ -41,6 +41,10 @@ public class BlockGeneratorHelper {
 //        StoneWrapper.allStoneWrappers.add(new StoneWrapper(Unearthed.MOD_ID + ":" + name));
     }
 
+    public String getName() {
+        return name;
+    }
+
     public List<Entry> getEntries() {
         return blocks;
     }

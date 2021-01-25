@@ -1,6 +1,5 @@
 package net.oriondevcorgitaco.unearthed.datagen;
 
-
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
@@ -70,25 +69,21 @@ public class BlockStates extends BlockStateProvider {
         IOreType oreType = form.getOreType();
         String stoneTexture = "block/" + getPath(baseBlock);
         String modelName = getPath(baseBlock) + "_" + oreType.getName() + "_ore";
-        ResourceLocation mask = modLoc("block/ore/" + oreType.getName() + "_ore_mask");
         String namespace = baseBlock.getRegistryName().getNamespace();
-        ResourceLocation baseStoneTexture = new ResourceLocation(namespace, stoneTexture);
         if (form.isSideTopBlock()) {
-            return overlayBlock(modelName, baseStoneTexture, new ResourceLocation(namespace, stoneTexture + "_top"), baseStoneTexture, mask, false);
+            return models().cubeTop(modelName, modLoc("block/ore/" + modelName), new ResourceLocation(namespace, stoneTexture + "_top"));
         } else {
-            return models().getBuilder(modelName)
-                    .parent(new ModelFile.UncheckedModelFile(modLoc("block/ore/ore_base")))
-                    .texture("texture", baseStoneTexture)
-                    .texture("overlay", mask);
+            return models().cubeAll(modelName, modLoc("block/ore/" + modelName));
         }
     }
 
     private void grassyBlock(Block block, ResourceLocation baseTexture) {
         ResourceLocation grass_top = mcLoc("block/grass_block_top");
-        ResourceLocation grass_overlay = modLoc("block/grass_block_side_overlay");
-        ResourceLocation snow_overlay = modLoc("block/grass_block_snow");
-        ModelFile grassyBlock = overlayBlock(block.getRegistryName().getPath(), baseTexture, grass_top, baseTexture, grass_overlay, true);
-        ModelFile snowyBlock = overlayBlock(block.getRegistryName().getPath() + "_snow", baseTexture, grass_top, baseTexture, snow_overlay, false);
+        ResourceLocation grass_overlay = mcLoc("block/grass_block_side_overlay");
+        String grassName = block.getRegistryName().getPath();
+        ModelFile grassyBlock = overlayBlock(grassName, baseTexture, grass_top, modLoc("block/side/" + grassName + "_side"), grass_overlay, true);
+        String snowName = block.getRegistryName().getPath() + "_snow";
+        ModelFile snowyBlock = models().cubeTop(snowName, modLoc("block/side/" + snowName), grass_top);
 
         getVariantBuilder(block).partialState().with(BlockStateProperties.SNOWY, false).modelForState()
                 .modelFile(grassyBlock).nextModel().modelFile(grassyBlock).rotationY(90).nextModel().modelFile(grassyBlock).rotationY(180).modelFile(grassyBlock).rotationY(270).addModel()

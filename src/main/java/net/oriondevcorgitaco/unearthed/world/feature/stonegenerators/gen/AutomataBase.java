@@ -1,15 +1,22 @@
 package net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.gen;
 
+import com.google.common.base.Functions;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.ISeedReader;
+import net.openhft.hashing.LongHashFunction;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.State;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.CellularOre;
 
+import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class AutomataBase implements IAutomata {
+public class AutomataBase {
     protected long seed;
     protected BlockPos basePos;
     protected int cellsize;
@@ -21,14 +28,12 @@ public class AutomataBase implements IAutomata {
     protected int zWidth2;
     protected int yHeight2;
 
-    protected TargetedRandom[][] randomArray = new TargetedRandom[3][3];
-    protected TargetedRandom random;
-
     protected State[][][] stateArray;
     protected State[][][] newStateArray = null;
     protected Function<Vector3i, State> stateGetter = null;
+    protected NoiseHandler noiseHandler;
 
-    public AutomataBase(long seed, BlockPos basePos, int cellsize, int xWidth, int zWidth, int yHeight) {
+    public AutomataBase(long seed, BlockPos basePos, int cellsize, int xWidth, int zWidth, int yHeight, NoiseHandler noiseHandler) {
         this.seed = seed;
         this.cellsize = cellsize;
         this.cellsize2 = cellsize / 2;
@@ -40,36 +45,13 @@ public class AutomataBase implements IAutomata {
         this.yHeight2 = yHeight * 2 - 1;
         this.stateArray = new State[xWidth][zWidth][yHeight];
         this.basePos = basePos;
+        this.noiseHandler = noiseHandler;
     }
 
     public AutomataBase(AutomataBase parent) {
-        this(parent.seed, parent.basePos, parent.cellsize2, parent.xWidth2, parent.zWidth2, parent.yHeight2);
+        this(parent.seed, parent.basePos, parent.cellsize2, parent.xWidth2, parent.zWidth2, parent.yHeight2, parent.noiseHandler);
         this.setStates(parent.newStateArray);
         this.setStateGetter(parent.stateGetter);
-        this.randomArray = parent.randomArray;
-        for (int x = 0; x < 3; x++) {
-            for (int z = 0; z < 3; z++) {
-                randomArray[x][z].multiply();
-            }
-        }
-    }
-
-    protected void setTargetHeights(final int[][] maxHeights) {
-        for (int x = 0; x < 3; x++) {
-            for (int z = 0; z < 3; z++) {
-                maxHeights[x][z] = convertMaxHeightToCells(maxHeights[x][z]);
-            }
-        }
-        int curY = maxHeights[1][1];
-        for (int x = 0; x < 3; x++) {
-            for (int z = 0; z < 3; z++) {
-                randomArray[x][z] = new TargetedRandom(getSeed(x - 1, z - 1), Math.max(curY, maxHeights[x][z]), curY);
-            }
-        }
-    }
-
-    protected int convertMaxHeightToCells(int height) {
-        return (int) Math.ceil((height - 1.0f) / cellsize2) + 1;
     }
 
     public void setStates(State[][][] stateArray) {
@@ -114,13 +96,10 @@ public class AutomataBase implements IAutomata {
 
     private void fillInEdgesAndFaces() {
         boolean xMid = false;
-        int borderX = 0;
         for (int x = 0; x < xWidth2; x++, xMid = !xMid) {
             boolean zMid = false;
-            int borderZ = 0;
             int x1 = x / 2;
             for (int z = 0; z < zWidth2; z++, zMid = !zMid) {
-                setRandom(randomArray[borderX][borderZ]);
                 int z1 = z / 2;
                 boolean yMid = false;
                 for (int y = 0; y < yHeight2; y++, yMid = !yMid) {
@@ -128,62 +107,47 @@ public class AutomataBase implements IAutomata {
                     State state = null;
                     if (xMid && !yMid) {
                         if (zMid) {
-                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], stateArray[x1][z1 + 1][y1], stateArray[x1 + 1][z1 + 1][y1]);
+                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], stateArray[x1][z1 + 1][y1], stateArray[x1 + 1][z1 + 1][y1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         } else {
-                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1]);   //select either point randomly
+                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);   //select either point randomly
                         }
                     } else if (yMid && !zMid) {
                         if (xMid) {
-                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1 + 1][z1][y1 + 1]);
+                            state = selectStatesY(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1 + 1][z1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         } else {
-                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1][y1 + 1]);
+                            state = selectStatesY(stateArray[x1][z1][y1], stateArray[x1][z1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         }
                     } else if (zMid && !xMid) {
                         if (yMid) {
-                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1][z1 + 1][y1 + 1]); //select one from four corners
+                            state = selectStatesY(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1][z1 + 1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z); //select one from four corners
                         } else {
-                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1]);
+                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         }
                     } else {
-                        random.skip();        //ensure random calls
                         continue;
                     }
                     if (state != null) {
                         newStateArray[x][z][y] = state;
                     }
                 }
-                borderZ = z == zWidth2 - 2 ? 2 : 1;
             }
-            borderX = x == xWidth2 - 2 ? 2 : 1;
         }
     }
 
     private void fillInCenters() {
-        int borderX = 0;
         boolean xMid = false;
         for (int x = 0; x < xWidth2; x++, xMid = !xMid) {
-            int borderZ = 0;
             boolean zMid = false;
             for (int z = 0; z < zWidth2; z++, zMid = !zMid) {
-                setRandom(randomArray[borderX][borderZ]);
                 boolean yMid = false;
                 for (int y = 0; y < yHeight2; y++, yMid = !yMid) {
                     if (xMid && yMid && zMid) {                         //if there isn't at least 2 axis that have the same state, getState() is called to determine;
-                        int finalX = x;
-                        int finalY = y;
-                        int finalZ = z;
+                        BlockPos pos = getBlockPosExpanded(x, z, y);
                         newStateArray[x][z][y] = determineState(newStateArray[x][z][y + 1], newStateArray[x][z][y - 1], newStateArray[x - 1][z][y], newStateArray[x + 1][z][y], newStateArray[x][z - 1][y], newStateArray[x][z + 1][y],
-                                () -> {
-//                                    return getState(((int) ((x1 + 0.5) * cellSize)), ((int) ((z1 + 0.5) * cellSize)), ((int) ((y1 + 0.5) * cellSize)));
-                                    return getState(finalX, finalY, finalZ);
-                                });
-                    } else {
-                        random.skip();      //ensure random calls
+                                () -> stateGetter.apply(pos), pos.getX(), pos.getY(), pos.getZ());
                     }
                 }
-                borderZ = z == zWidth2 - 2 ? 2 : 1;
             }
-            borderX = x == xWidth2 - 2 ? 2 : 1;
         }
     }
 
@@ -198,9 +162,9 @@ public class AutomataBase implements IAutomata {
      * evaluate state of the given coordinates in the expanded array
      */
     protected State getState(int x, int z, int y) {
-        BlockPos pos = getBlockPosExpanded(x, z, y);
-//        return stateGetter.apply(new Vector3i(x * cellsize/2, z * cellsize/2, y * cellsize/2));
-        return stateGetter.apply(pos);
+//        BlockPos pos = getBlockPosExpanded(x, z, y);
+//        return stateGetter.apply(pos);
+        return noiseHandler.getState(x * cellsize2, z * cellsize2, y * cellsize2);
     }
 
     private long getSeed(int chunkXOff, int chunkZOff) {
@@ -209,15 +173,69 @@ public class AutomataBase implements IAutomata {
         return NoiseUtil.getSeed(chunkX * 2 + chunkXOff, chunkZ * 2 + chunkZOff, seed);
     }
 
-    protected void setRandom(TargetedRandom random) {
-        this.random = random;
+    public int randomInt(int bound, int x, int y, int z) {
+        return Math.floorMod((int) getHash(x, y, z), bound);
     }
 
-    @Override
-    public int randomInt(int bound) {
-        long hash = 
-        return random.nextInt() % bound;
+    public int randomIntFast(int max, int x, int y, int z) {
+        return (int) getHash(x, y, z) & max;
     }
 
+    public long getHash(int x, int y, int z) {
+        return LongHashFunction.xx(seed).hashInts(new int[]{x, y, z});
+    }
 
+    protected State selectStates(State state1, State state2, int x, int y, int z) {
+        if (state1 == state2) return state1;
+        return randomIntFast(1, x, y, z) == 0 ? state1 : state2;
+    }
+
+    protected State selectStatesY(State state1, State state2, int x, int y, int z) {
+        return selectStates(state1, state2, x, y, z);
+    }
+
+    protected State selectStates(State state1, State state2, State state3, State state4, int x, int y, int z) {
+        if (state1 == state2 && state2 == state3 & state3 == state4) {
+            return state1;
+        }
+        int i = randomIntFast(3, x, y, z);
+        if (i == 0) {
+            return state1;
+        } else if (i == 1) {
+            return state2;
+        } else {
+            return i == 2 ? state3 : state4;
+        }
+    }
+
+    protected State selectStatesY(State state1, State state2, State state3, State state4, int x, int y, int z) {
+        return selectStates(state1, state2, state3, state4, x, y, z);
+    }
+
+    protected State determineState(State up, State down, State x1, State x2, State z1, State z2, Supplier<State> stateGetter, int x, int y, int z) {
+//        boolean ySame = up.equals(down);
+//        boolean xSame = x1.equals(x2);
+//        boolean zSame = z1.equals(z2);
+//        if (xSame && ySame && zSame) {
+//            int i = randomInt(3);
+//            if (i == 0) return up;
+//            else return (i == 1) ? x1 : z1;
+//        } else if (!xSame && zSame && ySame) {
+//            return selectStates(up, z1);
+//        } else if (xSame && !zSame && ySame) {
+//            return selectStates(up, x1);
+//        } else if (xSame && zSame && !ySame) {
+//            return selectStates(x1, z1);
+//        } else {
+//            randomInt(3);
+//            return stateGetter.get();
+//        }
+        Optional<State> state = Stream.of(up, down, x1, x2, z1, z2)
+//                .sorted()
+                .collect(Collectors.groupingBy(Functions.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey);
+        return state.orElseGet(stateGetter::get);
+    }
 }

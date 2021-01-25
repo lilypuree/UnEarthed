@@ -2,15 +2,14 @@ package net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.regio
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
-import net.oriondevcorgitaco.unearthed.block.StoneWrapper;
-import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.SimpleState;
+import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.Cell;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.State;
-import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.StoneState;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.Type;
 
 import java.util.*;
+
+import static net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.Cells.*;
 
 public class RegionManager {
     private static List<Region> regions = new ArrayList<>();
@@ -37,21 +36,18 @@ public class RegionManager {
         return tertiaries.get(((int) (tertiaries.size() * level)));
     }
 
-    public static void addTertiary(StoneWrapper stoneWrapper) {
-        tertiaries.add(new StoneState(Type.TERTIARY, stoneWrapper));
+    public static void addTertiary(Cell... cells) {
+        for (Cell cell : cells){
+            tertiaries.add(cell.getState(Type.TERTIARY));
+        }
     }
-
-    public static void addTertiary(State state){
-        tertiaries.add(state);
-    }
-
     static class BatolithicState {
         public State state;
         public float qf;
         public float ap;
 
-        public BatolithicState(StoneWrapper stone, float qf, float ap) {
-            this.state = new StoneState(Type.BATOLITH, stone);
+        public BatolithicState(Cell cell, float qf, float ap) {
+            this.state = cell.getState(Type.BATHOLITH);
             this.qf = qf;
             this.ap = ap;
         }
@@ -63,21 +59,16 @@ public class RegionManager {
 
     static {
         batolithicStates = new ArrayList<>();
-        batolithicStates.add(new BatolithicState(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.GRANITE), 0.8f, 0.0f));
-        batolithicStates.add(new BatolithicState(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.DIORITE), 0.0f, 0.9f));
-        batolithicStates.add(new BatolithicState(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.GRANODIORITE), -0.1f, 0.9f));
-        batolithicStates.add(new BatolithicState(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.ANDESITE), -0.5f, 0.0f));
+        batolithicStates.add(new BatolithicState(GRANITE, 0.8f, 0.0f));
+        batolithicStates.add(new BatolithicState(DIORITE, 0.0f, 0.9f));
+        batolithicStates.add(new BatolithicState(GRANODIORITE, -0.1f, 0.9f));
+        batolithicStates.add(new BatolithicState(ANDESITE, -0.5f, 0.0f));
 
         tertiaries = new ArrayList<>();
-        addTertiary(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.MARBLE));
-        addTertiary(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.DOLOMITE));
-        addTertiary(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.DACITE));
-        addTertiary(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.PUMICE));
-        addTertiary(StoneWrapper.fromGenerationHelper(BlockGeneratorReference.PILLOW_BASALT));
-//        addTertiary(StoneWrapper.getOrCreate(new ResourceLocation(Unearthed.MOD_ID, "weathered_rhyolite")));
+        addTertiary(MARBLE, DACITE, PUMICE, PILLOW_BASALT, DOLERITE);
 
         regions.add(Regions.DEFAULT);
-        regions.add(Regions.LIMESTONE);
+        regions.add(Regions.LIMESTONE_REGION);
         regions.add(Regions.SEDIMENTARY);
     }
 }

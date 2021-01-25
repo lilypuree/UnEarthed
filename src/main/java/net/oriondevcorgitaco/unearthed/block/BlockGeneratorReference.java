@@ -1,27 +1,20 @@
 package net.oriondevcorgitaco.unearthed.block;
 
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.Item;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
-import net.oriondevcorgitaco.unearthed.Unearthed;
-import net.oriondevcorgitaco.unearthed.block.schema.*;
+import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
+import net.oriondevcorgitaco.unearthed.block.schema.BlockSchemas;
+import net.oriondevcorgitaco.unearthed.block.schema.Forms;
+import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.IGNEOUS;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.METAMORPHIC;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.SEDIMENTARY;
+import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.*;
 import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.*;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.VANILLA;
 
 public class BlockGeneratorReference {
 

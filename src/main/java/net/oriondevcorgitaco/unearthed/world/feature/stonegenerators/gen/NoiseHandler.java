@@ -4,6 +4,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
+import net.openhft.hashing.LongHashFunction;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoiseLite;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoiseLite.Vector3;
 import net.oriondevcorgitaco.unearthed.util.noise.FastNoiseLite.Vector2;
@@ -20,7 +21,7 @@ import java.util.Random;
 public class NoiseHandler {
     private static float regionFreq = 0.0009f;
     private static float primaryFreq = 0.008f;
-    private static float orogenFreq = 0.08f;
+    private static float orogenFreq = 0.055f;
     private static float secondaryFreq = 0.002f;
     private static float batolithFreq = 0.001f;
     private static float tertiaryFreq = 0.09f;
@@ -72,7 +73,7 @@ public class NoiseHandler {
                 batolithHeights[i][j] = -1;
                 batolithStates[i][j] = null;
                 regions[i][j] = null;
-                maxHeights[i][j] = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos.getX() + i, pos.getZ() + i);
+                maxHeights[i][j] = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos.getX() + i, pos.getZ() + j);
             }
         }
     }
@@ -127,12 +128,13 @@ public class NoiseHandler {
 
     public CellularOre getReplacement(int x, int z, int y, int tier) {
         random.setSeed(NoiseUtil.getSeed(x, z, y, world.getSeed()));
-        return getRegionSimple(x - basePos.getX(), z - basePos.getZ()).getReplacement(tier, random);
+        return getRegionSimple(x - basePos.getX(), z - basePos.getZ())
+                .getReplacement(tier, random);
     }
 
     private Random random = new Random();
 
-    public Pair<State, Integer> getStrata(int xPos, int zPos, int strataLevel) {
+    public StratAutomata.StrataState getStrata(int xPos, int zPos, int strataLevel) {
         long worldSeed = world.getSeed();
         Vector2 v = new Vector2(xPos, zPos);
         stratumWarp.SetSeed((int) worldSeed + strataLevel * 100811);
@@ -144,7 +146,7 @@ public class NoiseHandler {
         if (cenAndDist.getValue() * cenAndDist.getValue() > region.getStratumPercentage()) {
             State state = region.getStrataState(random.nextFloat(), strataLevel);
             if (state != null) {
-                return Pair.of(state, region.getStratumDepth(random, strataLevel));
+                return new StratAutomata.StrataState(state, region.getStratumDepth(random, strataLevel));
             }
         }
         return null;
@@ -223,7 +225,7 @@ public class NoiseHandler {
             orogenWarp.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             orogenWarp.SetFractalOctaves(2);
             orogenWarp.SetDomainWarpAmp(orogenWarpAmplitude);
-            orogenWarp.SetFrequency(primaryFreq / 15);
+            orogenWarp.SetFrequency(primaryFreq / 12);
             orogenWarp.SetFractalType(FastNoiseLite.FractalType.DomainWarpIndependent);
         }
         if (primaryWarp == null) {
@@ -293,5 +295,25 @@ public class NoiseHandler {
         }
     }
 
+    private static final int UINT_MAX = Integer.parseUnsignedInt("4294967295");
 
+    public int randomInt(int bound, int x, int y, int z) {
+        return (int) getHash(x, y, z) % bound;
+    }
+
+    public float randomFloat(int x, int y, int z, int w) {
+        return (int) getHash(x, y, z, w) / (float) UINT_MAX;
+    }
+
+    public int randomIntFast(int max, int x, int y, int z) {
+        return (int) getHash(x, y, z) & max;
+    }
+
+    public long getHash(int x, int y, int z) {
+        return LongHashFunction.xx(world.getSeed()).hashInts(new int[]{x, y, z});
+    }
+
+    public long getHash(int x, int y, int z, int w) {
+        return LongHashFunction.xx(world.getSeed()).hashInts(new int[]{x, y, z, w});
+    }
 }

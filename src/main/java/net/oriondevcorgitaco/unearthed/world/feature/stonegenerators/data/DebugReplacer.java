@@ -14,7 +14,7 @@ public class DebugReplacer implements CellularOre {
 
     @Override
     public State apply(State existing) {
-        return new BaseState(Type.TERTIARY, ore.apply(existing).getDefaultState());
+        return ore.apply(existing).getCell().getState(Type.TERTIARY);
     }
 
     @Override

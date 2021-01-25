@@ -13,16 +13,13 @@ public class OreReplacer implements CellularOre {
 
     @Override
     public boolean canReplace(State existing) {
-        if (existing instanceof StoneState) {
-            return (((StoneState) existing).getWrapper().getOre(oreType)) != null;
-        }
-        return false;
+        return existing.getCell().replacesOre();
     }
 
     @Override
     public State apply(State existing) {
-        BlockState state = ((StoneState) existing).getWrapper().getOre(oreType);
-        return new BaseState(existing.getType(), state);
+        BlockState state = existing.getCell().getOre(oreType);
+        return new State(existing.getType(), new Cell(state, existing.getCell().getDirtReplacement(), existing.getCell().getGrassReplacementDefault(), true));
     }
 
     @Override

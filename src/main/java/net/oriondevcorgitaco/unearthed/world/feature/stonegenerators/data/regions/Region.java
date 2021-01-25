@@ -1,8 +1,5 @@
 package net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.regions;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.oriondevcorgitaco.unearthed.block.StoneWrapper;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.CellularOre;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.State;
 
@@ -101,12 +98,12 @@ public class Region {
         return strataStates.get(index);
     }
 
-    public CellularOre getReplacement(int tier, Random random) {
+    public CellularOre getReplacement(int tier, Random rand) {
         switch (tier) {
             default:
             case 1:
-                if (random.nextFloat() < largeOreProbability) {
-                    float targetWeight = accumulatedWeightLarge * random.nextFloat();
+                if (rand.nextFloat() < largeOreProbability) {
+                    float targetWeight = accumulatedWeightLarge * rand.nextFloat();
                     for (CellularOre ore : largeOres) {
                         if (ore.getAccumulatedWeight() >= targetWeight) {
                             return ore;
@@ -115,8 +112,8 @@ public class Region {
                 }
                 return null;
             case 2:
-                if (random.nextFloat() < mediumOreProbability) {
-                    float targetWeight = accumulatedWeightMedium * random.nextFloat();
+                if (rand.nextFloat() < mediumOreProbability) {
+                    float targetWeight = accumulatedWeightMedium * rand.nextFloat();
                     for (CellularOre ore : mediumOres) {
                         if (ore.getAccumulatedWeight() >= targetWeight) {
                             return ore;
@@ -125,8 +122,8 @@ public class Region {
                 }
                 return null;
             case 3:
-                if (random.nextFloat() < smallOreProbability) {
-                    float targetWeight = accumulatedWeightSmall * random.nextFloat();
+                if (rand.nextFloat() < smallOreProbability) {
+                    float targetWeight = accumulatedWeightSmall * rand.nextFloat();
                     for (CellularOre ore : smallOres) {
                         if (ore.getAccumulatedWeight() >= targetWeight) {
                             return ore;
@@ -167,8 +164,6 @@ public class Region {
         return strataCutoff;
     }
 
-    //magnitude : 0 to 1
-    //returns : stratum thickness
     public int getStratumDepth(Random rand, int strataLevel) {
         return minStrata + rand.nextInt(maxStrata - minStrata);
     }

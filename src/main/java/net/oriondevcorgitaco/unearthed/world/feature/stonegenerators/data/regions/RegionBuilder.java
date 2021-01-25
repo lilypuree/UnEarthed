@@ -1,9 +1,5 @@
 package net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.regions;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.ResourceLocation;
-import net.oriondevcorgitaco.unearthed.block.StoneWrapper;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.data.*;
 
@@ -60,40 +56,29 @@ public class RegionBuilder {
         return this;
     }
 
-    public RegionBuilder addPrimaryStoneType(StoneWrapper wrapper) {
-        primaryStates.add(new StoneState(Type.PRIMARY, wrapper));
-        return this;
-    }
-
-
-    public RegionBuilder addOrogenyStoneType(StoneWrapper wrapper) {
-        orogenyStates.add(new StoneState(Type.OROGEN, wrapper));
-        return this;
-    }
-
-    public RegionBuilder addSimpleStoneType(Type type, BlockState base, BlockState dirtReplacement, BlockState grassReplacement) {
-        SimpleState state = new SimpleState(type, base, dirtReplacement, grassReplacement);
-        switch (type) {
-            case PRIMARY:
-                primaryStates.add(state);
-                return this;
-            case OROGEN:
-                orogenyStates.add(state);
-                return this;
-            case STRATA:
-                strataStates.add(state);
-                return this;
+    public RegionBuilder addPrimary(Cell... cells) {
+        for (Cell cell : cells) {
+            primaryStates.add(cell.getState(Type.PRIMARY));
         }
         return this;
     }
 
-    public RegionBuilder setSecondaryStoneType(StoneWrapper wrapper) {
-        this.secondaryState = new StoneState(Type.SECONDARY, wrapper);
+    public RegionBuilder addOrogen(Cell... cells) {
+        for (Cell cell : cells) {
+            orogenyStates.add(cell.getState(Type.OROGEN));
+        }
         return this;
     }
 
-    public RegionBuilder addStrataStoneType(StoneWrapper wrapper) {
-        strataStates.add(new StoneState(Type.STRATA, wrapper));
+    public RegionBuilder setSecondary(Cell cell) {
+        this.secondaryState = cell.getState(Type.SECONDARY);
+        return this;
+    }
+
+    public RegionBuilder addStrata(Cell... cells) {
+        for (Cell cell : cells) {
+            strataStates.add(cell.getState(Type.STRATA));
+        }
         return this;
     }
 
