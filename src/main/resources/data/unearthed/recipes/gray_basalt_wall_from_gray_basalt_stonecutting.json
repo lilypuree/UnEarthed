@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:gray_basalt"
-  },
-  "result": "unearthed:gray_basalt_wall",
-  "count": 1
-}

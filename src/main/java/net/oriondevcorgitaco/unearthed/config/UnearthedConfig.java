@@ -2,6 +2,11 @@ package net.oriondevcorgitaco.unearthed.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -45,9 +50,9 @@ public class UnearthedConfig {
         COMMON_BUILDER.pop();
         stoneTag = COMMON_BUILDER.comment("Use Stone Block Tag? Could have performance impact!\nDefault: false").define("stoneTag", true);
         replaceCobble = COMMON_BUILDER.comment("Replace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true").define("replaceCobble", true);
-        trueMesas = COMMON_BUILDER.comment("Are vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true").define("trueMesas", true);
-        desertCaves = COMMON_BUILDER.comment("Do deserts use different blocks for cave generation?\nDefault: true").define("desertCaves", true);
-        icyCaves = COMMON_BUILDER.comment("Do icy/frozen biomes use different blocks for cave generation?\nDefault: true").define("icyCaves", true);
+        trueMesas = COMMON_BUILDER.comment("Are vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true").define("trueMesas", false);
+        desertCaves = COMMON_BUILDER.comment("Do deserts use different blocks for cave generation?\nDefault: true").define("desertCaves", false);
+        icyCaves = COMMON_BUILDER.comment("Do icy/frozen biomes use different blocks for cave generation?\nDefault: true").define("icyCaves", false);
         COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
@@ -63,5 +68,13 @@ public class UnearthedConfig {
     @SubscribeEvent
     public static void onLoad(final ModConfig.Loading configEvent) {
 
+    }
+
+    public static boolean isReplaceableStone(BlockState block) {
+        boolean stoneTag = UnearthedConfig.stoneTag.get();
+        if (stoneTag)
+            return block.isIn(BlockTags.BASE_STONE_OVERWORLD);
+        else
+            return block == Blocks.STONE.getDefaultState();
     }
 }

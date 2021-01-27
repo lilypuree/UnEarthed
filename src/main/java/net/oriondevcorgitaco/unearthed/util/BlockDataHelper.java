@@ -6,7 +6,6 @@ import com.google.gson.JsonPrimitive;
 import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
 import net.oriondevcorgitaco.unearthed.Unearthed;
-import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.FileWriter;
@@ -112,19 +111,19 @@ public class BlockDataHelper {
         }
     }
 
-    public static void printBlockIDs() {
-        BlockGeneratorHelper.baseBlockIdList.forEach(id -> {
-            Unearthed.LOGGER.info("unearthed:" + id);
-        });
-
-        BlockGeneratorHelper.cobbleBlockIdList.forEach(id -> {
-            Unearthed.LOGGER.info("unearthed:" + id);
-        });
-
-        BlockGeneratorHelper.oreBlockIdList.forEach(id -> {
-            Unearthed.LOGGER.info("unearthed:" + id);
-        });
-    }
+//    public static void printBlockIDs() {
+//        BlockGeneratorHelperOld.baseBlockIdList.forEach(id -> {
+//            Unearthed.LOGGER.info("unearthed:" + id);
+//        });
+//
+//        BlockGeneratorHelperOld.cobbleBlockIdList.forEach(id -> {
+//            Unearthed.LOGGER.info("unearthed:" + id);
+//        });
+//
+//        BlockGeneratorHelperOld.oreBlockIdList.forEach(id -> {
+//            Unearthed.LOGGER.info("unearthed:" + id);
+//        });
+//    }
 
 
     private static String capitalizeWord(String str) {

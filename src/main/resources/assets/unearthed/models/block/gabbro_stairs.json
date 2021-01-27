@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "unearthed:block/gabbro",
-    "top": "unearthed:block/gabbro",
-    "side": "unearthed:block/gabbro"
-  }
-}

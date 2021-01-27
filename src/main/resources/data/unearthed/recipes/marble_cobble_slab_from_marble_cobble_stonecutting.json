@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:marble_cobble"
-  },
-  "result": "unearthed:marble_cobble_slab",
-  "count": 1
-}

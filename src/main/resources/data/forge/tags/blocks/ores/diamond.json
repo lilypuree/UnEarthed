@@ -1,20 +1,6 @@
 {
   "replace": false,
   "values": [
-    "unearthed:gray_basalt_diamond_ore",
-    "unearthed:gabbro_diamond_ore",
-    "unearthed:pumice_diamond_ore",
-    "unearthed:kimberlite_diamond_ore",
-    "unearthed:rhyolite_diamond_ore",
-    "unearthed:slate_diamond_ore",
-    "unearthed:marble_diamond_ore",
-    "unearthed:quartzite_diamond_ore",
-    "unearthed:phyllite_diamond_ore",
-    "unearthed:schist_diamond_ore",
-    "unearthed:limestone_diamond_ore",
-    "unearthed:lignite_diamond_ore",
-    "unearthed:siltstone_diamond_ore",
-    "unearthed:mudstone_diamond_ore",
-    "unearthed:conglomerate_diamond_ore"
+    "#unearthed:diamond_ores"
   ]
 }

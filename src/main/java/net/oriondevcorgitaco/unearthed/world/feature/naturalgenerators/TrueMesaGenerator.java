@@ -24,7 +24,7 @@ public class TrueMesaGenerator extends Feature<NoFeatureConfig> {
     BlockState mesaBlockState = Blocks.TERRACOTTA.getDefaultState();
 
     @Override
-    public boolean func_241855_a(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -46,7 +46,7 @@ public class TrueMesaGenerator extends Feature<NoFeatureConfig> {
     public static boolean useStoneTag(ISeedReader world, BlockPos mutable) {
         boolean stoneTag = UnearthedConfig.stoneTag.get();
         if (stoneTag)
-            return world.getBlockState(mutable).isIn(BlockTags.field_242172_aH);
+            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
         else
             return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
 

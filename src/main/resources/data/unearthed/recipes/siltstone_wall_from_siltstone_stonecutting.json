@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:siltstone"
-  },
-  "result": "unearthed:siltstone_wall",
-  "count": 1
-}
