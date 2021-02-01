@@ -35,6 +35,9 @@ public class Items extends ItemModelProvider {
 
                 if (form == Forms.BUTTON || form == Forms.WALLS) {
                     blockInventoryModel(entry.getBlock());
+                } else if (form == Forms.BEAM) {
+                    String name = entry.getBlock().getRegistryName().getPath();
+                    getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc(ModelProvider.BLOCK_FOLDER + "/" + name + "_y")));
                 } else {
                     blockItemModel(entry.getBlock());
                 }
@@ -42,6 +45,7 @@ public class Items extends ItemModelProvider {
         }
         simpleItem(UEItems.GOLD_ORE);
         simpleItem(UEItems.IRON_ORE);
+        blockItemModel(UEBlocks.PYROXENE);
         blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
         blockItemModel(UEBlocks.PUDDLE);
         simpleItem(UEBlocks.LICHEN, modLoc("block/lichen"));

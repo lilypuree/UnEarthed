@@ -1,11 +1,9 @@
 package net.oriondevcorgitaco.unearthed;
 
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -108,6 +106,7 @@ public class Unearthed {
             SoundType WATER = new SoundType(1.0F, 1.0F, SoundEvents.BLOCK_WET_GRASS_BREAK, SoundEvents.ENTITY_GENERIC_SPLASH, SoundEvents.BLOCK_WET_GRASS_PLACE, SoundEvents.BLOCK_WET_GRASS_HIT, SoundEvents.ENTITY_GENERIC_SPLASH);
 
             event.getRegistry().registerAll(
+                    UEBlocks.PYROXENE = new GravelBlock(AbstractBlock.Properties.create(Material.SAND, MaterialColor.BLACK).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("pyroxene"),
                     UEBlocks.PUDDLE = new PuddleBlock(AbstractBlock.Properties.create(Material.WATER).notSolid().tickRandomly().slipperiness(0.98f).zeroHardnessAndResistance().sound(WATER)).setRegistryName("puddle"),
                     UEBlocks.LICHEN = new LichenBlock(AbstractBlock.Properties.create(Material.PLANTS).notSolid().tickRandomly().hardnessAndResistance(0.2f).sound(SoundType.PLANT)).setRegistryName("lichen"),
                     UEBlocks.LIGNITE_BRIQUETTES = new Block(AbstractBlock.Properties.from(Blocks.COAL_BLOCK)).setRegistryName("lignite_briquettes")
@@ -133,6 +132,7 @@ public class Unearthed {
                 }
             }));
             event.getRegistry().registerAll(
+                    UEItems.PYROXENE = new BlockItem(UEBlocks.PYROXENE, properties).setRegistryName("pyroxene"),
                     UEItems.IRON_ORE = new Item(properties).setRegistryName("iron_ore"),
                     UEItems.GOLD_ORE = new Item(properties).setRegistryName("gold_ore"),
                     UEItems.PUDDLE = new BlockItem(UEBlocks.PUDDLE, new Item.Properties().group(UNEARTHED_TAB).maxStackSize(1)).setRegistryName("puddle"),

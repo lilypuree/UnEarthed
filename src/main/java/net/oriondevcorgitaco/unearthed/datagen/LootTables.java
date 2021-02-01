@@ -8,7 +8,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.data.LootTableProvider;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Items;
 import net.minecraft.loot.*;
+import net.minecraft.loot.conditions.TableBonus;
 import net.minecraft.util.ResourceLocation;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
@@ -39,8 +42,10 @@ public class LootTables extends LootTableProvider {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
                 Block block = entry.getBlock();
-                if (form == Forms.SLAB) {
+                if (form == Forms.SLAB || form == Forms.SIDETOP_SLAB) {
                     lootTables.put(block, BlockLootTableAccessor.droppingSlab(block));
+                } else if (form == Forms.SIXWAY_SLAB) {
+                    lootTables.put(block, BlockLootTableAccessor.droppingSixwaySlab(block));
                 } else if (form instanceof Forms.OreForm) {
                     lootTables.put(block, ((Forms.OreForm) form).getOreType().createLootFactory().apply(block));
                 } else if (form == Forms.GRASSY_REGOLITH) {
@@ -56,12 +61,19 @@ public class LootTables extends LootTableProvider {
                 }
             }
         }
+        lootTables.put(UEBlocks.PYROXENE, BlockLootTableAccessor.droppingWithSilkTouch(UEBlocks.PYROXENE,
+                BlockLootTableAccessor.withSurvivesExplosion(UEBlocks.PYROXENE,
+                        ItemLootEntry.builder(Items.FLINT).acceptCondition(
+                                TableBonus.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                                .alternatively(ItemLootEntry.builder(UEBlocks.PYROXENE)))));
+
         addBlockLoot(UEBlocks.LIGNITE_BRIQUETTES);
         lootTables.put(UEBlocks.LICHEN, BlockLootTableAccessor.onlyWithShears(UEBlocks.LICHEN));
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
         for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {
             tables.put(entry.getKey().getLootTable(), entry.getValue().setParameterSet(LootParameterSets.BLOCK).build());
         }
+
         writeTables(cache, tables);
     }
 

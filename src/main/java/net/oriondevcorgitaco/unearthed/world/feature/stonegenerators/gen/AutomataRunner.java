@@ -80,6 +80,8 @@ public class AutomataRunner {
         third.replaceRandomly((v) -> {
             return noiseHandler.getReplacement(v.getX(), v.getZ(), v.getY(), 3);
         });
+
+
         AutomataBase fourth = new AutomataBase(third) {
             @Override
             public State determineState(State up, State down, State x1, State x2, State z1, State z2, Supplier<State> stateGetter, int x, int y, int z) {
@@ -99,7 +101,9 @@ public class AutomataRunner {
                         return z2;
                 }
             }
-        };
+        };           //for the fourth automata, just using a linear congruential generator might prove more performant (xoroshiro??)
+                     //bc the requirement for the chunk borders to be equal do not hold anymore.
+                    //however I am not sure if this is worth it so just noting it in case performace is getting crucial again
         fourth.expandStateArray();
 //        applyResults(world, pos, fourth);
         return fourth.newStateArray;

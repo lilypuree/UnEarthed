@@ -9,4 +9,5 @@ public class UEItems {
     public static Item LIGNITE_BRIQUETTES;
     public static Item PUDDLE;
     public static Item LICHEN;
+    public static Item PYROXENE;
 }

@@ -85,7 +85,6 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
                 int posX = pos.getX() + x;
                 int posZ = pos.getZ() + z;
                 mutable.setPos(posX, 0, posZ);
-
                 int stratumHeight = -1;
                 int stratumDepth = 0;
                 State stratumState = null;

@@ -6,16 +6,14 @@ import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
+import net.oriondevcorgitaco.unearthed.block.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
-import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 
@@ -125,6 +123,72 @@ public class BlockStates extends BlockStateProvider {
                 .part().modelFile(baseCube).rotationX(270).rotationY(90).addModel().condition(SixWayBlock.EAST, true).end();
     }
 
+    public void beamBlock(Block block) {
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        ModelFile beamXModel = beamModel(block, Direction.Axis.X);
+        ModelFile beamYModel = beamModel(block, Direction.Axis.Y);
+        ModelFile beamZModel = beamModel(block, Direction.Axis.Z);
+        builder.partialState().with(BlockStateProperties.AXIS, Direction.Axis.X)
+                .modelForState().modelFile(beamXModel).addModel();
+        builder.partialState().with(BlockStateProperties.AXIS, Direction.Axis.Y)
+                .modelForState().modelFile(beamYModel).addModel();
+        builder.partialState().with(BlockStateProperties.AXIS, Direction.Axis.Z)
+                .modelForState().modelFile(beamZModel).addModel();
+    }
+
+    public ModelFile beamModel(Block block, Direction.Axis axis) {
+        String name = getPath(block);
+        return models().getBuilder(name + "_" + axis.getName2()).parent(
+                new ModelFile.UncheckedModelFile(modLoc("block/beam_" + axis.getName2())))
+                .texture("side", modLoc("block/" + name + "_side"))
+                .texture("end", modLoc("block/" + name + "_end"));
+    }
+
+    public ModelFile sixwaySlab(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab")))
+                .texture("side", sideTexture)
+                .texture("bottom", bottomTexture)
+                .texture("top", topTexture);
+    }
+
+    public ModelFile sixwaySlabTop(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab_top")))
+                .texture("side", sideTexture)
+                .texture("bottom", bottomTexture)
+                .texture("top", topTexture);
+    }
+
+    public ModelFile sixwaySlabSide(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab_side")))
+                .texture("side", sideTexture)
+                .texture("bottom", bottomTexture)
+                .texture("top", topTexture);
+    }
+
+    public void sixwaySlabBlock(Block block, ResourceLocation doubleSlab, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        ModelFile sideModel = sixwaySlabSide(getPath(block) + "_side", side, top, bottom);
+        getVariantBuilder(block)
+                .forAllStatesExcept((state) -> {
+                    Direction facing = state.get(BlockStateProperties.FACING);
+                    Direction.Axis axis = facing.getAxis();
+                    if (state.get(ModBlockProperties.DOUBLE)) {
+                        return new ConfiguredModel[]{
+                                new ConfiguredModel(new ModelFile.UncheckedModelFile(axis.isHorizontal() ? extend(doubleSlab, "_horizontal") : doubleSlab), axis.isHorizontal() ? 90 : 0, axis == Direction.Axis.X ? 90 : 0, false)
+                        };
+                    } else {
+                        switch (facing) {
+                            case DOWN:
+                                return new ConfiguredModel[]{new ConfiguredModel(sixwaySlab(getPath(block), side, top, bottom))};
+                            case UP:
+                                return new ConfiguredModel[]{new ConfiguredModel(sixwaySlabTop(getPath(block) + "_top", side, top, bottom))};
+                            default:
+                                return new ConfiguredModel[]{new ConfiguredModel(sideModel, 0, (int) facing.getHorizontalAngle() + 180, false)};
+                        }
+                    }
+                }, BlockStateProperties.WATERLOGGED);
+    }
+
+
     @Override
     protected void registerStatesAndModels() {
         for (BlockGeneratorHelper schema : BlockGeneratorReference.ROCK_TYPES) {
@@ -146,10 +210,16 @@ public class BlockStates extends BlockStateProvider {
                     grassyBlock(block, blockTexture(schema.getEntry(entry.getVariant(), Forms.REGOLITH).getBlock()));
                 } else if (form == Forms.SIDETOP_BLOCK) {
                     simpleBlock(block, models().cubeTop(id, stoneTexture, topTexture));
+                } else if (form == Forms.BEAM) {
+                    beamBlock(block);
                 } else if (form == Forms.AXISBLOCK) {
                     axisBlock((RotatedPillarBlock) block);
                 } else if (form == Forms.SLAB || form == Forms.SIDETOP_SLAB) {
                     slabBlock((SlabBlock) block, baseBlock, stoneTexture, topTexture, topTexture);
+                } else if (form == Forms.SIXWAY_SLAB) {
+                    ResourceLocation side = extend(stoneTexture, "_side");
+                    ResourceLocation end = extend(stoneTexture, "_end");
+                    sixwaySlabBlock(block, stoneTexture, side, end, end);
                 } else if (form == Forms.STAIRS || form == Forms.SIDETOP_STAIRS) {
                     stairsBlock((StairsBlock) block, stoneTexture, topTexture, topTexture);
                 } else if (form == Forms.WALLS) {
@@ -172,7 +242,9 @@ public class BlockStates extends BlockStateProvider {
             }
         }
         sideTopBlock(UEBlocks.LIGNITE_BRIQUETTES);
+        simpleBlock(UEBlocks.PYROXENE);
         sixWayBlock(UEBlocks.LICHEN, 0.5f, modLoc("block/lichen"));
+
     }
 
     private void sideTopBlock(Block block) {
@@ -182,6 +254,10 @@ public class BlockStates extends BlockStateProvider {
 
     private String getPath(Block ingredient) {
         return ingredient.getRegistryName().getPath();
+    }
+
+    private ResourceLocation extend(ResourceLocation rl, String suffix) {
+        return new ResourceLocation(rl.getNamespace(), rl.getPath() + suffix);
     }
 
 }

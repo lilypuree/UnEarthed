@@ -17,14 +17,16 @@ public class Variants {
     public static BlockSchema.Variant SMOOTH;
     public static BlockSchema.Variant CUT;
     public static BlockSchema.Variant CHISELED;
+    public static BlockSchema.Variant CHISELED_FULL;
     public static BlockSchema.Variant POLISHED_NOWALL;
-    public static BlockSchema.Variant CHISELED_POLISHED;
     public static BlockSchema.Variant BRICK;
     public static BlockSchema.Variant BRICKS;
     public static BlockSchema.Variant MOSSY_BRICKS;
+    public static BlockSchema.Variant CRACKED_BRICKS;
     public static BlockSchema.Variant CHISELED_BRICKS;
     public static BlockSchema.Variant POLISHED_BRICKS;
-
+    public static BlockSchema.Variant CHISELED_POLISHED;
+    public static BlockSchema.Variant CRACKED_POLISHED_BRICKS;
     public static BlockSchema.Variant PILLAR;
     public static BlockSchema.Variant POLISHED_PILLAR;
 
@@ -62,7 +64,9 @@ public class Variants {
         POLISHED_BRICKS = new ComplexVariant("polished", "brick", true, baseBlocks).setDerivative();
         BRICKS = new ComplexVariant("", "brick", true, baseBlocks).setDerivative();
         MOSSY_BRICKS = new ComplexVariant("mossy", "brick", true, baseBlocks);
+        CRACKED_BRICKS = new ComplexVariant("cracked", "brick", true, singleBlock);
         CHISELED_BRICKS = new ComplexVariant("chiseled", "brick", true, singleBlock).setDerivative();
+        CRACKED_POLISHED_BRICKS = new ComplexVariant("cracked_polished", "brick", true, singleBlock);
 
         List<BlockSchema.Form> secondary = new ArrayList<>();
         secondary.addAll(baseBlocks);
@@ -81,16 +85,17 @@ public class Variants {
         sedimentary.addAll(sideTopOres);
         sedimentary.addAll(regoliths);
         SEDIMENTARY = new BlockSchema.Variant("", sedimentary);
-        CUT = new BlockSchema.Variant("cut", Lists.newArrayList(Forms.SIDETOP_BLOCK, Forms.SIDETOP_SLAB)).setDerivative();
+        CUT = new BlockSchema.Variant("cut", Lists.newArrayList(Forms.SIDETOP_BLOCK, Forms.SIDETOP_SLAB, Forms.SIDETOP_STAIRS)).setDerivative();
         CHISELED = new BlockSchema.Variant("chiseled", Lists.newArrayList(Forms.SIDETOP_BLOCK)).setDerivative();
+        CHISELED_FULL = new BlockSchema.Variant("chiseled", Lists.newArrayList(Forms.BLOCK)).setDerivative();
         SMOOTH = new BlockSchema.Variant("smooth", noWall);
 
         PILLAR = new BlockSchema.Variant("", Forms.AXISBLOCK);
-        POLISHED_PILLAR = new BlockSchema.Variant("polished", Lists.newArrayList(Forms.AXISBLOCK)).setDerivative();
+        POLISHED_PILLAR = new BlockSchema.Variant("polished", Forms.AXISBLOCK).setDerivative();
 
         BASIC = new BlockSchema.Variant("", baseBlocks);
         BRICK = new ComplexVariant("", "bricks", false, Lists.newArrayList(Forms.BLOCK)).setDerivative();
-        PILLAR_BLOCK = new ComplexVariant("", "pillar", false, Lists.newArrayList(Forms.AXISBLOCK)).setDerivative();
+        PILLAR_BLOCK = new ComplexVariant("", "pillar", false, Lists.newArrayList(Forms.BEAM)).setDerivative();
 
         VANILLA = new BlockSchema.Variant("", all_ores);
         List<BlockSchema.Form> sandstone = new ArrayList<>();

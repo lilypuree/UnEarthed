@@ -5,9 +5,11 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "unearthed.refmap.json",
   "mixins": [
-    "server.MixinMinecraftServer",
     "server.MixinEntity",
-    "server.MixinFlatGenerationSettings"
+    "server.MixinFlatGenerationSettings",
+    "server.MixinMinecraftServer",
+    "server.MixinNetherSurfaceBuilder",
+    "server.MixinSSVSurfaceBuilder"
   ],
   "client": [
     "client.MixinClientWorld"

@@ -113,13 +113,13 @@ public class AutomataBase {
                         }
                     } else if (yMid && !zMid) {
                         if (xMid) {
-                            state = selectStatesY(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1 + 1][z1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
+                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1 + 1][z1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1 + 1][z1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         } else {
-                            state = selectStatesY(stateArray[x1][z1][y1], stateArray[x1][z1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
+                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         }
                     } else if (zMid && !xMid) {
                         if (yMid) {
-                            state = selectStatesY(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1][z1 + 1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z); //select one from four corners
+                            state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1], stateArray[x1][z1][y1 + 1], stateArray[x1][z1 + 1][y1 + 1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z); //select one from four corners
                         } else {
                             state = selectStates(stateArray[x1][z1][y1], stateArray[x1][z1 + 1][y1], basePos.getX() + cellsize2 * x, y * cellsize2, basePos.getZ() + cellsize2 * z);
                         }
@@ -190,10 +190,6 @@ public class AutomataBase {
         return randomIntFast(1, x, y, z) == 0 ? state1 : state2;
     }
 
-    protected State selectStatesY(State state1, State state2, int x, int y, int z) {
-        return selectStates(state1, state2, x, y, z);
-    }
-
     protected State selectStates(State state1, State state2, State state3, State state4, int x, int y, int z) {
         if (state1 == state2 && state2 == state3 & state3 == state4) {
             return state1;
@@ -207,11 +203,6 @@ public class AutomataBase {
             return i == 2 ? state3 : state4;
         }
     }
-
-    protected State selectStatesY(State state1, State state2, State state3, State state4, int x, int y, int z) {
-        return selectStates(state1, state2, state3, state4, x, y, z);
-    }
-
     protected State determineState(State up, State down, State x1, State x2, State z1, State z2, Supplier<State> stateGetter, int x, int y, int z) {
 //        boolean ySame = up.equals(down);
 //        boolean xSame = x1.equals(x2);

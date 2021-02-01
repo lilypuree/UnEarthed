@@ -1,5 +1,6 @@
 package net.oriondevcorgitaco.unearthed.block;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -81,15 +82,15 @@ public class BlockGeneratorReference {
         QUARTZITE = new BlockGeneratorHelper.Builder("quartzite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(METAMORPHIC)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.QUARTZ).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
-        GABBRO = new BlockGeneratorHelper.Builder("gabbro", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        GABBRO = new BlockGeneratorHelper.Builder("gabbro", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(stoneProperty).createMiscProperties().createOreProperties().build();
-        GRANODIORITE = new BlockGeneratorHelper.Builder("granodiorite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        GRANODIORITE = new BlockGeneratorHelper.Builder("granodiorite", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.LIGHT_GRAY).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
-        WHITE_GRANITE = new BlockGeneratorHelper.Builder("white_granite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        WHITE_GRANITE = new BlockGeneratorHelper.Builder("white_granite", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.from(Blocks.DIORITE))
                 .createMiscProperties().createOreProperties().build();
-        RHYOLITE = new BlockGeneratorHelper.Builder("rhyolite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        RHYOLITE = new BlockGeneratorHelper.Builder("rhyolite", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
 
@@ -103,16 +104,16 @@ public class BlockGeneratorReference {
         BEIGE_LIMESTONE = new BlockGeneratorHelper.Builder("beige_limestone", BlockSchemas.BEIGE_LIMESTONE).setTier(SECONDARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.WHITE_TERRACOTTA).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createCobbleProperties().createOreProperties().build();
-        LIMESTONE = new BlockGeneratorHelper.Builder("limestone", BlockSchemas.LIMESTONE).setTier(PRIMARY).setClassification(SEDIMENTARY)
+        LIMESTONE = new BlockGeneratorHelper.Builder("limestone", BlockSchemas.LIMESTONE_FULL).setTier(PRIMARY).setClassification(SEDIMENTARY)
                 .defaultProperty(stoneProperty).createCobbleProperties().createOreProperties().build();
-        GREY_LIMESTONE = new BlockGeneratorHelper.Builder("grey_limestone", BlockSchemas.LIMESTONE).setTier(PRIMARY).setClassification(SEDIMENTARY)
+        GREY_LIMESTONE = new BlockGeneratorHelper.Builder("grey_limestone", BlockSchemas.LIMESTONE_FULL).setTier(PRIMARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.CLAY).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createCobbleProperties().createOreProperties().build();
 
-        SILTSTONE = new BlockGeneratorHelper.Builder("siltstone", BlockSchemas.SANDSTONE_LIKE).setTier(SECONDARY).setClassification(SEDIMENTARY)
+        SILTSTONE = new BlockGeneratorHelper.Builder("siltstone", BlockSchemas.SANDSTONE_LIKE_FULL).setTier(SECONDARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ORANGE_TERRACOTTA).setRequiresTool().hardnessAndResistance(0.8f))
                 .createOreProperties().build();
-        MUDSTONE = new BlockGeneratorHelper.Builder("mudstone", BlockSchemas.SANDSTONE_LIKE).setTier(SECONDARY).setClassification(SEDIMENTARY)
+        MUDSTONE = new BlockGeneratorHelper.Builder("mudstone", new BlockSchema(Variants.SEDIMENTARY, Variants.CUT, Variants.CHISELED_FULL)).setTier(SECONDARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED_TERRACOTTA).setRequiresTool().hardnessAndResistance(0.8f))
                 .createOreProperties().build();
 
@@ -133,7 +134,7 @@ public class BlockGeneratorReference {
         MARBLE = new BlockGeneratorHelper.Builder("marble", BlockSchemas.DECORATIVE).setTier(TERTIARY).setClassification(METAMORPHIC)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.SNOW).setRequiresTool().hardnessAndResistance(2.0f, 6.0f)).build();
 
-        WEATHERED_RHYOLITE = new BlockGeneratorHelper.Builder("weathered_rhyolite", BlockSchemas.DECORATIVE).setTier(TERTIARY).setClassification(IGNEOUS)
+        WEATHERED_RHYOLITE = new BlockGeneratorHelper.Builder("weathered_rhyolite", BlockSchemas.BASIC).setTier(TERTIARY).setClassification(IGNEOUS)
                 .defaultProperty(stoneProperty).build();
         PILLOW_BASALT = new BlockGeneratorHelper.Builder("pillow_basalt", BlockSchemas.BASIC).setTier(TERTIARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.STONE).setRequiresTool().hardnessAndResistance(3.0f, 6.0f)).build();
