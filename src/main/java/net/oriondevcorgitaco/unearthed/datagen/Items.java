@@ -35,6 +35,9 @@ public class Items extends ItemModelProvider {
 
                 if (form == Forms.BUTTON || form == Forms.WALLS) {
                     blockInventoryModel(entry.getBlock());
+                } else if (form == Forms.BEAM) {
+                    String name = entry.getBlock().getRegistryName().getPath();
+                    getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc(ModelProvider.BLOCK_FOLDER + "/" + name + "_y")));
                 } else {
                     blockItemModel(entry.getBlock());
                 }
@@ -42,9 +45,10 @@ public class Items extends ItemModelProvider {
         }
         simpleItem(UEItems.GOLD_ORE);
         simpleItem(UEItems.IRON_ORE);
+        blockItemModel(UEBlocks.PYROXENE);
         blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
         blockItemModel(UEBlocks.PUDDLE);
-        blockItemModel(UEBlocks.LICHEN);
+        simpleItem(UEBlocks.LICHEN, modLoc("block/lichen"));
 //
 //        caveWallModel(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_CAVE_WALL);
 //
@@ -60,6 +64,11 @@ public class Items extends ItemModelProvider {
     private void simpleItem(IItemProvider provider) {
         String name = provider.asItem().getRegistryName().getPath();
         generated(name, modLoc("item/" + name));
+    }
+
+    private void simpleItem(IItemProvider provider, ResourceLocation texture) {
+        String name = provider.asItem().getRegistryName().getPath();
+        generated(name, texture);
     }
 
     private void generated(String path, ResourceLocation texture) {

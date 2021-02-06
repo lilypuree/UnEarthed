@@ -5,6 +5,7 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -17,6 +18,7 @@ import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.core.UEItems;
+import net.oriondevcorgitaco.unearthed.core.UETags;
 
 import javax.annotation.Nullable;
 
@@ -29,17 +31,17 @@ public class UEItemTagsProvider extends ItemTagsProvider {
     protected void registerTags() {
         ITag.INamedTag<Item> IRON_ORE_ITEM_TAG = ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "iron_ores").toString());
         ITag.INamedTag<Item> GOLD_ORE_ITEM_TAG = ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "gold_ores").toString());
-        copy(BlockGeneratorReference.IRON_ORE_TAG, IRON_ORE_ITEM_TAG);
-        copy(BlockGeneratorReference.COAL_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "coal_ores").toString()));
-        copy(BlockGeneratorReference.GOLD_ORE_TAG, GOLD_ORE_ITEM_TAG);
-        copy(BlockGeneratorReference.REDSTONE_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "redstone_ores").toString()));
-        copy(BlockGeneratorReference.LAPIS_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lapis_ores").toString()));
-        copy(BlockGeneratorReference.DIAMOND_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "diamond_ores").toString()));
-        copy(BlockGeneratorReference.EMERALD_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "emerald_ores").toString()));
-        copy(BlockGeneratorReference.IGNEOUS_TAG, BlockGeneratorReference.IGNEOUS_ITEM);
-        copy(BlockGeneratorReference.SEDIMENTARY_TAG, BlockGeneratorReference.SEDIMENTARY_ITEM);
-        copy(BlockGeneratorReference.METAMORPHIC_TAG, BlockGeneratorReference.METAMORPHIC_ITEM);
-
+        copy(UETags.Blocks.IRON_ORE_TAG, IRON_ORE_ITEM_TAG);
+        copy(UETags.Blocks.COAL_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "coal_ores").toString()));
+        copy(UETags.Blocks.GOLD_ORE_TAG, GOLD_ORE_ITEM_TAG);
+        copy(UETags.Blocks.REDSTONE_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "redstone_ores").toString()));
+        copy(UETags.Blocks.LAPIS_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lapis_ores").toString()));
+        copy(UETags.Blocks.DIAMOND_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "diamond_ores").toString()));
+        copy(UETags.Blocks.EMERALD_ORE_TAG, ItemTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "emerald_ores").toString()));
+        copy(UETags.Blocks.IGNEOUS_TAG, UETags.Items.IGNEOUS_ITEM);
+        copy(UETags.Blocks.SEDIMENTARY_TAG, UETags.Items.SEDIMENTARY_ITEM);
+        copy(UETags.Blocks.METAMORPHIC_TAG, UETags.Items.METAMORPHIC_ITEM);
+        copy(UETags.Blocks.REGOLITH_TAG, UETags.Items.REGOLITH_TAG);
         getOrCreateBuilder(IRON_ORE_ITEM_TAG).add(UEItems.IRON_ORE);
         getOrCreateBuilder(GOLD_ORE_ITEM_TAG).add(UEItems.GOLD_ORE);
 
@@ -63,5 +65,6 @@ public class UEItemTagsProvider extends ItemTagsProvider {
                 Block block = entry.getBlock();
             }
         }
+        getOrCreateBuilder(UETags.Items.REGOLITH_USABLE).add(Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE);
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side_tall",
+  "textures": {
+    "wall": "unearthed:block/polished_granodiorite_bricks"
+  }
+}

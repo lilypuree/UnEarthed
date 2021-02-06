@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:slate_bricks"
+    }
+  },
+  "result": {
+    "item": "unearthed:slate_brick_wall",
+    "count": 6
+  }
+}

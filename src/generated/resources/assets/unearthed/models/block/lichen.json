@@ -1,0 +1,52 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "texture": "unearthed:block/lichen",
+    "particle": "#texture"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        0.5,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#texture",
+          "cullface": "down",
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#texture",
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#texture",
+          "cullface": "north",
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#texture",
+          "cullface": "south",
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#texture",
+          "cullface": "west",
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#texture",
+          "cullface": "east",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

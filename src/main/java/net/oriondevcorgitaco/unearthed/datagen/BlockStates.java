@@ -1,19 +1,17 @@
 package net.oriondevcorgitaco.unearthed.datagen;
 
-
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
+import net.oriondevcorgitaco.unearthed.block.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
@@ -69,24 +67,21 @@ public class BlockStates extends BlockStateProvider {
         IOreType oreType = form.getOreType();
         String stoneTexture = "block/" + getPath(baseBlock);
         String modelName = getPath(baseBlock) + "_" + oreType.getName() + "_ore";
-        ResourceLocation mask = modLoc("block/ore/" + oreType.getName() + "_ore_mask");
-        ResourceLocation baseStoneTexture = modLoc(stoneTexture);
+        String namespace = baseBlock.getRegistryName().getNamespace();
         if (form.isSideTopBlock()) {
-            return overlayBlock(modelName, baseStoneTexture, modLoc(stoneTexture + "_top"), baseStoneTexture, mask);
+            return models().cubeTop(modelName, modLoc("block/ore/" + modelName), new ResourceLocation(namespace, stoneTexture + "_top"));
         } else {
-            return models().getBuilder(modelName)
-                    .parent(new ModelFile.UncheckedModelFile(modLoc("block/ore/ore_base")))
-                    .texture("texture", baseStoneTexture)
-                    .texture("overlay", mask);
+            return models().cubeAll(modelName, modLoc("block/ore/" + modelName));
         }
     }
 
     private void grassyBlock(Block block, ResourceLocation baseTexture) {
         ResourceLocation grass_top = mcLoc("block/grass_block_top");
-        ResourceLocation grass_overlay = modLoc("block/grass_block_side_overlay");
-        ResourceLocation snow_overlay = modLoc("block/grass_block_snow");
-        ModelFile grassyBlock = overlayBlock(block.getRegistryName().getPath(), baseTexture, grass_top, baseTexture, grass_overlay);
-        ModelFile snowyBlock = overlayBlock(block.getRegistryName().getPath() + "_snow", baseTexture, grass_top, baseTexture, snow_overlay);
+        ResourceLocation grass_overlay = mcLoc("block/grass_block_side_overlay");
+        String grassName = block.getRegistryName().getPath();
+        ModelFile grassyBlock = overlayBlock(grassName, baseTexture, grass_top, modLoc("block/side/" + grassName + "_side"), grass_overlay, true);
+        String snowName = block.getRegistryName().getPath() + "_snow";
+        ModelFile snowyBlock = models().cubeTop(snowName, modLoc("block/side/" + snowName), grass_top);
 
         getVariantBuilder(block).partialState().with(BlockStateProperties.SNOWY, false).modelForState()
                 .modelFile(grassyBlock).nextModel().modelFile(grassyBlock).rotationY(90).nextModel().modelFile(grassyBlock).rotationY(180).modelFile(grassyBlock).rotationY(270).addModel()
@@ -94,8 +89,9 @@ public class BlockStates extends BlockStateProvider {
                 .modelFile(snowyBlock).addModel();
     }
 
-    private ModelFile overlayBlock(String name, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation overlay) {
-        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/ore/overlay_horizontal")))
+    private ModelFile overlayBlock(String name, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation overlay, boolean tint) {
+        ModelFile parent = tint ? new ModelFile.UncheckedModelFile(modLoc("block/ore/tinted_overlay_horizontal")) : new ModelFile.UncheckedModelFile(modLoc("block/ore/overlay_horizontal"));
+        return models().getBuilder(name).parent(parent)
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom)
@@ -127,6 +123,72 @@ public class BlockStates extends BlockStateProvider {
                 .part().modelFile(baseCube).rotationX(270).rotationY(90).addModel().condition(SixWayBlock.EAST, true).end();
     }
 
+    public void beamBlock(Block block) {
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        ModelFile beamXModel = beamModel(block, Direction.Axis.X);
+        ModelFile beamYModel = beamModel(block, Direction.Axis.Y);
+        ModelFile beamZModel = beamModel(block, Direction.Axis.Z);
+        builder.partialState().with(BlockStateProperties.AXIS, Direction.Axis.X)
+                .modelForState().modelFile(beamXModel).addModel();
+        builder.partialState().with(BlockStateProperties.AXIS, Direction.Axis.Y)
+                .modelForState().modelFile(beamYModel).addModel();
+        builder.partialState().with(BlockStateProperties.AXIS, Direction.Axis.Z)
+                .modelForState().modelFile(beamZModel).addModel();
+    }
+
+    public ModelFile beamModel(Block block, Direction.Axis axis) {
+        String name = getPath(block);
+        return models().getBuilder(name + "_" + axis.getName2()).parent(
+                new ModelFile.UncheckedModelFile(modLoc("block/beam_" + axis.getName2())))
+                .texture("side", modLoc("block/" + name + "_side"))
+                .texture("end", modLoc("block/" + name + "_end"));
+    }
+
+    public ModelFile sixwaySlab(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab")))
+                .texture("side", sideTexture)
+                .texture("bottom", bottomTexture)
+                .texture("top", topTexture);
+    }
+
+    public ModelFile sixwaySlabTop(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab_top")))
+                .texture("side", sideTexture)
+                .texture("bottom", bottomTexture)
+                .texture("top", topTexture);
+    }
+
+    public ModelFile sixwaySlabSide(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab_side")))
+                .texture("side", sideTexture)
+                .texture("bottom", bottomTexture)
+                .texture("top", topTexture);
+    }
+
+    public void sixwaySlabBlock(Block block, ResourceLocation doubleSlab, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        ModelFile sideModel = sixwaySlabSide(getPath(block) + "_side", side, top, bottom);
+        getVariantBuilder(block)
+                .forAllStatesExcept((state) -> {
+                    Direction facing = state.get(BlockStateProperties.FACING);
+                    Direction.Axis axis = facing.getAxis();
+                    if (state.get(ModBlockProperties.DOUBLE)) {
+                        return new ConfiguredModel[]{
+                                new ConfiguredModel(new ModelFile.UncheckedModelFile(axis.isHorizontal() ? extend(doubleSlab, "_horizontal") : doubleSlab), axis.isHorizontal() ? 90 : 0, axis == Direction.Axis.X ? 90 : 0, false)
+                        };
+                    } else {
+                        switch (facing) {
+                            case DOWN:
+                                return new ConfiguredModel[]{new ConfiguredModel(sixwaySlab(getPath(block), side, top, bottom))};
+                            case UP:
+                                return new ConfiguredModel[]{new ConfiguredModel(sixwaySlabTop(getPath(block) + "_top", side, top, bottom))};
+                            default:
+                                return new ConfiguredModel[]{new ConfiguredModel(sideModel, 0, (int) facing.getHorizontalAngle() + 180, false)};
+                        }
+                    }
+                }, BlockStateProperties.WATERLOGGED);
+    }
+
+
     @Override
     protected void registerStatesAndModels() {
         for (BlockGeneratorHelper schema : BlockGeneratorReference.ROCK_TYPES) {
@@ -148,10 +210,16 @@ public class BlockStates extends BlockStateProvider {
                     grassyBlock(block, blockTexture(schema.getEntry(entry.getVariant(), Forms.REGOLITH).getBlock()));
                 } else if (form == Forms.SIDETOP_BLOCK) {
                     simpleBlock(block, models().cubeTop(id, stoneTexture, topTexture));
+                } else if (form == Forms.BEAM) {
+                    beamBlock(block);
                 } else if (form == Forms.AXISBLOCK) {
                     axisBlock((RotatedPillarBlock) block);
                 } else if (form == Forms.SLAB || form == Forms.SIDETOP_SLAB) {
                     slabBlock((SlabBlock) block, baseBlock, stoneTexture, topTexture, topTexture);
+                } else if (form == Forms.SIXWAY_SLAB) {
+                    ResourceLocation side = extend(stoneTexture, "_side");
+                    ResourceLocation end = extend(stoneTexture, "_end");
+                    sixwaySlabBlock(block, stoneTexture, side, end, end);
                 } else if (form == Forms.STAIRS || form == Forms.SIDETOP_STAIRS) {
                     stairsBlock((StairsBlock) block, stoneTexture, topTexture, topTexture);
                 } else if (form == Forms.WALLS) {
@@ -168,11 +236,15 @@ public class BlockStates extends BlockStateProvider {
                     } else {
                         simpleBlock(block, oreModel(schema.getBaseBlock(), (Forms.OreForm) form));
                     }
+                } else if (form == Forms.OVERGROWN_ROCK) {
+                    grassyBlock(block, blockTexture(schema.getBaseBlock()));
                 }
             }
         }
         sideTopBlock(UEBlocks.LIGNITE_BRIQUETTES);
+        simpleBlock(UEBlocks.PYROXENE);
         sixWayBlock(UEBlocks.LICHEN, 0.5f, modLoc("block/lichen"));
+
     }
 
     private void sideTopBlock(Block block) {
@@ -182,6 +254,10 @@ public class BlockStates extends BlockStateProvider {
 
     private String getPath(Block ingredient) {
         return ingredient.getRegistryName().getPath();
+    }
+
+    private ResourceLocation extend(ResourceLocation rl, String suffix) {
+        return new ResourceLocation(rl.getNamespace(), rl.getPath() + suffix);
     }
 
 }

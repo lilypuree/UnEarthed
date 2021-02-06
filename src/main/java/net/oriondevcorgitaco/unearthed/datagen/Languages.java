@@ -33,6 +33,7 @@ public class Languages extends LanguageProvider {
         addBlock(UEBlocks.PUDDLE);
         addItem(UEItems.GOLD_ORE);
         addItem(UEItems.IRON_ORE);
+        addBlock(UEBlocks.PYROXENE);
         add("itemGroup.unearthed", "Unearthed");
 //        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALACTITE, "Beige Limestone Stalactite");
 //        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALAGMITE, "Beige Limestone Stalagmite");

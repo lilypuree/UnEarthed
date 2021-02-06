@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:lignite"
+  },
+  "result": "unearthed:lignite_wall",
+  "count": 1
+}

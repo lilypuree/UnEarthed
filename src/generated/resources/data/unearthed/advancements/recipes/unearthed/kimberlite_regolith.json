@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:kimberlite_regolith"
+    ]
+  },
+  "criteria": {
+    "has_kimberlite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:kimberlite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:kimberlite_regolith"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_kimberlite",
+      "has_the_recipe"
+    ]
+  ]
+}

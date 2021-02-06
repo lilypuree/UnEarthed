@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:phyllite",
+    "unearthed:slate",
+    "unearthed:quartzite",
+    "unearthed:gabbro",
+    "unearthed:granodiorite",
+    "unearthed:white_granite",
+    "unearthed:rhyolite",
+    "unearthed:dolomite",
+    "unearthed:conglomerate",
+    "unearthed:beige_limestone",
+    "unearthed:limestone",
+    "unearthed:grey_limestone",
+    "unearthed:siltstone",
+    "unearthed:mudstone",
+    "minecraft:stone"
+  ]
+}

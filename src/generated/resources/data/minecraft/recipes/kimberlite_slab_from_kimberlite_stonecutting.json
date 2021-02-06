@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:kimberlite"
+  },
+  "result": "unearthed:kimberlite_slab",
+  "count": 2
+}

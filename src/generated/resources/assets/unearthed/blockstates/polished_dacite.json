@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "unearthed:block/polished_dacite_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "unearthed:block/polished_dacite"
+    },
+    "axis=z": {
+      "model": "unearthed:block/polished_dacite_horizontal",
+      "x": 90
+    }
+  }
+}

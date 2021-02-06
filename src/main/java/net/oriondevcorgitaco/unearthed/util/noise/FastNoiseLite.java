@@ -52,7 +52,7 @@ package net.oriondevcorgitaco.unearthed.util.noise;// MIT License
 // /*FNLfloat*/ float
 // /*FNLfloat*/ double
 
-import com.ibm.icu.impl.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class FastNoiseLite {
     public enum NoiseType {
@@ -365,8 +365,8 @@ public class FastNoiseLite {
         x *= mFrequency;
         y *= mFrequency;
         Pair<Vector2, Float> result = CellularDistance2Center(mSeed, x, y);
-        result.first.x /= mFrequency;
-        result.first.y /= mFrequency;
+        result.getKey().x /= mFrequency;
+        result.getKey().y /= mFrequency;
         return result;
     }
 

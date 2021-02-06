@@ -1,9 +1,8 @@
 package net.oriondevcorgitaco.unearthed.block;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.common.Tags;
+import net.oriondevcorgitaco.unearthed.core.UETags;
 
 import java.util.Random;
 
@@ -14,13 +13,13 @@ public class UEOreBlock extends OreBlock {
 
     @Override
     protected int getExperience(Random random) {
-        if (this.isIn(Tags.Blocks.ORES_COAL)) {
+        if (this.isIn(UETags.Blocks.COAL_ORE_TAG)) {
             return MathHelper.nextInt(random, 0, 2);
-        } else if (this.isIn(Tags.Blocks.ORES_DIAMOND)) {
+        } else if (this.isIn(UETags.Blocks.DIAMOND_ORE_TAG)) {
             return MathHelper.nextInt(random, 3, 7);
-        } else if (this.isIn(Tags.Blocks.ORES_EMERALD)) {
+        } else if (this.isIn(UETags.Blocks.EMERALD_ORE_TAG)) {
             return MathHelper.nextInt(random, 3, 7);
-        } else if (this.isIn(Tags.Blocks.ORES_LAPIS)) {
+        } else if (this.isIn(UETags.Blocks.LAPIS_ORE_TAG)) {
             return MathHelper.nextInt(random, 2, 5);
         } else
             return 0;

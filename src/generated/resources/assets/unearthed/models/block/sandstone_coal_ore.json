@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "unearthed:block/ore/sandstone_coal_ore",
+    "top": "minecraft:block/sandstone_top"
+  }
+}

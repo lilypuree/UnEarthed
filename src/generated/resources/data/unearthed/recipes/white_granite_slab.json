@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:white_granite"
+    }
+  },
+  "result": {
+    "item": "unearthed:white_granite_slab",
+    "count": 6
+  }
+}

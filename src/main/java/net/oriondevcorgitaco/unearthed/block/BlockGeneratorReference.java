@@ -1,32 +1,21 @@
 package net.oriondevcorgitaco.unearthed.block;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.Item;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
-import net.oriondevcorgitaco.unearthed.Unearthed;
+import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchemas;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
-import net.oriondevcorgitaco.unearthed.block.schema.StoneClassification;
-import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
+import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.IGNEOUS;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.METAMORPHIC;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.SEDIMENTARY;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.PRIMARY;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.SECONDARY;
-import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.TERTIARY;
+import static net.oriondevcorgitaco.unearthed.block.schema.StoneClassification.*;
+import static net.oriondevcorgitaco.unearthed.block.schema.StoneTiers.*;
 
 public class BlockGeneratorReference {
 
@@ -65,6 +54,13 @@ public class BlockGeneratorReference {
     public static final BlockGeneratorHelper MUDSTONE;
     public static final BlockGeneratorHelper LIGNITE;
 
+    //vanilla
+    public static final BlockGeneratorHelper GRANITE;
+    public static final BlockGeneratorHelper DIORITE;
+    public static final BlockGeneratorHelper ANDESITE;
+    public static final BlockGeneratorHelper SANDSTONE;
+    public static final BlockGeneratorHelper STONE;
+
     public static void init() {
         for (BlockGeneratorHelper schema : BlockGeneratorReference.ROCK_TYPES) {
             for (BlockGeneratorHelper.Entry entry : schema.getEntries()) {
@@ -86,15 +82,15 @@ public class BlockGeneratorReference {
         QUARTZITE = new BlockGeneratorHelper.Builder("quartzite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(METAMORPHIC)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.QUARTZ).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
-        GABBRO = new BlockGeneratorHelper.Builder("gabbro", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        GABBRO = new BlockGeneratorHelper.Builder("gabbro", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(stoneProperty).createMiscProperties().createOreProperties().build();
-        GRANODIORITE = new BlockGeneratorHelper.Builder("granodiorite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        GRANODIORITE = new BlockGeneratorHelper.Builder("granodiorite", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.LIGHT_GRAY).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
-        WHITE_GRANITE = new BlockGeneratorHelper.Builder("white_granite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        WHITE_GRANITE = new BlockGeneratorHelper.Builder("white_granite", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.from(Blocks.DIORITE))
                 .createMiscProperties().createOreProperties().build();
-        RHYOLITE = new BlockGeneratorHelper.Builder("rhyolite", BlockSchemas.BLACKSTONE_LIKE).setTier(PRIMARY).setClassification(IGNEOUS)
+        RHYOLITE = new BlockGeneratorHelper.Builder("rhyolite", BlockSchemas.BLACKSTONE_LIKE_FULL).setTier(PRIMARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createMiscProperties().createOreProperties().build();
 
@@ -108,16 +104,16 @@ public class BlockGeneratorReference {
         BEIGE_LIMESTONE = new BlockGeneratorHelper.Builder("beige_limestone", BlockSchemas.BEIGE_LIMESTONE).setTier(SECONDARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.WHITE_TERRACOTTA).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createCobbleProperties().createOreProperties().build();
-        LIMESTONE = new BlockGeneratorHelper.Builder("limestone", BlockSchemas.LIMESTONE).setTier(PRIMARY).setClassification(SEDIMENTARY)
+        LIMESTONE = new BlockGeneratorHelper.Builder("limestone", BlockSchemas.LIMESTONE_FULL).setTier(PRIMARY).setClassification(SEDIMENTARY)
                 .defaultProperty(stoneProperty).createCobbleProperties().createOreProperties().build();
-        GREY_LIMESTONE = new BlockGeneratorHelper.Builder("grey_limestone", BlockSchemas.LIMESTONE).setTier(PRIMARY).setClassification(SEDIMENTARY)
+        GREY_LIMESTONE = new BlockGeneratorHelper.Builder("grey_limestone", BlockSchemas.LIMESTONE_FULL).setTier(PRIMARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.CLAY).setRequiresTool().hardnessAndResistance(stoneHardness, stoneResistance))
                 .createCobbleProperties().createOreProperties().build();
 
-        SILTSTONE = new BlockGeneratorHelper.Builder("siltstone", BlockSchemas.SANDSTONE_LIKE).setTier(SECONDARY).setClassification(SEDIMENTARY)
+        SILTSTONE = new BlockGeneratorHelper.Builder("siltstone", BlockSchemas.SANDSTONE_LIKE_FULL).setTier(SECONDARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ORANGE_TERRACOTTA).setRequiresTool().hardnessAndResistance(0.8f))
                 .createOreProperties().build();
-        MUDSTONE = new BlockGeneratorHelper.Builder("mudstone", BlockSchemas.SANDSTONE_LIKE).setTier(SECONDARY).setClassification(SEDIMENTARY)
+        MUDSTONE = new BlockGeneratorHelper.Builder("mudstone", new BlockSchema(Variants.SEDIMENTARY, Variants.CUT, Variants.CHISELED_FULL)).setTier(SECONDARY).setClassification(SEDIMENTARY)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED_TERRACOTTA).setRequiresTool().hardnessAndResistance(0.8f))
                 .createOreProperties().build();
 
@@ -138,30 +134,25 @@ public class BlockGeneratorReference {
         MARBLE = new BlockGeneratorHelper.Builder("marble", BlockSchemas.DECORATIVE).setTier(TERTIARY).setClassification(METAMORPHIC)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.SNOW).setRequiresTool().hardnessAndResistance(2.0f, 6.0f)).build();
 
-        WEATHERED_RHYOLITE = new BlockGeneratorHelper.Builder("weathered_rhyolite", BlockSchemas.DECORATIVE).setTier(TERTIARY).setClassification(IGNEOUS)
+        WEATHERED_RHYOLITE = new BlockGeneratorHelper.Builder("weathered_rhyolite", BlockSchemas.BASIC).setTier(TERTIARY).setClassification(IGNEOUS)
                 .defaultProperty(stoneProperty).build();
         PILLOW_BASALT = new BlockGeneratorHelper.Builder("pillow_basalt", BlockSchemas.BASIC).setTier(TERTIARY).setClassification(IGNEOUS)
                 .defaultProperty(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.STONE).setRequiresTool().hardnessAndResistance(3.0f, 6.0f)).build();
+
+        GRANITE = new BlockGeneratorHelper.Builder("granite", BlockSchemas.INTRUSIVE).setTier(VANILLA).setClassification(IGNEOUS)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.GRANITE)).createOreProperties().build();
+        GRANITE.setDefaultBlock(Blocks.GRANITE);
+        DIORITE = new BlockGeneratorHelper.Builder("diorite", BlockSchemas.INTRUSIVE).setTier(VANILLA).setClassification(IGNEOUS)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.DIORITE)).createOreProperties().build();
+        DIORITE.setDefaultBlock(Blocks.DIORITE);
+        ANDESITE = new BlockGeneratorHelper.Builder("andesite", BlockSchemas.INTRUSIVE).setTier(VANILLA).setClassification(IGNEOUS)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.ANDESITE)).createOreProperties().build();
+        ANDESITE.setDefaultBlock(Blocks.ANDESITE);
+        SANDSTONE = new BlockGeneratorHelper.Builder("sandstone", new BlockSchema(Variants.SANDSTONE)).setTier(VANILLA).setClassification(SEDIMENTARY)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.SANDSTONE)).createOreProperties().createRegolithProperties().build();
+        SANDSTONE.setDefaultBlock(Blocks.SANDSTONE);
+        STONE = new BlockGeneratorHelper.Builder("stone", new BlockSchema(Variants.REGOLITHS)).setTier(VANILLA).setClassification(SEDIMENTARY)
+                .defaultProperty(AbstractBlock.Properties.from(Blocks.STONE)).createRegolithProperties().build();
+        STONE.setDefaultBlock(Blocks.STONE);
     }
-
-    public static final ITag.INamedTag<Block> IRON_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "iron_ores").toString());
-    public static final ITag.INamedTag<Block> COAL_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "coal_ores").toString());
-    public static final ITag.INamedTag<Block> GOLD_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "gold_ores").toString());
-    public static final ITag.INamedTag<Block> LAPIS_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lapis_ores").toString());
-    public static final ITag.INamedTag<Block> REDSTONE_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "redstone_ores").toString());
-    public static final ITag.INamedTag<Block> DIAMOND_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "diamond_ores").toString());
-    public static final ITag.INamedTag<Block> EMERALD_ORE_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "emerald_ores").toString());
-    public static final ITag.INamedTag<Block> REGOLITH_TAG = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "regolith").toString());
-
-    public static final ITag.INamedTag<Block> SEDIMENTARY_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":sedimentary");
-    public static final ITag.INamedTag<Block> IGNEOUS_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
-    public static final ITag.INamedTag<Block> METAMORPHIC_TAG = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");
-
-    public static final ITag.INamedTag<Block> REPLACABLE = BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":replaceable");
-
-    public static final ITag.INamedTag<Item> SEDIMENTARY_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":sedimentary");
-    public static final ITag.INamedTag<Item> IGNEOUS_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":igneous");
-    public static final ITag.INamedTag<Item> METAMORPHIC_ITEM = ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":metamorphic");
-
-//    public static final ITag.INamedTag<Block> LICHEN_SUBSTRATE = BlockTags.makeWrapperTag(new ResourceLocation(Unearthed.MOD_ID, "lichen_substrate"))
 }

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "unearthed:block/gabbro_grassy_regolith"
+      },
+      {
+        "model": "unearthed:block/gabbro_grassy_regolith",
+        "y": 90
+      },
+      {
+        "model": "unearthed:block/gabbro_grassy_regolith",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "unearthed:block/gabbro_grassy_regolith_snow"
+    }
+  }
+}

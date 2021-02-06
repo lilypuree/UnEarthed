@@ -12,7 +12,6 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
-import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 
 import java.util.Random;
 
@@ -44,7 +43,7 @@ public class TrueMesaGenerator extends Feature<NoFeatureConfig> {
     }
 
     public static boolean useStoneTag(ISeedReader world, BlockPos mutable) {
-        boolean stoneTag = UnearthedConfig.stoneTag.get();
+        boolean stoneTag = UnearthedConfig.replaceableTag.get();
         if (stoneTag)
             return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
         else

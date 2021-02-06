@@ -10,9 +10,8 @@ public class AutomataFiller extends AutomataBase {
 
     private State[][] subChunkStates = new State[5][yHeight];
 
-    public AutomataFiller(ISeedReader world, BlockPos basePos, final int maxHeight) {
-        super(world, basePos, 16, 2, 2, (int) Math.ceil((maxHeight - 1.0f) / 16) + 1);
-
+    public AutomataFiller(long seed, BlockPos basePos, final int maxHeight, NoiseHandler noiseHandler) {
+        super(seed, basePos, 16, 2, 2, (maxHeight + 30) / 16, noiseHandler);
     }
 
     //fill the initial stateArray
@@ -36,7 +35,7 @@ public class AutomataFiller extends AutomataBase {
 //            subchunkContinuity[y] = isSubChunkContinuous(y);
 //        }
         for (int y = 0; y < yHeight2; y++) {
-            boolean yMid = y % 2 == 1;
+//            boolean yMid = y % 2 == 1;
             //check if the surrounding chunks have the same state
 //            if (subchunkContinuity[y / 2] && (!yMid || subchunkContinuity[y / 2 + 1])) {
 //                fillInLayerWithState(y, subChunkStates[2][y / 2]);
@@ -87,8 +86,8 @@ public class AutomataFiller extends AutomataBase {
 //    protected State getState(int x, int z, int y) {
 //        return stateGetter.apply(new Vector3i(x * 4, z * 4, y * 4));
 //    }
-
-    //    /**
+//
+//    /**
 //     * x and z are chunk position offsets
 //     */
 //    private State getSubChunkState(int xOff, int zOff, int yOff) {

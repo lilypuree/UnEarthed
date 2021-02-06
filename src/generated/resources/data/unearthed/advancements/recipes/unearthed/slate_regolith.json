@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:slate_regolith"
+    ]
+  },
+  "criteria": {
+    "has_slate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:slate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:slate_regolith"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slate",
+      "has_the_recipe"
+    ]
+  ]
+}

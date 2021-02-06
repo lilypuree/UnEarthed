@@ -1,110 +1,61 @@
 package net.oriondevcorgitaco.unearthed.block;
 
-import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.block.*;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UEItems;
 
-import javax.annotation.Nullable;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-public class LichenBlock extends Block {
+public class LichenBlock extends VanillaLichenParentBlock implements IWaterLoggable {
     public static BooleanProperty WET = ModBlockProperties.WET;
-    public static final BooleanProperty UP = SixWayBlock.UP;
-    public static final BooleanProperty DOWN = SixWayBlock.DOWN;
-    public static final BooleanProperty NORTH = SixWayBlock.NORTH;
-    public static final BooleanProperty EAST = SixWayBlock.EAST;
-    public static final BooleanProperty SOUTH = SixWayBlock.SOUTH;
-    public static final BooleanProperty WEST = SixWayBlock.WEST;
+    public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> FACING_TO_PROPERTY_MAP = SixWayBlock.FACING_TO_PROPERTY_MAP;
-    private static final VoxelShape UP_AABB = Block.makeCuboidShape(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    private static final VoxelShape DOWN_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-    private static final VoxelShape EAST_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
-    private static final VoxelShape WEST_AABB = Block.makeCuboidShape(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    private static final VoxelShape SOUTH_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D);
-    private static final VoxelShape NORTH_AABB = Block.makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
-    private final Map<BlockState, VoxelShape> stateToShapeMap;
 
     private static Map<Block, Block> lichenErosionMap = new Object2ObjectOpenHashMap<>();
 
     public LichenBlock(AbstractBlock.Properties properties) {
         super(properties);
-        this.setDefaultState(this.getStateContainer().getBaseState()
-                .with(UP, false).with(DOWN, false).with(WEST, false).with(EAST, false).with(NORTH, false).with(SOUTH, false));
-        this.stateToShapeMap = ImmutableMap.copyOf(this.stateContainer.getValidStates().stream().collect(Collectors.toMap(Function.identity(), LichenBlock::getShapeForState)));
+        this.setDefaultState(this.getDefaultState().with(WET, true).with(WATERLOGGED, false));
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(WET, UP, DOWN, NORTH, SOUTH, EAST, WEST);
-    }
-
-    private static VoxelShape getShapeForState(BlockState state) {
-        boolean hasValue = false;
-        VoxelShape voxelshape = VoxelShapes.empty();
-        if (state.get(UP)) {
-            voxelshape = UP_AABB;
-            hasValue = true;
-        }
-        if (state.get(DOWN)) {
-            voxelshape = VoxelShapes.or(voxelshape, DOWN_AABB);
-            hasValue = true;
-        }
-        if (state.get(NORTH)) {
-            voxelshape = VoxelShapes.or(voxelshape, SOUTH_AABB);
-            hasValue = true;
-        }
-        if (state.get(SOUTH)) {
-            voxelshape = VoxelShapes.or(voxelshape, NORTH_AABB);
-            hasValue = true;
-        }
-        if (state.get(EAST)) {
-            voxelshape = VoxelShapes.or(voxelshape, WEST_AABB);
-            hasValue = true;
-        }
-        if (state.get(WEST)) {
-            voxelshape = VoxelShapes.or(voxelshape, EAST_AABB);
-            hasValue = true;
-        }
-        if (!hasValue) {
-            return VoxelShapes.fullCube();
-        }
-
-        return voxelshape;
-    }
-
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return this.stateToShapeMap.get(state);
+        super.fillStateContainer(builder);
+        builder.add(WET, WATERLOGGED);
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        return this.getBlocksAttachedTo(this.updateState(state, worldIn, pos));
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if ((Boolean) stateIn.get(WATERLOGGED)) {
+            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+        }
+        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
-    private boolean getBlocksAttachedTo(BlockState state) {
-        return countBlocksLichenIsAttachedTo(state) > 0;
+    @Override
+    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+        return !(useContext.getItem().getItem() == UEItems.LICHEN) || super.isReplaceable(state, useContext);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
     public static int countBlocksLichenIsAttachedTo(BlockState state) {
@@ -115,64 +66,6 @@ public class LichenBlock extends Block {
             }
         }
         return i;
-    }
-
-    private BlockState updateState(BlockState state, IBlockReader blockReader, BlockPos pos) {
-        for (Direction direction : Direction.values()) {
-            if (state.get(getPropertyFor(direction))) {
-                BlockPos neighbor = pos.offset(direction);
-                state = state.with(getPropertyFor(direction), canAttachTo(blockReader, neighbor, direction));
-            }
-        }
-        return state;
-    }
-
-    public static boolean canAttachTo(IBlockReader blockReader, BlockPos posIn, Direction neighborPos) {
-        BlockState blockstate = blockReader.getBlockState(posIn);
-        return Block.doesSideFillSquare(blockstate.getCollisionShape(blockReader, posIn), neighborPos.getOpposite());
-    }
-
-    public static boolean canGrowOn(IBlockReader blockReader, BlockPos posIn) {
-        BlockState blockstate = blockReader.getBlockState(posIn);
-        return lichenErosionMap.containsKey(blockstate.getBlock()) || lichenErosionMap.containsValue(blockstate.getBlock());
-//        return Block.doesSideFillSquare(blockstate.getCollisionShape(blockReader, posIn), neighborPos.getOpposite());
-    }
-
-    @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        BlockState blockstate = this.updateState(stateIn, worldIn, currentPos);
-        return !this.getBlocksAttachedTo(blockstate) ? Blocks.AIR.getDefaultState() : blockstate;
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        Direction face = context.getFace();
-        World world = context.getWorld();
-        BlockPos pos = context.getPos();
-        BlockState originalState = world.getBlockState(pos);
-
-        boolean isLichen = originalState.isIn(this);
-        BlockState blockstate = isLichen ? originalState : this.getDefaultState();
-
-        for (Direction direction : context.getNearestLookingDirections()) {
-            BooleanProperty booleanProperty = getPropertyFor(direction);
-            boolean exists = isLichen && originalState.get(booleanProperty);
-            if (!exists && canAttachTo(world, pos.offset(direction), direction)) {
-                return blockstate.with(booleanProperty, true);
-            }
-        }
-        return isLichen ? blockstate : null;
-    }
-
-    @Override
-    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-        BlockState blockstate = useContext.getWorld().getBlockState(useContext.getPos());
-        if (blockstate.isIn(this)) {
-            return this.countBlocksLichenIsAttachedTo(blockstate) < FACING_TO_PROPERTY_MAP.size();
-        } else {
-            return super.isReplaceable(state, useContext);
-        }
     }
 
     @Override
@@ -192,7 +85,9 @@ public class LichenBlock extends Block {
         }
         if (isWet) {
             if (random.nextInt(4) == 0) {
-                growToConnectedBlockFace(state, worldIn, pos, random);
+                if (!hasEnoughLichen(worldIn, pos, 10, 2, 2)) {
+                    tryGrowth(state, worldIn, pos, random);
+                }
             }
             if (random.nextInt(5) == 0) {
                 for (Direction dir : Direction.values()) {
@@ -209,47 +104,6 @@ public class LichenBlock extends Block {
             if (worldIn.getFluidState(blockpos).isTagged(FluidTags.WATER) || worldIn.getBlockState(blockpos).isIn(UEBlocks.PUDDLE)) {
                 return true;
             }
-        }
-        return false;
-    }
-
-    private static void growToConnectedBlockFace(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int count = 0;
-        Direction face;
-        do {
-            face = Direction.getRandomDirection(random);
-            if (count++ > 20) {
-                return;
-            }
-        } while (!state.get(getPropertyFor(face)));
-
-        Direction growthDir;
-        do {
-            growthDir = Direction.getRandomDirection(random);
-        } while (growthDir == face || growthDir == face.getOpposite());
-
-        BlockPos newPos = pos.offset(growthDir);
-        if (canGrowOn(world, newPos)) {
-            world.setBlockState(pos, state.with(getPropertyFor(growthDir), true), 2);
-        } else if (!tryGrowIntoBlock(world, newPos, face, false)) {
-            if (world.getBlockState(newPos).isAir()) {
-                tryGrowIntoBlock(world, newPos.offset(face), growthDir.getOpposite(), false);
-            }
-        }
-
-    }
-
-    public static boolean tryGrowIntoBlock(World world, BlockPos pos, Direction side, boolean fromPuddle) {
-        BlockState block = world.getBlockState(pos);
-        BlockState newBlock = null;
-        if (block.isAir()) {
-            newBlock = UEBlocks.LICHEN.getDefaultState();
-        } else if (block.isIn(UEBlocks.LICHEN)) {
-            newBlock = block;
-        }
-        if (newBlock != null && (fromPuddle ? canAttachTo(world, pos.offset(side), side) : canGrowOn(world, pos.offset(side)))) {
-            world.setBlockState(pos, newBlock.with(getPropertyFor(side), true));
-            return true;
         }
         return false;
     }
@@ -288,30 +142,4 @@ public class LichenBlock extends Block {
             }
         }
     }
-
-    public static BooleanProperty getPropertyFor(Direction side) {
-        return FACING_TO_PROPERTY_MAP.get(side);
-    }
-
-    @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.NORTH)), state.get(NORTH))
-                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.SOUTH)), state.get(SOUTH))
-                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.EAST)), state.get(EAST))
-                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.WEST)), state.get(WEST))
-                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.UP)), state.get(UP))
-                .with(FACING_TO_PROPERTY_MAP.get(rot.rotate(Direction.DOWN)), state.get(DOWN));
-    }
-
-    @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.NORTH)), state.get(NORTH))
-                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.SOUTH)), state.get(SOUTH))
-                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.EAST)), state.get(EAST))
-                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.WEST)), state.get(WEST))
-                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.UP)), state.get(UP))
-                .with(FACING_TO_PROPERTY_MAP.get(mirrorIn.mirror(Direction.DOWN)), state.get(DOWN));
-    }
-
-
 }

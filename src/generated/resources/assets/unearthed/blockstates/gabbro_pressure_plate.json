@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "unearthed:block/gabbro_pressure_plate"
+    },
+    "powered=true": {
+      "model": "unearthed:block/gabbro_pressure_plate_down"
+    }
+  }
+}

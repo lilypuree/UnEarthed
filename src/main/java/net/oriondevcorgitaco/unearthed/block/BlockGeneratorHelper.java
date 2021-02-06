@@ -4,12 +4,13 @@ package net.oriondevcorgitaco.unearthed.block;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
-import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.schema.*;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BlockGeneratorHelper {
@@ -24,6 +25,7 @@ public class BlockGeneratorHelper {
     //    private Map<IOreType, BlockState> oreMap;
     private StoneTiers tier;
     private StoneClassification classification;
+    private Block defaultBlock = Blocks.STONE;
 
     private BlockGeneratorHelper(String name, BlockSchema blockSchema, PressurePlateBlock.Sensitivity sensitivity, List<Entry> blocks, StoneTiers tier, StoneClassification classification) {
         this.name = name;
@@ -33,10 +35,14 @@ public class BlockGeneratorHelper {
         this.tier = tier;
         this.classification = classification;
 
-        baseEntry = blocks.stream().filter(Entry::isBaseEntry).findAny().get();
+        baseEntry = blocks.stream().filter(Entry::isBaseEntry).findAny().orElse(null);
         variantBaseEntries = blocks.stream().filter(entry -> entry.getForm().isBaseForm()).collect(Collectors.toMap(Entry::getVariant, entry -> entry));
         BlockGeneratorReference.ROCK_TYPES.add(this);
-        StoneWrapper.allStoneWrappers.add(new StoneWrapper(Unearthed.MOD_ID + ":" + name));
+//        StoneWrapper.allStoneWrappers.add(new StoneWrapper(Unearthed.MOD_ID + ":" + name));
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<Entry> getEntries() {
@@ -44,7 +50,15 @@ public class BlockGeneratorHelper {
     }
 
     public Block getBaseBlock() {
-        return baseEntry != null ? baseEntry.getBlock() : Blocks.STONE;
+        if (baseEntry != null) {
+            return baseEntry.getBlock();
+        } else {
+            return defaultBlock;
+        }
+    }
+
+    public void setDefaultBlock(Block block) {
+        this.defaultBlock = block;
     }
 
     public Entry getBaseEntry() {
@@ -55,12 +69,12 @@ public class BlockGeneratorHelper {
         if (variantBaseEntries.containsKey(variant)) {
             return variantBaseEntries.get(variant).getBlock();
         } else {
-            return Blocks.STONE;
+            return defaultBlock;
         }
     }
 
     public Entry getEntry(BlockSchema.Variant variant, BlockSchema.Form form) {
-        return blocks.stream().filter(entry -> entry.form == form && entry.variant == variant).findAny().get();
+        return blocks.stream().filter(entry -> entry.form == form && entry.variant == variant).findAny().orElse(null);
     }
 
 //    public BlockState getOreBlock(IOreType oreType) {

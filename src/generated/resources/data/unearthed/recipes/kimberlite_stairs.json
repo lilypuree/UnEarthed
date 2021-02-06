@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:kimberlite"
+    }
+  },
+  "result": {
+    "item": "unearthed:kimberlite_stairs",
+    "count": 4
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "unearthed:siltstone"
+      },
+      {
+        "item": "unearthed:chiseled_siltstone"
+      }
+    ]
+  },
+  "result": {
+    "item": "unearthed:siltstone_slab",
+    "count": 6
+  }
+}

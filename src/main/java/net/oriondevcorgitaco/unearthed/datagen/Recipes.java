@@ -1,6 +1,5 @@
 package net.oriondevcorgitaco.unearthed.datagen;
 
-import com.google.common.collect.Lists;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.block.Block;
@@ -9,6 +8,7 @@ import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
@@ -17,10 +17,10 @@ import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UETags;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
@@ -48,7 +48,7 @@ public class Recipes extends RecipeProvider {
 
                 if (form instanceof Forms.OreForm) {
 //                    ((Forms.OreForm) form).getOreType().addCookingRecipes(block, consumer);
-                } else if (form == Forms.SLAB || form == Forms.SIDETOP_SLAB) {
+                } else if (form == Forms.SLAB || form == Forms.SIDETOP_SLAB || form == Forms.SIXWAY_SLAB) {
                     if (variant.isBaseVariant() && type.getSchema().getVariants().contains(Variants.CHISELED)) {
                         slabRecipeOf(block, baseBlock, type.getBaseBlock(Variants.CHISELED));
                     } else {
@@ -65,6 +65,8 @@ public class Recipes extends RecipeProvider {
                     pressurePlateRecipeOf(type, variant);
                 } else if (form == Forms.BUTTON) {
                     buttonRecipeOf(type, variant);
+                } else if (form == Forms.REGOLITH) {
+                    regolithConversionRecipe(block, typeBaseBlock);
                 } else if (entry.isBaseEntry()) {
                     if (type.getSchema().getVariants().contains(Variants.COBBLED)) {
                         stoneSmeltingRecipeOf(block, type.getBaseBlock(Variants.COBBLED));
@@ -73,28 +75,57 @@ public class Recipes extends RecipeProvider {
                     stoneCuttingRecipes(type, variant, form, 1);
                     if (variant == Variants.BRICK || variant == Variants.BRICKS || variant == Variants.POLISHED || variant == Variants.CUT || variant == Variants.POLISHED_PILLAR || variant == Variants.POLISHED_NOWALL) {
                         brickRecipeOf(block, typeBaseBlock);
+                    } else if (variant == Variants.POLISHED_BRICKS){
+                        brickRecipeOf(block, type.getBaseBlock(Variants.POLISHED));
                     } else if (variant == Variants.SMOOTH) {
                         stoneSmeltingRecipeOf(block, typeBaseBlock);
-                    } else if (variant == Variants.CHISELED) {
-                        chiseledRecipeOf(block, type.getEntry(type.getBaseEntry().getVariant(), Forms.SLAB).getBlock(), typeBaseBlock);
+                    } else if (variant == Variants.CHISELED || variant == Variants.CHISELED_FULL) {
+                        BlockGeneratorHelper.Entry form1 = type.getEntry(type.getBaseEntry().getVariant(), Forms.SLAB);
+                        BlockGeneratorHelper.Entry form2 = type.getEntry(type.getBaseEntry().getVariant(), Forms.SIDETOP_SLAB);
+                        chiseledRecipeOf(block, (form1 == null) ? form2.getBlock() : form1.getBlock(), typeBaseBlock);
                     } else if (variant == Variants.CHISELED_BRICKS) {
                         chiseledRecipeOf(block, type.getEntry(Variants.BRICKS, Forms.SLAB).getBlock(), type.getBaseBlock(Variants.BRICKS));
                     } else if (variant == Variants.CHISELED_POLISHED) {
                         chiseledRecipeOf(block, type.getEntry(Variants.POLISHED, Forms.SLAB).getBlock(), type.getBaseBlock(Variants.POLISHED));
-                    } else if (variant == Variants.PILLAR) {
+                    } else if (variant.getForms().contains(Forms.AXISBLOCK) || variant == Variants.PILLAR_BLOCK) {
                         pillarRecipeOf(block, typeBaseBlock, typeBaseBlock);
+                    } else if (variant == Variants.MOSSY_COBBLED) {
+                        mossyRecipe(type.getBaseBlock(Variants.COBBLED), block);
+                    } else if (variant == Variants.MOSSY_BRICKS) {
+                        mossyRecipe(type.getBaseBlock(Variants.BRICKS), block);
+                    } else if (variant == Variants.CRACKED_BRICKS) {
+                        crackedRecipe(type.getBaseBlock(Variants.BRICKS), block);
+                    } else if (variant == Variants.CRACKED_POLISHED_BRICKS) {
+                        crackedRecipe(type.getBaseBlock(Variants.POLISHED_BRICKS), block);
                     }
                 }
             }
         }
-
+        ShapelessRecipeBuilder.shapelessRecipe(Blocks.GRAVEL).addIngredient(UEBlocks.PYROXENE).addCriterion("has_pyroxene", hasItem(UEBlocks.PYROXENE)).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(UEBlocks.LIGNITE_BRIQUETTES).key('#', BlockGeneratorReference.LIGNITE.getBaseBlock())
                 .key('*', Blocks.CLAY)
                 .patternLine("###").patternLine("#*#").patternLine("###").addCriterion("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).build(consumer);
     }
 
+    private void regolithConversionRecipe(IItemProvider result, IItemProvider baseBlock) {
+        ShapelessRecipeBuilder.shapelessRecipe(result, 8)
+                .addIngredient(Ingredient.fromTag(UETags.Items.REGOLITH_TAG), 8)
+                .addIngredient(baseBlock)
+                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+    }
+
+    private void mossyRecipe(Block baseBlock, Block mossyBlock) {
+        ShapelessRecipeBuilder.shapelessRecipe(mossyBlock).addIngredient(baseBlock).addIngredient(Items.VINE)
+                .addCriterion("has_" + getPath(mossyBlock), hasItem(mossyBlock)).build(consumer);
+    }
+
+    private void crackedRecipe(Block baseBlock, Block crackedBlock) {
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(baseBlock), crackedBlock, 0.1f, 200)
+                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+    }
+
     private void stoneRecipe() {
-        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(BlockGeneratorReference.IGNEOUS_ITEM).addIngredient(BlockGeneratorReference.METAMORPHIC_ITEM).addIngredient(BlockGeneratorReference.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(UETags.Items.IGNEOUS_ITEM).addIngredient(UETags.Items.METAMORPHIC_ITEM).addIngredient(UETags.Items.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer);
     }
 
     private void brickRecipeOf(IItemProvider result, IItemProvider ingredient) {

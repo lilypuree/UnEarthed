@@ -3,10 +3,14 @@
   "minVersion": "0.8",
   "package": "net.oriondevcorgitaco.unearthed.mixin",
   "compatibilityLevel": "JAVA_8",
+  "refmap": "unearthed.refmap.json",
   "mixins": [
-    "server.MixinMinecraftServer",
+    "server.MixinAbstractFurnaceTileEntity",
     "server.MixinEntity",
-    "server.MixinFlatGenerationSettings"
+    "server.MixinFlatGenerationSettings",
+    "server.MixinMinecraftServer",
+    "server.MixinNetherSurfaceBuilder",
+    "server.MixinSSVSurfaceBuilder"
   ],
   "client": [
     "client.MixinClientWorld"
