@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass_block",
+    {
+      "id": "byg:overgrown_stone",
+      "required": false
+    }
+  ]
+}

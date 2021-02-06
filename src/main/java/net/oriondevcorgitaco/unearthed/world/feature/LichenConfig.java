@@ -8,7 +8,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

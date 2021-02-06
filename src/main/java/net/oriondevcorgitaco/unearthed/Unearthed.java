@@ -120,16 +120,16 @@ public class Unearthed {
             Item.Properties properties = new Item.Properties().group(UNEARTHED_TAB);
             BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry ->
             {
-                if (entry.getId().equals("lignite")) {
-                    event.getRegistry().register(new BlockItem(entry.getBlock(), properties) {
-                        @Override
-                        public int getBurnTime(ItemStack itemStack) {
-                            return 200;
-                        }
-                    }.setRegistryName(entry.getId()));
-                } else {
+//                if (entry.getId().equals("lignite")) {
+//                    event.getRegistry().register(new BlockItem(entry.getBlock(), properties) {
+//                        @Override
+//                        public int getBurnTime(ItemStack itemStack) {
+//                            return 200;
+//                        }
+//                    }.setRegistryName(entry.getId()));
+//                } else {
                     event.getRegistry().register(new BlockItem(entry.getBlock(), properties).setRegistryName(entry.getId()));
-                }
+//                }
             }));
             event.getRegistry().registerAll(
                     UEItems.PYROXENE = new BlockItem(UEBlocks.PYROXENE, properties).setRegistryName("pyroxene"),
@@ -137,12 +137,13 @@ public class Unearthed {
                     UEItems.GOLD_ORE = new Item(properties).setRegistryName("gold_ore"),
                     UEItems.PUDDLE = new BlockItem(UEBlocks.PUDDLE, new Item.Properties().group(UNEARTHED_TAB).maxStackSize(1)).setRegistryName("puddle"),
                     UEItems.LICHEN = new BlockItem(UEBlocks.LICHEN, properties).setRegistryName("lichen"),
-                    UEItems.LIGNITE_BRIQUETTES = new BlockItem(UEBlocks.LIGNITE_BRIQUETTES, properties) {
-                        @Override
-                        public int getBurnTime(ItemStack itemStack) {
-                            return 2000;
-                        }
-                    }.setRegistryName("lignite_briquettes")
+//                    UEItems.LIGNITE_BRIQUETTES = new BlockItem(UEBlocks.LIGNITE_BRIQUETTES, properties) {
+//                        @Override
+//                        public int getBurnTime(ItemStack itemStack) {
+//                            return 2000;
+//                        }
+//                    }.setRegistryName("lignite_briquettes")
+                    UEItems.LIGNITE_BRIQUETTES = new BlockItem(UEBlocks.LIGNITE_BRIQUETTES, properties).setRegistryName("lignite_briquettes")
             );
             LOGGER.info("UE: Items registered!");
         }

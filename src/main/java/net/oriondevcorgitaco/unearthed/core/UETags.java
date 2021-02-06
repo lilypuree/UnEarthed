@@ -26,6 +26,8 @@ public class UETags {
         public static final ITag.INamedTag<Block> IGNEOUS_TAG = tag("igneous");
         public static final ITag.INamedTag<Block> METAMORPHIC_TAG = tag("metamorphic");
         public static final ITag.INamedTag<Block> REPLACABLE = tag("replaceable");
+        public static final ITag.INamedTag<Block> REPLACE_GRASS = tag("replace_grass");
+        public static final ITag.INamedTag<Block> REPLACE_DIRT = tag("replace_dirt");
 
         private static void init() {
         }

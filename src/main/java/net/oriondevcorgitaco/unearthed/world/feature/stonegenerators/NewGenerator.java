@@ -133,7 +133,7 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
         } else {
             Cell cell = state.getCell();
             if (state.getType() == Type.TERTIARY) {
-                if (original.isIn(Blocks.DIRT) || original.isIn(Blocks.GRASS_BLOCK)) {
+                if (original.isIn(UETags.Blocks.REPLACE_DIRT) || original.isIn(UETags.Blocks.REPLACE_GRASS)) {
                     return cell.getDefaultState();
                 }
                 for (IOreType oreType : ores) {
@@ -146,9 +146,9 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
                     return cell.getCobbleReplacement();
                 }
                 if (replaceDirt) {
-                    if (original.isIn(Blocks.DIRT)) {
+                    if (original.isIn(UETags.Blocks.REPLACE_DIRT)) {
                         return cell.getDirtReplacement();
-                    } else if (original.isIn(Blocks.GRASS_BLOCK)) {
+                    } else if (original.isIn(UETags.Blocks.REPLACE_GRASS)) {
                         return cell.getGrassReplacement(original);
                     }
                 }
