@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:marble_slab"
+    ]
+  },
+  "criteria": {
+    "has_marble": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:marble"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:marble_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_marble",
+      "has_the_recipe"
+    ]
+  ]
+}

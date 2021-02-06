@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "item": "unearthed:white_granite"
+    }
+  ],
+  "result": {
+    "item": "unearthed:white_granite_regolith",
+    "count": 8
+  }
+}

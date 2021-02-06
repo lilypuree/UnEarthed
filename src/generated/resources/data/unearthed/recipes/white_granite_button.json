@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "unearthed:white_granite"
+    }
+  ],
+  "result": {
+    "item": "unearthed:white_granite_button"
+  }
+}

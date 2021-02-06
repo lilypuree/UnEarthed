@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "unearthed:block/grey_limestone",
+    "bottom": "unearthed:block/grey_limestone",
+    "top": "unearthed:block/grey_limestone"
+  }
+}

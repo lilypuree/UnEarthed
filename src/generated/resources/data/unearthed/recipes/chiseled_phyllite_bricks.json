@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:phyllite_brick_slab"
+    }
+  },
+  "result": {
+    "item": "unearthed:chiseled_phyllite_bricks"
+  }
+}

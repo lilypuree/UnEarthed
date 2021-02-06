@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:phyllite"
+    ]
+  },
+  "criteria": {
+    "has_cobbled_phyllite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:cobbled_phyllite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:phyllite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_phyllite",
+      "has_the_recipe"
+    ]
+  ]
+}

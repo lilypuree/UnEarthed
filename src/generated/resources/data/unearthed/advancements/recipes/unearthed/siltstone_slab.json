@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:siltstone_slab"
+    ]
+  },
+  "criteria": {
+    "has_siltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:siltstone"
+          }
+        ]
+      }
+    },
+    "has_chiseled_siltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:chiseled_siltstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:siltstone_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_siltstone",
+      "has_chiseled_siltstone",
+      "has_the_recipe"
+    ]
+  ]
+}

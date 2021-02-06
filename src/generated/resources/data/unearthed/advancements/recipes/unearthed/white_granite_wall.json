@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:white_granite_wall"
+    ]
+  },
+  "criteria": {
+    "has_white_granite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:white_granite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:white_granite_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_white_granite",
+      "has_the_recipe"
+    ]
+  ]
+}

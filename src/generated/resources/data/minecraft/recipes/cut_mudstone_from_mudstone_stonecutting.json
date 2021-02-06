@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:mudstone"
+  },
+  "result": "unearthed:cut_mudstone",
+  "count": 1
+}

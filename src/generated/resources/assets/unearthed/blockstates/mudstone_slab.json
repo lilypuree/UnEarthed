@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "unearthed:block/mudstone_slab_top"
+    },
+    "type=bottom": {
+      "model": "unearthed:block/mudstone_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/mudstone"
+    }
+  }
+}
