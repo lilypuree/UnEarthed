@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "unearthed",
+  "version": "${version}",
+  "name": "Unearthed",
+  "description": "A mod that makes exploring underground interesting. Adds 21 new rocks!",
+  "authors": [
+    "Corgi Taco",
+    "Lilypuree",
+    "AOCAWOL"
+  ],
+  "contact": {
+    "homepage": "https://bygmc.weebly.com/",
+    "sources": "https://github.com/CorgiTaco/BYG"
+  },
+  "license": "Code: LGPLv3",
+  "icon": "assets/unearthed/Logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.lilycorgitaco.unearthed.Unearthed"
+    ],
+    "client": [
+      "net.lilycorgitaco.unearthed.ClientSetup"
+    ]
+  },
+  "mixins": [
+    "unearthed.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=1.16.3"
+  },
+  "suggests": {
+    "flamingo": "*"
+  },
+  "accessWidener": "unearthed.aw"
+}
