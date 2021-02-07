@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.oriondevcorgitaco.unearthed.mixin",
+  "package": "net.lilycorgitaco.unearthed.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "unearthed.refmap.json",
   "mixins": [
@@ -13,7 +13,9 @@
     "server.MixinSSVSurfaceBuilder"
   ],
   "client": [
-    "client.MixinClientWorld"
+    "client.MixinBlockColors",
+    "client.MixinClientWorld",
+    "client.MixinItemsColors"
   ],
   "injectors": {
     "defaultRequire": 1
