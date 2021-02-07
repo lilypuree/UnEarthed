@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "unearthed:block/smooth_siltstone_slab_top"
+    },
+    "type=bottom": {
+      "model": "unearthed:block/smooth_siltstone_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/smooth_siltstone"
+    }
+  }
+}

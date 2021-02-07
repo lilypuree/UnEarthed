@@ -23,7 +23,7 @@ public class RegistrationHelper {
 
     public static <T extends FeatureConfig, G extends Feature<T>> G registerFeature(String registryName, G feature) {
         if (!Registry.FEATURE.getIds().contains(new Identifier(Unearthed.MOD_ID, registryName)))
-            feature.setRegistryName(new Identifier(Unearthed.MOD_ID, registryName));
+            Registry.register(Registry.FEATURE, new Identifier(Unearthed.MOD_ID, registryName), feature);
         features.add(feature);
         return feature;
     }

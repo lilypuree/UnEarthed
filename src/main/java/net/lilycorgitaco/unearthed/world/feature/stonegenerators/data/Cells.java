@@ -9,6 +9,7 @@ import net.lilycorgitaco.unearthed.block.schema.BlockSchema;
 import net.lilycorgitaco.unearthed.block.schema.Forms;
 import net.lilycorgitaco.unearthed.block.schema.Variants;
 import net.lilycorgitaco.unearthed.datagen.type.IOreType;
+import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class Cells {
 
 
     private static Cell fromBlockHelper(BlockGeneratorHelper helper) {
-        Identifier id = helper.getBaseBlock().getRegistryName();
+        Identifier id = Registry.BLOCK.getId(helper.getBaseBlock());
         BlockState baseBlock = helper.getBaseBlock().getDefaultState();
         BlockGeneratorHelper.Entry entry = helper.getEntry(Variants.COBBLED, Forms.BLOCK);
         BlockState cobbleBlock = entry != null ? entry.getBlock().getDefaultState() : Blocks.COBBLESTONE.getDefaultState();

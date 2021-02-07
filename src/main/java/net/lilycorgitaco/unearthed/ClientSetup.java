@@ -28,7 +28,8 @@ public class ClientSetup implements ClientModInitializer {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
                 if (form instanceof Forms.OreForm || form == Forms.GRASSY_REGOLITH || form == Forms.OVERGROWN_ROCK) {
-                    BlockRenderLayerMap.INSTANCE.putBlock(entry.getBlock(), RenderLayer.getCutoutMipped());
+                    if (entry.getBlock() != null)
+                        BlockRenderLayerMap.INSTANCE.putBlock(entry.getBlock(), RenderLayer.getCutoutMipped());
                 }
             }
         }
@@ -61,6 +62,9 @@ public class ClientSetup implements ClientModInitializer {
     public static void onItemColourHandlerEvent(ItemColors colors, BlockColors blockColors) {
         for (BlockGeneratorHelper type : BlockGeneratorReference.ROCK_TYPES) {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
+                if (entry.getBlock() == null)
+                    continue;
+
                 BlockSchema.Form form = entry.getForm();
                 if (form == Forms.GRASSY_REGOLITH || form == Forms.OVERGROWN_ROCK) {
                     colors.register((stack, color) -> {

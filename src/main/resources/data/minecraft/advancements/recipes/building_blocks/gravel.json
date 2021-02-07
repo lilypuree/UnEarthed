@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:gravel"
+    ]
+  },
+  "criteria": {
+    "has_pyroxene": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:pyroxene"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:gravel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pyroxene",
+      "has_the_recipe"
+    ]
+  ]
+}

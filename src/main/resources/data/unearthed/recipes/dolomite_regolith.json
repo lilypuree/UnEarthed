@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "item": "unearthed:dolomite"
+    }
+  ],
+  "result": {
+    "item": "unearthed:dolomite_regolith",
+    "count": 8
+  }
+}

@@ -1,6 +1,4 @@
 {
-  "type" : "no_op",
-  "config" : {
-
-  }
+  "type": "no_op",
+  "config": {}
 }

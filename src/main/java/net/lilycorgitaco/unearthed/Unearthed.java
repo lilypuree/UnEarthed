@@ -1,11 +1,14 @@
 package net.lilycorgitaco.unearthed;
 
 
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.lilycorgitaco.unearthed.block.BlockGeneratorReference;
 import net.lilycorgitaco.unearthed.block.LichenBlock;
 import net.lilycorgitaco.unearthed.block.PuddleBlock;
+import net.lilycorgitaco.unearthed.config.UEConfig;
 import net.lilycorgitaco.unearthed.core.UEBlocks;
 import net.lilycorgitaco.unearthed.core.UEItems;
 import net.lilycorgitaco.unearthed.core.UETags;
@@ -25,22 +28,29 @@ public class Unearthed implements ModInitializer {
     public static final String MOD_ID = "unearthed";
     public static final Logger LOGGER = LogManager.getLogger();
 
+    public static UEConfig CONFIG;
+
     @Override
     public void onInitialize() {
+        AutoConfig.register(UEConfig.class, JanksonConfigSerializer::new);
+        CONFIG = AutoConfig.getConfigHolder(UEConfig.class).getConfig();
+        BlockGeneratorReference.init();
         registerBlocks();
         registerItems();
         ueCommonSetup();
     }
 
     public void ueCommonSetup() {
-        BlockGeneratorReference.init();
         UETags.init();
 //        configReader();
     }
 
     public static void registerBlocks() {
         LOGGER.debug("UE: Registering blocks...");
-        BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> createBlock(entry.getBlock(), entry.getId())));
+        BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> {
+            if (entry.getBlock() != null)
+                createBlock(entry.getBlock(), entry.getId());
+        }));
 
         BlockSoundGroup WATER = new BlockSoundGroup(1.0F, 1.0F, SoundEvents.BLOCK_WET_GRASS_BREAK, SoundEvents.ENTITY_GENERIC_SPLASH, SoundEvents.BLOCK_WET_GRASS_PLACE, SoundEvents.BLOCK_WET_GRASS_HIT, SoundEvents.ENTITY_GENERIC_SPLASH);
 
@@ -60,7 +70,8 @@ public class Unearthed implements ModInitializer {
         LOGGER.debug("UE: Registering items...");
         Item.Settings properties = new Item.Settings().group(UNEARTHED_TAB);
         BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> {
-            createItem(new BlockItem(entry.getBlock(), properties), entry.getId());
+            if (entry.getBlock() != null)
+                createItem(new BlockItem(entry.getBlock(), properties), entry.getId());
         }));
 
         UEItems.PYROXENE = createItem(new BlockItem(UEBlocks.PYROXENE, properties), "pyroxene");

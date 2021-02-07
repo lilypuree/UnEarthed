@@ -27,7 +27,7 @@ public class MixinAbstractFurnaceTileEntity {
     protected static void addFuel(Map<Item, Integer> map, ItemConvertible itemProvider, int burnTimeIn) {
     }
 
-    @Inject(method = "Lnet/minecraft/tileentity/AbstractFurnaceTileEntity;getBurnTimes()Ljava/util/Map;", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "createFuelTimeMap", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private static void onGetBurnTime(CallbackInfoReturnable<Map<Item, Integer>> cir, Map<Item, Integer> map){
         addFuel(map, UEItems.LIGNITE_BRIQUETTES, 2000);
         addFuel(map, BlockGeneratorReference.LIGNITE.getBaseBlock(), 200);

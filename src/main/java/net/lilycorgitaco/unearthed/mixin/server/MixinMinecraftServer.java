@@ -47,7 +47,7 @@ public class MixinMinecraftServer {
     @Final
     protected DynamicRegistryManager.Impl registryManager;
 
-    @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistryManager$Impl;Lnet/minecraft/world/level/storage/LevelStorage$Session;Lnet/minecraft/world/SaveProperties;Lnet/minecraft/resource/ResourcePackManager;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resource/ServerResourceManager;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/util/UserCache;Lnet/minecraft/server/WorldGenerationProgressListenerFactory;)V", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistryManager$Impl;Lnet/minecraft/world/level/storage/LevelStorage$Session;Lnet/minecraft/world/SaveProperties;Lnet/minecraft/resource/ResourcePackManager;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resource/ServerResourceManager;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/util/UserCache;Lnet/minecraft/server/WorldGenerationProgressListenerFactory;)V")
     private void implementUnearthedStones(Thread thread, DynamicRegistryManager.Impl impl, LevelStorage.Session session, SaveProperties saveProperties, ResourcePackManager resourcePackManager, Proxy proxy, DataFixer dataFixer, ServerResourceManager serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, UserCache userCache, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
         if (this.registryManager.getOptional(Registry.BIOME_KEY).isPresent()) {
             for (Biome biome : registryManager.getOptional(Registry.BIOME_KEY).get()) {
@@ -86,7 +86,7 @@ public class MixinMinecraftServer {
 
 
 //    private static boolean useTrueMesas(Biome biome) {
-//        boolean trueMesas = UnearthedConfig.trueMesas.get();
+//        boolean trueMesas = Unearthed.CONFIG.trueMesas.get();
 //        if (trueMesas) {
 //            return biome.getCategory() == Biome.Category.MESA;
 //        } else
@@ -95,7 +95,7 @@ public class MixinMinecraftServer {
 //
 //
 //    private static boolean useIceCaves(Biome biome) {
-//        boolean icyCaves = UnearthedConfig.icyCaves.get();
+//        boolean icyCaves = Unearthed.CONFIG.icyCaves.get();
 //        if (icyCaves) {
 //            return biome.getCategory() == Biome.Category.ICY;
 //        } else
@@ -103,7 +103,7 @@ public class MixinMinecraftServer {
 //    }
 //
 //    private static boolean useDesertCaves(Biome biome) {
-//        boolean desertCaves = UnearthedConfig.desertCaves.get();
+//        boolean desertCaves = Unearthed.CONFIG.desertCaves.get();
 //        if (desertCaves) {
 //            return biome.getCategory() == Biome.Category.DESERT;
 //        } else

@@ -71,7 +71,7 @@ public class PuddleBlock extends Block {
         if (worldIn.isSkyVisibleAllowingSea(pos) && worldIn.isDay() || worldIn.getLightLevel(pos) >= 14) {
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
         } else {
-            if (random.nextInt(4) == 0 && worldIn.isAreaLoaded(pos, 4)) {
+            if (random.nextInt(4) == 0) {
                 int range = 1;
                 BlockPos randomPos = new BlockPos(pos.getX() - range + random.nextInt(range * 2 + 1), pos.getY() - range + random.nextInt(range * 2 + 1), pos.getZ() - range + random.nextInt(range * 2 + 1));
                 Direction direction = Direction.random(random);

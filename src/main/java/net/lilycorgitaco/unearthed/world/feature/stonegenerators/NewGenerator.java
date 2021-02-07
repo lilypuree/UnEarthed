@@ -1,11 +1,15 @@
 package net.lilycorgitaco.unearthed.world.feature.stonegenerators;
 
 import com.mojang.serialization.Codec;
+import net.lilycorgitaco.unearthed.Unearthed;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -13,7 +17,6 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.lilycorgitaco.unearthed.config.UnearthedConfig;
 import net.lilycorgitaco.unearthed.core.UETags;
 import net.lilycorgitaco.unearthed.datagen.type.IOreType;
 import net.lilycorgitaco.unearthed.datagen.type.VanillaOreTypes;
@@ -52,9 +55,9 @@ public class NewGenerator extends Feature<DefaultFeatureConfig> {
         }
 //        boolean isAir = Math.abs(pos.getX() >> 4) % 5 < 2;
         boolean isAmplified = generator instanceof NoiseChunkGenerator && ((NoiseChunkGenerator) generator).matchesSettings(world.getSeed(), ChunkGeneratorSettings.AMPLIFIED);
-        boolean alwaysReplaceDirt = UnearthedConfig.alwaysReplaceDirt.get();
-        boolean debugMode = UnearthedConfig.debug.get();
-        replaceCobble = UnearthedConfig.replaceCobble.get();
+        boolean alwaysReplaceDirt = Unearthed.CONFIG.alwaysReplaceDirt;
+        boolean debugMode = Unearthed.CONFIG.debug;
+        replaceCobble = Unearthed.CONFIG.replaceCobble;
         NoiseHandler noiseHandler = new NoiseHandler(world, pos);
         AutomataRunner runner = new AutomataRunner(world, pos, noiseHandler);
         if (debugMode) {
@@ -107,7 +110,7 @@ public class NewGenerator extends Feature<DefaultFeatureConfig> {
                         state = stratumState;
                     }
                     BlockState original = chunk.getBlockState(mutable);
-                    BlockState replaced = replaceBlock(original, state, alwaysReplaceDirt || isBiomeHilly(noiseHandler.getBiome(x, z)));
+                    BlockState replaced = replaceBlock(original, state, alwaysReplaceDirt || isBiomeHilly(noiseHandler.getBiome(x, z), world));
                     if (original != replaced && replaced != null) {
                         chunk.getSectionArray()[y >> 4].setBlockState(x, y & 15, z, replaced, false);
 //                        chunk.setBlockState(mutable, replaced, false);
@@ -119,8 +122,8 @@ public class NewGenerator extends Feature<DefaultFeatureConfig> {
         }
     }
 
-    private boolean isBiomeHilly(Biome biome) {
-        String biomeName = biome.getRegistryName().getPath();
+    private boolean isBiomeHilly(Biome biome, ServerWorldAccess worldAccess) {
+        String biomeName = worldAccess.getRegistryManager().get(Registry.BIOME_KEY).getKey(biome).get().getValue().getPath();
         return biome.getCategory() == Biome.Category.EXTREME_HILLS || biomeName.contains("hill") || biomeName.contains("plateau") || biomeName.contains("mountain");
     }
 
@@ -222,7 +225,7 @@ public class NewGenerator extends Feature<DefaultFeatureConfig> {
                     if (state.getType() == Type.PRIMARY) {
                         replaced = GLASS;
                     } else {
-                        replaced = replaceBlock(original, state, alwaysReplaceDirt || isBiomeHilly(noiseHandler.getBiome(x, z)));
+                        replaced = replaceBlock(original, state, alwaysReplaceDirt || isBiomeHilly(noiseHandler.getBiome(x, z), world));
                     }
                     if (original != replaced && replaced != null) {
                         chunk.setBlockState(mutable, replaced, false);

@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(Entity.class)
 public class MixinEntity {
 
-    @Inject(method = "onSwimmingStart()V", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "onSwimmingStart()V", at = @At("RETURN"), locals = LocalCapture.PRINT)
     private void makePuddlesAfterSplash(CallbackInfo ci, Entity entity, float f, Vec3d vector3d, float f1, float f2) {
         if (f1 > 0.20f) {
             World world = entity.getEntityWorld();

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:cobbled_grey_limestone_wall"
+    ]
+  },
+  "criteria": {
+    "has_cobbled_grey_limestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:cobbled_grey_limestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:cobbled_grey_limestone_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_grey_limestone",
+      "has_the_recipe"
+    ]
+  ]
+}

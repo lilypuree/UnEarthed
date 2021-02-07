@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "double=false,facing=down": {
+      "model": "unearthed:block/schist_slab"
+    },
+    "double=true,facing=down": {
+      "model": "unearthed:block/schist"
+    },
+    "double=false,facing=up": {
+      "model": "unearthed:block/schist_slab_top"
+    },
+    "double=true,facing=up": {
+      "model": "unearthed:block/schist"
+    },
+    "double=false,facing=north": {
+      "model": "unearthed:block/schist_slab_side",
+      "y": 360
+    },
+    "double=true,facing=north": {
+      "model": "unearthed:block/schist_horizontal",
+      "x": 90
+    },
+    "double=false,facing=south": {
+      "model": "unearthed:block/schist_slab_side",
+      "y": 180
+    },
+    "double=true,facing=south": {
+      "model": "unearthed:block/schist_horizontal",
+      "x": 90
+    },
+    "double=false,facing=west": {
+      "model": "unearthed:block/schist_slab_side",
+      "y": 270
+    },
+    "double=true,facing=west": {
+      "model": "unearthed:block/schist_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "double=false,facing=east": {
+      "model": "unearthed:block/schist_slab_side",
+      "y": 450
+    },
+    "double=true,facing=east": {
+      "model": "unearthed:block/schist_horizontal",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

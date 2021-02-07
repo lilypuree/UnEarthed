@@ -25,6 +25,7 @@ import net.lilycorgitaco.unearthed.core.UEBlocks;
 import net.lilycorgitaco.unearthed.core.UETags;
 import net.lilycorgitaco.unearthed.datagen.type.IOreType;
 import net.lilycorgitaco.unearthed.datagen.type.VanillaOreTypes;
+import net.minecraft.util.registry.Registry;
 
 import java.util.function.Consumer;
 
@@ -35,7 +36,6 @@ public class Recipes extends RecipesProvider {
 
     private Consumer<RecipeJsonProvider> consumer;
 
-    @Override
     protected void generate(Consumer<RecipeJsonProvider> consumerIn) {
         consumer = consumerIn;
         stoneRecipe();
@@ -222,7 +222,7 @@ public class Recipes extends RecipesProvider {
     }
 
     private String getPath(ItemConvertible ingredient) {
-        return ingredient.asItem().getRegistryName().getPath();
+        return Registry.ITEM.getId(ingredient.asItem()).getPath();
     }
 
     /**

@@ -29,7 +29,7 @@ public class Forms {
 
         @Override
         public Function<AbstractBlock.Settings, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
-            return properties -> new StairsBlock(() -> schema.getBaseBlock(variant).getDefaultState(), properties);
+            return properties -> new StairUE(schema.getBaseBlock(variant).getDefaultState(), properties);
         }
     }
 
@@ -65,7 +65,7 @@ public class Forms {
     public static final BlockSchema.Form OVERGROWN_ROCK = new BlockSchema.Form("") {
         @Override
         public Function<AbstractBlock.Settings, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
-            return properties -> new RegolithGrassBlock(schema.getBaseBlock().getBlock(), properties);
+            return properties -> new RegolithGrassBlock(schema.getBaseBlock(), properties);
         }
     };
     public static final BlockSchema.Form SLAB = new SimpleForm("slab", SlabBlock::new);
@@ -77,10 +77,10 @@ public class Forms {
     public static final BlockSchema.Form PRESSURE_PLATE = new BlockSchema.Form("pressure_plate") {
         @Override
         public Function<AbstractBlock.Settings, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
-            return properties -> new PressurePlateBlock(schema.getPressurePlateSensitivity(), properties);
+            return properties -> new PressurePlateUE(schema.getPressurePlateSensitivity(), properties);
         }
     };
-    public static final BlockSchema.Form BUTTON = new SimpleForm("button", StoneButtonBlock::new);
+    public static final BlockSchema.Form BUTTON = new SimpleForm("button", ButtonUE::new);
 
     public static final BlockSchema.Form IRON_ORE = new OreForm("iron_ore", VanillaOreTypes.IRON);
     public static final BlockSchema.Form COAL_ORE = new OreForm("coal_ore", VanillaOreTypes.COAL);
@@ -101,4 +101,24 @@ public class Forms {
     public static final BlockSchema.Form KIMBERLITE_DIAMOND_ORE = new OreForm("diamond_ore", VanillaOreTypes.DIAMOND);
 
 
+    public static class PressurePlateUE extends PressurePlateBlock {
+
+        public PressurePlateUE(ActivationRule type, Settings settings) {
+            super(type, settings);
+        }
+    }
+
+    public static class ButtonUE extends StoneButtonBlock {
+
+        public ButtonUE(Settings settings) {
+            super(settings);
+        }
+    }
+
+    public static class StairUE extends StairsBlock {
+
+        protected StairUE(BlockState baseBlockState, Settings settings) {
+            super(baseBlockState, settings);
+        }
+    }
 }

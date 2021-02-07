@@ -16,7 +16,7 @@ import static net.lilycorgitaco.unearthed.UEFeatures.NEW_GENERATOR;
 @Mixin(FlatChunkGeneratorConfig.class)
 public class MixinFlatGenerationSettings {
 
-    @Inject(method = "Lnet/minecraft/world/gen/FlatGenerationSettings;func_236942_c_()Lnet/minecraft/world/biome/Biome;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/GenerationSettings$Builder;build()Lnet/minecraft/world/biome/GenerationSettings;"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "createBiome", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/GenerationSettings$Builder;build()Lnet/minecraft/world/biome/GenerationSettings;"), locals = LocalCapture.PRINT)
     private void addUnearthedFeature(CallbackInfoReturnable<Biome> ci, Biome biome, GenerationSettings biomeGenerationSettings, GenerationSettings.Builder builder, boolean flag, BlockState[] blockStates) {
         builder.feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, NEW_GENERATOR);
     }

@@ -1,6 +1,8 @@
 package net.lilycorgitaco.unearthed.world.feature.stonegenerators.data.regions;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.lilycorgitaco.unearthed.world.feature.stonegenerators.data.Cell;
 import net.lilycorgitaco.unearthed.world.feature.stonegenerators.data.State;
@@ -17,11 +19,11 @@ public class RegionManager {
     private static List<BatolithicState> batolithicStates;
     private static List<State> tertiaries = new ArrayList<>();
 
-    public static Region getRegion(Biome biome, float value) {
+    public static Region getRegion(Biome biome, float value, ServerWorldAccess world) {
         if (specialRegions.containsKey(biome.getCategory())) {
             return specialRegions.get(biome.getCategory());
-        } else if (biomeRegion.containsKey(biome.getRegistryName())) {
-            return biomeRegion.get(biome.getRegistryName());
+        } else if (biomeRegion.containsKey(world.getRegistryManager().getOptional(Registry.BIOME_KEY).get().getId(biome))) {
+            return biomeRegion.get(world.getRegistryManager().getOptional(Registry.BIOME_KEY).get().getId(biome));
         } else {
             return regions.get(((int) (value * regions.size())));
         }

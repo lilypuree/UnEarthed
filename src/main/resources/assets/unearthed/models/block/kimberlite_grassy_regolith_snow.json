@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "unearthed:block/side/kimberlite_grassy_regolith_snow",
+    "top": "minecraft:block/grass_block_top"
+  }
+}

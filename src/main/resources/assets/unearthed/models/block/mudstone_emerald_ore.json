@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "unearthed:block/ore/mudstone_emerald_ore",
+    "top": "unearthed:block/mudstone_top"
+  }
+}

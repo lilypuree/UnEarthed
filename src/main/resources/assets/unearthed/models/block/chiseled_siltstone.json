@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "unearthed:block/chiseled_siltstone",
+    "top": "unearthed:block/chiseled_siltstone_top"
+  }
+}

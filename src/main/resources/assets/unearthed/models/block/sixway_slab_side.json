@@ -1,17 +1,88 @@
-{   "parent": "block/block",
+{
+  "parent": "block/block",
   "textures": {
     "particle": "#side"
   },
   "elements": [
-    {   "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 8 ],
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        8
+      ],
       "faces": {
-        "down":  { "uv": [ 0, 0, 16, 8 ], "texture": "#side","tintindex": 0, "cullface": "down" },
-        "up":    { "uv": [ 0, 0, 16, 8 ], "texture": "#side", "tintindex": 0, "cullface" : "up"},
-        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#top","tintindex": 0, "cullface": "north" },
-        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom","tintindex": 0},
-        "west":  {  "uv": [ 0, 0, 16, 8 ], "texture": "#side","tintindex": 0, "cullface": "west", "rotation" :90 },
-        "east":  { "uv": [ 0, 0, 16, 8 ], "texture": "#side","tintindex": 0, "cullface": "east", "rotation" :90  }
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#side",
+          "tintindex": 0,
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#side",
+          "tintindex": 0,
+          "cullface": "up"
+        },
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#top",
+          "tintindex": 0,
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#bottom",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#side",
+          "tintindex": 0,
+          "cullface": "west",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#side",
+          "tintindex": 0,
+          "cullface": "east",
+          "rotation": 90
+        }
       }
     }
   ]

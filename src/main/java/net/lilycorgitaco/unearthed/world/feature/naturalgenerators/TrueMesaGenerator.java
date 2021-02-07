@@ -1,6 +1,7 @@
 package net.lilycorgitaco.unearthed.world.feature.naturalgenerators;
 
 import com.mojang.serialization.Codec;
+import net.lilycorgitaco.unearthed.Unearthed;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
@@ -11,7 +12,6 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.lilycorgitaco.unearthed.config.UnearthedConfig;
 
 import java.util.Random;
 
@@ -43,7 +43,7 @@ public class TrueMesaGenerator extends Feature<DefaultFeatureConfig> {
     }
 
     public static boolean useStoneTag(StructureWorldAccess world, BlockPos mutable) {
-        boolean stoneTag = UnearthedConfig.replaceableTag.get();
+        boolean stoneTag = Unearthed.CONFIG.replaceableTag;
         if (stoneTag)
             return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
         else

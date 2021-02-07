@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "unearthed:igneous"
+    },
+    {
+      "tag": "unearthed:metamorphic"
+    },
+    {
+      "tag": "unearthed:sedimentary"
+    }
+  ],
+  "result": {
+    "item": "minecraft:stone"
+  }
+}

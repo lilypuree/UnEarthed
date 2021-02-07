@@ -157,7 +157,7 @@ public class NoiseHandler {
             int xPos = basePos.getX() + x;
             int zPos = basePos.getZ() + z;
             Biome biome = getBiome(x, z);
-            regions[x][z] = RegionManager.getRegion(biome, regionNoise.GetNoise(xPos, zPos) / 2 + 0.5f);
+            regions[x][z] = RegionManager.getRegion(biome, regionNoise.GetNoise(xPos, zPos) / 2 + 0.5f, world);
         }
         return regions[x][z];
     }
@@ -166,7 +166,7 @@ public class NoiseHandler {
         BlockPos pos = new BlockPos(xPos, 0, zPos);
         return regionMap.computeIfAbsent(pos, p -> {
             Biome biome = world.getBiome(p);
-            return RegionManager.getRegion(biome, regionNoise.GetNoise(xPos, zPos) / 2 + 0.5f);
+            return RegionManager.getRegion(biome, regionNoise.GetNoise(xPos, zPos) / 2 + 0.5f, world);
         });
     }
 
