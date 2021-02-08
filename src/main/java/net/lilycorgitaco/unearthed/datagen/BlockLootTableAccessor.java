@@ -1,6 +1,7 @@
 package net.lilycorgitaco.unearthed.datagen;
 
 import com.google.common.collect.ImmutableSet;
+import net.lilycorgitaco.unearthed.mixin.access.BlockLootTableGeneratorAccess;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.BlockLootTableGenerator;
@@ -43,27 +44,27 @@ public class BlockLootTableAccessor extends BlockLootTableGenerator {
     }
 
     public static LootTable.Builder oreDrops(Block block, Item item) {
-        return BlockLootTableGenerator.oreDrops(block, item);
+        return BlockLootTableGeneratorAccess.invokeOreDrops(block, item);
     }
 
     public static LootTable.Builder slabDrops(Block slab) {
-        return BlockLootTableGenerator.slabDrops(slab);
+        return BlockLootTableGeneratorAccess.invokeSlabDrops(slab);
     }
 
     protected static LootTable.Builder droppingSixwaySlab(Block slab) {
-        return LootTable.builder().pool(LootPool.builder().rolls(ConstantLootTableRange.create(1)).with(applyExplosionDecay(slab, ItemEntry.builder(slab).apply(SetCountLootFunction.builder(ConstantLootTableRange.create(2)).conditionally(BlockStatePropertyLootCondition.builder(slab).properties(StatePredicate.Builder.create().exactMatch(ModBlockProperties.DOUBLE, true)))))));
+        return LootTable.builder().pool(LootPool.builder().rolls(ConstantLootTableRange.create(1)).with(BlockLootTableGeneratorAccess.invokeApplyExplosionDecay(slab, ItemEntry.builder(slab).apply(SetCountLootFunction.builder(ConstantLootTableRange.create(2)).conditionally(BlockStatePropertyLootCondition.builder(slab).properties(StatePredicate.Builder.create().exactMatch(ModBlockProperties.DOUBLE, true)))))));
     }
 
     public static LootTable.Builder drops(ItemConvertible item) {
-        return BlockLootTableGenerator.drops(item);
+        return BlockLootTableGeneratorAccess.invokeDrops(item);
     }
 
     public static LootTable.Builder dropsWithSilkTouch(Block block, LootPoolEntry.Builder<?> builder) {
-        return BlockLootTableGenerator.drops(block, SILK_TOUCH, builder);
+        return BlockLootTableGeneratorAccess.invokeDrops(block, SILK_TOUCH, builder);
     }
 
     public static LootTable.Builder drops(Block block, ItemConvertible noSilkTouch) {
-        return BlockLootTableGenerator.drops(block, noSilkTouch);
+        return BlockLootTableGeneratorAccess.invokeDrops(block, noSilkTouch);
     }
 
     public static LootTable.Builder droppingWithHoe(Block block, ItemConvertible hoed) {
@@ -71,11 +72,11 @@ public class BlockLootTableAccessor extends BlockLootTableGenerator {
     }
 
     public static LootTable.Builder droppingWithHoe(Block block, LootPoolEntry.Builder<?> builder) {
-        return BlockLootTableGenerator.drops(block, HOES.invert(), builder);
+        return BlockLootTableGeneratorAccess.invokeDrops(block, HOES.invert(), builder);
     }
 
     public static LootTable.Builder onlyWithShears(Block block){
-        return BlockLootTableGenerator.dropsWithShears(block);
+        return BlockLootTableGeneratorAccess.invokeDropsWithShears(block);
     }
 
     public static LootTable.Builder regolithGrassBlock(Block block, ItemConvertible noSilkTouch, ItemConvertible withHoe) {

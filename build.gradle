@@ -55,10 +55,6 @@ dependencies {
 	}
 }
 
-minecraft {
-	accessWidener file('src/main/resources/unearthed.aw')
-}
-
 processResources {
 	inputs.property "version", project.version
 
