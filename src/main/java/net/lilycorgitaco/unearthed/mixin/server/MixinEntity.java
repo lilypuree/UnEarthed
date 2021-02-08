@@ -21,13 +21,13 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(Entity.class)
 public class MixinEntity {
 
-    @Inject(method = "onSwimmingStart()V", at = @At("RETURN"), locals = LocalCapture.PRINT)
-    private void makePuddlesAfterSplash(CallbackInfo ci, Entity entity, float f, Vec3d vector3d, float f1, float f2) {
-        if (f1 > 0.20f) {
+    @Inject(method = "onSwimmingStart()V", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void makePuddlesAfterSplash(CallbackInfo ci, Entity entity, float f, Vec3d vec3d, float h) {
+        if (h > 0.20f) {
             World world = entity.getEntityWorld();
             BlockPos pos = entity.getBlockPos();
             if (!world.isClient()) {
-                int radius = MathHelper.clamp(((int) (f1 * 40 - 8)), 1, 3);
+                int radius = MathHelper.clamp(((int) (h * 40 - 8)), 1, 3);
                 BlockPos.iterateRandomly(world.random, ((int) (5 + radius * radius)), pos.getX() - radius, pos.getY() - 1, pos.getZ() - radius, pos.getX() + radius, pos.getY() + 1, pos.getZ() + radius).forEach(blockPos -> {
                     BlockState block = world.getBlockState(blockPos);
                     BlockPos up = blockPos.up();
