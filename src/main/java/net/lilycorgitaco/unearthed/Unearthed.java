@@ -48,7 +48,7 @@ public class Unearthed implements ModInitializer {
     public static void registerBlocks() {
         LOGGER.debug("UE: Registering blocks...");
         BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> {
-                createBlock(entry.getBlock(), entry.getId());
+            createBlock(entry.createBlock(type), entry.getId());
         }));
 
         BlockSoundGroup WATER = new BlockSoundGroup(1.0F, 1.0F, SoundEvents.BLOCK_WET_GRASS_BREAK, SoundEvents.ENTITY_GENERIC_SPLASH, SoundEvents.BLOCK_WET_GRASS_PLACE, SoundEvents.BLOCK_WET_GRASS_HIT, SoundEvents.ENTITY_GENERIC_SPLASH);

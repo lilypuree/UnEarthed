@@ -11,9 +11,9 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	maven {
-		url 'https://maven.fabricmc.net/io/github/prospector/modmenu/'
-	}
+//	maven {
+//		url 'https://maven.fabricmc.net/io/github/prospector/modmenu/'
+//	}
 	maven {
 		name "cotton-config"
 		url 'http://server.bbkr.space:8081/artifactory/libs-release'
@@ -50,9 +50,9 @@ dependencies {
 //	include ("me.shedaniel.cloth:config-2:${project.cloth_config_version}"){
 //		exclude module: 'fabric-api'
 //	}
-	modImplementation ("io.github.prospector:modmenu:${project.mod_menu_version}"){
-		exclude module: 'fabric-api'
-	}
+//	modImplementation ("io.github.prospector:modmenu:${project.mod_menu_version}"){
+//		exclude module: 'fabric-api'
+//	}
 }
 
 processResources {

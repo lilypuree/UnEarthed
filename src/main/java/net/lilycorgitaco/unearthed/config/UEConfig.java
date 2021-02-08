@@ -13,8 +13,8 @@ public class UEConfig implements ConfigData {
     public boolean replaceCobble = true;
 
     @Comment(value = "\nAlways replace dirt regardless of biome?\nDefault: false")
-    public boolean alwaysReplaceDirt = true;
+    public boolean alwaysReplaceDirt = false;
 
     @Comment(value = "\nReplace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true")
-    public boolean debug = true;
+    public boolean debug = false;
 }
