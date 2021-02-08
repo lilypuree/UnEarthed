@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.datafixers.DataFixer;
+import net.lilycorgitaco.unearthed.interfaces.GenerationSettingsHelper;
+import net.lilycorgitaco.unearthed.mixin.access.GenerationSettingsAccess;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.resource.ServerResourceManager;
 import net.minecraft.server.MinecraftServer;
@@ -71,7 +73,7 @@ public class MixinMinecraftServer {
 
     private static void addFeatureToBiome(Biome biome, GenerationStep.Feature feature, ConfiguredFeature<?, ?> configuredFeature) {
         ConvertImmutableFeatures(biome);
-        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.getGenerationSettings().features;
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = ((GenerationSettingsAccess) biome.getGenerationSettings()).getFeatures();
         while (biomeFeatures.size() <= feature.ordinal()) {
             biomeFeatures.add(Lists.newArrayList());
         }
@@ -79,8 +81,8 @@ public class MixinMinecraftServer {
     }
 
     private static void ConvertImmutableFeatures(Biome biome) {
-        if (biome.getGenerationSettings().features instanceof ImmutableList) {
-            biome.getGenerationSettings().features = biome.getGenerationSettings().features.stream().map(Lists::newArrayList).collect(Collectors.toList());
+        if (((GenerationSettingsAccess) biome.getGenerationSettings()).getFeatures() instanceof ImmutableList) {
+            ((GenerationSettingsHelper) biome.getGenerationSettings()).setGenerationSettings(((GenerationSettingsAccess) biome.getGenerationSettings()).getFeatures().stream().map(Lists::newArrayList).collect(Collectors.toList()));
         }
     }
 

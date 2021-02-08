@@ -48,7 +48,6 @@ public class Unearthed implements ModInitializer {
     public static void registerBlocks() {
         LOGGER.debug("UE: Registering blocks...");
         BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> {
-            if (entry.getBlock() != null)
                 createBlock(entry.getBlock(), entry.getId());
         }));
 
@@ -70,7 +69,6 @@ public class Unearthed implements ModInitializer {
         LOGGER.debug("UE: Registering items...");
         Item.Settings properties = new Item.Settings().group(UNEARTHED_TAB);
         BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> {
-            if (entry.getBlock() != null)
                 createItem(new BlockItem(entry.getBlock(), properties), entry.getId());
         }));
 

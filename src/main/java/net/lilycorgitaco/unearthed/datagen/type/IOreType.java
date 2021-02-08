@@ -12,9 +12,9 @@ public interface IOreType {
 
     String getName();
 
-    Function<Block, LootTable.Builder> createLootFactory();
+//    Function<Block, LootTable.Builder> createLootFactory();
 
     int getHarvestLevel();
 
-    void addCookingRecipes(Consumer<RecipeJsonProvider> consumer);
+//    void addCookingRecipes(Consumer<RecipeJsonProvider> consumer);
 }

@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "unearthed.refmap.json",
   "mixins": [
-    "access.BlockLootTableGeneratorAccess",
-    "access.BlocksTagsAccess",
+    "MixinBiomeGenerationSettings",
+    "access.GenerationSettingsAccess",
     "server.MixinAbstractFurnaceTileEntity",
     "server.MixinEntity",
     "server.MixinFlatGenerationSettings",

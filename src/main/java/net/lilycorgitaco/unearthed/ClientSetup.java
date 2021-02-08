@@ -28,8 +28,7 @@ public class ClientSetup implements ClientModInitializer {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
                 if (form instanceof Forms.OreForm || form == Forms.GRASSY_REGOLITH || form == Forms.OVERGROWN_ROCK) {
-                    if (entry.getBlock() != null)
-                        BlockRenderLayerMap.INSTANCE.putBlock(entry.getBlock(), RenderLayer.getCutoutMipped());
+                    BlockRenderLayerMap.INSTANCE.putBlock(entry.getBlock(), RenderLayer.getCutoutMipped());
                 }
             }
         }
