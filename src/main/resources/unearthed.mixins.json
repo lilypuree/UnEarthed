@@ -3,7 +3,6 @@
   "minVersion": "0.8",
   "package": "net.lilycorgitaco.unearthed.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "unearthed.refmap.json",
   "mixins": [
     "MixinBiomeGenerationSettings",
     "access.GenerationSettingsAccess",

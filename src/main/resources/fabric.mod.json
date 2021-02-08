@@ -28,7 +28,8 @@
     "unearthed.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.16.3"
+    "minecraft": ">=1.16.3",
+    "fabric": "*"
   },
   "suggests": {
     "flamingo": "*"
