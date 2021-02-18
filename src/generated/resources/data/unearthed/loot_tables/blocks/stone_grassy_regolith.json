@@ -48,7 +48,7 @@
                       "condition": "minecraft:survives_explosion"
                     }
                   ],
-                  "name": "unearthed:stone_regolith"
+                  "name": "unearthed:regolith"
                 }
               ]
             }

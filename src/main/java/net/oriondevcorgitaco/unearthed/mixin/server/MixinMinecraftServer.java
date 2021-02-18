@@ -3,9 +3,11 @@ package net.oriondevcorgitaco.unearthed.mixin.server;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.gson.JsonElement;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.datafixers.DataFixer;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.DataPackRegistries;
 import net.minecraft.resources.ResourcePackList;
 import net.minecraft.server.MinecraftServer;
@@ -16,9 +18,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.listener.IChunkStatusListenerFactory;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.DecoratedFeatureConfig;
+import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.storage.IServerConfiguration;
 import net.minecraft.world.storage.SaveFormat;
 import net.oriondevcorgitaco.unearthed.UEFeatures;
+import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +32,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.net.Proxy;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -60,9 +67,18 @@ public class MixinMinecraftServer {
 //                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
 //                    else
 //                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
-                    addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, UEFeatures.NEW_GENERATOR);
                     if (biome.getCategory() == Biome.Category.EXTREME_HILLS) {
                         addFeatureToBiome(biome, GenerationStage.Decoration.VEGETAL_DECORATION, UEFeatures.LICHEN_FEATURE);
+                    }
+                    if (UnearthedConfig.disableGeneration.get()) {
+
+                    }else{
+                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, UEFeatures.NEW_GENERATOR);
+                        removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT, Features.ORE_GRANITE, Features.ORE_DIORITE, Features.ORE_ANDESITE);
+                    }
+                } else {
+                    if (UnearthedConfig.disableNetherGeneration.get()) {
+                        removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL_NETHER);
                     }
                 }
             }
@@ -78,12 +94,44 @@ public class MixinMinecraftServer {
         biomeFeatures.get(feature.ordinal()).add(() -> configuredFeature);
     }
 
+    private static void removeFeatureFromBiome(Biome biome, GenerationStage.Decoration feature, ConfiguredFeature<?, ?>... configuredFeatures) {
+        ConvertImmutableFeatures(biome);
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.getGenerationSettings().features;
+        while (biomeFeatures.size() <= feature.ordinal()) {
+            biomeFeatures.add(Lists.newArrayList());
+        }
+        biomeFeatures.get(feature.ordinal()).removeIf(supplier -> {
+            return supplier.get().getConfig() instanceof DecoratedFeatureConfig && Arrays.stream(configuredFeatures).anyMatch(configuredFeature -> serializeAndCompareFeature(configuredFeature, supplier.get()));
+        });
+    }
+
     private static void ConvertImmutableFeatures(Biome biome) {
         if (biome.getGenerationSettings().features instanceof ImmutableList) {
             biome.getGenerationSettings().features = biome.getGenerationSettings().features.stream().map(Lists::newArrayList).collect(Collectors.toList());
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // GENERAL UTILITIES // from TelepathicGrunt's Repurposed Structures Repo
+    // https://github.com/TelepathicGrunt/RepurposedStructures
+
+    /**
+     * Will serialize (if possible) both features and check if they are the same feature.
+     * If cannot serialize, compare the feature itself to see if it is the same.
+     */
+    private static boolean serializeAndCompareFeature(ConfiguredFeature<?, ?> configuredFeature1, ConfiguredFeature<?, ?> configuredFeature2) {
+
+        Optional<JsonElement> configuredFeatureJSON1 = ConfiguredFeature.field_242763_a.encode(configuredFeature1, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
+        Optional<JsonElement> configuredFeatureJSON2 = ConfiguredFeature.field_242763_a.encode(configuredFeature2, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
+
+        // One of the configuredfeatures cannot be serialized
+        if(!configuredFeatureJSON1.isPresent() || !configuredFeatureJSON2.isPresent()) {
+            return false;
+        }
+
+        // Compare the JSON to see if it's the same ConfiguredFeature in the end.
+        return configuredFeatureJSON1.equals(configuredFeatureJSON2);
+    }
 
 //    private static boolean useTrueMesas(Biome biome) {
 //        boolean trueMesas = UnearthedConfig.trueMesas.get();

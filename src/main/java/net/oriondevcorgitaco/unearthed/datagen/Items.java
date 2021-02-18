@@ -43,11 +43,18 @@ public class Items extends ItemModelProvider {
                 }
             }
         }
+        simpleItem(UEItems.REGOLITH);
         simpleItem(UEItems.GOLD_ORE);
         simpleItem(UEItems.IRON_ORE);
         blockItemModel(UEBlocks.PYROXENE);
         blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
         blockItemModel(UEBlocks.PUDDLE);
+//        blockItemModel(UEBlocks.MANTLE_CORE);
+//        blockItemModel(UEBlocks.SURFACE);
+//        blockItemModel(UEBlocks.VOLCANO);
+//        blockItemModel(UEBlocks.FAULT);
+//        blockItemModel(UEBlocks.PLANET_WATER);
+//        blockItemModel(UEBlocks.PLANET_LAVA);
         simpleItem(UEBlocks.LICHEN, modLoc("block/lichen"));
 //
 //        caveWallModel(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_CAVE_WALL);

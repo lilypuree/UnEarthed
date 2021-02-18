@@ -71,7 +71,9 @@ public class VanillaLichenParentBlock extends Block {
 
     @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        return isFaceFilled(stateIn, facing) && !canAttachTo(worldIn, facing, facingPos, facingState) ? removeProperty(stateIn, getPropertyFor(facing)) : stateIn;
+        return isFaceFilled(stateIn, facing) &&
+                !canAttachTo(worldIn, facing, facingPos, facingState) ?
+                removeProperty(stateIn, getPropertyFor(facing)) : stateIn;
     }
 
     @Override
@@ -196,7 +198,7 @@ public class VanillaLichenParentBlock extends Block {
     }
 
     //method_33359
-    private boolean tryGrowInto(IWorld worldAccess, BlockPos blockPos, Direction direction) {
+    public boolean tryGrowInto(IWorld worldAccess, BlockPos blockPos, Direction direction) {
         BlockState blockState = worldAccess.getBlockState(blockPos);
         if (!this.canGrowInto(blockState)) {
             return false;
@@ -207,7 +209,7 @@ public class VanillaLichenParentBlock extends Block {
     }
 
     //
-    private boolean canGrowInto(BlockState blockState) {
+    public boolean canGrowInto(BlockState blockState) {
         return blockState.isAir() || blockState.isIn(this) || blockState.isIn(Blocks.WATER) && blockState.getFluidState().isSource();
     }
 

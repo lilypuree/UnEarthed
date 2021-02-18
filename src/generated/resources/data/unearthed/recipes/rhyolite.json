@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ox"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:andesite"
+    },
+    "o": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "result": {
+    "item": "unearthed:rhyolite",
+    "count": 4
+  }
+}

@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
@@ -12,6 +13,7 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
+import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.core.UETags;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
@@ -43,7 +45,9 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
                 Block block = entry.getBlock();
-
+                if (entry.getVariant() == Variants.COBBLED && entry.isBaseEntry()) {
+                    getOrCreateBuilder(Tags.Blocks.COBBLESTONE).add(block);
+                }
                 if (form == Forms.BUTTON) {
                     getOrCreateBuilder(BlockTags.BUTTONS).add(block);
                 } else if (form == Forms.PRESSURE_PLATE) {
@@ -78,6 +82,7 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
                 }
             }
         }
+
         getOrCreateBuilder(UETags.Blocks.SEDIMENTARY_TAG).add(Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
         getOrCreateBuilder(UETags.Blocks.IGNEOUS_TAG).add(Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.BASALT);
         getOrCreateBuilder(UETags.Blocks.METAMORPHIC_TAG).add(Blocks.BLACKSTONE);
