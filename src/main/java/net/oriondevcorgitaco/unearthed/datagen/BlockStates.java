@@ -2,6 +2,8 @@ package net.oriondevcorgitaco.unearthed.datagen;
 
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.Property;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -11,11 +13,13 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
-import net.oriondevcorgitaco.unearthed.block.ModBlockProperties;
+import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
+
+import java.util.Arrays;
 
 public class BlockStates extends BlockStateProvider {
 
@@ -144,50 +148,132 @@ public class BlockStates extends BlockStateProvider {
                 .texture("end", modLoc("block/" + name + "_end"));
     }
 
-    public ModelFile sixwaySlab(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
-        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab")))
-                .texture("side", sideTexture)
-                .texture("bottom", bottomTexture)
-                .texture("top", topTexture);
+
+    private ModelFile simpleSideTopBottom(String name, ResourceLocation parent, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(parent))
+                .texture("side", side)
+                .texture("bottom", bottom)
+                .texture("top", top);
     }
 
-    public ModelFile sixwaySlabTop(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
-        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab_top")))
-                .texture("side", sideTexture)
-                .texture("bottom", bottomTexture)
-                .texture("top", topTexture);
-    }
-
-    public ModelFile sixwaySlabSide(String name, ResourceLocation sideTexture, ResourceLocation topTexture, ResourceLocation bottomTexture) {
-        return models().getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc("block/sixway_slab_side")))
-                .texture("side", sideTexture)
-                .texture("bottom", bottomTexture)
-                .texture("top", topTexture);
-    }
+//    public void sixwaySlabBlock(Block block, ResourceLocation doubleSlab, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+//        ModelFile sideModel = simpleSideTopBottom(getPath(block) + "_side", modLoc("block/sixway_slab_side"), side, top, bottom);
+//        ModelFile sideModelZ = simpleSideTopBottom(getPath(block) + "_side_z", modLoc("block/sixway_slab_side_z"), side, top, bottom);
+//        ModelFile topModel = simpleSideTopBottom(getPath(block) + "_top", modLoc("block/sixway_slab_top"), side, top, bottom);
+//        ModelFile bottomModel = simpleSideTopBottom(getPath(block), modLoc("block/sixway_slab"), side, top, bottom);
+//        ModelFile stairModel = simpleSideTopBottom(getPath(block) + "_stair", modLoc("block/sixway_stair"), side, top, bottom);
+//        ModelFile stairTop = simpleSideTopBottom(getPath(block) + "_stair_top", modLoc("block/sixway_stair_top"), side, top, bottom);
+//        ModelFile stairSide = simpleSideTopBottom(getPath(block) + "_stair_side", modLoc("block/sixway_stair_side"), side, top, bottom);
+//        ModelFile stairSideOpposite = simpleSideTopBottom(getPath(block) + "_stair_side_opposite", modLoc("block/sixway_stair_side_opposite"), side, top, bottom);
+//
+//        getVariantBuilder(block)
+//                .forAllStatesExcept((state) -> {
+//                    Direction facing = state.get(BlockStateProperties.FACING);
+//                    Direction secondary = state.get(ModBlockProperties.SECONDARY_FACING);
+//                    Direction.Axis axis = facing.getAxis();
+//                    if (facing == secondary.getOpposite()) {
+//                        return new ConfiguredModel[]{
+//                                new ConfiguredModel(new ModelFile.UncheckedModelFile(axis.isHorizontal() ? extend(doubleSlab, "_horizontal") : doubleSlab), axis.isHorizontal() ? 90 : 0, axis == Direction.Axis.X ? 90 : 0, false)
+//                        };
+//                    } else if (facing == secondary) {
+//                        switch (facing) {
+//                            case DOWN:
+//                                return ConfiguredModel.builder().modelFile(bottomModel).build();
+//                            case UP:
+//                                return ConfiguredModel.builder().modelFile(topModel).build();
+//                            case NORTH:
+//                            case SOUTH:
+//                                return ConfiguredModel.builder().modelFile(sideModel).rotationX(0).rotationY((int) facing.getHorizontalAngle() + 180).uvLock(true).build();
+//                            case EAST:
+//                            case WEST:
+//                            default:
+//                                return ConfiguredModel.builder().modelFile(sideModelZ).rotationX(0).rotationY((int) facing.getHorizontalAngle() - 90).uvLock(true).build();
+//                        }
+//                    } else {
+//                        if (facing == Direction.DOWN) {
+//                            return ConfiguredModel.builder().modelFile(stairModel).uvLock(true).rotationY((int) secondary.getHorizontalAngle() + 180).build();
+//                        } else if (facing == Direction.UP) {
+//                            return ConfiguredModel.builder().modelFile(stairTop).uvLock(true).rotationY((int) secondary.getHorizontalAngle() + 180).build();
+//                        } else if (facing.rotateYCCW() == secondary) {
+//                            return ConfiguredModel.builder().modelFile(stairSide).uvLock(true).rotationY((int) facing.getHorizontalAngle() + 180).build();
+//                        } else if (facing.rotateY() == secondary) {
+//                            return ConfiguredModel.builder().modelFile(stairSideOpposite).uvLock(true).rotationY((int) facing.getHorizontalAngle() + 180).build();
+//                        } else {
+//                            return ConfiguredModel.builder().modelFile(stairSide).uvLock(true).rotationX(secondary == Direction.DOWN ? 90 : 270).rotationY((int) facing.getHorizontalAngle() + 180).build();
+//                        }
+//                    }
+//                }, BlockStateProperties.WATERLOGGED);
+//    }
 
     public void sixwaySlabBlock(Block block, ResourceLocation doubleSlab, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        ModelFile sideModel = sixwaySlabSide(getPath(block) + "_side", side, top, bottom);
-        getVariantBuilder(block)
-                .forAllStatesExcept((state) -> {
-                    Direction facing = state.get(BlockStateProperties.FACING);
-                    Direction.Axis axis = facing.getAxis();
-                    if (state.get(ModBlockProperties.DOUBLE)) {
-                        return new ConfiguredModel[]{
-                                new ConfiguredModel(new ModelFile.UncheckedModelFile(axis.isHorizontal() ? extend(doubleSlab, "_horizontal") : doubleSlab), axis.isHorizontal() ? 90 : 0, axis == Direction.Axis.X ? 90 : 0, false)
-                        };
-                    } else {
-                        switch (facing) {
-                            case DOWN:
-                                return new ConfiguredModel[]{new ConfiguredModel(sixwaySlab(getPath(block), side, top, bottom))};
-                            case UP:
-                                return new ConfiguredModel[]{new ConfiguredModel(sixwaySlabTop(getPath(block) + "_top", side, top, bottom))};
-                            default:
-                                return new ConfiguredModel[]{new ConfiguredModel(sideModel, 0, (int) facing.getHorizontalAngle() + 180, false)};
-                        }
-                    }
-                }, BlockStateProperties.WATERLOGGED);
+        models().slab(getPath(block), side, bottom, top);
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        DirectionProperty facing = BlockStateProperties.FACING;
+        DirectionProperty secondary = ModBlockProperties.SECONDARY_FACING;
+        ModelFile[][][] parts = blockEightParts();
+        for (int x = 0; x < 2; x++) {
+            for (int y = 0; y < 2; y++) {
+                for (int z = 0; z < 2; z++) {
+                    Direction xDir = x==0 ? Direction.WEST : Direction.EAST;
+                    Direction yDir = y==0 ? Direction.DOWN : Direction.UP;
+                    Direction zDir = z==0 ? Direction.NORTH : Direction.SOUTH;
+                    ModelFile part = models().getBuilder(getPath(block) + "_part_"+x+"_"+y+"_"+z).texture("particle", side).texture("side", side).texture("top", top).texture("bottom", bottom).parent(parts[x][y][z]);
+                    builder.part().modelFile(part).addModel().condition(facing, yDir);
+                    builder.part().modelFile(part).addModel().condition(facing, yDir.getOpposite()).condition(secondary, xDir);
+                    builder.part().modelFile(part).addModel().condition(facing, yDir.getOpposite()).condition(secondary, zDir);
+                    builder.part().modelFile(part).addModel().condition(facing, yDir.getOpposite()).condition(secondary, yDir);
+                    yDir = y==0 ? Direction.SOUTH : Direction.NORTH;
+                    zDir = z==0 ? Direction.DOWN : Direction.UP;
+                    builder.part().modelFile(part).rotationX(90).addModel().condition(facing, yDir);
+                    builder.part().modelFile(part).rotationX(90).addModel().condition(facing, yDir.getOpposite()).condition(secondary, xDir);
+                    builder.part().modelFile(part).rotationX(90).addModel().condition(facing, yDir.getOpposite()).condition(secondary, zDir);
+                    builder.part().modelFile(part).rotationX(90).addModel().condition(facing, yDir.getOpposite()).condition(secondary, yDir);
+                    xDir = x==0 ? Direction.NORTH : Direction.SOUTH;
+                    yDir = y==0 ? Direction.WEST : Direction.EAST;
+                    builder.part().modelFile(part).rotationX(90).rotationY(90).addModel().condition(facing, yDir);
+                    builder.part().modelFile(part).rotationX(90).rotationY(90).addModel().condition(facing, yDir.getOpposite()).condition(secondary, xDir);
+                    builder.part().modelFile(part).rotationX(90).rotationY(90).addModel().condition(facing, yDir.getOpposite()).condition(secondary, zDir);
+                    builder.part().modelFile(part).rotationX(90).rotationY(90).addModel().condition(facing, yDir.getOpposite()).condition(secondary, yDir);
+                }
+            }
+        }
     }
 
+    private ModelFile[][][] blockEightParts() {
+        ModelFile[][][] parts = new ModelFile[2][2][2];
+        for (int x = 0; x < 2; x++) {
+            for (int y = 0; y < 2; y++) {
+                for (int z = 0; z < 2; z++) {
+                    int finalX = x;
+                    int finalY = y;
+                    int finalZ = z;
+                    parts[x][y][z] = models().getBuilder("block_part_" + x + "_" + y + "_" + z)
+                            .element().from(x * 8, y * 8, z * 8).to(8 + x * 8, 8 + y * 8, 8 + z * 8)
+                            .allFaces((direction, faceBuilder) -> {
+                                if (finalX == 0 && direction == Direction.WEST || finalX == 1 && direction == Direction.EAST ||
+                                        finalY == 0 && direction == Direction.DOWN || finalY == 1 && direction == Direction.UP ||
+                                        finalZ == 0 && direction == Direction.NORTH || finalZ == 1 && direction == Direction.SOUTH)
+                                    faceBuilder.cullface(direction);
+                                switch (direction.getAxis()) {
+                                    case X:
+                                        faceBuilder.uvs(finalZ * 8, 8 - finalY * 8, 8 + finalZ * 8, 16 - finalY * 8);
+                                        faceBuilder.texture("#side");
+                                        break;
+                                    case Y:
+                                        faceBuilder.uvs(finalX * 8, finalZ * 8, 8 + finalX * 8, 8 + finalZ * 8);
+                                        faceBuilder.texture(direction == Direction.UP ? "#top" : "#bottom");
+                                        break;
+                                    case Z:
+                                        faceBuilder.uvs(finalX * 8, 8 - finalY * 8, 8 + finalX * 8, 16 - finalY * 8);
+                                        faceBuilder.texture("#side");
+                                        break;
+                                }
+                            }).end();
+                }
+            }
+        }
+        return parts;
+    }
 
     @Override
     protected void registerStatesAndModels() {
@@ -213,7 +299,11 @@ public class BlockStates extends BlockStateProvider {
                 } else if (form == Forms.BEAM) {
                     beamBlock(block);
                 } else if (form == Forms.AXISBLOCK) {
-                    axisBlock((RotatedPillarBlock) block);
+                    if (schema == BlockGeneratorReference.SCHIST){
+                        axisNoHorizontalBlock((RotatedPillarBlock) block);
+                    }else{
+                        axisBlock((RotatedPillarBlock) block);
+                    }
                 } else if (form == Forms.SLAB || form == Forms.SIDETOP_SLAB) {
                     slabBlock((SlabBlock) block, baseBlock, stoneTexture, topTexture, topTexture);
                 } else if (form == Forms.SIXWAY_SLAB) {
@@ -244,7 +334,18 @@ public class BlockStates extends BlockStateProvider {
         sideTopBlock(UEBlocks.LIGNITE_BRIQUETTES);
         simpleBlock(UEBlocks.PYROXENE);
         sixWayBlock(UEBlocks.LICHEN, 0.5f, modLoc("block/lichen"));
+    }
 
+    public void axisNoHorizontalBlock(RotatedPillarBlock block) {
+        axisNoHorizontalBlock(block, blockTexture(block));
+    }
+
+    public void axisNoHorizontalBlock(RotatedPillarBlock block, ResourceLocation baseName) {
+        axisNoHorizontalBlock(block, extend(baseName, "_side"), extend(baseName, "_end"));
+    }
+
+    public void axisNoHorizontalBlock(RotatedPillarBlock block, ResourceLocation side, ResourceLocation end) {
+        axisBlock(block, models().cubeColumn(getPath(block), side, end), models().cubeColumn(getPath(block) + "_horizontal", side, end));
     }
 
     private void sideTopBlock(Block block) {
@@ -259,5 +360,6 @@ public class BlockStates extends BlockStateProvider {
     private ResourceLocation extend(ResourceLocation rl, String suffix) {
         return new ResourceLocation(rl.getNamespace(), rl.getPath() + suffix);
     }
+
 
 }

@@ -48,7 +48,7 @@
                       "condition": "minecraft:survives_explosion"
                     }
                   ],
-                  "name": "unearthed:gabbro_regolith"
+                  "name": "unearthed:regolith"
                 }
               ]
             }

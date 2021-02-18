@@ -1,8 +1,0 @@
-{
-  "parent": "unearthed:block/sixway_slab_top",
-  "textures": {
-    "side": "unearthed:block/schist_side",
-    "bottom": "unearthed:block/schist_end",
-    "top": "unearthed:block/schist_end"
-  }
-}

@@ -11,17 +11,21 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UEItems;
 import net.oriondevcorgitaco.unearthed.core.UETags;
 import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
 import java.util.function.Consumer;
+
+import static net.oriondevcorgitaco.unearthed.block.schema.Variants.STONE_LIKE;
 
 public class Recipes extends RecipeProvider {
     public Recipes(DataGenerator generatorIn) {
@@ -75,7 +79,7 @@ public class Recipes extends RecipeProvider {
                     stoneCuttingRecipes(type, variant, form, 1);
                     if (variant == Variants.BRICK || variant == Variants.BRICKS || variant == Variants.POLISHED || variant == Variants.CUT || variant == Variants.POLISHED_PILLAR || variant == Variants.POLISHED_NOWALL) {
                         brickRecipeOf(block, typeBaseBlock);
-                    } else if (variant == Variants.POLISHED_BRICKS){
+                    } else if (variant == Variants.POLISHED_BRICKS) {
                         brickRecipeOf(block, type.getBaseBlock(Variants.POLISHED));
                     } else if (variant == Variants.SMOOTH) {
                         stoneSmeltingRecipeOf(block, typeBaseBlock);
@@ -105,6 +109,29 @@ public class Recipes extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(UEBlocks.LIGNITE_BRIQUETTES).key('#', BlockGeneratorReference.LIGNITE.getBaseBlock())
                 .key('*', Blocks.CLAY)
                 .patternLine("###").patternLine("#*#").patternLine("###").addCriterion("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).build(consumer);
+
+        mixingRecipe(BlockGeneratorReference.SILTSTONE.getBaseBlock(), Blocks.SAND, Blocks.COARSE_DIRT);
+        mixingRecipe(BlockGeneratorReference.MUDSTONE.getBaseBlock(), Blocks.RED_SAND, Blocks.TERRACOTTA);
+        mixingRecipe(BlockGeneratorReference.CONGLOMERATE.getBaseBlock(), Blocks.GRAVEL, Blocks.COARSE_DIRT);
+        addingRecipe(BlockGeneratorReference.GRANODIORITE.getBaseBlock(), Blocks.GRANITE, Blocks.DIORITE);
+        addingRecipe(BlockGeneratorReference.RHYOLITE.getBaseBlock(), Blocks.ANDESITE, Items.QUARTZ);
+        addingRecipe(BlockGeneratorReference.GABBRO.getBaseBlock(), Blocks.DIORITE, UEItems.PYROXENE);
+        mixingRecipe(BlockGeneratorReference.WEATHERED_RHYOLITE.getBaseBlock(), BlockGeneratorReference.RHYOLITE.getBaseBlock(), BlockGeneratorReference.RHYOLITE.getEntry(STONE_LIKE, Forms.REGOLITH).getBlock());
+        stoneSmeltingRecipeOf(BlockGeneratorReference.SLATE.getBaseBlock(), Blocks.SMOOTH_STONE);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.PHYLLITE.getBaseBlock(), BlockGeneratorReference.SLATE.getBaseBlock());
+        stoneSmeltingRecipeOf(BlockGeneratorReference.SCHIST.getBaseBlock(), BlockGeneratorReference.PHYLLITE.getBaseBlock());
+        stoneSmeltingRecipeOf(BlockGeneratorReference.QUARTZITE.getBaseBlock(),Blocks.SMOOTH_SANDSTONE);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.QUARTZITE.getBaseBlock(),Blocks.SMOOTH_RED_SANDSTONE);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.MARBLE.getBaseBlock(),BlockGeneratorReference.LIMESTONE.getBaseBlock());
+        stoneSmeltingRecipeOf(BlockGeneratorReference.MARBLE.getBaseBlock(),BlockGeneratorReference.GREY_LIMESTONE.getBaseBlock());
+        stoneSmeltingRecipeOf(BlockGeneratorReference.MARBLE.getBaseBlock(),BlockGeneratorReference.BEIGE_LIMESTONE.getBaseBlock());
+        addingRecipe(BlockGeneratorReference.BEIGE_LIMESTONE.getBaseBlock(), BlockGeneratorReference.LIMESTONE.getBaseBlock(), Blocks.SAND);
+        addingRecipe(BlockGeneratorReference.GREY_LIMESTONE.getBaseBlock(), BlockGeneratorReference.LIMESTONE.getBaseBlock(), Blocks.SOUL_SAND);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.BEIGE_LIMESTONE.getBaseBlock(), Blocks.DEAD_HORN_CORAL_BLOCK);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.GREY_LIMESTONE.getBaseBlock(), Blocks.DEAD_TUBE_CORAL);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.LIMESTONE.getBaseBlock(), Blocks.DEAD_BUBBLE_CORAL);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.LIMESTONE.getBaseBlock(), Blocks.DEAD_FIRE_CORAL);
+        stoneSmeltingRecipeOf(BlockGeneratorReference.DOLOMITE.getBaseBlock(), Blocks.DEAD_BRAIN_CORAL);
     }
 
     private void regolithConversionRecipe(IItemProvider result, IItemProvider baseBlock) {
@@ -112,6 +139,18 @@ public class Recipes extends RecipeProvider {
                 .addIngredient(Ingredient.fromTag(UETags.Items.REGOLITH_TAG), 8)
                 .addIngredient(baseBlock)
                 .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+    }
+
+    private void mixingRecipe(IItemProvider result, IItemProvider ingredient1, IItemProvider ingredient2) {
+        ShapedRecipeBuilder.shapedRecipe(result, 4)
+                .patternLine("ox").patternLine("xo").key('x', ingredient1).key('o', ingredient2)
+                .addCriterion("has_" + getPath(result), hasItem(result)).build(consumer);
+    }
+
+    private void addingRecipe(IItemProvider result, IItemProvider ingredient1, IItemProvider ingredient2) {
+        ShapedRecipeBuilder.shapedRecipe(result, 4)
+                .patternLine("ox").key('x', ingredient1).key('o', ingredient2)
+                .addCriterion("has_" + getPath(result), hasItem(result)).build(consumer);
     }
 
     private void mossyRecipe(Block baseBlock, Block mossyBlock) {
@@ -186,9 +225,11 @@ public class Recipes extends RecipeProvider {
     }
 
     private void stoneSmeltingRecipeOf(IItemProvider result, IItemProvider ingredient) {
+        String name = Unearthed.MOD_ID + ":" + result.asItem().getRegistryName().getPath() + "_from_" + ingredient.asItem().getRegistryName().getPath();
         CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient), result, 0.1F, 200)
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer);
+                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer, name);
     }
+
 
 //    private List<BlockSchema.Variant> derivativeStones = Lists.newArrayList(Variants.BRICK, Variants. Variants.BRICKS, Variants.CHISELED_BRICKS, Variants.CHISELED, Variants.CUT, Variants.POLISHED, Variants.POLISHED_NOWALL, Variants.POLISHED_BRICKS, Variants.CHISELED_POLISHED);
 

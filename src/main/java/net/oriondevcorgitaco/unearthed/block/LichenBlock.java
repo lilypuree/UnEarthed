@@ -16,6 +16,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.core.UEItems;
 
@@ -27,7 +28,7 @@ public class LichenBlock extends VanillaLichenParentBlock implements IWaterLogga
     public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> FACING_TO_PROPERTY_MAP = SixWayBlock.FACING_TO_PROPERTY_MAP;
 
-    private static Map<Block, Block> lichenErosionMap = new Object2ObjectOpenHashMap<>();
+    public static Map<Block, Block> lichenErosionMap = new Object2ObjectOpenHashMap<>();
 
     public LichenBlock(AbstractBlock.Properties properties) {
         super(properties);
@@ -38,6 +39,11 @@ public class LichenBlock extends VanillaLichenParentBlock implements IWaterLogga
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(WET, WATERLOGGED);
+    }
+
+    @Override
+    public void updateDiagonalNeighbors(BlockState state, IWorld worldIn, BlockPos pos, int flags, int recursionLeft) {
+        super.updateDiagonalNeighbors(state, worldIn, pos, flags, recursionLeft);
     }
 
     @Override
@@ -85,7 +91,7 @@ public class LichenBlock extends VanillaLichenParentBlock implements IWaterLogga
         }
         if (isWet) {
             if (random.nextInt(4) == 0) {
-                if (!hasEnoughLichen(worldIn, pos, 10, 2, 2)) {
+                if (!hasEnoughLichen(worldIn, pos, 8, 2, 2)) {
                     tryGrowth(state, worldIn, pos, random);
                 }
             }

@@ -1,0 +1,5 @@
+{   "parent": "unearthed:block/tinted_cube_all",
+  "textures": {
+    "all": "unearthed:block/foliage"
+  }
+}

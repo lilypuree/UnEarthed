@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_cobbled_grey_limestone": {
+    "has_grey_limestone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "unearthed:cobbled_grey_limestone"
+            "item": "unearthed:grey_limestone"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_cobbled_grey_limestone",
+      "has_grey_limestone",
       "has_the_recipe"
     ]
   ]

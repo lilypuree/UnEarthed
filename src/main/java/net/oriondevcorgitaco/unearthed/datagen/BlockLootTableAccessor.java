@@ -7,21 +7,19 @@ import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.BlockStateProperty;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.loot.conditions.MatchTool;
-import net.minecraft.loot.conditions.SurvivesExplosion;
+import net.minecraft.loot.conditions.*;
 import net.minecraft.loot.functions.ExplosionDecay;
 import net.minecraft.loot.functions.SetCount;
-import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.IItemProvider;
-import net.oriondevcorgitaco.unearthed.block.ModBlockProperties;
+import net.oriondevcorgitaco.unearthed.block.SixwaySlabBlock;
+import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
+import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.core.UETags;
+import net.oriondevcorgitaco.unearthed.util.BlockStatePropertiesMatch;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -37,7 +35,7 @@ public class BlockLootTableAccessor extends BlockLootTables {
     }
 
     protected static <T> T withSurvivesExplosion(IItemProvider item, ILootConditionConsumer<T> condition) {
-        return (T)(!IMMUNE_TO_EXPLOSIONS.contains(item.asItem()) ? condition.acceptCondition(SurvivesExplosion.builder()) : condition.cast());
+        return (T) (!IMMUNE_TO_EXPLOSIONS.contains(item.asItem()) ? condition.acceptCondition(SurvivesExplosion.builder()) : condition.cast());
     }
 
     public static LootTable.Builder droppingItemWithFortune(Block block, Item item) {
@@ -49,7 +47,9 @@ public class BlockLootTableAccessor extends BlockLootTables {
     }
 
     protected static LootTable.Builder droppingSixwaySlab(Block slab) {
-        return LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(withExplosionDecay(slab, ItemLootEntry.builder(slab).acceptFunction(SetCount.builder(ConstantRange.of(2)).acceptCondition(BlockStateProperty.builder(slab).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withBoolProp(ModBlockProperties.DOUBLE, true)))))));
+        return LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1))
+                .addEntry(withExplosionDecay(slab, ItemLootEntry.builder(slab).acceptFunction(SetCount.builder(ConstantRange.of(2))
+                        .acceptCondition(Inverted.builder(BlockStatePropertiesMatch.builder(slab).propertiesToCompare(SixwaySlabBlock.FACE, SixwaySlabBlock.SECONDARY_FACING)))))));
     }
 
     public static LootTable.Builder dropping(IItemProvider item) {
@@ -72,7 +72,7 @@ public class BlockLootTableAccessor extends BlockLootTables {
         return BlockLootTables.dropping(block, HOES.inverted(), builder);
     }
 
-    public static LootTable.Builder onlyWithShears(Block block){
+    public static LootTable.Builder onlyWithShears(Block block) {
         return BlockLootTables.onlyWithShears(block);
     }
 

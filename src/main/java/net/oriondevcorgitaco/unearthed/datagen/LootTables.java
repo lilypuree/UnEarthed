@@ -19,6 +19,8 @@ import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import net.oriondevcorgitaco.unearthed.core.UEItems;
+import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -49,9 +51,9 @@ public class LootTables extends LootTableProvider {
                 } else if (form instanceof Forms.OreForm) {
                     lootTables.put(block, ((Forms.OreForm) form).getOreType().createLootFactory().apply(block));
                 } else if (form == Forms.GRASSY_REGOLITH) {
-                    lootTables.put(block, BlockLootTableAccessor.regolithGrassBlock(block, type.getEntry(entry.getVariant(), Forms.REGOLITH).getBlock(), Blocks.DIRT));
+                    lootTables.put(block, BlockLootTableAccessor.regolithGrassBlock(block, UEItems.REGOLITH, Blocks.DIRT));
                 } else if (form == Forms.REGOLITH) {
-                    lootTables.put(block, BlockLootTableAccessor.droppingWithHoe(block, Blocks.DIRT));
+                    lootTables.put(block, BlockLootTableAccessor.droppingWithSilkTouch(block, UEItems.REGOLITH));
                 } else if (form == Forms.OVERGROWN_ROCK) {
                     lootTables.put(block, BlockLootTableAccessor.droppingWithSilkTouch(block, type.getBaseBlock()));
                 } else if (entry.isBaseEntry() && type.getSchema().getVariants().contains(Variants.COBBLED)) {
@@ -61,6 +63,9 @@ public class LootTables extends LootTableProvider {
                 }
             }
         }
+        VanillaOreTypes.IRON.createLootFactory().apply(Blocks.IRON_ORE);
+        VanillaOreTypes.GOLD.createLootFactory().apply(Blocks.GOLD_ORE);
+
         lootTables.put(UEBlocks.PYROXENE, BlockLootTableAccessor.droppingWithSilkTouch(UEBlocks.PYROXENE,
                 BlockLootTableAccessor.withSurvivesExplosion(UEBlocks.PYROXENE,
                         ItemLootEntry.builder(Items.FLINT).acceptCondition(

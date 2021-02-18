@@ -6,6 +6,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.NetherSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,8 +22,10 @@ public class MixinNetherSurfaceBuilder {
     @Shadow
     public static BlockState GRAVEL;
 
-    @Inject(method = "Lnet/minecraft/world/gen/surfacebuilders/NetherSurfaceBuilder;buildSurface(Ljava/util/Random;Lnet/minecraft/world/chunk/IChunk;Lnet/minecraft/world/biome/Biome;IIIDLnet/minecraft/block/BlockState;Lnet/minecraft/block/BlockState;IJLnet/minecraft/world/gen/surfacebuilders/SurfaceBuilderConfig;)V", at = @At(value = "HEAD"))
+    @Inject(method = "buildSurface(Ljava/util/Random;Lnet/minecraft/world/chunk/IChunk;Lnet/minecraft/world/biome/Biome;IIIDLnet/minecraft/block/BlockState;Lnet/minecraft/block/BlockState;IJLnet/minecraft/world/gen/surfacebuilders/SurfaceBuilderConfig;)V", at = @At(value = "HEAD"))
     private void onInit(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config, CallbackInfo ci) {
-        GRAVEL = UEBlocks.PYROXENE.getDefaultState();
+        if (!UnearthedConfig.disableNetherGeneration.get()){
+            GRAVEL = UEBlocks.PYROXENE.getDefaultState();
+        }
     }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "unearthed:block/sixway_slab",
+  "parent": "minecraft:block/slab",
   "textures": {
     "side": "unearthed:block/schist_side",
     "bottom": "unearthed:block/schist_end",

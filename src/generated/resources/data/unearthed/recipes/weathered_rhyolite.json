@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ox",
+    "xo"
+  ],
+  "key": {
+    "x": {
+      "item": "unearthed:rhyolite"
+    },
+    "o": {
+      "item": "unearthed:rhyolite_regolith"
+    }
+  },
+  "result": {
+    "item": "unearthed:weathered_rhyolite",
+    "count": 4
+  }
+}

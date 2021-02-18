@@ -32,7 +32,7 @@ public enum VanillaOreTypes implements IOreType {
         public Function<Block, LootTable.Builder> createLootFactory() {
             return block -> BlockLootTableAccessor.droppingItemWithFortune(block, Items.COAL);
         }
-    }, LAPIS(Blocks.LAPIS_ORE, Items.LAPIS_LAZULI, 0.2f, 200, 2) {
+    }, LAPIS(Blocks.LAPIS_ORE, Items.LAPIS_LAZULI, 0.2f, 200, 1) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
             return block -> BlockLootTableAccessor.droppingWithSilkTouch(block, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(block, ItemLootEntry.builder(Items.LAPIS_LAZULI).acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 9.0F))).acceptFunction(ApplyBonus.oreDrops(Enchantments.FORTUNE))));

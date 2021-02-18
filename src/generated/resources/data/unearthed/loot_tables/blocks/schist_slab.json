@@ -11,10 +11,12 @@
               "function": "minecraft:set_count",
               "conditions": [
                 {
-                  "condition": "minecraft:block_state_property",
-                  "block": "unearthed:schist_slab",
-                  "properties": {
-                    "double": "true"
+                  "condition": "minecraft:inverted",
+                  "term": {
+                    "condition": "unearthed:block_state_properties_match",
+                    "block": "unearthed:schist_slab",
+                    "propertyA": "facing",
+                    "propertyB": "secondary_facing"
                   }
                 }
               ],

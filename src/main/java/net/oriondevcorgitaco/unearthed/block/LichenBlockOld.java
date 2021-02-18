@@ -22,6 +22,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 
 import javax.annotation.Nullable;

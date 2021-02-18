@@ -32,6 +32,8 @@ public class UnearthedConfig {
     public static ForgeConfigSpec.BooleanValue replaceableTag;
     public static ForgeConfigSpec.BooleanValue replaceCobble;
     public static ForgeConfigSpec.BooleanValue alwaysReplaceDirt;
+    public static ForgeConfigSpec.BooleanValue disableGeneration;
+    public static ForgeConfigSpec.BooleanValue disableNetherGeneration;
     public static ForgeConfigSpec.BooleanValue debug;
 //    public static ForgeConfigSpec.BooleanValue trueMesas;
 //    public static ForgeConfigSpec.BooleanValue desertCaves;
@@ -51,6 +53,9 @@ public class UnearthedConfig {
         replaceableTag = COMMON_BUILDER.comment("Use Replaceable Block Tag? Could have performance impact!\nDefault: true").define("replaceableTag", true);
         replaceCobble = COMMON_BUILDER.comment("Replace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true").define("replaceCobble", true);
         alwaysReplaceDirt = COMMON_BUILDER.comment("Always replace dirt regardless of biome?\nDefault: false").define("alwaysReplaceDirt", false);
+
+        disableGeneration = COMMON_BUILDER.comment("Disable rock replacement\nDefault: false").define("disableGeneration", false);
+        disableNetherGeneration = COMMON_BUILDER.comment("Disable nether generation\nDefault: false").define("disableNetherGeneration", false);
         debug = COMMON_BUILDER.comment("Enables debug mode. Takes more time to generate.\nDefault : false").define("debug", false);
         //        trueMesas = COMMON_BUILDER.comment("Are vanilla Mesas/badlands layered down to bedrock? Ores will still be kept.\nDefault: true").define("trueMesas", false);
 //        desertCaves = COMMON_BUILDER.comment("Do deserts use different blocks for cave generation?\nDefault: true").define("desertCaves", false);

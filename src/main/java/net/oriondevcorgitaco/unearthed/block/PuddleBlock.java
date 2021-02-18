@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -21,7 +22,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -57,7 +60,7 @@ public class PuddleBlock extends Block {
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader reader, BlockPos pos) {
+    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return VoxelShapes.empty();
     }
 
@@ -71,15 +74,12 @@ public class PuddleBlock extends Block {
         if (worldIn.canBlockSeeSky(pos) && worldIn.isDaytime() || worldIn.getLight(pos) >= 14) {
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
         } else {
-            if (random.nextInt(4) == 0 && worldIn.isAreaLoaded(pos, 4)) {
+            if (worldIn.isAreaLoaded(pos, 4)) {
                 int range = 1;
                 BlockPos randomPos = new BlockPos(pos.getX() - range + random.nextInt(range * 2 + 1), pos.getY() - range + random.nextInt(range * 2 + 1), pos.getZ() - range + random.nextInt(range * 2 + 1));
                 Direction direction = Direction.getRandomDirection(random);
                 if (!LichenBlock.hasEnoughLichen(worldIn, pos, 6, 3, 2)) {
-                    BlockState newState = ((LichenBlock) UEBlocks.LICHEN).tryPlaceOnto(state, worldIn, randomPos, direction);
-                    if (newState != null) {
-                        worldIn.setBlockState(randomPos, newState);
-                    }
+                    ((LichenBlock) UEBlocks.LICHEN).tryGrowInto(worldIn, randomPos, direction);
                 }
             }
         }
@@ -95,6 +95,12 @@ public class PuddleBlock extends Block {
     public static int getEvaporationDelay(World world, BlockPos pos) {
         float downFall = world.getBiome(pos).getDownfall();
         return ((int) (10 + (0.5 + world.getRandom().nextFloat()) * downFall * 100));
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return getDefaultState().with(TRANSIENT, false);
     }
 
     @Override

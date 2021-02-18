@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ox"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:granite"
+    },
+    "o": {
+      "item": "minecraft:diorite"
+    }
+  },
+  "result": {
+    "item": "unearthed:granodiorite",
+    "count": 4
+  }
+}

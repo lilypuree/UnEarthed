@@ -8,6 +8,7 @@
     "server.MixinAbstractFurnaceTileEntity",
     "server.MixinEntity",
     "server.MixinFlatGenerationSettings",
+    "server.MixinFlowingFluidBlock",
     "server.MixinMinecraftServer",
     "server.MixinNetherSurfaceBuilder",
     "server.MixinSSVSurfaceBuilder"
