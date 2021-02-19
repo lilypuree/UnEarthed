@@ -144,7 +144,10 @@ public class LichenBlock extends VanillaLichenParentBlock implements IWaterLogga
                 }
             }
             if (coveredSides >= 5) {
-                world.setBlockState(pos, lichenErosionMap.get(block.getBlock()).getDefaultState());
+                Block eroded =  lichenErosionMap.get(block.getBlock());
+                if (eroded != null){
+                    world.setBlockState(pos,eroded.getDefaultState());
+                }
             }
         }
     }

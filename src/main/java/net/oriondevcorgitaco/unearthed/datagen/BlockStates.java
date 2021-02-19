@@ -73,7 +73,8 @@ public class BlockStates extends BlockStateProvider {
         String modelName = getPath(baseBlock) + "_" + oreType.getName() + "_ore";
         String namespace = baseBlock.getRegistryName().getNamespace();
         if (form.isSideTopBlock()) {
-            return models().cubeTop(modelName, modLoc("block/ore/" + modelName), new ResourceLocation(namespace, stoneTexture + "_top"));
+            ResourceLocation topTexture = new ResourceLocation(namespace, stoneTexture + "_top");
+            return models().cubeBottomTop(modelName, modLoc("block/ore/" + modelName), topTexture, topTexture);
         } else {
             return models().cubeAll(modelName, modLoc("block/ore/" + modelName));
         }
@@ -295,7 +296,7 @@ public class BlockStates extends BlockStateProvider {
                 } else if (form == Forms.GRASSY_REGOLITH) {
                     grassyBlock(block, blockTexture(schema.getEntry(entry.getVariant(), Forms.REGOLITH).getBlock()));
                 } else if (form == Forms.SIDETOP_BLOCK) {
-                    simpleBlock(block, models().cubeTop(id, stoneTexture, topTexture));
+                    simpleBlock(block, models().cubeBottomTop(id, stoneTexture,topTexture, topTexture));
                 } else if (form == Forms.BEAM) {
                     beamBlock(block);
                 } else if (form == Forms.AXISBLOCK) {

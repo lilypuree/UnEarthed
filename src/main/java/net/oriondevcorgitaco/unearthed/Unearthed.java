@@ -1,6 +1,7 @@
 package net.oriondevcorgitaco.unearthed;
 
 
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -15,6 +16,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.GameRules;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -193,4 +195,6 @@ public class Unearthed {
             return new ItemStack(Registry.ITEM.getOrDefault(new ResourceLocation(Unearthed.MOD_ID, "kimberlite_diamond_ore")));
         }
     };
+
+    public static final GameRules.RuleKey<GameRules.BooleanValue> DO_PUDDLE_CREATION = GameRules.register("doPuddleCreation", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
 }

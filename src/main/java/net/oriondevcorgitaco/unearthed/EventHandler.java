@@ -1,10 +1,7 @@
 package net.oriondevcorgitaco.unearthed;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,11 +9,11 @@ import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.schema.BlockSchema;
 import net.oriondevcorgitaco.unearthed.block.schema.Forms;
-import net.oriondevcorgitaco.unearthed.block.schema.StoneTiers;
 import net.oriondevcorgitaco.unearthed.block.schema.Variants;
 
 @Mod.EventBusSubscriber(modid = Unearthed.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
+
 
     @SubscribeEvent
     public static void onVillagerTradesEvent(VillagerTradesEvent event) {

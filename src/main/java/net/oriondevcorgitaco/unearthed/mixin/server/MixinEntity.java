@@ -4,11 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.oriondevcorgitaco.unearthed.block.PuddleBlock;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
@@ -26,7 +29,7 @@ public class MixinEntity {
         if (f1 > 0.20f) {
             World world = entity.getEntityWorld();
             BlockPos pos = entity.getPosition();
-            if (!world.isRemote()) {
+            if (entity instanceof PlayerEntity && !world.isRemote() && world.getGameRules().getBoolean(Unearthed.DO_PUDDLE_CREATION)) {
                 int radius = MathHelper.clamp(((int) (f1 * 40 - 8)), 1, 3);
                 BlockPos.getRandomPositions(world.rand, ((int) (5 + radius * radius)), pos.getX() - radius, pos.getY() - 1, pos.getZ() - radius, pos.getX() + radius, pos.getY() + 1, pos.getZ() + radius).forEach(blockPos -> {
                     BlockState block = world.getBlockState(blockPos);
