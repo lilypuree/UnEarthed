@@ -63,8 +63,8 @@ public class LootTables extends LootTableProvider {
                 }
             }
         }
-        VanillaOreTypes.IRON.createLootFactory().apply(Blocks.IRON_ORE);
-        VanillaOreTypes.GOLD.createLootFactory().apply(Blocks.GOLD_ORE);
+        lootTables.put(Blocks.IRON_ORE ,VanillaOreTypes.IRON.createLootFactory().apply(Blocks.IRON_ORE));
+        lootTables.put(Blocks.GOLD_ORE ,VanillaOreTypes.GOLD.createLootFactory().apply(Blocks.GOLD_ORE));
 
         lootTables.put(UEBlocks.PYROXENE, BlockLootTableAccessor.droppingWithSilkTouch(UEBlocks.PYROXENE,
                 BlockLootTableAccessor.withSurvivesExplosion(UEBlocks.PYROXENE,

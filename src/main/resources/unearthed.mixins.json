@@ -11,6 +11,7 @@
     "server.MixinFlowingFluidBlock",
     "server.MixinMinecraftServer",
     "server.MixinNetherSurfaceBuilder",
+    "server.MixinSpreadableSnowyDirtBlock",
     "server.MixinSSVSurfaceBuilder"
   ],
   "client": [

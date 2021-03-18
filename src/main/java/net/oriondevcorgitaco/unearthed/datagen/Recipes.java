@@ -105,7 +105,7 @@ public class Recipes extends RecipeProvider {
                 }
             }
         }
-        ShapelessRecipeBuilder.shapelessRecipe(Blocks.GRAVEL).addIngredient(UEBlocks.PYROXENE).addCriterion("has_pyroxene", hasItem(UEBlocks.PYROXENE)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(Blocks.GRAVEL).addIngredient(UEBlocks.PYROXENE).addCriterion("has_pyroxene", hasItem(UEBlocks.PYROXENE)).build(consumer, "unearthed:gravel_from_pyroxene");
         ShapedRecipeBuilder.shapedRecipe(UEBlocks.LIGNITE_BRIQUETTES).key('#', BlockGeneratorReference.LIGNITE.getBaseBlock())
                 .key('*', Blocks.CLAY)
                 .patternLine("###").patternLine("#*#").patternLine("###").addCriterion("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).build(consumer);
@@ -164,7 +164,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void stoneRecipe() {
-        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(UETags.Items.IGNEOUS_ITEM).addIngredient(UETags.Items.METAMORPHIC_ITEM).addIngredient(UETags.Items.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(UETags.Items.IGNEOUS_ITEM).addIngredient(UETags.Items.METAMORPHIC_ITEM).addIngredient(UETags.Items.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer, "unearthed:stone_from_stones");
     }
 
     private void brickRecipeOf(IItemProvider result, IItemProvider ingredient) {

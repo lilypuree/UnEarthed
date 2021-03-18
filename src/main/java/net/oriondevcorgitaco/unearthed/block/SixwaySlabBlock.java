@@ -42,7 +42,7 @@ public class SixwaySlabBlock extends Block implements IWaterLoggable {
 
     public SixwaySlabBlock(Block.Properties properties) {
         super(properties);
-        this.setDefaultState(super.getDefaultState().with(FACE, Direction.DOWN).with(WATERLOGGED, false).with(SECONDARY_FACING, Direction.DOWN));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(FACE, Direction.DOWN).with(WATERLOGGED, false).with(SECONDARY_FACING, Direction.DOWN));
         shapeArray = getShapeArray();
     }
 
