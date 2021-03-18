@@ -62,4 +62,9 @@ public class RegolithGrassBlock extends GrassBlock {
         BlockState coverBlock = worldReader.getBlockState(blockpos);
         return coverBlock.isOf(UEBlocks.LICHEN) && coverBlock.get(LichenBlock.getPropertyFor(Direction.DOWN));
     }
+
+    public Block getRegolithBlock() {
+        return regolithBlock;
+    }
+
 }

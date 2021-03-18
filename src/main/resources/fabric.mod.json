@@ -14,8 +14,9 @@
     "sources": "https://github.com/CorgiTaco/BYG"
   },
   "license": "Code: LGPLv3",
-  "icon": "assets/unearthed/Logo.png",
+  "icon": "assets/unearthed/logo.png",
   "environment": "*",
+  "accessWidener" : "unearthed.accesswidener",
   "entrypoints": {
     "main": [
       "net.lilycorgitaco.unearthed.Unearthed"

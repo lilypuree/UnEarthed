@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:quartzite_from_smooth_red_sandstone"
+    ]
+  },
+  "criteria": {
+    "has_smooth_red_sandstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:smooth_red_sandstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:quartzite_from_smooth_red_sandstone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_red_sandstone",
+      "has_the_recipe"
+    ]
+  ]
+}

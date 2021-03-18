@@ -195,7 +195,7 @@ public class VanillaLichenParentBlock extends Block {
     }
 
     //method_33359
-    private boolean tryGrowInto(WorldAccess worldAccess, BlockPos blockPos, Direction direction) {
+    public boolean tryGrowInto(WorldAccess worldAccess, BlockPos blockPos, Direction direction) {
         BlockState blockState = worldAccess.getBlockState(blockPos);
         if (!this.canGrowInto(blockState)) {
             return false;

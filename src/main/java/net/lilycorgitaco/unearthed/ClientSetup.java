@@ -2,6 +2,7 @@ package net.lilycorgitaco.unearthed;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.lilycorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
@@ -11,7 +12,6 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
 import net.lilycorgitaco.unearthed.block.BlockGeneratorHelper;
 import net.lilycorgitaco.unearthed.block.BlockGeneratorReference;
-import net.lilycorgitaco.unearthed.block.ModBlockProperties;
 import net.lilycorgitaco.unearthed.block.schema.BlockSchema;
 import net.lilycorgitaco.unearthed.block.schema.Forms;
 import net.lilycorgitaco.unearthed.core.UEBlocks;

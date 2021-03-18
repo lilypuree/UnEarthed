@@ -1,6 +1,7 @@
 package net.lilycorgitaco.unearthed.block.schema;
 
 import com.google.common.collect.Lists;
+import net.lilycorgitaco.unearthed.block.schema.BlockSchema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,7 @@ public class Variants {
         sedimentary.addAll(sideTopOres);
         sedimentary.addAll(regoliths);
         SEDIMENTARY = new BlockSchema.Variant("", sedimentary);
-        CUT = new BlockSchema.Variant("cut", Lists.newArrayList(Forms.SIDETOP_BLOCK, Forms.SIDETOP_SLAB, Forms.SIDETOP_STAIRS)).setDerivative();
+        CUT = new BlockSchema.Variant("cut", Lists.newArrayList(Forms.SIDETOP_BLOCK, Forms.SIDETOP_SLAB, Forms.SIDETOP_STAIRS, Forms.WALLS)).setDerivative();
         CHISELED = new BlockSchema.Variant("chiseled", Lists.newArrayList(Forms.SIDETOP_BLOCK)).setDerivative();
         CHISELED_FULL = new BlockSchema.Variant("chiseled", Lists.newArrayList(Forms.BLOCK)).setDerivative();
         SMOOTH = new BlockSchema.Variant("smooth", noWall);

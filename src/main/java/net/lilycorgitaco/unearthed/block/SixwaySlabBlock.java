@@ -1,5 +1,6 @@
 package net.lilycorgitaco.unearthed.block;
 
+import net.lilycorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.Fluid;
@@ -20,87 +21,142 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
 public class SixwaySlabBlock extends Block implements Waterloggable {
-    public static final BooleanProperty DOUBLE = ModBlockProperties.DOUBLE;
+
     public static final DirectionProperty FACE = Properties.FACING;
+    public static final DirectionProperty SECONDARY_FACING = ModBlockProperties.SECONDARY_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    protected static final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
-    protected static final VoxelShape TOP_SHAPE = Block.createCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
-    protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
+
+    //Down, Up, North, South, West, East (order of Direction enum)
+    protected static final VoxelShape[] directionShapes = new VoxelShape[]{
+            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+            Block.createCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D),
+            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D),
+            Block.createCuboidShape(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D),
+            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D),
+            Block.createCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+    };
+    protected static VoxelShape[][] shapeArray;
 
     public SixwaySlabBlock(AbstractBlock.Settings properties) {
         super(properties);
-        this.setDefaultState(super.getDefaultState().with(FACE, Direction.DOWN).with(WATERLOGGED, false).with(DOUBLE, false));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(FACE, Direction.DOWN).with(WATERLOGGED, false).with(SECONDARY_FACING, Direction.DOWN));
+        shapeArray = getShapeArray();
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(FACE, WATERLOGGED, DOUBLE);
+        builder.add(FACE, WATERLOGGED, SECONDARY_FACING);
+    }
+
+    protected static VoxelShape[][] getShapeArray() {
+        VoxelShape[][] shapes = new VoxelShape[6][6];
+        for (Direction direction : Direction.values()) {
+            for (Direction otherDir : Direction.values()) {
+                int directionIndex = direction.ordinal();
+                int directionIndex2 = otherDir.ordinal();
+                shapes[directionIndex][directionIndex2] = VoxelShapes.union(directionShapes[directionIndex], directionShapes[directionIndex2]);
+            }
+        }
+        return shapes;
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
-        Direction direction = state.get(FACE);
-        if (state.get(DOUBLE)) {
-            return VoxelShapes.fullCube();
-        }
-        switch (direction) {
-            case UP:
-                return TOP_SHAPE;
-            default:
-            case DOWN:
-                return BOTTOM_SHAPE;
-            case NORTH:
-                return NORTH_SHAPE;
-            case EAST:
-                return EAST_SHAPE;
-            case SOUTH:
-                return SOUTH_SHAPE;
-            case WEST:
-                return WEST_SHAPE;
-        }
+        return shapeArray[state.get(FACE).ordinal()][state.get(SECONDARY_FACING).ordinal()];
     }
 
     //partly copied from slabblock
     public BlockState getPlacementState(ItemPlacementContext context) {
+//        BlockPos blockpos = context.getBlockPos();
+//        FluidState ifluidstate = context.getWorld().getFluidState(blockpos);
+//        BlockState currentState = context.getWorld().getBlockState(blockpos);
+//        Direction direction = context.getSide().getOpposite();
+//        if (currentState.isOf(this)) {
+//            return currentState.with(WATERLOGGED, false).with(DOUBLE, true);
+//        }
+//        BlockState baseState = super.getPlacementState(context).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+//        if (context.getPlayer() != null && context.getPlayer().isSneaking()) {
+//            if (direction.getAxis() != Direction.Axis.Y) {
+//                return baseState.with(FACE, (context.getHitPos().y - (double) blockpos.getY() > 0.5D) ? Direction.UP : Direction.DOWN);
+//            } else {
+//                Direction lookDir = context.getPlayerFacing();
+//                if (lookDir.getAxis() == Direction.Axis.X) {
+//                    return baseState.with(FACE, (context.getHitPos().x - (double) blockpos.getX() > 0.5D) ? Direction.EAST : Direction.WEST);
+//                } else if (lookDir.getAxis() == Direction.Axis.Z) {
+//                    return baseState.with(FACE, (context.getHitPos().z - (double) blockpos.getZ() > 0.5D) ? Direction.SOUTH : Direction.NORTH);
+//                }
+//            }
+//        }
+//        return baseState.with(FACE, direction);
+
+
         BlockPos blockpos = context.getBlockPos();
         FluidState ifluidstate = context.getWorld().getFluidState(blockpos);
         BlockState currentState = context.getWorld().getBlockState(blockpos);
-        Direction direction = context.getSide().getOpposite();
+        Direction placeDir = getPlaceDir(context);
+        boolean waterLoggedFlag;
+
         if (currentState.isOf(this)) {
-            return currentState.with(WATERLOGGED, false).with(DOUBLE, true);
+            waterLoggedFlag = currentState.get(WATERLOGGED) && placeDir != currentState.get(FACE);
+            return currentState.with(WATERLOGGED, waterLoggedFlag).with(FACE, currentState.get(FACE)).with(SECONDARY_FACING, placeDir);
+        } else {
+            waterLoggedFlag = ifluidstate.getFluid() == Fluids.WATER;
+            return getDefaultState().with(WATERLOGGED, waterLoggedFlag).with(FACE, placeDir).with(SECONDARY_FACING, placeDir);
         }
-        BlockState baseState = super.getPlacementState(context).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
-        if (context.getPlayer() != null && context.getPlayer().isSneaking()) {
-            if (direction.getAxis() != Direction.Axis.Y) {
-                return baseState.with(FACE, (context.getHitPos().y - (double) blockpos.getY() > 0.5D) ? Direction.UP : Direction.DOWN);
-            } else {
-                Direction lookDir = context.getPlayerFacing();
-                if (lookDir.getAxis() == Direction.Axis.X) {
-                    return baseState.with(FACE, (context.getHitPos().x - (double) blockpos.getX() > 0.5D) ? Direction.EAST : Direction.WEST);
-                } else if (lookDir.getAxis() == Direction.Axis.Z) {
-                    return baseState.with(FACE, (context.getHitPos().z - (double) blockpos.getZ() > 0.5D) ? Direction.SOUTH : Direction.NORTH);
-                }
-            }
-        }
-        return baseState.with(FACE, direction);
     }
+
+    public boolean hasTwoSides(BlockState state) {
+        return state.get(FACE) != state.get(SECONDARY_FACING);
+    }
+
+    public boolean isFullBlock(BlockState state) {
+        return state.get(FACE) == state.get(SECONDARY_FACING).getOpposite();
+    }
+
 
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext useContext) {
         ItemStack itemstack = useContext.getStack();
-        if (!state.get(DOUBLE) && itemstack.getItem() == this.asItem()) {
+        if (!hasTwoSides(state) && itemstack.getItem() == this.asItem()) {
             if (useContext.canReplaceExisting()) {
-                Direction direction = useContext.getSide();
-                if (state.get(FACE) == direction.getOpposite()) {
+                if (useContext.getSide() == state.get(FACE).getOpposite()) {
                     return true;
                 }
+
+                return false;
             } else {
+                Direction placeDir = getPlaceDir(useContext);
+                if (state.get(SECONDARY_FACING) == placeDir) {
+                    return false;
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    protected Direction getPlaceDir(ItemPlacementContext context) {
+        BlockPos blockpos = context.getBlockPos();
+        BlockState currentState = context.getWorld().getBlockState(blockpos);
+        Direction placeDir = context.getSide().getOpposite();
+        if (currentState.isOf(this)) {
+            if (placeDir == currentState.get(FACE)) {
+                placeDir = placeDir.getOpposite();
+            }
+        }
+
+        if (context.getPlayer() != null && context.getPlayer().isSneaking()) {
+            if (placeDir.getAxis() != Direction.Axis.Y) {
+                placeDir = (context.getHitPos().y - (double) blockpos.getY() > 0.5D) ? Direction.UP : Direction.DOWN;
+            } else {
+                Direction lookDir = context.getPlayerFacing();
+                if (lookDir.getAxis() == Direction.Axis.X) {
+                    placeDir = (context.getHitPos().x - (double) blockpos.getX() > 0.5D) ? Direction.EAST : Direction.WEST;
+                } else if (lookDir.getAxis() == Direction.Axis.Z) {
+                    placeDir = (context.getHitPos().z - (double) blockpos.getZ() > 0.5D) ? Direction.SOUTH : Direction.NORTH;
+                }
+            }
+        }
+        return placeDir;
     }
 
     public FluidState getFluidState(BlockState state) {
@@ -108,11 +164,11 @@ public class SixwaySlabBlock extends Block implements Waterloggable {
     }
 
     public boolean tryFillWithFluid(WorldAccess worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return !state.get(DOUBLE) && Waterloggable.super.tryFillWithFluid(worldIn, pos, state, fluidStateIn);
+        return !isFullBlock(state) && Waterloggable.super.tryFillWithFluid(worldIn, pos, state, fluidStateIn);
     }
 
     public boolean canFillWithFluid(BlockView worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return !state.get(DOUBLE) && Waterloggable.super.canFillWithFluid(worldIn, pos, state, fluidIn);
+        return !isFullBlock(state) && Waterloggable.super.canFillWithFluid(worldIn, pos, state, fluidIn);
     }
 
 

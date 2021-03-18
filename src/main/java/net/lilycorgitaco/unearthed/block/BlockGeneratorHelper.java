@@ -216,7 +216,7 @@ public class BlockGeneratorHelper {
         public Builder createRegolithProperties() {
             FabricBlockSettings regolithProp = FabricBlockSettings.copyOf(new Block(defaultProperty));
             FabricBlockSettings grassProp = FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK);
-            regolithProp.strength(0.6f).sounds(BlockSoundGroup.GRAVEL).breakByTool(FabricToolTags.PICKAXES).requiresTool();
+            regolithProp.strength(0.6f).sounds(BlockSoundGroup.GRAVEL).breakByTool(FabricToolTags.SHOVELS);
             setProperty(Forms.REGOLITH, regolithProp);
             setProperty(Forms.GRASSY_REGOLITH, grassProp);
             return this;

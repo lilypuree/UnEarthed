@@ -1,5 +1,6 @@
 package net.lilycorgitaco.unearthed.mixin.server;
 
+import net.lilycorgitaco.unearthed.Unearthed;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -26,6 +27,8 @@ public class MixinNetherSurfaceBuilder {
 
     @Inject(method = "generate", at = @At(value = "HEAD"))
     private void onInit(Random random, Chunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig config, CallbackInfo ci) {
-        GRAVEL = UEBlocks.PYROXENE.getDefaultState();
+        if (!Unearthed.CONFIG.disableNetherGeneration){
+            GRAVEL = UEBlocks.PYROXENE.getDefaultState();
+        }
     }
 }

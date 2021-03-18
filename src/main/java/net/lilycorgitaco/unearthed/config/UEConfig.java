@@ -15,6 +15,14 @@ public class UEConfig implements ConfigData {
     @Comment(value = "\nAlways replace dirt regardless of biome?\nDefault: false")
     public boolean alwaysReplaceDirt = false;
 
+    @Comment(value = "\nDisable rock replacement?\nDefault: false")
+    public boolean disableGeneration = false;
+
+    @Comment(value = "\nDisable nether generation?\nDefault: false")
+    public boolean disableNetherGeneration = false;
+
     @Comment(value = "\nReplace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true")
     public boolean debug = false;
+
+
 }

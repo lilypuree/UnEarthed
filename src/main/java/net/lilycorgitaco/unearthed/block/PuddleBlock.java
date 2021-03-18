@@ -1,11 +1,13 @@
 package net.lilycorgitaco.unearthed.block;
 
+import net.lilycorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -22,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.lilycorgitaco.unearthed.core.UEBlocks;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -57,7 +60,7 @@ public class PuddleBlock extends Block {
     }
 
     @Override
-    public VoxelShape getSidesShape(BlockState state, BlockView reader, BlockPos pos) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
     }
 
@@ -71,16 +74,12 @@ public class PuddleBlock extends Block {
         if (worldIn.isSkyVisibleAllowingSea(pos) && worldIn.isDay() || worldIn.getLightLevel(pos) >= 14) {
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
         } else {
-            if (random.nextInt(4) == 0) {
-                int range = 1;
-                BlockPos randomPos = new BlockPos(pos.getX() - range + random.nextInt(range * 2 + 1), pos.getY() - range + random.nextInt(range * 2 + 1), pos.getZ() - range + random.nextInt(range * 2 + 1));
-                Direction direction = Direction.random(random);
-                if (!LichenBlock.hasEnoughLichen(worldIn, pos, 6, 3, 2)) {
-                    BlockState newState = ((LichenBlock) UEBlocks.LICHEN).tryPlaceOnto(state, worldIn, randomPos, direction);
-                    if (newState != null) {
-                        worldIn.setBlockState(randomPos, newState);
-                    }
-                }
+
+            int range = 1;
+            BlockPos randomPos = new BlockPos(pos.getX() - range + random.nextInt(range * 2 + 1), pos.getY() - range + random.nextInt(range * 2 + 1), pos.getZ() - range + random.nextInt(range * 2 + 1));
+            Direction direction = Direction.random(random);
+            if (!LichenBlock.hasEnoughLichen(worldIn, pos, 6, 3, 2)) {
+                ((LichenBlock) UEBlocks.LICHEN).tryGrowInto(worldIn, randomPos, direction);
             }
         }
     }
@@ -90,6 +89,12 @@ public class PuddleBlock extends Block {
         if (state.get(TRANSIENT)) {
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
         }
+    }
+
+    @Nullable
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return super.getPlacementState(ctx).with(TRANSIENT, false);
     }
 
     public static int getEvaporationDelay(World world, BlockPos pos) {

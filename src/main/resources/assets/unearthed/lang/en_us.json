@@ -77,9 +77,11 @@
   "block.unearthed.cut_mudstone": "Cut Mudstone",
   "block.unearthed.cut_mudstone_slab": "Cut Mudstone Slab",
   "block.unearthed.cut_mudstone_stairs": "Cut Mudstone Stairs",
+  "block.unearthed.cut_mudstone_wall": "Cut Mudstone Wall",
   "block.unearthed.cut_siltstone": "Cut Siltstone",
   "block.unearthed.cut_siltstone_slab": "Cut Siltstone Slab",
   "block.unearthed.cut_siltstone_stairs": "Cut Siltstone Stairs",
+  "block.unearthed.cut_siltstone_wall": "Cut Siltstone Wall",
   "block.unearthed.dacite": "Dacite",
   "block.unearthed.diorite_coal_ore": "Diorite Coal Ore",
   "block.unearthed.diorite_diamond_ore": "Diorite Diamond Ore",
@@ -396,5 +398,6 @@
   "block.unearthed.white_granite_wall": "White Granite Wall",
   "item.unearthed.gold_ore": "Gold Ore",
   "item.unearthed.iron_ore": "Iron Ore",
-  "itemGroup.unearthed": "Unearthed"
+  "item.unearthed.regolith": "Regolith",
+  "itemGroup.unearthed.tab": "Unearthed"
 }

@@ -1,6 +1,7 @@
 package net.lilycorgitaco.unearthed.block;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.lilycorgitaco.unearthed.block.properties.ModBlockProperties;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -12,6 +13,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -27,11 +30,16 @@ public class LichenBlock extends VanillaLichenParentBlock implements Waterloggab
     public static BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> FACING_TO_PROPERTY_MAP = ConnectingBlock.FACING_PROPERTIES;
 
-    private static Map<Block, Block> lichenErosionMap = new Object2ObjectOpenHashMap<>();
+    public static Map<Block, Block> lichenErosionMap = new Object2ObjectOpenHashMap<>();
 
     public LichenBlock(AbstractBlock.Settings properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(WET, true).with(WATERLOGGED, false));
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.empty();
     }
 
     @Override
@@ -85,7 +93,7 @@ public class LichenBlock extends VanillaLichenParentBlock implements Waterloggab
         }
         if (isWet) {
             if (random.nextInt(4) == 0) {
-                if (!hasEnoughLichen(worldIn, pos, 10, 2, 2)) {
+                if (!hasEnoughLichen(worldIn, pos, 8, 2, 2)) {
                     tryGrowth(state, worldIn, pos, random);
                 }
             }
@@ -138,7 +146,10 @@ public class LichenBlock extends VanillaLichenParentBlock implements Waterloggab
                 }
             }
             if (coveredSides >= 5) {
-                world.setBlockState(pos, lichenErosionMap.get(block.getBlock()).getDefaultState());
+                Block eroded = lichenErosionMap.get(block.getBlock());
+                if (eroded != null){
+                    world.setBlockState(pos, lichenErosionMap.get(block.getBlock()).getDefaultState());
+                }
             }
         }
     }

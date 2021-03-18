@@ -5,6 +5,7 @@ import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.server.ServerStartCallback;
 import net.lilycorgitaco.unearthed.block.BlockGeneratorReference;
 import net.lilycorgitaco.unearthed.block.LichenBlock;
 import net.lilycorgitaco.unearthed.block.PuddleBlock;
@@ -12,6 +13,11 @@ import net.lilycorgitaco.unearthed.config.UEConfig;
 import net.lilycorgitaco.unearthed.core.UEBlocks;
 import net.lilycorgitaco.unearthed.core.UEItems;
 import net.lilycorgitaco.unearthed.core.UETags;
+import net.lilycorgitaco.unearthed.item.RegolithItem;
+import net.lilycorgitaco.unearthed.misc.BlockStatePropertiesMatch;
+import net.lilycorgitaco.unearthed.misc.VillagerTrades;
+import net.lilycorgitaco.unearthed.mixin.access.BooleanRuleInvoker;
+import net.lilycorgitaco.unearthed.mixin.access.GameRulesInvoker;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -21,6 +27,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.GameRules;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,14 +41,18 @@ public class Unearthed implements ModInitializer {
     public void onInitialize() {
         AutoConfig.register(UEConfig.class, JanksonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(UEConfig.class).getConfig();
-        BlockGeneratorReference.init();
         registerBlocks();
         registerItems();
+        BlockGeneratorReference.init();
+        BlockStatePropertiesMatch.init();
+
         ueCommonSetup();
     }
 
     public void ueCommonSetup() {
         UETags.init();
+        ServerStartCallback.EVENT.register(minecraftServer -> VillagerTrades.addMapTrades());
+
 //        configReader();
     }
 
@@ -71,7 +82,7 @@ public class Unearthed implements ModInitializer {
         BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> {
                 createItem(new BlockItem(entry.getBlock(), properties), entry.getId());
         }));
-
+        UEItems.REGOLITH = createItem(new RegolithItem(properties), "regolith");
         UEItems.PYROXENE = createItem(new BlockItem(UEBlocks.PYROXENE, properties), "pyroxene");
         UEItems.IRON_ORE = createItem(new Item(properties), "iron_ore");
         UEItems.GOLD_ORE = createItem(new Item(properties), "gold_ore");
@@ -89,4 +100,7 @@ public class Unearthed implements ModInitializer {
 
 
     public static final ItemGroup UNEARTHED_TAB = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "tab"), () -> new ItemStack(Registry.ITEM.get(new Identifier(Unearthed.MOD_ID, "kimberlite_diamond_ore"))));
+
+    public static final GameRules.Key<GameRules.BooleanRule> DO_PUDDLE_CREATION = GameRulesInvoker.callRegister("doPuddleCreation",GameRules.Category.MISC, BooleanRuleInvoker.callCreate(true));
+
 }

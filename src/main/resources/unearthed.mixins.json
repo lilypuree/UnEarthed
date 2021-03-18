@@ -5,12 +5,16 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinBiomeGenerationSettings",
+    "access.BooleanRuleInvoker",
+    "access.GameRulesInvoker",
     "access.GenerationSettingsAccess",
     "server.MixinAbstractFurnaceTileEntity",
     "server.MixinEntity",
     "server.MixinFlatGenerationSettings",
+    "server.MixinFluidBlock",
     "server.MixinMinecraftServer",
     "server.MixinNetherSurfaceBuilder",
+    "server.MixinSpreadableBlock",
     "server.MixinSSVSurfaceBuilder"
   ],
   "client": [
