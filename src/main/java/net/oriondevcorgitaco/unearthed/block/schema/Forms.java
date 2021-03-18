@@ -86,7 +86,7 @@ public class Forms {
     public static final BlockSchema.Form COAL_ORE = new OreForm("coal_ore", VanillaOreTypes.COAL);
     public static final BlockSchema.Form GOLD_ORE = new OreForm("gold_ore", VanillaOreTypes.GOLD);
     public static final BlockSchema.Form REDSTONE_ORE = new OreForm("redstone_ore", VanillaOreTypes.REDSTONE);
-    public static final BlockSchema.Form LAPIS_ORE = new OreForm("lapis_ore", VanillaOreTypes.LAPIS);
+    public static final BlockSchema.Form LAPIS_ORE =    new OreForm("lapis_ore", VanillaOreTypes.LAPIS);
     public static final BlockSchema.Form DIAMOND_ORE = new OreForm("diamond_ore", VanillaOreTypes.DIAMOND);
     public static final BlockSchema.Form EMERALD_ORE = new OreForm("emerald_ore", VanillaOreTypes.EMERALD);
 

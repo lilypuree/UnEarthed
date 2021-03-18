@@ -50,11 +50,6 @@ public class LichenBlock extends VanillaLichenParentBlock implements IWaterLogga
     }
 
     @Override
-    public void updateDiagonalNeighbors(BlockState state, IWorld worldIn, BlockPos pos, int flags, int recursionLeft) {
-        super.updateDiagonalNeighbors(state, worldIn, pos, flags, recursionLeft);
-    }
-
-    @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
         if ((Boolean) stateIn.get(WATERLOGGED)) {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));

@@ -77,7 +77,7 @@ public class MixinMinecraftServer {
                         removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT, Features.ORE_GRANITE, Features.ORE_DIORITE, Features.ORE_ANDESITE);
                     }
                 } else {
-                    if (UnearthedConfig.disableNetherGeneration.get()) {
+                    if (!UnearthedConfig.disableNetherGeneration.get()) {
                         removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL_NETHER);
                     }
                 }
