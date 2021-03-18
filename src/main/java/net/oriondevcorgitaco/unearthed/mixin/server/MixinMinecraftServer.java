@@ -58,7 +58,11 @@ public class MixinMinecraftServer {
     private void implementUnearthedStones(Thread thread, DynamicRegistries.Impl impl, SaveFormat.LevelSave session, IServerConfiguration saveProperties, ResourcePackList resourcePackManager, Proxy proxy, DataFixer dataFixer, DataPackRegistries serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, PlayerProfileCache userCache, IChunkStatusListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
         if (this.field_240767_f_.func_230521_a_(Registry.BIOME_KEY).isPresent()) {
             for (Biome biome : field_240767_f_.func_230521_a_(Registry.BIOME_KEY).get()) {
-                if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
+                if (biome.getCategory() == Biome.Category.NETHER) {
+                    if (!UnearthedConfig.disableNetherGeneration.get()) {
+                        removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL_NETHER);
+                    }
+                } else if (biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
 //                    if (useDesertCaves(biome))
 //                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
 //                    else if (useIceCaves(biome))
@@ -72,13 +76,9 @@ public class MixinMinecraftServer {
                     }
                     if (UnearthedConfig.disableGeneration.get()) {
 
-                    }else{
+                    } else {
                         addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, UEFeatures.NEW_GENERATOR);
                         removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT, Features.ORE_GRANITE, Features.ORE_DIORITE, Features.ORE_ANDESITE);
-                    }
-                } else {
-                    if (!UnearthedConfig.disableNetherGeneration.get()) {
-                        removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL_NETHER);
                     }
                 }
             }
@@ -125,7 +125,7 @@ public class MixinMinecraftServer {
         Optional<JsonElement> configuredFeatureJSON2 = ConfiguredFeature.field_242763_a.encode(configuredFeature2, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
 
         // One of the configuredfeatures cannot be serialized
-        if(!configuredFeatureJSON1.isPresent() || !configuredFeatureJSON2.isPresent()) {
+        if (!configuredFeatureJSON1.isPresent() || !configuredFeatureJSON2.isPresent()) {
             return false;
         }
 

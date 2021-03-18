@@ -59,6 +59,13 @@ public class RegolithItem extends BlockItem {
     }
 
     @Override
+    public String getTranslationKey() {
+        return this.getDefaultTranslationKey();
+    }
+
+
+
+    @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
     }
 
