@@ -18,13 +18,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.Map;
+
 import static net.oriondevcorgitaco.unearthed.UEFeatures.NEW_GENERATOR;
 
 @Mixin(FlatGenerationSettings.class)
 public class MixinFlatGenerationSettings {
 
-    @Inject(method = "Lnet/minecraft/world/gen/FlatGenerationSettings;func_236942_c_()Lnet/minecraft/world/biome/Biome;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;build()Lnet/minecraft/world/biome/BiomeGenerationSettings;"), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void addUnearthedFeature(CallbackInfoReturnable<Biome> ci, Biome biome, BiomeGenerationSettings biomeGenerationSettings, BiomeGenerationSettings.Builder builder, boolean flag, BlockState[] blockStates) {
-        builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NEW_GENERATOR);
+    @Inject(method = "func_236942_c_", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;build()Lnet/minecraft/world/biome/BiomeGenerationSettings;"), locals = LocalCapture.CAPTURE_FAILHARD)
+    private void addUnearthedFeature(CallbackInfoReturnable<Biome> cir, Biome biome, BiomeGenerationSettings biomegenerationsettings, BiomeGenerationSettings.Builder biomegenerationsettings$builder, Map map, boolean flag, BlockState ablockstate[]) {
+        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NEW_GENERATOR);
     }
 }
