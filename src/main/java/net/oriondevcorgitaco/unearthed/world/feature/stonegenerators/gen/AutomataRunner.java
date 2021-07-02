@@ -13,15 +13,15 @@ import java.util.function.Supplier;
 
 public class AutomataRunner {
 
-    static BlockState GLASS = Blocks.GLASS.getDefaultState();
-    static BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
-    static BlockState YELLOW_CON = Blocks.YELLOW_CONCRETE.getDefaultState();
-    static BlockState GOLD = Blocks.GOLD_BLOCK.getDefaultState();
-    static BlockState YELLOW_WOOL = Blocks.YELLOW_WOOL.getDefaultState();
-    static BlockState IRON = Blocks.IRON_BLOCK.getDefaultState();
-    static BlockState WOOL = Blocks.WHITE_WOOL.getDefaultState();
-    static BlockState BONE = Blocks.BONE_BLOCK.getDefaultState();
-    static BlockState CONCRETE = Blocks.WHITE_CONCRETE.getDefaultState();
+    static BlockState GLASS = Blocks.GLASS.defaultBlockState();
+    static BlockState SANDSTONE = Blocks.SANDSTONE.defaultBlockState();
+    static BlockState YELLOW_CON = Blocks.YELLOW_CONCRETE.defaultBlockState();
+    static BlockState GOLD = Blocks.GOLD_BLOCK.defaultBlockState();
+    static BlockState YELLOW_WOOL = Blocks.YELLOW_WOOL.defaultBlockState();
+    static BlockState IRON = Blocks.IRON_BLOCK.defaultBlockState();
+    static BlockState WOOL = Blocks.WHITE_WOOL.defaultBlockState();
+    static BlockState BONE = Blocks.BONE_BLOCK.defaultBlockState();
+    static BlockState CONCRETE = Blocks.WHITE_CONCRETE.defaultBlockState();
 
     private NoiseHandler noiseHandler;
     private ISeedReader world;

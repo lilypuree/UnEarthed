@@ -19,8 +19,8 @@ public class RegionManager {
     private static List<State> tertiaries = new ArrayList<>();
 
     public static Region getRegion(Biome biome, float value) {
-        if (specialRegions.containsKey(biome.getCategory())) {
-            return specialRegions.get(biome.getCategory());
+        if (specialRegions.containsKey(biome.getBiomeCategory())) {
+            return specialRegions.get(biome.getBiomeCategory());
         } else if (biomeRegion.containsKey(biome.getRegistryName())) {
             return biomeRegion.get(biome.getRegistryName());
         } else {

@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import net.minecraft.item.Item.Properties;
+
 public class RegolithItem extends BlockItem {
 
     public RegolithItem(Properties properties) {
@@ -33,16 +35,16 @@ public class RegolithItem extends BlockItem {
 
     @Nullable
     @Override
-    protected BlockState getStateForPlacement(BlockItemUseContext context) {
-        World world = context.getWorld();
-        BlockPos pos = context.getPos();
+    protected BlockState getPlacementState(BlockItemUseContext context) {
+        World world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         Block block = getDominantBlock(world, pos);
         if (block == null) return null;
-        else return block.getDefaultState();
+        else return block.defaultBlockState();
     }
 
     protected Block getDominantBlock(World world, BlockPos pos) {
-        return BlockPos.getAllInBox(pos.add(-1, -1, -1), pos.add(1, 1, 1)).map(eachPos -> {
+        return BlockPos.betweenClosedStream(pos.offset(-1, -1, -1), pos.offset(1, 1, 1)).map(eachPos -> {
             Block block = world.getBlockState(eachPos).getBlock();
             if (block instanceof RegolithGrassBlock){
                 block = ((RegolithGrassBlock)block).getRegolithBlock();
@@ -59,25 +61,25 @@ public class RegolithItem extends BlockItem {
     }
 
     @Override
-    public String getTranslationKey() {
-        return this.getDefaultTranslationKey();
+    public String getDescriptionId() {
+        return this.getOrCreateDescriptionId();
     }
 
 
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (this.isInGroup(group)) {
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(group)) {
             items.add(new ItemStack(this));
         }
     }
 
     @Override
-    public void addToBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
+    public void registerBlocks(Map<Block, Item> blockToItemMap, Item itemIn) {
     }
 
     @Override

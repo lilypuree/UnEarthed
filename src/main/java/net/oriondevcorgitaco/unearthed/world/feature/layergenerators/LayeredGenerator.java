@@ -27,16 +27,16 @@ public class LayeredGenerator extends Feature<NoFeatureConfig> {
 
     public static List<BlockState> blockStates = new ArrayList<>();
 
-    public static BlockState mesaBlockState = Blocks.STONE.getDefaultState();
+    public static BlockState mesaBlockState = Blocks.STONE.defaultBlockState();
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
+                mutable.set(pos.getX() + x, 0, pos.getZ() + z);
                 int topY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 double noise2D = fastNoise2D.GetNoise(mutable.getX(), mutable.getZ());
@@ -54,19 +54,19 @@ public class LayeredGenerator extends Feature<NoFeatureConfig> {
 
                     //Soil Layer
                     if (y > topY - soilLayerWidth)
-                        world.setBlockState(mutable, Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
+                        world.setBlock(mutable, Blocks.DIAMOND_BLOCK.defaultBlockState(), 2);
 
                     //Sedimentary Layer
                     else if (y > topY - sedimentaryLayerWidth + noise2D)
-                        world.setBlockState(mutable, Blocks.EMERALD_BLOCK.getDefaultState(), 2);
+                        world.setBlock(mutable, Blocks.EMERALD_BLOCK.defaultBlockState(), 2);
 
                     //Metamorphic Layer
                     else if (y > topY - metamorphicLayerWidth)
-                        world.setBlockState(mutable, Blocks.COAL_BLOCK.getDefaultState(), 2);
+                        world.setBlock(mutable, Blocks.COAL_BLOCK.defaultBlockState(), 2);
 
                     //Igneous Intrusive Layer
                     else
-                        world.setBlockState(mutable, Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
+                        world.setBlock(mutable, Blocks.REDSTONE_BLOCK.defaultBlockState(), 2);
 
 
                     mutable.move(Direction.UP);
@@ -127,8 +127,8 @@ public class LayeredGenerator extends Feature<NoFeatureConfig> {
 
 
     static {
-        blockStates.add(Blocks.COAL_BLOCK.getDefaultState());
-        blockStates.add(Blocks.DIAMOND_BLOCK.getDefaultState());
-        blockStates.add(Blocks.EMERALD_BLOCK.getDefaultState());
+        blockStates.add(Blocks.COAL_BLOCK.defaultBlockState());
+        blockStates.add(Blocks.DIAMOND_BLOCK.defaultBlockState());
+        blockStates.add(Blocks.EMERALD_BLOCK.defaultBlockState());
     }
 }

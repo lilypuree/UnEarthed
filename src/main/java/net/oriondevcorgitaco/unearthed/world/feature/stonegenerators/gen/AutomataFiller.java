@@ -58,7 +58,7 @@ public class AutomataFiller extends AutomataBase {
         State center = subChunkStates[2][y];
         Direction[] directions = (y != 0) ? ((y != yHeight - 1) ? Direction.values() : top) : bottom;
         for (Direction dir : directions) {
-            Vector3i vi = dir.getDirectionVec();
+            Vector3i vi = dir.getNormal();
             if (!center.equals(subChunkStates[2 + vi.getX() * 2 + vi.getZ()][y + vi.getY()])) {
                 return false;
             }

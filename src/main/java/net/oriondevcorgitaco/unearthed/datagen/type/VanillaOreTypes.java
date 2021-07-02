@@ -35,12 +35,12 @@ public enum VanillaOreTypes implements IOreType {
     }, LAPIS(Blocks.LAPIS_ORE, Items.LAPIS_LAZULI, 0.2f, 200, 1) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
-            return block -> BlockLootTableAccessor.droppingWithSilkTouch(block, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(block, ItemLootEntry.builder(Items.LAPIS_LAZULI).acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 9.0F))).acceptFunction(ApplyBonus.oreDrops(Enchantments.FORTUNE))));
+            return block -> BlockLootTableAccessor.droppingWithSilkTouch(block, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(block, ItemLootEntry.lootTableItem(Items.LAPIS_LAZULI).apply(SetCount.setCount(RandomValueRange.between(4.0F, 9.0F))).apply(ApplyBonus.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
         }
     }, REDSTONE(Blocks.REDSTONE_ORE, Items.REDSTONE, 0.7f, 200, 2) {
         @Override
         public Function<Block, LootTable.Builder> createLootFactory() {
-            return redstoneOre -> BlockLootTableAccessor.droppingWithSilkTouch(redstoneOre, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(redstoneOre, ItemLootEntry.builder(Items.REDSTONE).acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 5.0F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE))));
+            return redstoneOre -> BlockLootTableAccessor.droppingWithSilkTouch(redstoneOre, BlockLootTableAccessor.withExplosionDecayWithoutImmuneCheck(redstoneOre, ItemLootEntry.lootTableItem(Items.REDSTONE).apply(SetCount.setCount(RandomValueRange.between(4.0F, 5.0F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
         }
     }, DIAMOND(Blocks.DIAMOND_ORE, Items.DIAMOND, 1.0f, 200, 2) {
         @Override
@@ -85,10 +85,10 @@ public enum VanillaOreTypes implements IOreType {
     @Override
     public void addCookingRecipes(Consumer<IFinishedRecipe> consumer) {
         ITag.INamedTag<Item> oreTag = ItemTags.createOptional(new ResourceLocation(Unearthed.MOD_ID, getName() + "_ores"));
-        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(oreTag), smeltResult, experience, smeltTime)
-                .addCriterion("has_" + getName() + "_ore", hasTaggedItem(oreTag)).build(consumer, smeltResult.getRegistryName().getPath() + "_from_smelting_" + getName() + "_ore");
-        CookingRecipeBuilder.blastingRecipe(Ingredient.fromTag(oreTag), smeltResult, experience, blastTime)
-                .addCriterion("has_" + getName() + "_ore", hasTaggedItem(oreTag)).build(consumer, smeltResult.getRegistryName().getPath() + "_from_blasting_" + getName() + "_ore");
+        CookingRecipeBuilder.smelting(Ingredient.of(oreTag), smeltResult, experience, smeltTime)
+                .unlockedBy("has_" + getName() + "_ore", hasTaggedItem(oreTag)).save(consumer, smeltResult.getRegistryName().getPath() + "_from_smelting_" + getName() + "_ore");
+        CookingRecipeBuilder.blasting(Ingredient.of(oreTag), smeltResult, experience, blastTime)
+                .unlockedBy("has_" + getName() + "_ore", hasTaggedItem(oreTag)).save(consumer, smeltResult.getRegistryName().getPath() + "_from_blasting_" + getName() + "_ore");
     }
 
     @Override

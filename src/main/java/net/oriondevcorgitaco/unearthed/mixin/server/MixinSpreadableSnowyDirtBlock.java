@@ -15,19 +15,16 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Random;
 
-import static net.minecraft.block.SpreadableSnowyDirtBlock.isSnowyAndNotUnderwater;
-import static net.minecraft.state.properties.BlockStateProperties.SNOWY;
-
 @Mixin(SpreadableSnowyDirtBlock.class)
 public class MixinSpreadableSnowyDirtBlock {
 
-    @Inject(method = "randomTick", at = @At(target = "Lnet/minecraft/util/math/BlockPos;add(III)Lnet/minecraft/util/math/BlockPos;", value = "INVOKE_ASSIGN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "randomTick", at = @At(target = "Lnet/minecraft/util/math/BlockPos;offset(III)Lnet/minecraft/util/math/BlockPos;", value = "INVOKE_ASSIGN"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void onRandomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random, CallbackInfo cir, BlockState blockstate, int i, BlockPos blockpos) {
         BlockState newBlock = worldIn.getBlockState(blockpos);
         if (RegolithGrassBlock.regolithToGrassMap.containsKey(newBlock.getBlock()) && RegolithGrassBlock.canPropagate(newBlock, worldIn, blockpos)) {
-            if (!worldIn.getFluidState(blockpos.up()).isTagged(FluidTags.WATER)) {
-                worldIn.setBlockState(blockpos, RegolithGrassBlock.regolithToGrassMap.get(newBlock.getBlock()).getDefaultState());
-                worldIn.setBlockState(blockpos.up(), Blocks.AIR.getDefaultState());
+            if (!worldIn.getFluidState(blockpos.above()).is(FluidTags.WATER)) {
+                worldIn.setBlockAndUpdate(blockpos, RegolithGrassBlock.regolithToGrassMap.get(newBlock.getBlock()).defaultBlockState());
+                worldIn.setBlockAndUpdate(blockpos.above(), Blocks.AIR.defaultBlockState());
             }
         }
     }

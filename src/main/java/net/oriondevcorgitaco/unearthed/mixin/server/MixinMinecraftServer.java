@@ -52,17 +52,17 @@ public class MixinMinecraftServer {
 
     @Shadow
     @Final
-    protected DynamicRegistries.Impl field_240767_f_;
+    protected DynamicRegistries.Impl registryHolder;
 
     @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistries$Impl;Lnet/minecraft/world/storage/SaveFormat$LevelSave;Lnet/minecraft/world/storage/IServerConfiguration;Lnet/minecraft/resources/ResourcePackList;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resources/DataPackRegistries;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/server/management/PlayerProfileCache;Lnet/minecraft/world/chunk/listener/IChunkStatusListenerFactory;)V", cancellable = true)
     private void implementUnearthedStones(Thread thread, DynamicRegistries.Impl impl, SaveFormat.LevelSave session, IServerConfiguration saveProperties, ResourcePackList resourcePackManager, Proxy proxy, DataFixer dataFixer, DataPackRegistries serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, PlayerProfileCache userCache, IChunkStatusListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-        if (this.field_240767_f_.func_230521_a_(Registry.BIOME_KEY).isPresent()) {
-            for (Biome biome : field_240767_f_.func_230521_a_(Registry.BIOME_KEY).get()) {
-                if (biome.getCategory() == Biome.Category.NETHER) {
+        if (this.registryHolder.registry(Registry.BIOME_REGISTRY).isPresent()) {
+            for (Biome biome : registryHolder.registry(Registry.BIOME_REGISTRY).get()) {
+                if (biome.getBiomeCategory() == Biome.Category.NETHER) {
                     if (!UnearthedConfig.disableNetherGeneration.get()) {
                         removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL_NETHER);
                     }
-                } else if (biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
+                } else if (biome.getBiomeCategory() != Biome.Category.THEEND && biome.getBiomeCategory() != Biome.Category.NONE) {
 //                    if (useDesertCaves(biome))
 //                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
 //                    else if (useIceCaves(biome))
@@ -71,7 +71,7 @@ public class MixinMinecraftServer {
 //                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
 //                    else
 //                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
-                    if (biome.getCategory() == Biome.Category.EXTREME_HILLS) {
+                    if (biome.getBiomeCategory() == Biome.Category.EXTREME_HILLS) {
                         addFeatureToBiome(biome, GenerationStage.Decoration.VEGETAL_DECORATION, UEFeatures.LICHEN_FEATURE);
                     }
                     if (UnearthedConfig.disableGeneration.get()) {
@@ -101,7 +101,7 @@ public class MixinMinecraftServer {
             biomeFeatures.add(Lists.newArrayList());
         }
         biomeFeatures.get(feature.ordinal()).removeIf(supplier -> {
-            return supplier.get().getConfig() instanceof DecoratedFeatureConfig && Arrays.stream(configuredFeatures).anyMatch(configuredFeature -> serializeAndCompareFeature(configuredFeature, supplier.get()));
+            return supplier.get().config() instanceof DecoratedFeatureConfig && Arrays.stream(configuredFeatures).anyMatch(configuredFeature -> serializeAndCompareFeature(configuredFeature, supplier.get()));
         });
     }
 
@@ -121,8 +121,8 @@ public class MixinMinecraftServer {
      */
     private static boolean serializeAndCompareFeature(ConfiguredFeature<?, ?> configuredFeature1, ConfiguredFeature<?, ?> configuredFeature2) {
 
-        Optional<JsonElement> configuredFeatureJSON1 = ConfiguredFeature.field_242763_a.encode(configuredFeature1, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
-        Optional<JsonElement> configuredFeatureJSON2 = ConfiguredFeature.field_242763_a.encode(configuredFeature2, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
+        Optional<JsonElement> configuredFeatureJSON1 = ConfiguredFeature.DIRECT_CODEC.encode(configuredFeature1, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
+        Optional<JsonElement> configuredFeatureJSON2 = ConfiguredFeature.DIRECT_CODEC.encode(configuredFeature2, JsonOps.INSTANCE, JsonOps.INSTANCE.empty()).get().left();
 
         // One of the configuredfeatures cannot be serialized
         if (!configuredFeatureJSON1.isPresent() || !configuredFeatureJSON2.isPresent()) {

@@ -60,7 +60,7 @@ public class LichenConfig implements IFeatureConfig {
 
     public boolean isValidBlock(Block block) {
         return this.canBePlacedOn.stream().anyMatch((blockState) -> {
-            return blockState.isIn(block);
+            return blockState.is(block);
         });
     }
 }

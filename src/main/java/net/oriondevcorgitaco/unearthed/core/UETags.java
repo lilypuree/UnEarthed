@@ -33,7 +33,7 @@ public class UETags {
         }
 
         private static ITag.INamedTag<Block> tag(String name) {
-            return BlockTags.makeWrapperTag(Unearthed.MOD_ID + ":" + name);
+            return BlockTags.bind(Unearthed.MOD_ID + ":" + name);
         }
     }
 
@@ -48,7 +48,7 @@ public class UETags {
         }
 
         private static ITag.INamedTag<Item> tag(String name) {
-            return ItemTags.makeWrapperTag(Unearthed.MOD_ID + ":" + name);
+            return ItemTags.bind(Unearthed.MOD_ID + ":" + name);
         }
 
     }

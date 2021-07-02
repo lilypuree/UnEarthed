@@ -20,20 +20,20 @@ public class TrueMesaGenerator extends Feature<NoFeatureConfig> {
         super(configCodec);
     }
 
-    BlockState mesaBlockState = Blocks.TERRACOTTA.getDefaultState();
+    BlockState mesaBlockState = Blocks.TERRACOTTA.defaultBlockState();
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
+                mutable.set(pos.getX() + x, 0, pos.getZ() + z);
                 int topY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 for (int y = 0; y < topY; y++) {
                     setStrataLayerBlock(y);
                     if (useStoneTag(world, mutable))
-                        world.setBlockState(mutable, mesaBlockState, 2);
+                        world.setBlock(mutable, mesaBlockState, 2);
 
                     mutable.move(Direction.UP);
                 }
@@ -45,18 +45,18 @@ public class TrueMesaGenerator extends Feature<NoFeatureConfig> {
     public static boolean useStoneTag(ISeedReader world, BlockPos mutable) {
         boolean stoneTag = UnearthedConfig.replaceableTag.get();
         if (stoneTag)
-            return world.getBlockState(mutable).isIn(BlockTags.BASE_STONE_OVERWORLD);
+            return world.getBlockState(mutable).is(BlockTags.BASE_STONE_OVERWORLD);
         else
-            return world.getBlockState(mutable) == Blocks.STONE.getDefaultState();
+            return world.getBlockState(mutable) == Blocks.STONE.defaultBlockState();
 
     }
 
     public void setStrataLayerBlock(int yPos) {
         if (yPos % 4 == 0)
-            mesaBlockState = Blocks.TERRACOTTA.getDefaultState();
+            mesaBlockState = Blocks.TERRACOTTA.defaultBlockState();
         else if (yPos % 5 == 0)
-            mesaBlockState = Blocks.ORANGE_TERRACOTTA.getDefaultState();
+            mesaBlockState = Blocks.ORANGE_TERRACOTTA.defaultBlockState();
         else if (yPos % 3 == 0)
-            mesaBlockState = Blocks.WHITE_TERRACOTTA.getDefaultState();
+            mesaBlockState = Blocks.WHITE_TERRACOTTA.defaultBlockState();
     }
 }

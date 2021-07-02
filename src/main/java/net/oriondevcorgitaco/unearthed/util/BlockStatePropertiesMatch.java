@@ -34,24 +34,24 @@ public class BlockStatePropertiesMatch implements ILootCondition {
     }
 
     @Override
-    public LootConditionType func_230419_b_() {
+    public LootConditionType getType() {
         return BLOCK_STATE_PROPERTIES_MATCH;
     }
 
     @Override
-    public Set<LootParameter<?>> getRequiredParameters() {
+    public Set<LootParameter<?>> getReferencedContextParams() {
         return ImmutableSet.of(LootParameters.BLOCK_STATE);
     }
 
     @Override
     public boolean test(LootContext lootContext) {
-        BlockState blockState = lootContext.get(LootParameters.BLOCK_STATE);
+        BlockState blockState = lootContext.getParamOrNull(LootParameters.BLOCK_STATE);
         if (blockState != null && this.block == blockState.getBlock()) {
-            StateContainer<Block, BlockState> container = blockState.getBlock().getStateContainer();
+            StateContainer<Block, BlockState> container = blockState.getBlock().getStateDefinition();
             Property<?> propertyA = container.getProperty(propertyNameA);
             Property<?> propertyB = container.getProperty(propertyNameB);
             if (propertyA != null && propertyB != null) {
-                return blockState.get(propertyA).equals(blockState.get(propertyB));
+                return blockState.getValue(propertyA).equals(blockState.getValue(propertyB));
             }
         }
         return false;
@@ -89,12 +89,12 @@ public class BlockStatePropertiesMatch implements ILootCondition {
 
         @Override
         public BlockStatePropertiesMatch deserialize(JsonObject jsonObject, JsonDeserializationContext context) {
-            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getString(jsonObject, "block"));
+            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(jsonObject, "block"));
             Block block = Registry.BLOCK.getOptional(resourcelocation).orElseThrow(() -> {
                 return new IllegalArgumentException("Can't find block " + resourcelocation);
             });
-            String nameA = JSONUtils.getString(jsonObject, "propertyA");
-            String nameB = JSONUtils.getString(jsonObject, "propertyB");
+            String nameA = JSONUtils.getAsString(jsonObject, "propertyA");
+            String nameB = JSONUtils.getAsString(jsonObject, "propertyB");
             return new BlockStatePropertiesMatch(block, nameA, nameB);
         }
     }

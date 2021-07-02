@@ -17,19 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.Map;
 
 @Mixin(AbstractFurnaceTileEntity.class)
-public class MixinAbstractFurnaceTileEntity {
+public abstract class MixinAbstractFurnaceTileEntity {
 
     @Shadow
-    protected static void addItemTagBurnTime(Map<Item, Integer> map, ITag<Item> itemTag, int burnTimeIn) {
+    protected static void add(Map<Item, Integer> map, IItemProvider item, int burnTime) {
     }
 
-    @Shadow
-    protected static void addItemBurnTime(Map<Item, Integer> map, IItemProvider itemProvider, int burnTimeIn) {
-    }
-
-    @Inject(method = "Lnet/minecraft/tileentity/AbstractFurnaceTileEntity;getBurnTimes()Ljava/util/Map;", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "getFuel()Ljava/util/Map;", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private static void onGetBurnTime(CallbackInfoReturnable<Map<Item, Integer>> cir, Map<Item, Integer> map){
-        addItemBurnTime(map, UEItems.LIGNITE_BRIQUETTES, 2000);
-        addItemBurnTime(map, BlockGeneratorReference.LIGNITE.getBaseBlock(), 200);
+        add(map, UEItems.LIGNITE_BRIQUETTES, 2000);
+        add(map, BlockGeneratorReference.LIGNITE.getBaseBlock(), 200);
     }
 }

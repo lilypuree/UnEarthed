@@ -21,26 +21,25 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public abstract class MixinFlowingFluidBlock {
 
 
-    @Shadow
-    protected abstract void triggerMixEffects(IWorld worldIn, BlockPos pos);
+    @Shadow protected abstract void fizz(IWorld p_180688_1_, BlockPos p_180688_2_);
 
-    @Inject(method = "reactWithNeighbors", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/math/BlockPos;offset(Lnet/minecraft/util/Direction;)Lnet/minecraft/util/math/BlockPos;"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+    @Inject(method = "shouldSpreadLiquid", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/math/BlockPos;relative(Lnet/minecraft/util/Direction;)Lnet/minecraft/util/math/BlockPos;"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void onReactWithNeighbors(World worldIn, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir, boolean flag, Direction[] direction, int i, int j, Direction direction2, BlockPos blockPos) {
 
 
-        boolean isClay = worldIn.getBlockState(pos.down()).isIn(Blocks.CLAY);
-        if (isClay && worldIn.getBlockState(blockPos).isIn(Blocks.BLUE_ICE)) {
+        boolean isClay = worldIn.getBlockState(pos.below()).is(Blocks.CLAY);
+        if (isClay && worldIn.getBlockState(blockPos).is(Blocks.BLUE_ICE)) {
             Block block = BlockGeneratorReference.DACITE.getBaseBlock();
-            worldIn.setBlockState(pos, net.minecraftforge.event.ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block.getDefaultState()));
-            this.triggerMixEffects(worldIn, pos);
+            worldIn.setBlockAndUpdate(pos, net.minecraftforge.event.ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block.defaultBlockState()));
+            this.fizz(worldIn, pos);
             cir.setReturnValue(false);
         }
 
-        boolean isSnow = worldIn.getBlockState(pos.down()).isIn(Blocks.SNOW_BLOCK);
-        if (isSnow && worldIn.getFluidState(blockPos).isTagged(FluidTags.WATER)) {
+        boolean isSnow = worldIn.getBlockState(pos.below()).is(Blocks.SNOW_BLOCK);
+        if (isSnow && worldIn.getFluidState(blockPos).is(FluidTags.WATER)) {
             Block block = worldIn.getFluidState(pos).isSource() ? Blocks.OBSIDIAN : BlockGeneratorReference.WHITE_GRANITE.getBaseBlock();
-            worldIn.setBlockState(pos, net.minecraftforge.event.ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block.getDefaultState()));
-            this.triggerMixEffects(worldIn, pos);
+            worldIn.setBlockAndUpdate(pos, net.minecraftforge.event.ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block.defaultBlockState()));
+            this.fizz(worldIn, pos);
             cir.setReturnValue(false);
         }
     }

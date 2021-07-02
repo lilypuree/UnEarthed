@@ -23,6 +23,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.oriondevcorgitaco.unearthed.block.properties.ModBlockProperties;
 
+import net.minecraft.block.AbstractBlock;
+
 public class SixwaySlabBlock extends Block implements IWaterLoggable {
 
     public static final DirectionProperty FACE = BlockStateProperties.FACING;
@@ -31,23 +33,23 @@ public class SixwaySlabBlock extends Block implements IWaterLoggable {
 
     //Down, Up, North, South, West, East (order of Direction enum)
     protected static final VoxelShape[] directionShapes = new VoxelShape[]{
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D),
-            Block.makeCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+            Block.box(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D),
+            Block.box(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D),
+            Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
     };
     protected static VoxelShape[][] shapeArray;
 
-    public SixwaySlabBlock(Block.Properties properties) {
+    public SixwaySlabBlock(AbstractBlock.Properties properties) {
         super(properties);
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACE, Direction.DOWN).with(WATERLOGGED, false).with(SECONDARY_FACING, Direction.DOWN));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACE, Direction.DOWN).setValue(WATERLOGGED, false).setValue(SECONDARY_FACING, Direction.DOWN));
         shapeArray = getShapeArray();
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FACE, WATERLOGGED, SECONDARY_FACING);
     }
 
@@ -64,47 +66,47 @@ public class SixwaySlabBlock extends Block implements IWaterLoggable {
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return shapeArray[state.get(FACE).ordinal()][state.get(SECONDARY_FACING).ordinal()];
+        return shapeArray[state.getValue(FACE).ordinal()][state.getValue(SECONDARY_FACING).ordinal()];
     }
 
     //partly copied from slabblock
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        FluidState ifluidstate = context.getWorld().getFluidState(blockpos);
-        BlockState currentState = context.getWorld().getBlockState(blockpos);
+        BlockPos blockpos = context.getClickedPos();
+        FluidState ifluidstate = context.getLevel().getFluidState(blockpos);
+        BlockState currentState = context.getLevel().getBlockState(blockpos);
         Direction placeDir = getPlaceDir(context);
         boolean waterLoggedFlag;
 
-        if (currentState.isIn(this)) {
-            waterLoggedFlag = currentState.get(WATERLOGGED) && placeDir != currentState.get(FACE);
-            return currentState.with(WATERLOGGED, waterLoggedFlag).with(FACE, currentState.get(FACE)).with(SECONDARY_FACING, placeDir);
+        if (currentState.is(this)) {
+            waterLoggedFlag = currentState.getValue(WATERLOGGED) && placeDir != currentState.getValue(FACE);
+            return currentState.setValue(WATERLOGGED, waterLoggedFlag).setValue(FACE, currentState.getValue(FACE)).setValue(SECONDARY_FACING, placeDir);
         } else {
-            waterLoggedFlag = ifluidstate.getFluid() == Fluids.WATER;
-            return getDefaultState().with(WATERLOGGED, waterLoggedFlag).with(FACE, placeDir).with(SECONDARY_FACING, placeDir);
+            waterLoggedFlag = ifluidstate.getType() == Fluids.WATER;
+            return defaultBlockState().setValue(WATERLOGGED, waterLoggedFlag).setValue(FACE, placeDir).setValue(SECONDARY_FACING, placeDir);
         }
     }
 
     public boolean hasTwoSides(BlockState state) {
-        return state.get(FACE) != state.get(SECONDARY_FACING);
+        return state.getValue(FACE) != state.getValue(SECONDARY_FACING);
     }
 
     public boolean isFullBlock(BlockState state) {
-        return state.get(FACE) == state.get(SECONDARY_FACING).getOpposite();
+        return state.getValue(FACE) == state.getValue(SECONDARY_FACING).getOpposite();
     }
 
     @Override
-    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-        ItemStack itemstack = useContext.getItem();
+    public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
+        ItemStack itemstack = useContext.getItemInHand();
         if (!hasTwoSides(state) && itemstack.getItem() == this.asItem()) {
             if (useContext.replacingClickedOnBlock()) {
-                if (useContext.getFace() == state.get(FACE).getOpposite()) {
+                if (useContext.getClickedFace() == state.getValue(FACE).getOpposite()) {
                     return true;
                 }
 
                 return false;
             } else {
                 Direction placeDir = getPlaceDir(useContext);
-                if (state.get(SECONDARY_FACING) == placeDir) {
+                if (state.getValue(SECONDARY_FACING) == placeDir) {
                     return false;
                 }
                 return true;
@@ -114,24 +116,24 @@ public class SixwaySlabBlock extends Block implements IWaterLoggable {
     }
 
     protected Direction getPlaceDir(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        BlockState currentState = context.getWorld().getBlockState(blockpos);
-        Direction placeDir = context.getFace().getOpposite();
-        if (currentState.isIn(this)) {
-            if (placeDir == currentState.get(FACE)) {
+        BlockPos blockpos = context.getClickedPos();
+        BlockState currentState = context.getLevel().getBlockState(blockpos);
+        Direction placeDir = context.getClickedFace().getOpposite();
+        if (currentState.is(this)) {
+            if (placeDir == currentState.getValue(FACE)) {
                 placeDir = placeDir.getOpposite();
             }
         }
 
-        if (context.getPlayer() != null && context.getPlayer().isSneaking()) {
+        if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown()) {
             if (placeDir.getAxis() != Direction.Axis.Y) {
-                placeDir = (context.getHitVec().y - (double) blockpos.getY() > 0.5D) ? Direction.UP : Direction.DOWN;
+                placeDir = (context.getClickLocation().y - (double) blockpos.getY() > 0.5D) ? Direction.UP : Direction.DOWN;
             } else {
-                Direction lookDir = context.getPlacementHorizontalFacing();
+                Direction lookDir = context.getHorizontalDirection();
                 if (lookDir.getAxis() == Direction.Axis.X) {
-                    placeDir = (context.getHitVec().x - (double) blockpos.getX() > 0.5D) ? Direction.EAST : Direction.WEST;
+                    placeDir = (context.getClickLocation().x - (double) blockpos.getX() > 0.5D) ? Direction.EAST : Direction.WEST;
                 } else if (lookDir.getAxis() == Direction.Axis.Z) {
-                    placeDir = (context.getHitVec().z - (double) blockpos.getZ() > 0.5D) ? Direction.SOUTH : Direction.NORTH;
+                    placeDir = (context.getClickLocation().z - (double) blockpos.getZ() > 0.5D) ? Direction.SOUTH : Direction.NORTH;
                 }
             }
         }
@@ -139,15 +141,15 @@ public class SixwaySlabBlock extends Block implements IWaterLoggable {
     }
 
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return !isFullBlock(state) && IWaterLoggable.super.receiveFluid(worldIn, pos, state, fluidStateIn);
+    public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+        return !isFullBlock(state) && IWaterLoggable.super.placeLiquid(worldIn, pos, state, fluidStateIn);
     }
 
-    public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return !isFullBlock(state) && IWaterLoggable.super.canContainFluid(worldIn, pos, state, fluidIn);
+    public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+        return !isFullBlock(state) && IWaterLoggable.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
     }
 
 
@@ -157,19 +159,19 @@ public class SixwaySlabBlock extends Block implements IWaterLoggable {
      * returns its solidified counterpart.
      * Note that this method should ideally consider only the specific face passed in.
      */
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.get(WATERLOGGED)) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (stateIn.getValue(WATERLOGGED)) {
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+    public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
         switch (type) {
             case LAND:
                 return false;
             case WATER:
-                return worldIn.getFluidState(pos).isTagged(FluidTags.WATER);
+                return worldIn.getFluidState(pos).is(FluidTags.WATER);
             case AIR:
                 return false;
             default:

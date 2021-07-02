@@ -35,7 +35,7 @@ public class Recipes extends RecipeProvider {
     private Consumer<IFinishedRecipe> consumer;
 
     @Override
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumerIn) {
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumerIn) {
         consumer = consumerIn;
         stoneRecipe();
         for (IOreType oreType : VanillaOreTypes.values()) {
@@ -105,10 +105,10 @@ public class Recipes extends RecipeProvider {
                 }
             }
         }
-        ShapelessRecipeBuilder.shapelessRecipe(Blocks.GRAVEL).addIngredient(UEBlocks.PYROXENE).addCriterion("has_pyroxene", hasItem(UEBlocks.PYROXENE)).build(consumer, "unearthed:gravel_from_pyroxene");
-        ShapedRecipeBuilder.shapedRecipe(UEBlocks.LIGNITE_BRIQUETTES).key('#', BlockGeneratorReference.LIGNITE.getBaseBlock())
-                .key('*', Blocks.CLAY)
-                .patternLine("###").patternLine("#*#").patternLine("###").addCriterion("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).build(consumer);
+        ShapelessRecipeBuilder.shapeless(Blocks.GRAVEL).requires(UEBlocks.PYROXENE).unlockedBy("has_pyroxene", hasItem(UEBlocks.PYROXENE)).save(consumer, "unearthed:gravel_from_pyroxene");
+        ShapedRecipeBuilder.shaped(UEBlocks.LIGNITE_BRIQUETTES).define('#', BlockGeneratorReference.LIGNITE.getBaseBlock())
+                .define('*', Blocks.CLAY)
+                .pattern("###").pattern("#*#").pattern("###").unlockedBy("has_lignite", hasItem(BlockGeneratorReference.LIGNITE.getBaseBlock())).save(consumer);
 
         mixingRecipe(BlockGeneratorReference.SILTSTONE.getBaseBlock(), Blocks.SAND, Blocks.COARSE_DIRT);
         mixingRecipe(BlockGeneratorReference.MUDSTONE.getBaseBlock(), Blocks.RED_SAND, Blocks.TERRACOTTA);
@@ -135,74 +135,74 @@ public class Recipes extends RecipeProvider {
     }
 
     private void regolithConversionRecipe(IItemProvider result, IItemProvider baseBlock) {
-        ShapelessRecipeBuilder.shapelessRecipe(result, 8)
-                .addIngredient(Ingredient.fromTag(UETags.Items.REGOLITH_TAG), 8)
-                .addIngredient(baseBlock)
-                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+        ShapelessRecipeBuilder.shapeless(result, 8)
+                .requires(Ingredient.of(UETags.Items.REGOLITH_TAG), 8)
+                .requires(baseBlock)
+                .unlockedBy("has_" + getPath(baseBlock), hasItem(baseBlock)).save(consumer);
     }
 
     private void mixingRecipe(IItemProvider result, IItemProvider ingredient1, IItemProvider ingredient2) {
-        ShapedRecipeBuilder.shapedRecipe(result, 4)
-                .patternLine("ox").patternLine("xo").key('x', ingredient1).key('o', ingredient2)
-                .addCriterion("has_" + getPath(result), hasItem(result)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 4)
+                .pattern("ox").pattern("xo").define('x', ingredient1).define('o', ingredient2)
+                .unlockedBy("has_" + getPath(result), hasItem(result)).save(consumer);
     }
 
     private void addingRecipe(IItemProvider result, IItemProvider ingredient1, IItemProvider ingredient2) {
-        ShapedRecipeBuilder.shapedRecipe(result, 4)
-                .patternLine("ox").key('x', ingredient1).key('o', ingredient2)
-                .addCriterion("has_" + getPath(result), hasItem(result)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 4)
+                .pattern("ox").define('x', ingredient1).define('o', ingredient2)
+                .unlockedBy("has_" + getPath(result), hasItem(result)).save(consumer);
     }
 
     private void mossyRecipe(Block baseBlock, Block mossyBlock) {
-        ShapelessRecipeBuilder.shapelessRecipe(mossyBlock).addIngredient(baseBlock).addIngredient(Items.VINE)
-                .addCriterion("has_" + getPath(mossyBlock), hasItem(mossyBlock)).build(consumer);
+        ShapelessRecipeBuilder.shapeless(mossyBlock).requires(baseBlock).requires(Items.VINE)
+                .unlockedBy("has_" + getPath(mossyBlock), hasItem(mossyBlock)).save(consumer);
     }
 
     private void crackedRecipe(Block baseBlock, Block crackedBlock) {
-        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(baseBlock), crackedBlock, 0.1f, 200)
-                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+        CookingRecipeBuilder.smelting(Ingredient.of(baseBlock), crackedBlock, 0.1f, 200)
+                .unlockedBy("has_" + getPath(baseBlock), hasItem(baseBlock)).save(consumer);
     }
 
     private void stoneRecipe() {
-        ShapelessRecipeBuilder.shapelessRecipe(Items.STONE).addIngredient(UETags.Items.IGNEOUS_ITEM).addIngredient(UETags.Items.METAMORPHIC_ITEM).addIngredient(UETags.Items.SEDIMENTARY_ITEM).addCriterion("has_stone", hasItem(Items.STONE)).build(consumer, "unearthed:stone_from_stones");
+        ShapelessRecipeBuilder.shapeless(Items.STONE).requires(UETags.Items.IGNEOUS_ITEM).requires(UETags.Items.METAMORPHIC_ITEM).requires(UETags.Items.SEDIMENTARY_ITEM).unlockedBy("has_stone", hasItem(Items.STONE)).save(consumer, "unearthed:stone_from_stones");
     }
 
     private void brickRecipeOf(IItemProvider result, IItemProvider ingredient) {
-        ShapedRecipeBuilder.shapedRecipe(result, 4).key('#', ingredient).patternLine("##").patternLine("##")
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 4).define('#', ingredient).pattern("##").pattern("##")
+                .unlockedBy("has_" + getPath(ingredient), hasItem(ingredient)).save(consumer);
     }
 
     private void chiseledRecipeOf(IItemProvider result, IItemProvider ingredient, IItemProvider trigger) {
-        ShapedRecipeBuilder.shapedRecipe(result, 1).key('#', ingredient).patternLine("#").patternLine("#")
-                .addCriterion("has_" + getPath(ingredient), hasItem(trigger)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 1).define('#', ingredient).pattern("#").pattern("#")
+                .unlockedBy("has_" + getPath(ingredient), hasItem(trigger)).save(consumer);
     }
 
     private void pillarRecipeOf(IItemProvider result, IItemProvider ingredient, IItemProvider trigger) {
-        ShapedRecipeBuilder.shapedRecipe(result, 2).key('#', ingredient).patternLine("#").patternLine("#")
-                .addCriterion("has_" + getPath(ingredient), hasItem(trigger)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 2).define('#', ingredient).pattern("#").pattern("#")
+                .unlockedBy("has_" + getPath(ingredient), hasItem(trigger)).save(consumer);
     }
 
     private void wallRecipeOf(IItemProvider result, IItemProvider ingredient) {
-        ShapedRecipeBuilder.shapedRecipe(result, 6).key('#', ingredient).patternLine("###").patternLine("###")
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 6).define('#', ingredient).pattern("###").pattern("###")
+                .unlockedBy("has_" + getPath(ingredient), hasItem(ingredient)).save(consumer);
     }
 
     private void stairRecipeOf(IItemProvider result, IItemProvider ingredient) {
-        ShapedRecipeBuilder.shapedRecipe(result, 4).key('#', ingredient).patternLine("#  ").patternLine("## ").patternLine("###")
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 4).define('#', ingredient).pattern("#  ").pattern("## ").pattern("###")
+                .unlockedBy("has_" + getPath(ingredient), hasItem(ingredient)).save(consumer);
     }
 
     private void slabRecipeOf(IItemProvider result, IItemProvider ingredient) {
-        ShapedRecipeBuilder.shapedRecipe(result, 6).key('#', ingredient).patternLine("###")
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer);
+        ShapedRecipeBuilder.shaped(result, 6).define('#', ingredient).pattern("###")
+                .unlockedBy("has_" + getPath(ingredient), hasItem(ingredient)).save(consumer);
     }
 
     private void slabRecipeOf(IItemProvider result, IItemProvider... ingredients) {
-        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shapedRecipe(result, 6).key('#', Ingredient.fromItems(ingredients)).patternLine("###");
+        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(result, 6).define('#', Ingredient.of(ingredients)).pattern("###");
         for (IItemProvider provider : ingredients) {
-            builder.addCriterion("has_" + getPath(provider), hasItem(provider));
+            builder.unlockedBy("has_" + getPath(provider), hasItem(provider));
         }
-        builder.build(consumer);
+        builder.save(consumer);
     }
 
 
@@ -210,24 +210,24 @@ public class Recipes extends RecipeProvider {
         BlockGeneratorHelper.Entry button = type.getEntry(variant, Forms.BUTTON);
         if (button == null) return;
         Block baseBlock = type.getBaseBlock(variant);
-        ShapelessRecipeBuilder.shapelessRecipe(button.getBlock()).addIngredient(baseBlock)
-                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+        ShapelessRecipeBuilder.shapeless(button.getBlock()).requires(baseBlock)
+                .unlockedBy("has_" + getPath(baseBlock), hasItem(baseBlock)).save(consumer);
     }
 
     private void pressurePlateRecipeOf(BlockGeneratorHelper type, BlockSchema.Variant variant) {
         BlockGeneratorHelper.Entry pressurePlate = type.getEntry(variant, Forms.PRESSURE_PLATE);
         if (pressurePlate == null) return;
         Block baseBlock = type.getBaseBlock(variant);
-        ShapedRecipeBuilder.shapedRecipe(pressurePlate.getBlock())
-                .patternLine("##")
-                .key('#', baseBlock)
-                .addCriterion("has_" + getPath(baseBlock), hasItem(baseBlock)).build(consumer);
+        ShapedRecipeBuilder.shaped(pressurePlate.getBlock())
+                .pattern("##")
+                .define('#', baseBlock)
+                .unlockedBy("has_" + getPath(baseBlock), hasItem(baseBlock)).save(consumer);
     }
 
     private void stoneSmeltingRecipeOf(IItemProvider result, IItemProvider ingredient) {
         String name = Unearthed.MOD_ID + ":" + result.asItem().getRegistryName().getPath() + "_from_" + ingredient.asItem().getRegistryName().getPath();
-        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient), result, 0.1F, 200)
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer, name);
+        CookingRecipeBuilder.smelting(Ingredient.of(ingredient), result, 0.1F, 200)
+                .unlockedBy("has_" + getPath(ingredient), hasItem(ingredient)).save(consumer, name);
     }
 
 
@@ -253,8 +253,8 @@ public class Recipes extends RecipeProvider {
     }
 
     private void singleStoneCuttingRecipe(IItemProvider result, int count, IItemProvider ingredient) {
-        SingleItemRecipeBuilder.stonecuttingRecipe(Ingredient.fromItems(ingredient), result, count)
-                .addCriterion("has_" + getPath(ingredient), hasItem(ingredient)).build(consumer, getPath(result) + "_from_" + getPath(ingredient) + "_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), result, count)
+                .unlocks("has_" + getPath(ingredient), hasItem(ingredient)).save(consumer, getPath(result) + "_from_" + getPath(ingredient) + "_stonecutting");
     }
 
     private String getPath(IItemProvider ingredient) {
@@ -265,10 +265,10 @@ public class Recipes extends RecipeProvider {
      * Creates a new {@link InventoryChangeTrigger} that checks for a player having a certain item.
      */
     public static InventoryChangeTrigger.Instance hasItem(IItemProvider itemProvider) {
-        return hasItem(ItemPredicate.Builder.create().item(itemProvider).build());
+        return inventoryTrigger(ItemPredicate.Builder.item().of(itemProvider).build());
     }
 
     public static InventoryChangeTrigger.Instance hasTaggedItem(ITag<Item> tag) {
-        return hasItem(ItemPredicate.Builder.create().tag(tag).build());
+        return inventoryTrigger(ItemPredicate.Builder.item().of(tag).build());
     }
 }

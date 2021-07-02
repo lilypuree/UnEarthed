@@ -29,7 +29,7 @@ public class Forms {
 
         @Override
         public Function<AbstractBlock.Properties, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
-            return properties -> new StairsBlock(() -> schema.getBaseBlock(variant).getDefaultState(), properties);
+            return properties -> new StairsBlock(() -> schema.getBaseBlock(variant).defaultBlockState(), properties);
         }
     }
 

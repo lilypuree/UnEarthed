@@ -26,18 +26,18 @@ import java.util.function.Supplier;
 @Mixin(ClientWorld.class)
 public class MixinClientWorld {
 
-    @Shadow
-    public Object2ObjectArrayMap<ColorResolver, ColorCache> colorCaches;
+
+    @Shadow public Object2ObjectArrayMap<ColorResolver, ColorCache> tintCaches;
 
     @Inject(at = @At("RETURN"), method = "Lnet/minecraft/client/world/ClientWorld;<init>(Lnet/minecraft/client/network/play/ClientPlayNetHandler;Lnet/minecraft/client/world/ClientWorld$ClientWorldInfo;Lnet/minecraft/util/RegistryKey;Lnet/minecraft/world/DimensionType;ILjava/util/function/Supplier;Lnet/minecraft/client/renderer/WorldRenderer;ZJ)V")
     private void addLichenColorCaches(ClientPlayNetHandler clientPlayNetHandler, ClientWorld.ClientWorldInfo clientWorldInfo, RegistryKey<World> key, DimensionType type, int viewDistance, Supplier<IProfiler> profiler, WorldRenderer renderer, boolean isDebug, long seed, CallbackInfo ci) {
-        colorCaches = Util.make(new Object2ObjectArrayMap<>(colorCaches.size() + 1), map -> {
-            map.putAll(colorCaches);
+        tintCaches = Util.make(new Object2ObjectArrayMap<>(tintCaches.size() + 1), map -> {
+            map.putAll(tintCaches);
             map.put(LichenColors.LICHEN_COLOR, new ColorCache());
         });
     }
 
-    @Inject(at = @At(value = "NEW", target = "Lnet/minecraft/util/math/CubeCoordinateIterator;<init>"), method = "Lnet/minecraft/client/world/ClientWorld;getBlockColorRaw(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/level/ColorResolver;)I", locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(at = @At(value = "NEW", target = "net/minecraft/util/math/CubeCoordinateIterator"), method = "calculateBlockTint(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/level/ColorResolver;)I", locals = LocalCapture.CAPTURE_FAILSOFT)
     private void setLichenBlendRadius(BlockPos blockPosIn, ColorResolver colorResolverIn, CallbackInfoReturnable<Integer> cir, int i, int j, int k, int l, int i1) {
         if (colorResolverIn == LichenColors.LICHEN_COLOR) {
             i = 1;

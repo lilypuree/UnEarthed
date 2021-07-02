@@ -35,7 +35,7 @@ public class Cell {
             this.cobbleBlock = defaultBlock;
             this.defaultOreReplacement = defaultBlock;
         } else {
-            this.cobbleBlock = Blocks.COBBLESTONE.getDefaultState();
+            this.cobbleBlock = Blocks.COBBLESTONE.defaultBlockState();
         }
     }
 
@@ -48,11 +48,11 @@ public class Cell {
         if (replaceRest) {
             cobbleBlock = defaultBlock;
             dirtReplacement = defaultBlock;
-            grassReplacement = Blocks.GRASS_BLOCK.getDefaultState();
+            grassReplacement = Blocks.GRASS_BLOCK.defaultBlockState();
         } else {
-            cobbleBlock = Blocks.COBBLESTONE.getDefaultState();
-            dirtReplacement = Blocks.DIRT.getDefaultState();
-            grassReplacement = Blocks.GRASS_BLOCK.getDefaultState();
+            cobbleBlock = Blocks.COBBLESTONE.defaultBlockState();
+            dirtReplacement = Blocks.DIRT.defaultBlockState();
+            grassReplacement = Blocks.GRASS_BLOCK.defaultBlockState();
         }
     }
 
@@ -74,7 +74,7 @@ public class Cell {
 
     public BlockState getGrassReplacement(BlockState original) {
         if (grassReplacement.hasProperty(BlockStateProperties.SNOWY)) {
-            return grassReplacement.with(BlockStateProperties.SNOWY, original.get(BlockStateProperties.SNOWY));
+            return grassReplacement.setValue(BlockStateProperties.SNOWY, original.getValue(BlockStateProperties.SNOWY));
         } else {
             return grassReplacement;
         }

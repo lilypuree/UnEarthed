@@ -39,9 +39,9 @@ public class BlockStates {
     protected static final BlockState DOLOMITE = getBaseBlock(BlockGeneratorReference.DOLOMITE);
     protected static final BlockState DOLOMITE_REGOLITH = getRegolithBlock(BlockGeneratorReference.DOLOMITE);
     protected static final BlockState DOLOMITE_GRASSY_REGOLITH = getGrassyRegolithBlock(BlockGeneratorReference.DOLOMITE);
-    protected static final BlockState SCHIST_X = getBaseBlock(BlockGeneratorReference.SCHIST).with(BlockStateProperties.AXIS, Direction.Axis.X);
-    protected static final BlockState SCHIST_Y = getBaseBlock(BlockGeneratorReference.SCHIST).with(BlockStateProperties.AXIS, Direction.Axis.Y);
-    protected static final BlockState SCHIST_Z = getBaseBlock(BlockGeneratorReference.SCHIST).with(BlockStateProperties.AXIS, Direction.Axis.Z);
+    protected static final BlockState SCHIST_X = getBaseBlock(BlockGeneratorReference.SCHIST).setValue(BlockStateProperties.AXIS, Direction.Axis.X);
+    protected static final BlockState SCHIST_Y = getBaseBlock(BlockGeneratorReference.SCHIST).setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
+    protected static final BlockState SCHIST_Z = getBaseBlock(BlockGeneratorReference.SCHIST).setValue(BlockStateProperties.AXIS, Direction.Axis.Z);
     protected static final BlockState MARBLE = getBaseBlock(BlockGeneratorReference.MARBLE);
     protected static final BlockState BEIGE_LIMESTONE = getBaseBlock(BlockGeneratorReference.BEIGE_LIMESTONE);
     protected static final BlockState BEIGE_LIMESTONE_REGOLITH = getRegolithBlock(BlockGeneratorReference.BEIGE_LIMESTONE);
@@ -62,26 +62,26 @@ public class BlockStates {
     protected static final BlockState MUDSTONE_REGOLITH = getRegolithBlock(BlockGeneratorReference.MUDSTONE);
     protected static final BlockState MUDSTONE_GRASSY_REGOLITH = getGrassyRegolithBlock(BlockGeneratorReference.MUDSTONE);
     protected static final BlockState LIGNITE = getBaseBlock(BlockGeneratorReference.LIGNITE);
-    protected static final BlockState STONE = Blocks.STONE.getDefaultState();
-    protected static final BlockState COBBLESTONE = Blocks.COBBLESTONE.getDefaultState();
-    protected static final BlockState STONE_REGOLITH = BlockGeneratorReference.STONE.getEntry(Variants.REGOLITHS, Forms.REGOLITH).getBlock().getDefaultState();
-    protected static final BlockState STONE_GRASSY_REGOLITH = BlockGeneratorReference.STONE.getEntry(Variants.REGOLITHS, Forms.GRASSY_REGOLITH).getBlock().getDefaultState();
-    protected static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
-    protected static final BlockState SMOOTH_SANDSTONE = Blocks.SMOOTH_SANDSTONE.getDefaultState();
-    protected static final BlockState SANDSTONE_REGOLITH = BlockGeneratorReference.SANDSTONE.getEntry(Variants.SANDSTONE, Forms.REGOLITH).getBlock().getDefaultState();
-    protected static final BlockState SANDSTONE_GRASSY_REGOLITH = BlockGeneratorReference.SANDSTONE.getEntry(Variants.SANDSTONE, Forms.GRASSY_REGOLITH).getBlock().getDefaultState();
-    protected static final BlockState TERRACOTTA = Blocks.TERRACOTTA.getDefaultState();
+    protected static final BlockState STONE = Blocks.STONE.defaultBlockState();
+    protected static final BlockState COBBLESTONE = Blocks.COBBLESTONE.defaultBlockState();
+    protected static final BlockState STONE_REGOLITH = BlockGeneratorReference.STONE.getEntry(Variants.REGOLITHS, Forms.REGOLITH).getBlock().defaultBlockState();
+    protected static final BlockState STONE_GRASSY_REGOLITH = BlockGeneratorReference.STONE.getEntry(Variants.REGOLITHS, Forms.GRASSY_REGOLITH).getBlock().defaultBlockState();
+    protected static final BlockState SANDSTONE = Blocks.SANDSTONE.defaultBlockState();
+    protected static final BlockState SMOOTH_SANDSTONE = Blocks.SMOOTH_SANDSTONE.defaultBlockState();
+    protected static final BlockState SANDSTONE_REGOLITH = BlockGeneratorReference.SANDSTONE.getEntry(Variants.SANDSTONE, Forms.REGOLITH).getBlock().defaultBlockState();
+    protected static final BlockState SANDSTONE_GRASSY_REGOLITH = BlockGeneratorReference.SANDSTONE.getEntry(Variants.SANDSTONE, Forms.GRASSY_REGOLITH).getBlock().defaultBlockState();
+    protected static final BlockState TERRACOTTA = Blocks.TERRACOTTA.defaultBlockState();
 
 
     private static BlockState getBaseBlock(BlockGeneratorHelper helper) {
-        return helper.getBaseBlock().getDefaultState();
+        return helper.getBaseBlock().defaultBlockState();
     }
 
     private static BlockState getRegolithBlock(BlockGeneratorHelper helper) {
-        return helper.getEntry(helper.getBaseEntry().getVariant(), Forms.REGOLITH).getBlock().getDefaultState();
+        return helper.getEntry(helper.getBaseEntry().getVariant(), Forms.REGOLITH).getBlock().defaultBlockState();
     }
 
     private static BlockState getGrassyRegolithBlock(BlockGeneratorHelper helper) {
-        return helper.getEntry(helper.getBaseEntry().getVariant(), Forms.GRASSY_REGOLITH).getBlock().getDefaultState();
+        return helper.getEntry(helper.getBaseEntry().getVariant(), Forms.GRASSY_REGOLITH).getBlock().defaultBlockState();
     }
 }

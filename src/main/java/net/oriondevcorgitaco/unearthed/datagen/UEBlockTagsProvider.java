@@ -26,65 +26,65 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         for (BlockGeneratorHelper type : BlockGeneratorReference.ROCK_TYPES) {
             if (type.getTier() == StoneTiers.PRIMARY || type.getTier() == StoneTiers.SECONDARY) {
-                getOrCreateBuilder(BlockTags.BASE_STONE_OVERWORLD).add(type.getBaseBlock());
+                tag(BlockTags.BASE_STONE_OVERWORLD).add(type.getBaseBlock());
             }
             switch (type.getClassification()) {
                 case IGNEOUS:
-                    getOrCreateBuilder(UETags.Blocks.IGNEOUS_TAG).add(type.getBaseBlock());
+                    tag(UETags.Blocks.IGNEOUS_TAG).add(type.getBaseBlock());
                     break;
                 case METAMORPHIC:
-                    getOrCreateBuilder(UETags.Blocks.METAMORPHIC_TAG).add(type.getBaseBlock());
+                    tag(UETags.Blocks.METAMORPHIC_TAG).add(type.getBaseBlock());
                     break;
                 case SEDIMENTARY:
-                    getOrCreateBuilder(UETags.Blocks.SEDIMENTARY_TAG).add(type.getBaseBlock());
+                    tag(UETags.Blocks.SEDIMENTARY_TAG).add(type.getBaseBlock());
                     break;
             }
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
                 Block block = entry.getBlock();
                 if (entry.getVariant() == Variants.COBBLED && entry.isBaseEntry()) {
-                    getOrCreateBuilder(Tags.Blocks.COBBLESTONE).add(block);
+                    tag(Tags.Blocks.COBBLESTONE).add(block);
                 }
                 if (form == Forms.BUTTON) {
-                    getOrCreateBuilder(BlockTags.BUTTONS).add(block);
+                    tag(BlockTags.BUTTONS).add(block);
                 } else if (form == Forms.PRESSURE_PLATE) {
-                    getOrCreateBuilder(BlockTags.STONE_PRESSURE_PLATES).add(block);
+                    tag(BlockTags.STONE_PRESSURE_PLATES).add(block);
                 } else if (form == Forms.REGOLITH || form == Forms.GRASSY_REGOLITH) {
-                    getOrCreateBuilder(UETags.Blocks.REGOLITH_TAG).add(block);
+                    tag(UETags.Blocks.REGOLITH_TAG).add(block);
                     if (form == Forms.GRASSY_REGOLITH) {
-                        getOrCreateBuilder(BlockTags.VALID_SPAWN).add(block);
+                        tag(BlockTags.VALID_SPAWN).add(block);
                     }
                 } else if (form == Forms.STAIRS || form == Forms.SIDETOP_STAIRS) {
-                    getOrCreateBuilder(BlockTags.STAIRS).add(block);
+                    tag(BlockTags.STAIRS).add(block);
                 } else if (form == Forms.WALLS) {
-                    getOrCreateBuilder(BlockTags.WALLS).add(block);
+                    tag(BlockTags.WALLS).add(block);
                 }
                 if (form instanceof Forms.OreForm) {
                     IOreType oreType = ((Forms.OreForm) form).getOreType();
                     if (oreType == VanillaOreTypes.IRON) {
-                        getOrCreateBuilder(UETags.Blocks.IRON_ORE_TAG).add(block);
+                        tag(UETags.Blocks.IRON_ORE_TAG).add(block);
                     } else if (oreType == VanillaOreTypes.COAL) {
-                        getOrCreateBuilder(UETags.Blocks.COAL_ORE_TAG).add(block);
+                        tag(UETags.Blocks.COAL_ORE_TAG).add(block);
                     } else if (oreType == VanillaOreTypes.GOLD) {
-                        getOrCreateBuilder(UETags.Blocks.GOLD_ORE_TAG).add(block);
+                        tag(UETags.Blocks.GOLD_ORE_TAG).add(block);
                     } else if (oreType == VanillaOreTypes.LAPIS) {
-                        getOrCreateBuilder(UETags.Blocks.LAPIS_ORE_TAG).add(block);
+                        tag(UETags.Blocks.LAPIS_ORE_TAG).add(block);
                     } else if (oreType == VanillaOreTypes.REDSTONE) {
-                        getOrCreateBuilder(UETags.Blocks.REDSTONE_ORE_TAG).add(block);
+                        tag(UETags.Blocks.REDSTONE_ORE_TAG).add(block);
                     } else if (oreType == VanillaOreTypes.DIAMOND) {
-                        getOrCreateBuilder(UETags.Blocks.DIAMOND_ORE_TAG).add(block);
+                        tag(UETags.Blocks.DIAMOND_ORE_TAG).add(block);
                     } else if (oreType == VanillaOreTypes.EMERALD) {
-                        getOrCreateBuilder(UETags.Blocks.EMERALD_ORE_TAG).add(block);
+                        tag(UETags.Blocks.EMERALD_ORE_TAG).add(block);
                     }
                 }
             }
         }
 
-        getOrCreateBuilder(UETags.Blocks.SEDIMENTARY_TAG).add(Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
-        getOrCreateBuilder(UETags.Blocks.IGNEOUS_TAG).add(Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.BASALT);
-        getOrCreateBuilder(UETags.Blocks.METAMORPHIC_TAG).add(Blocks.BLACKSTONE);
+        tag(UETags.Blocks.SEDIMENTARY_TAG).add(Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
+        tag(UETags.Blocks.IGNEOUS_TAG).add(Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.BASALT);
+        tag(UETags.Blocks.METAMORPHIC_TAG).add(Blocks.BLACKSTONE);
     }
 }

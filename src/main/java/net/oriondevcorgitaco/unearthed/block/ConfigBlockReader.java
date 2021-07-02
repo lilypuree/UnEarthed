@@ -23,7 +23,7 @@ public class ConfigBlockReader {
 
     static int blockIdx = 0;
     public Block getBlock() {
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(this.id));
+        Block block = Registry.BLOCK.get(new ResourceLocation(this.id));
         if (block == Blocks.AIR) {
             if (blockIdx == 0) {
                 Unearthed.LOGGER.warn(id + " does not exist. Defaulting to stone!");
@@ -37,7 +37,7 @@ public class ConfigBlockReader {
 
     public Block getCobbleBlock(BlockState originalState) {
         String cobbleID = this.id + "_cobble";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(cobbleID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(cobbleID));
         if (block == Blocks.AIR) {
             if (blockIdx == 0) {
                 Unearthed.LOGGER.warn(cobbleID + " does not exist. Defaulting to stone!");
@@ -56,7 +56,7 @@ public class ConfigBlockReader {
 
     public Block getCoalOre(BlockState originalState) {
         String ironOreID = this.id + "_coal_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(ironOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(ironOreID));
         if (block == Blocks.AIR) {
             if (coalIdx == 0) {
                 Unearthed.LOGGER.debug(ironOreID + " does not exist.");
@@ -71,7 +71,7 @@ public class ConfigBlockReader {
 
     public Block getIronOre(BlockState originalState) {
         String ironOreID = this.id + "_iron_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(ironOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(ironOreID));
         if (block == Blocks.AIR) {
             if (ironIdx == 0) {
                 Unearthed.LOGGER.debug(ironOreID + " does not exist");
@@ -86,7 +86,7 @@ public class ConfigBlockReader {
 
     public Block getGoldOre(BlockState originalState) {
         String goldOreID = this.id + "_gold_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(goldOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(goldOreID));
         if (block == Blocks.AIR) {
             if (goldIdx == 0) {
                 Unearthed.LOGGER.debug(goldOreID + " does not exist.");
@@ -102,7 +102,7 @@ public class ConfigBlockReader {
 
     public Block getLapisOre(BlockState originalState) {
         String lapisOreID = this.id + "_lapis_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(lapisOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(lapisOreID));
         if (block == Blocks.AIR) {
             if (lapisIdx == 0) {
                 Unearthed.LOGGER.debug(lapisOreID + " does not exist.");
@@ -118,7 +118,7 @@ public class ConfigBlockReader {
 
     public Block getRedstoneOre(BlockState originalState) {
         String redstoneOreID = this.id + "_redstone_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(redstoneOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(redstoneOreID));
         if (block == Blocks.AIR) {
             if (redstoneIdx == 0) {
                 Unearthed.LOGGER.debug(redstoneOreID + " does not exist.");
@@ -133,7 +133,7 @@ public class ConfigBlockReader {
 
     public Block getDiamondOre(BlockState originalState) {
         String diamondOreID = this.id + "_diamond_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(diamondOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(diamondOreID));
         if (block == Blocks.AIR) {
             if (diamondIdx == 0) {
                 Unearthed.LOGGER.debug(diamondOreID + " does not exist.");
@@ -149,7 +149,7 @@ public class ConfigBlockReader {
 
     public Block getEmeraldOre(BlockState originalState) {
         String emeraldOreID = this.id + "_emerald_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(emeraldOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(emeraldOreID));
         if (block == Blocks.AIR) {
             if (emeraldIdx == 0) {
                 Unearthed.LOGGER.debug(emeraldOreID + " does not exist.");
@@ -165,7 +165,7 @@ public class ConfigBlockReader {
 
     public Block getBYGAmetrineOre(BlockState originalState) {
         String ametrineOreID = this.id + "_ametrine_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(ametrineOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(ametrineOreID));
         if (block == Blocks.AIR) {
             if (emeraldIdx == 0) {
                 Unearthed.LOGGER.debug("Modded Ore: " + ametrineOreID + " does not exist.");
@@ -178,7 +178,7 @@ public class ConfigBlockReader {
 
     public Block getBYGPendoriteOre(BlockState originalState) {
         String pendoriteOreID = this.id + "_pendorite_ore";
-        Block block = Registry.BLOCK.getOrDefault(new ResourceLocation(pendoriteOreID));
+        Block block = Registry.BLOCK.get(new ResourceLocation(pendoriteOreID));
         if (block == Blocks.AIR) {
             if (emeraldIdx == 0) {
                 Unearthed.LOGGER.debug("Modded Ore: " + pendoriteOreID + " does not exist.");

@@ -15,24 +15,24 @@ import net.oriondevcorgitaco.unearthed.util.RegistrationHelper;
 import java.util.Random;
 
 public class StrataGenerator3 extends Feature<NoFeatureConfig> {
-    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE3 = RegistrationHelper.registerFeature("strata_gen3", new StrataGenerator3(NoFeatureConfig.field_236558_a_));
+    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE3 = RegistrationHelper.registerFeature("strata_gen3", new StrataGenerator3(NoFeatureConfig.CODEC));
 
     public StrataGenerator3(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
+                mutable.set(pos.getX() + x, 0, pos.getZ() + z);
                 int topY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 for (int y = 0; y < topY; y++) {
-                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD)) {
+                    if (world.getBlockState(mutable).getBlock().is(BlockTags.BASE_STONE_OVERWORLD)) {
 
-                        world.setBlockState(mutable, BlockGeneratorHelper.baseStoneBlockArray.get(random.nextInt(BlockGeneratorHelper.baseStoneBlockArray.size())).getDefaultState(), 2);
+                        world.setBlock(mutable, BlockGeneratorHelper.baseStoneBlockArray.get(random.nextInt(BlockGeneratorHelper.baseStoneBlockArray.size())).defaultBlockState(), 2);
                     }
                     mutable.move(Direction.UP);
                 }

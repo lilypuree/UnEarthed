@@ -25,8 +25,8 @@ import static net.oriondevcorgitaco.unearthed.UEFeatures.NEW_GENERATOR;
 @Mixin(FlatGenerationSettings.class)
 public class MixinFlatGenerationSettings {
 
-    @Inject(method = "func_236942_c_", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;build()Lnet/minecraft/world/biome/BiomeGenerationSettings;"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "getBiomeFromSettings", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;build()Lnet/minecraft/world/biome/BiomeGenerationSettings;"), locals = LocalCapture.CAPTURE_FAILHARD)
     private void addUnearthedFeature(CallbackInfoReturnable<Biome> cir, Biome biome, BiomeGenerationSettings biomegenerationsettings, BiomeGenerationSettings.Builder biomegenerationsettings$builder, Map map, boolean flag, BlockState ablockstate[]) {
-        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NEW_GENERATOR);
+        biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NEW_GENERATOR);
     }
 }

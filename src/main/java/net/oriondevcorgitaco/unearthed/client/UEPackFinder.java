@@ -16,9 +16,9 @@ public class UEPackFinder implements IPackFinder {
     }
 
     @Override
-    public void findPacks(Consumer<ResourcePackInfo> consumer, ResourcePackInfo.IFactory packInfoFactory) {
+    public void loadPacks(Consumer<ResourcePackInfo> consumer, ResourcePackInfo.IFactory packInfoFactory) {
         if (folder.exists() && folder.isDirectory()) {
-            ResourcePackInfo t = ResourcePackInfo.createResourcePack("Unearthed Generated Assets", true, () -> new FolderPack(folder), packInfoFactory, ResourcePackInfo.Priority.TOP, IPackNameDecorator.PLAIN);
+            ResourcePackInfo t = ResourcePackInfo.create("Unearthed Generated Assets", true, () -> new FolderPack(folder), packInfoFactory, ResourcePackInfo.Priority.TOP, IPackNameDecorator.DEFAULT);
             if (t == null) return;
             consumer.accept(t);
         }

@@ -24,7 +24,7 @@ public class LichenFeature extends Feature<LichenConfig> {
     }
 
     @Override
-    public boolean generate(ISeedReader seedReader, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, LichenConfig arg) {
+    public boolean place(ISeedReader seedReader, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, LichenConfig arg) {
         if (!canReplace(seedReader.getBlockState(blockPos))) {
             return false;
         } else {
@@ -32,15 +32,15 @@ public class LichenFeature extends Feature<LichenConfig> {
             if (tryGeneration(seedReader, blockPos, seedReader.getBlockState(blockPos), arg, random, growthDirs)) {
                 return true;
             } else {
-                BlockPos.Mutable mutable = blockPos.toMutable();
+                BlockPos.Mutable mutable = blockPos.mutable();
                 for (Direction direction : growthDirs) {
-                    mutable.setPos(blockPos);
+                    mutable.set(blockPos);
                     List<Direction> list2 = getValidDirectionsWithout(arg, random, direction.getOpposite());
 
                     for (int i = 0; i < arg.searchRange; ++i) {
-                        mutable.setAndMove(blockPos, direction);
+                        mutable.setWithOffset(blockPos, direction);
                         BlockState blockState = seedReader.getBlockState(mutable);
-                        if (!canReplace(blockState) && !blockState.isIn(UEBlocks.LICHEN)) {
+                        if (!canReplace(blockState) && !blockState.is(UEBlocks.LICHEN)) {
                             break;
                         }
 
@@ -55,7 +55,7 @@ public class LichenFeature extends Feature<LichenConfig> {
     }
 
     public static boolean tryGeneration(ISeedReader reader, BlockPos blockPos, BlockState blockState, LichenConfig arg, Random random, List<Direction> list) {
-        BlockPos.Mutable mutable = blockPos.toMutable();
+        BlockPos.Mutable mutable = blockPos.mutable();
         Iterator<Direction> iterator = list.iterator();
         Direction direction;
         BlockState newState;
@@ -64,7 +64,7 @@ public class LichenFeature extends Feature<LichenConfig> {
                 return false;
             }
             direction = iterator.next();
-            newState = reader.getBlockState(mutable.setAndMove(blockPos, direction));
+            newState = reader.getBlockState(mutable.setWithOffset(blockPos, direction));
         } while (!arg.isValidBlock(newState.getBlock()));
 
         LichenBlock block = (LichenBlock) UEBlocks.LICHEN;
@@ -72,7 +72,7 @@ public class LichenFeature extends Feature<LichenConfig> {
         if (lichenState == null) {
             return false;
         } else {
-            reader.setBlockState(blockPos, lichenState, 3);
+            reader.setBlock(blockPos, lichenState, 3);
             if (random.nextFloat() < arg.spreadChance) {
                 block.tryGrowFrom(lichenState, reader, blockPos, direction, random);
             }
@@ -96,6 +96,6 @@ public class LichenFeature extends Feature<LichenConfig> {
 
     //method_33395
     private static boolean canReplace(BlockState blockState) {
-        return blockState.isAir() || blockState.isIn(Blocks.WATER);
+        return blockState.isAir() || blockState.is(Blocks.WATER);
     }
 }

@@ -19,7 +19,7 @@ import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 import java.util.Random;
 
 public class StrataGenerator extends Feature<NoFeatureConfig> {
-    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("strata_gen1", new StrataGenerator(NoFeatureConfig.field_236558_a_));
+    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("strata_gen1", new StrataGenerator(NoFeatureConfig.CODEC));
 
     public StrataGenerator(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);
@@ -29,148 +29,148 @@ public class StrataGenerator extends Feature<NoFeatureConfig> {
     FastNoise fastNoise3D2 = null;
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         setSeed(world.getSeed());
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
+                mutable.set(pos.getX() + x, 0, pos.getZ() + z);
                 int topY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ());
 
                 for (int y = 0; y < topY; y++) {
                     //Noise range is between -1 and 1.
                     double noise3D = fastNoise3D.GetNoise(mutable.getX(), mutable.getY(), mutable.getZ());
 
-                    if (world.getBlockState(mutable).getBlock().isIn(BlockTags.BASE_STONE_OVERWORLD)) {
-                        if (world.getBiome(mutable).getCategory() == Biome.Category.ICY) {
+                    if (world.getBlockState(mutable).getBlock().is(BlockTags.BASE_STONE_OVERWORLD)) {
+                        if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.ICY) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.DIORITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.DIORITE.defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.ANDESITE.defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().defaultBlockState(), 2);
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.MESA) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.MESA) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, Blocks.RED_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.RED_TERRACOTTA.defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.BLACK_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.BLACK_TERRACOTTA.defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, Blocks.YELLOW_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.YELLOW_TERRACOTTA.defaultBlockState(), 2);
                             else if (noise3D > -0.6)
-                                world.setBlockState(mutable, Blocks.WHITE_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.WHITE_TERRACOTTA.defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, Blocks.GRAY_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.GRAY_TERRACOTTA.defaultBlockState(), 2);
                             else if (noise3D > -0.8)
-                                world.setBlockState(mutable, Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.LIGHT_GRAY_TERRACOTTA.defaultBlockState(), 2);
                             else if (noise3D > -0.9)
-                                world.setBlockState(mutable, Blocks.TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.TERRACOTTA.defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, Blocks.ORANGE_TERRACOTTA.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.ORANGE_TERRACOTTA.defaultBlockState(), 2);
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.EXTREME_HILLS) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.EXTREME_HILLS) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.GRANITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.GRANITE.defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.ANDESITE.defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.9)
-                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.KIMBERLITE.getBaseBlock().defaultBlockState(), 2);
 
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.EXTREME_HILLS) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.EXTREME_HILLS) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, Blocks.DIORITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.DIORITE.defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.ANDESITE.defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, BlockGeneratorReference.PILLOW_BASALT.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.PILLOW_BASALT.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.9)
-                                world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.KIMBERLITE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.KIMBERLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.KIMBERLITE.getBaseBlock().defaultBlockState(), 2);
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.OCEAN) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.OCEAN) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.PUMICE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.PUMICE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.PILLOW_BASALT.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.PILLOW_BASALT.getBaseBlock().defaultBlockState(), 2);
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.DESERT) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.DESERT) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, Blocks.SANDSTONE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.SANDSTONE.defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, BlockGeneratorReference.CONGLOMERATE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.CONGLOMERATE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().defaultBlockState(), 2);
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.SWAMP) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.SWAMP) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIGNITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.LIGNITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIGNITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.LIGNITE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.MUDSTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.MUDSTONE.getBaseBlock().defaultBlockState(), 2);
 
-                        } else if (world.getBiome(mutable).getCategory() == Biome.Category.FOREST) {
+                        } else if (world.getBiome(mutable).getBiomeCategory() == Biome.Category.FOREST) {
                             if (noise3D > 0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.MARBLE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.MARBLE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > 0.0)
-                                world.setBlockState(mutable, BlockGeneratorReference.MARBLE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.MARBLE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.5)
-                                world.setBlockState(mutable, BlockGeneratorReference.SCHIST.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.SCHIST.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.7)
-                                world.setBlockState(mutable, BlockGeneratorReference.PHYLLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.PHYLLITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D > -0.9)
-                                world.setBlockState(mutable, BlockGeneratorReference.QUARTZITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.QUARTZITE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, BlockGeneratorReference.QUARTZITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.QUARTZITE.getBaseBlock().defaultBlockState(), 2);
 
                         } else {
                             double noise3D2 = fastNoise3D2.GetNoise(mutable.getX(), mutable.getY(), mutable.getZ());
 
                             if (noise3D2 > 0.8)
-                                world.setBlockState(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.LIMESTONE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > 0.6)
-                                world.setBlockState(mutable, BlockGeneratorReference.MARBLE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.MARBLE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > 0.4)
-                                world.setBlockState(mutable, BlockGeneratorReference.CONGLOMERATE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.CONGLOMERATE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > 0)
-                                world.setBlockState(mutable, BlockGeneratorReference.QUARTZITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.QUARTZITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > -0.2)
-                                world.setBlockState(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.RHYOLITE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > -0.4)
-                                world.setBlockState(mutable, BlockGeneratorReference.CONGLOMERATE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.CONGLOMERATE.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > -0.6)
-                                world.setBlockState(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.GABBRO.getBaseBlock().defaultBlockState(), 2);
                             else if (noise3D2 > -0.8)
-                                world.setBlockState(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().getDefaultState(), 2);
+                                world.setBlock(mutable, BlockGeneratorReference.SILTSTONE.getBaseBlock().defaultBlockState(), 2);
                             else
-                                world.setBlockState(mutable, Blocks.ANDESITE.getDefaultState(), 2);
+                                world.setBlock(mutable, Blocks.ANDESITE.defaultBlockState(), 2);
                         }
                     }
                     mutable.move(Direction.UP);

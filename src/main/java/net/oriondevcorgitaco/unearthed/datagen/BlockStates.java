@@ -29,9 +29,9 @@ public class BlockStates extends BlockStateProvider {
 
     private void buttonBlock(AbstractButtonBlock block, ResourceLocation texture) {
         getVariantBuilder(block).forAllStates(state -> {
-            ModelFile buttonModel = buttonModel(block, texture, state.get(AbstractButtonBlock.POWERED));
-            AttachFace face = state.get(AbstractButtonBlock.FACE);
-            Direction dir = state.get(AbstractButtonBlock.HORIZONTAL_FACING);
+            ModelFile buttonModel = buttonModel(block, texture, state.getValue(AbstractButtonBlock.POWERED));
+            AttachFace face = state.getValue(AbstractButtonBlock.FACE);
+            Direction dir = state.getValue(AbstractButtonBlock.FACING);
             int xrot = 0;
             if (face == AttachFace.CEILING) {
                 dir = dir.getOpposite();
@@ -40,7 +40,7 @@ public class BlockStates extends BlockStateProvider {
                 xrot = 270;
             }
             return ConfiguredModel.builder().modelFile(buttonModel)
-                    .rotationY((int) dir.getHorizontalAngle())
+                    .rotationY((int) dir.toYRot())
                     .rotationX(xrot)
                     .uvLock(face == AttachFace.WALL).build();
         });
@@ -57,7 +57,7 @@ public class BlockStates extends BlockStateProvider {
 
     private void pressurePlateBlock(PressurePlateBlock block, ResourceLocation texture) {
         getVariantBuilder(block).forAllStates(state ->
-                ConfiguredModel.builder().modelFile(pressurePlateModel(block, texture, state.get(PressurePlateBlock.POWERED))).build());
+                ConfiguredModel.builder().modelFile(pressurePlateModel(block, texture, state.getValue(PressurePlateBlock.POWERED))).build());
     }
 
     private ModelFile pressurePlateModel(Block block, ResourceLocation texture, boolean powered) {
@@ -143,8 +143,8 @@ public class BlockStates extends BlockStateProvider {
 
     public ModelFile beamModel(Block block, Direction.Axis axis) {
         String name = getPath(block);
-        return models().getBuilder(name + "_" + axis.getName2()).parent(
-                new ModelFile.UncheckedModelFile(modLoc("block/beam_" + axis.getName2())))
+        return models().getBuilder(name + "_" + axis.getName()).parent(
+                new ModelFile.UncheckedModelFile(modLoc("block/beam_" + axis.getName())))
                 .texture("side", modLoc("block/" + name + "_side"))
                 .texture("end", modLoc("block/" + name + "_end"));
     }

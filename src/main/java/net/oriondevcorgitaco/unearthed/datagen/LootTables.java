@@ -39,7 +39,7 @@ public class LootTables extends LootTableProvider {
 
 
     @Override
-    public void act(DirectoryCache cache) {
+    public void run(DirectoryCache cache) {
         for (BlockGeneratorHelper type : BlockGeneratorReference.ROCK_TYPES) {
             for (BlockGeneratorHelper.Entry entry : type.getEntries()) {
                 BlockSchema.Form form = entry.getForm();
@@ -68,15 +68,15 @@ public class LootTables extends LootTableProvider {
 
         lootTables.put(UEBlocks.PYROXENE, BlockLootTableAccessor.droppingWithSilkTouch(UEBlocks.PYROXENE,
                 BlockLootTableAccessor.withSurvivesExplosion(UEBlocks.PYROXENE,
-                        ItemLootEntry.builder(Items.FLINT).acceptCondition(
-                                TableBonus.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
-                                .alternatively(ItemLootEntry.builder(UEBlocks.PYROXENE)))));
+                        ItemLootEntry.lootTableItem(Items.FLINT).when(
+                                TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                                .otherwise(ItemLootEntry.lootTableItem(UEBlocks.PYROXENE)))));
 
         addBlockLoot(UEBlocks.LIGNITE_BRIQUETTES);
         lootTables.put(UEBlocks.LICHEN, BlockLootTableAccessor.onlyWithShears(UEBlocks.LICHEN));
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
         for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {
-            tables.put(entry.getKey().getLootTable(), entry.getValue().setParameterSet(LootParameterSets.BLOCK).build());
+            tables.put(entry.getKey().getLootTable(), entry.getValue().setParamSet(LootParameterSets.BLOCK).build());
         }
 
         writeTables(cache, tables);
@@ -91,7 +91,7 @@ public class LootTables extends LootTableProvider {
         tables.forEach((key, lootTable) -> {
             Path path = outputFolder.resolve("data/" + key.getNamespace() + "/loot_tables/" + key.getPath() + ".json");
             try {
-                IDataProvider.save(GSON, cache, LootTableManager.toJson(lootTable), path);
+                IDataProvider.save(GSON, cache, LootTableManager.serialize(lootTable), path);
             } catch (IOException e) {
                 e.printStackTrace();
 //                LOGGER.error("Couldn't write loot table {}", path, e);
@@ -100,10 +100,10 @@ public class LootTables extends LootTableProvider {
     }
 
     protected static LootTable.Builder createSimpleTable(String name, Block block) {
-        LootPool.Builder builder = LootPool.builder()
+        LootPool.Builder builder = LootPool.lootPool()
                 .name(name)
-                .rolls(ConstantRange.of(1))
-                .addEntry(ItemLootEntry.builder(block));
-        return LootTable.builder().addLootPool(builder);
+                .setRolls(ConstantRange.exactly(1))
+                .add(ItemLootEntry.lootTableItem(block));
+        return LootTable.lootTable().withPool(builder);
     }
 }

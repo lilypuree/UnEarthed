@@ -81,8 +81,8 @@ public class UnearthedConfig {
     public static boolean isReplaceableStone(BlockState block) {
         boolean stoneTag = UnearthedConfig.replaceableTag.get();
         if (stoneTag)
-            return block.isIn(BlockTags.BASE_STONE_OVERWORLD);
+            return block.is(BlockTags.BASE_STONE_OVERWORLD);
         else
-            return block == Blocks.STONE.getDefaultState();
+            return block == Blocks.STONE.defaultBlockState();
     }
 }

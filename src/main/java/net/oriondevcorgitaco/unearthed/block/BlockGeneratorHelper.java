@@ -213,8 +213,8 @@ public class BlockGeneratorHelper {
 
         public Builder createOreProperties() {
             for (IOreType oreType : VanillaOreTypes.values()) {
-                AbstractBlock.Properties newProp = AbstractBlock.Properties.from(new Block(defaultProperty));
-                newProp.setRequiresTool().harvestLevel(oreType.getHarvestLevel()).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.0f);
+                AbstractBlock.Properties newProp = AbstractBlock.Properties.copy(new Block(defaultProperty));
+                newProp.requiresCorrectToolForDrops().harvestLevel(oreType.getHarvestLevel()).harvestTool(ToolType.PICKAXE).strength(3.0f);
                 entries.stream().filter(entry -> {
                     return entry.form instanceof Forms.OreForm && ((Forms.OreForm) entry.form).getOreType() == oreType;
                 }).forEach(entry -> entry.property = newProp);
@@ -223,26 +223,26 @@ public class BlockGeneratorHelper {
         }
 
         public Builder createCobbleProperties() {
-            AbstractBlock.Properties cobbleProp = AbstractBlock.Properties.from(new Block(defaultProperty));
-            cobbleProp.hardnessAndResistance(2.0f, 6.0f);
+            AbstractBlock.Properties cobbleProp = AbstractBlock.Properties.copy(new Block(defaultProperty));
+            cobbleProp.strength(2.0f, 6.0f);
             setProperty(Variants.COBBLED, cobbleProp);
             setProperty(Variants.MOSSY_COBBLED, cobbleProp);
             return this;
         }
 
         public Builder createRegolithProperties() {
-            AbstractBlock.Properties regolithProp = AbstractBlock.Properties.from(new Block(defaultProperty));
-            AbstractBlock.Properties grassProp = AbstractBlock.Properties.from(Blocks.GRASS_BLOCK);
-            regolithProp.hardnessAndResistance(0.6f).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL);
+            AbstractBlock.Properties regolithProp = AbstractBlock.Properties.copy(new Block(defaultProperty));
+            AbstractBlock.Properties grassProp = AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK);
+            regolithProp.strength(0.6f).sound(SoundType.GRAVEL).harvestTool(ToolType.SHOVEL);
             setProperty(Forms.REGOLITH, regolithProp);
             setProperty(Forms.GRASSY_REGOLITH, grassProp);
             return this;
         }
 
         public Builder createMiscProperties() {
-            AbstractBlock.Properties buttonProp = AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F);
-            AbstractBlock.Properties pressurePlateProp = AbstractBlock.Properties.from(new Block(defaultProperty));
-            pressurePlateProp.doesNotBlockMovement().hardnessAndResistance(0.5f);
+            AbstractBlock.Properties buttonProp = AbstractBlock.Properties.of(Material.DECORATION).noCollission().strength(0.5F);
+            AbstractBlock.Properties pressurePlateProp = AbstractBlock.Properties.copy(new Block(defaultProperty));
+            pressurePlateProp.noCollission().strength(0.5f);
             setProperty(Forms.BUTTON, buttonProp);
             setProperty(Forms.PRESSURE_PLATE, pressurePlateProp);
             return this;

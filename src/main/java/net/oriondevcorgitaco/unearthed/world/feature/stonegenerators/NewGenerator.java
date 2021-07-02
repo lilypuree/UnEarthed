@@ -36,22 +36,22 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
     private boolean isSeedSet = false;
     private static FastNoiseLite strataHeight;
     private boolean replaceCobble = false;
-    static BlockState air = Blocks.AIR.getDefaultState();
-    static BlockState GLASS = Blocks.GLASS.getDefaultState();
-    static BlockState DIAMOND = Blocks.DIAMOND_BLOCK.getDefaultState();
-    static BlockState EMERALD = Blocks.EMERALD_BLOCK.getDefaultState();
-    static BlockState GOLD = Blocks.GOLD_BLOCK.getDefaultState();
-    static BlockState IRON = Blocks.IRON_BLOCK.getDefaultState();
-    static BlockState NETHERITE = Blocks.NETHERITE_BLOCK.getDefaultState();
+    static BlockState air = Blocks.AIR.defaultBlockState();
+    static BlockState GLASS = Blocks.GLASS.defaultBlockState();
+    static BlockState DIAMOND = Blocks.DIAMOND_BLOCK.defaultBlockState();
+    static BlockState EMERALD = Blocks.EMERALD_BLOCK.defaultBlockState();
+    static BlockState GOLD = Blocks.GOLD_BLOCK.defaultBlockState();
+    static BlockState IRON = Blocks.IRON_BLOCK.defaultBlockState();
+    static BlockState NETHERITE = Blocks.NETHERITE_BLOCK.defaultBlockState();
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         if (!isSeedSet) {
             setSeed(world.getSeed());
             NoiseHandler.setSeed(world.getSeed());
         }
 //        boolean isAir = Math.abs(pos.getX() >> 4) % 5 < 2;
-        boolean isAmplified = generator instanceof NoiseChunkGenerator && ((NoiseChunkGenerator) generator).func_236088_a_(world.getSeed(), DimensionSettings.field_242735_d);
+        boolean isAmplified = generator instanceof NoiseChunkGenerator && ((NoiseChunkGenerator) generator).stable(world.getSeed(), DimensionSettings.AMPLIFIED);
         boolean alwaysReplaceDirt = UnearthedConfig.alwaysReplaceDirt.get();
         boolean debugMode = UnearthedConfig.debug.get();
         replaceCobble = UnearthedConfig.replaceCobble.get();
@@ -84,7 +84,7 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
             for (int z = 0; z < 16; z++) {
                 int posX = pos.getX() + x;
                 int posZ = pos.getZ() + z;
-                mutable.setPos(posX, 0, posZ);
+                mutable.set(posX, 0, posZ);
                 int stratumHeight = -1;
                 int stratumDepth = 0;
                 State stratumState = null;
@@ -121,40 +121,40 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
 
     private boolean isBiomeHilly(Biome biome) {
         String biomeName = biome.getRegistryName().getPath();
-        return biome.getCategory() == Biome.Category.EXTREME_HILLS || biomeName.contains("hill") || biomeName.contains("plateau") || biomeName.contains("mountain");
+        return biome.getBiomeCategory() == Biome.Category.EXTREME_HILLS || biomeName.contains("hill") || biomeName.contains("plateau") || biomeName.contains("mountain");
     }
 
     private BlockState replaceBlock(BlockState original, State state, boolean replaceDirt) {
 //        return state.getDefaultState();
-        if (original.getBlock().isIn(UETags.Blocks.REPLACABLE)) {
+        if (original.getBlock().is(UETags.Blocks.REPLACABLE)) {
             return state.getCell().getDefaultState();
-        } else if (original.isIn(Blocks.AIR)) {
+        } else if (original.is(Blocks.AIR)) {
             return original;
         } else {
             Cell cell = state.getCell();
             if (state.getType() == Type.TERTIARY) {
-                if (original.isIn(UETags.Blocks.REPLACE_DIRT) || original.isIn(UETags.Blocks.REPLACE_GRASS)) {
+                if (original.is(UETags.Blocks.REPLACE_DIRT) || original.is(UETags.Blocks.REPLACE_GRASS)) {
                     return cell.getDefaultState();
                 }
                 for (IOreType oreType : ores) {
-                    if (original.isIn(oreType.getBlock())) {
+                    if (original.is(oreType.getBlock())) {
                         return cell.getDefaultState();
                     }
                 }
             } else {
-                if (replaceCobble && original.isIn(Blocks.COBBLESTONE)) {
+                if (replaceCobble && original.is(Blocks.COBBLESTONE)) {
                     return cell.getCobbleReplacement();
                 }
                 if (replaceDirt) {
-                    if (original.isIn(UETags.Blocks.REPLACE_DIRT)) {
+                    if (original.is(UETags.Blocks.REPLACE_DIRT)) {
                         return cell.getDirtReplacement();
-                    } else if (original.isIn(UETags.Blocks.REPLACE_GRASS)) {
+                    } else if (original.is(UETags.Blocks.REPLACE_GRASS)) {
                         return cell.getGrassReplacement(original);
                     }
                 }
                 if (cell.replacesOre()) {
                     for (IOreType oreType : ores) {
-                        if (original.isIn(oreType.getBlock())) {
+                        if (original.is(oreType.getBlock())) {
                             BlockState ore = cell.getOre(oreType);
                             if (ore != null) {
                                 return ore;
@@ -193,7 +193,7 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
             for (int z = 0; z < 16; z++) {
                 int posX = pos.getX() + x;
                 int posZ = pos.getZ() + z;
-                mutable.setPos(posX, 0, posZ);
+                mutable.set(posX, 0, posZ);
 
                 int stratumHeight = -1;
                 int stratumDepth = 0;

@@ -15,6 +15,8 @@ import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RegolithGrassBlock extends GrassBlock {
     public static Map<Block, Block> regolithToGrassMap = new Object2ObjectOpenHashMap<>();
     private Block regolithBlock;
@@ -34,15 +36,15 @@ public class RegolithGrassBlock extends GrassBlock {
         if (!canBeGrass(state, worldIn, pos)) {
             if (!worldIn.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-            worldIn.setBlockState(pos, regolithBlock.getDefaultState());
+            worldIn.setBlockAndUpdate(pos, regolithBlock.defaultBlockState());
         } else {
-            if (worldIn.getLight(pos.up()) >= 9) {
+            if (worldIn.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 for (int i = 0; i < 4; ++i) {
-                    BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 2, random.nextInt(3) - 1);
+                    BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 2, random.nextInt(3) - 1);
                     BlockState blockState = worldIn.getBlockState(blockpos);
                     if (regolithToGrassMap.containsKey(blockState.getBlock()) && canPropagate(blockState, worldIn, blockpos)) {
-                        worldIn.setBlockState(blockpos, regolithToGrassMap.get(blockState.getBlock()).getDefaultState());
-                        worldIn.setBlockState(blockpos.up(), Blocks.AIR.getDefaultState());
+                        worldIn.setBlockAndUpdate(blockpos, regolithToGrassMap.get(blockState.getBlock()).defaultBlockState());
+                        worldIn.setBlockAndUpdate(blockpos.above(), Blocks.AIR.defaultBlockState());
                     }
                 }
             }
@@ -50,22 +52,22 @@ public class RegolithGrassBlock extends GrassBlock {
     }
 
     public static boolean canBeGrass(BlockState state, IWorldReader worldReader, BlockPos pos) {
-        BlockPos blockpos = pos.up();
+        BlockPos blockpos = pos.above();
         BlockState blockstate = worldReader.getBlockState(blockpos);
-        if (blockstate.isIn(Blocks.SNOW) && blockstate.get(SnowBlock.LAYERS) == 1 || blockstate.isIn(UEBlocks.LICHEN)) {
+        if (blockstate.is(Blocks.SNOW) && blockstate.getValue(SnowBlock.LAYERS) == 1 || blockstate.is(UEBlocks.LICHEN)) {
             return true;
-        } else if (blockstate.getFluidState().getLevel() == 8) {
+        } else if (blockstate.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.func_215613_a(worldReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getOpacity(worldReader, blockpos));
+            int i = LightEngine.getLightBlockInto(worldReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(worldReader, blockpos));
             return i < worldReader.getMaxLightLevel();
         }
     }
 
     public static boolean canPropagate(BlockState state, IWorldReader worldReader, BlockPos pos) {
-        BlockPos blockpos = pos.up();
+        BlockPos blockpos = pos.above();
         BlockState coverBlock = worldReader.getBlockState(blockpos);
-        return coverBlock.isIn(UEBlocks.LICHEN) && coverBlock.get(LichenBlock.getPropertyFor(Direction.DOWN));
+        return coverBlock.is(UEBlocks.LICHEN) && coverBlock.getValue(LichenBlock.getPropertyFor(Direction.DOWN));
     }
 
     @Override

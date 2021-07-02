@@ -14,15 +14,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cells {
-    public static final Cell GLASS = new Cell(Blocks.GLASS.getDefaultState(), true, true);
-    public static final Cell EMERALD = new Cell(Blocks.EMERALD_BLOCK.getDefaultState(), true, true);
-    public static final Cell DIAMOND = new Cell(Blocks.DIAMOND_BLOCK.getDefaultState(), true, true);
-    public static final Cell GOLD = new Cell(Blocks.GOLD_BLOCK.getDefaultState(), true, true);
-    public static final Cell IRON = new Cell(Blocks.IRON_BLOCK.getDefaultState(), true, true);
-    public static final Cell NETHERITE = new Cell(Blocks.NETHERITE_BLOCK.getDefaultState(), true, true);
-    public static final Cell LAPIS = new Cell(Blocks.LAPIS_BLOCK.getDefaultState(), true, true);
-    public static final Cell REDSTONE = new Cell(Blocks.REDSTONE_BLOCK.getDefaultState(), true, true);
-    public static final Cell COAL = new Cell(Blocks.COAL_BLOCK.getDefaultState(), true, true);
+    public static final Cell GLASS = new Cell(Blocks.GLASS.defaultBlockState(), true, true);
+    public static final Cell EMERALD = new Cell(Blocks.EMERALD_BLOCK.defaultBlockState(), true, true);
+    public static final Cell DIAMOND = new Cell(Blocks.DIAMOND_BLOCK.defaultBlockState(), true, true);
+    public static final Cell GOLD = new Cell(Blocks.GOLD_BLOCK.defaultBlockState(), true, true);
+    public static final Cell IRON = new Cell(Blocks.IRON_BLOCK.defaultBlockState(), true, true);
+    public static final Cell NETHERITE = new Cell(Blocks.NETHERITE_BLOCK.defaultBlockState(), true, true);
+    public static final Cell LAPIS = new Cell(Blocks.LAPIS_BLOCK.defaultBlockState(), true, true);
+    public static final Cell REDSTONE = new Cell(Blocks.REDSTONE_BLOCK.defaultBlockState(), true, true);
+    public static final Cell COAL = new Cell(Blocks.COAL_BLOCK.defaultBlockState(), true, true);
 
     public static final Cell STONE = fromBlockHelper(BlockGeneratorReference.STONE);
     public static final Cell PHYLLITE = fromBlockHelper(BlockGeneratorReference.PHYLLITE);
@@ -61,23 +61,23 @@ public class Cells {
 
     private static Cell fromBlockHelper(BlockGeneratorHelper helper) {
         ResourceLocation id = helper.getBaseBlock().getRegistryName();
-        BlockState baseBlock = helper.getBaseBlock().getDefaultState();
+        BlockState baseBlock = helper.getBaseBlock().defaultBlockState();
         BlockGeneratorHelper.Entry entry = helper.getEntry(Variants.COBBLED, Forms.BLOCK);
-        BlockState cobbleBlock = entry != null ? entry.getBlock().getDefaultState() : Blocks.COBBLESTONE.getDefaultState();
-        BlockState dirtReplacement = Blocks.DIRT.getDefaultState();
-        BlockState grassReplacement = Blocks.GRASS_BLOCK.getDefaultState();
+        BlockState cobbleBlock = entry != null ? entry.getBlock().defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState();
+        BlockState dirtReplacement = Blocks.DIRT.defaultBlockState();
+        BlockState grassReplacement = Blocks.GRASS_BLOCK.defaultBlockState();
         Map<IOreType, BlockState> oreMap = new HashMap<>();
         for (BlockGeneratorHelper.Entry e : helper.getEntries()) {
             BlockSchema.Form form = e.getForm();
             if (form == Forms.OVERGROWN_ROCK) {
                 dirtReplacement = baseBlock;
-                grassReplacement = e.getBlock().getDefaultState();
+                grassReplacement = e.getBlock().defaultBlockState();
             } else if (form == Forms.REGOLITH) {
-                dirtReplacement = e.getBlock().getDefaultState();
+                dirtReplacement = e.getBlock().defaultBlockState();
             } else if (form == Forms.GRASSY_REGOLITH) {
-                grassReplacement = e.getBlock().getDefaultState();
+                grassReplacement = e.getBlock().defaultBlockState();
             } else if (form instanceof Forms.OreForm) {
-                oreMap.put(((Forms.OreForm) form).getOreType(), e.getBlock().getDefaultState());
+                oreMap.put(((Forms.OreForm) form).getOreType(), e.getBlock().defaultBlockState());
             }
         }
         return new Cell(baseBlock, cobbleBlock, dirtReplacement, grassReplacement, oreMap);

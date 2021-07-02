@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(SoulSandValleySurfaceBuilder.class)
 public class MixinSSVSurfaceBuilder {
 
-    @Inject(method = "Lnet/minecraft/world/gen/surfacebuilders/SoulSandValleySurfaceBuilder;func_230389_c_()Lnet/minecraft/block/BlockState;", at = @At("HEAD"),
+    @Inject(method = "Lnet/minecraft/world/gen/surfacebuilders/SoulSandValleySurfaceBuilder;getPatchBlockState()Lnet/minecraft/block/BlockState;", at = @At("HEAD"),
             cancellable = true)
     private void getGravel(CallbackInfoReturnable<BlockState> cir) {
         if (!UnearthedConfig.disableNetherGeneration.get()){
-            cir.setReturnValue(UEBlocks.PYROXENE.getDefaultState());
+            cir.setReturnValue(UEBlocks.PYROXENE.defaultBlockState());
         }
     }
 }
