@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:cobbled_phyllite",
+    "unearthed:cobbled_slate",
+    "unearthed:cobbled_limestone",
+    "unearthed:cobbled_grey_limestone"
+  ]
+}

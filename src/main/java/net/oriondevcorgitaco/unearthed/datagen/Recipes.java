@@ -164,7 +164,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void stoneRecipe() {
-        ShapelessRecipeBuilder.shapeless(Items.STONE).requires(UETags.Items.IGNEOUS_ITEM).requires(UETags.Items.METAMORPHIC_ITEM).requires(UETags.Items.SEDIMENTARY_ITEM).unlockedBy("has_stone", hasItem(Items.STONE)).save(consumer, "unearthed:stone_from_stones");
+        ShapelessRecipeBuilder.shapeless(Items.STONE, 3).requires(UETags.Items.IGNEOUS_ITEM).requires(UETags.Items.METAMORPHIC_ITEM).requires(UETags.Items.SEDIMENTARY_ITEM).unlockedBy("has_stone", hasItem(Items.STONE)).save(consumer, "unearthed:stone_from_stones");
     }
 
     private void brickRecipeOf(IItemProvider result, IItemProvider ingredient) {
