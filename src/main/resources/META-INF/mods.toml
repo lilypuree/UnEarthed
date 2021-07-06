@@ -1,10 +1,10 @@
 modLoader="javafml"
-loaderVersion="[33,)"
+loaderVersion="[36,)"
 license="LGPLv3"
 issueTrackerURL="https://github.com/HexBugOrion/UnEarthed/issues"
 [[mods]]
 modId="unearthed"
-version="1.1.2c"
+version="1.2.1"
 displayName="Unearthed"
 displayURL="N/A"
 logoFile="logo.png"
@@ -16,6 +16,6 @@ A mod that makes exploring underground interesting. Adds 21 new rocks!
 [[dependencies.unearthed]]
     modId="forge"
     mandatory=true
-    versionRange="[35.0.0,)"
+    versionRange="[36.1.18,)"
     ordering="NONE"
     side="BOTH"
