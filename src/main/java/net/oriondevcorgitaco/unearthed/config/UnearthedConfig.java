@@ -31,7 +31,8 @@ public class UnearthedConfig {
 //    public static ForgeConfigSpec.ConfigValue<String> desertBlocksForGeneration;
     public static ForgeConfigSpec.BooleanValue replaceableTag;
     public static ForgeConfigSpec.BooleanValue replaceCobble;
-    public static ForgeConfigSpec.BooleanValue alwaysReplaceDirt;
+    public static ForgeConfigSpec.BooleanValue replaceOres;
+    public static ForgeConfigSpec.EnumValue<DirtReplacement> dirtReplacement;
     public static ForgeConfigSpec.BooleanValue disableGeneration;
     public static ForgeConfigSpec.BooleanValue disableNetherGeneration;
     public static ForgeConfigSpec.BooleanValue debug;
@@ -52,7 +53,9 @@ public class UnearthedConfig {
         COMMON_BUILDER.pop();
         replaceableTag = COMMON_BUILDER.comment("Use Replaceable Block Tag? Could have performance impact!\nDefault: true").define("replaceableTag", true);
         replaceCobble = COMMON_BUILDER.comment("Replace cobblestone? Replaces dungeon cobble stone for example.\nDefault: true").define("replaceCobble", true);
-        alwaysReplaceDirt = COMMON_BUILDER.comment("Always replace dirt regardless of biome?\nDefault: false").define("alwaysReplaceDirt", false);
+        replaceOres = COMMON_BUILDER.comment("Replace ores? \nDefault: true").define("replaceOres", true);
+        dirtReplacement = COMMON_BUILDER.comment("Replacement behavior of dirt.\nNONE: does not replace dirt\nHILL: only replace on hilly biomes(default)\nALL: replace all dirt regardless of biome")
+                .defineEnum("dirtReplacement", DirtReplacement.HILLS);
 
         disableGeneration = COMMON_BUILDER.comment("Disable rock replacement\nDefault: false").define("disableGeneration", false);
         disableNetherGeneration = COMMON_BUILDER.comment("Disable nether generation\nDefault: false").define("disableNetherGeneration", false);
@@ -84,5 +87,10 @@ public class UnearthedConfig {
             return block.is(BlockTags.BASE_STONE_OVERWORLD);
         else
             return block == Blocks.STONE.defaultBlockState();
+    }
+
+
+    public static enum DirtReplacement {
+        NONE, HILLS, ALL
     }
 }

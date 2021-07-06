@@ -36,6 +36,9 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
     private boolean isSeedSet = false;
     private static FastNoiseLite strataHeight;
     private boolean replaceCobble = false;
+    private boolean replaceOres = false;
+    private UnearthedConfig.DirtReplacement dirtReplacement = UnearthedConfig.DirtReplacement.HILLS;
+    private boolean isAmplified = false;
     static BlockState air = Blocks.AIR.defaultBlockState();
     static BlockState GLASS = Blocks.GLASS.defaultBlockState();
     static BlockState DIAMOND = Blocks.DIAMOND_BLOCK.defaultBlockState();
@@ -51,24 +54,36 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
             NoiseHandler.setSeed(world.getSeed());
         }
 //        boolean isAir = Math.abs(pos.getX() >> 4) % 5 < 2;
-        boolean isAmplified = generator instanceof NoiseChunkGenerator && ((NoiseChunkGenerator) generator).stable(world.getSeed(), DimensionSettings.AMPLIFIED);
-        boolean alwaysReplaceDirt = UnearthedConfig.alwaysReplaceDirt.get();
+        isAmplified = generator instanceof NoiseChunkGenerator && ((NoiseChunkGenerator) generator).stable(world.getSeed(), DimensionSettings.AMPLIFIED);
         boolean debugMode = UnearthedConfig.debug.get();
         replaceCobble = UnearthedConfig.replaceCobble.get();
+        replaceOres = UnearthedConfig.replaceOres.get();
+        dirtReplacement = UnearthedConfig.dirtReplacement.get();
         NoiseHandler noiseHandler = new NoiseHandler(world, pos);
         AutomataRunner runner = new AutomataRunner(world, pos, noiseHandler);
         if (debugMode) {
-            setDebugResults(world, pos, runner, noiseHandler, isAmplified || alwaysReplaceDirt);
+            setDebugResults(world, pos, runner, noiseHandler);
         } else {
-            setResults(world, pos, runner, noiseHandler, isAmplified || alwaysReplaceDirt);
+            setResults(world, pos, runner, noiseHandler);
         }
         return true;
+    }
+
+    private void setSeed(long seed) {
+        if (strataHeight == null) {
+            strataHeight = new FastNoiseLite((int) seed + 4568665);
+            strataHeight.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2S);
+            strataHeight.SetFrequency(0.001f);
+            strataHeight.SetFractalOctaves(3);
+        }
     }
 
     private int stratumLevelSize = 35;
     private static IOreType[] ores = VanillaOreTypes.values();
 
-    private void setResults(ISeedReader world, BlockPos pos, AutomataRunner runner, NoiseHandler noiseHandler, boolean alwaysReplaceDirt) {
+    private void setResults(ISeedReader world, BlockPos pos, AutomataRunner runner, NoiseHandler noiseHandler) {
+        boolean alwaysReplaceDirt = isAmplified || dirtReplacement == UnearthedConfig.DirtReplacement.ALL;
+
         State[][][] result = runner.getResults();
         int[][] maxHeights = runner.getMaxHeights();
         int strataLevels = runner.getMaxHeight() / stratumLevelSize + 1;
@@ -107,7 +122,8 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
                         state = stratumState;
                     }
                     BlockState original = chunk.getBlockState(mutable);
-                    BlockState replaced = replaceBlock(original, state, alwaysReplaceDirt || isBiomeHilly(noiseHandler.getBiome(x, z)));
+                    boolean replaceDirt = alwaysReplaceDirt || dirtReplacement == UnearthedConfig.DirtReplacement.HILLS && isBiomeHilly(noiseHandler.getBiome(x, z));
+                    BlockState replaced = replaceBlock(original, state, replaceDirt);
                     if (original != replaced && replaced != null) {
                         chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, replaced, false);
 //                        chunk.setBlockState(mutable, replaced, false);
@@ -126,7 +142,7 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
 
     private BlockState replaceBlock(BlockState original, State state, boolean replaceDirt) {
 //        return state.getDefaultState();
-        if (original.getBlock().is(UETags.Blocks.REPLACABLE)) {
+        if (UnearthedConfig.isReplaceableStone(original.getBlockState())) {
             return state.getCell().getDefaultState();
         } else if (original.is(Blocks.AIR)) {
             return original;
@@ -152,7 +168,7 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
                         return cell.getGrassReplacement(original);
                     }
                 }
-                if (cell.replacesOre()) {
+                if (replaceOres && cell.replacesOre()) {
                     for (IOreType oreType : ores) {
                         if (original.is(oreType.getBlock())) {
                             BlockState ore = cell.getOre(oreType);
@@ -167,17 +183,10 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
         return original;
     }
 
-    private void setSeed(long seed) {
-        if (strataHeight == null) {
-            strataHeight = new FastNoiseLite((int) seed + 4568665);
-            strataHeight.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2S);
-            strataHeight.SetFrequency(0.001f);
-            strataHeight.SetFractalOctaves(3);
-        }
-    }
 
+    private void setDebugResults(ISeedReader world, BlockPos pos, AutomataRunner runner, NoiseHandler noiseHandler) {
+        boolean alwaysReplaceDirt = isAmplified || dirtReplacement == UnearthedConfig.DirtReplacement.ALL;
 
-    private void setDebugResults(ISeedReader world, BlockPos pos, AutomataRunner runner, NoiseHandler noiseHandler, boolean alwaysReplaceDirt) {
         State[][][] result = runner.debugResults();
         int[][] maxHeights = runner.getMaxHeights();
         int strataLevels = runner.getMaxHeight() / stratumLevelSize + 1;
@@ -222,7 +231,9 @@ public class NewGenerator extends Feature<NoFeatureConfig> {
                     if (state.getType() == Type.PRIMARY) {
                         replaced = GLASS;
                     } else {
-                        replaced = replaceBlock(original, state, alwaysReplaceDirt || isBiomeHilly(noiseHandler.getBiome(x, z)));
+                        boolean replaceDirt = alwaysReplaceDirt || dirtReplacement == UnearthedConfig.DirtReplacement.HILLS && isBiomeHilly(noiseHandler.getBiome(x, z));
+
+                        replaced = replaceBlock(original, state, replaceDirt);
                     }
                     if (original != replaced && replaced != null) {
                         chunk.setBlockState(mutable, replaced, false);
