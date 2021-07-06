@@ -11,7 +11,7 @@ public class BlockSchemas {
     public static BlockSchema BLACKSTONE_LIKE_FULL = new BlockSchema(Lists.newArrayList(Variants.STONE_LIKE, POLISHED, POLISHED_BRICKS, CHISELED_POLISHED, CRACKED_POLISHED_BRICKS));
     public static BlockSchema BLACKSTONE_LIKE = new BlockSchema(Lists.newArrayList(Variants.STONE_LIKE));
     //    public static BlockSchema BLACKSTONE_LIKE_IGNEOUS = new BlockSchema(Variants.IGNEOUS);
-    //    public static BlockSchema
+
     public static BlockSchema BASALT_LIKE = new BlockSchema(Variants.PILLAR, Variants.POLISHED_PILLAR);
     public static BlockSchema SANDSTONE_LIKE_FULL = new BlockSchema(Lists.newArrayList(Variants.SEDIMENTARY, SMOOTH, CUT, CHISELED));
 

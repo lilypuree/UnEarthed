@@ -54,6 +54,8 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
                     tag(BlockTags.STONE_PRESSURE_PLATES).add(block);
                 } else if (form == Forms.REGOLITH || form == Forms.GRASSY_REGOLITH) {
                     tag(UETags.Blocks.REGOLITH_TAG).add(block);
+                    tag(BlockTags.BAMBOO_PLANTABLE_ON).add(block);
+                    tag(BlockTags.ENDERMAN_HOLDABLE).add(block);
                     if (form == Forms.GRASSY_REGOLITH) {
                         tag(BlockTags.VALID_SPAWN).add(block);
                     }

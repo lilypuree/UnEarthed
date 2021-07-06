@@ -10,6 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.oriondevcorgitaco.unearthed.Unearthed;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorHelper;
@@ -53,8 +54,10 @@ public class UEItemTagsProvider extends ItemTagsProvider {
         for (BlockGeneratorHelper type : BlockGeneratorReference.ROCK_TYPES) {
             if (type.getTier() == StoneTiers.PRIMARY) {
                 if (type.getSchema().getVariants().contains(Variants.COBBLED)) {
-                    tag(ItemTags.STONE_CRAFTING_MATERIALS).add(type.getBaseBlock(Variants.COBBLED).asItem());
-                    tag(ItemTags.STONE_TOOL_MATERIALS).add(type.getBaseBlock(Variants.COBBLED).asItem());
+                    Item cobblestone = type.getBaseBlock(Variants.COBBLED).asItem();
+                    tag(Tags.Items.COBBLESTONE).add(cobblestone);
+                    tag(ItemTags.STONE_CRAFTING_MATERIALS).add(cobblestone);
+                    tag(ItemTags.STONE_TOOL_MATERIALS).add(cobblestone);
                 } else {
                     tag(ItemTags.STONE_CRAFTING_MATERIALS).add(type.getBaseBlock().asItem());
                     tag(ItemTags.STONE_TOOL_MATERIALS).add(type.getBaseBlock().asItem());

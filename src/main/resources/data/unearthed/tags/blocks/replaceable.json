@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:base_stone_overworld"
+    "minecraft:stone",
+    "minecraft:granite",
+    "minecraft:diorite",
+    "minecraft:andesite"
   ]
 }

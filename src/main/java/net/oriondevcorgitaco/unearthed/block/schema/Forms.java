@@ -47,7 +47,11 @@ public class Forms {
 
         @Override
         public Function<AbstractBlock.Properties, Block> getBlockCreator(BlockGeneratorHelper schema, BlockSchema.Variant variant) {
-            return UEOreBlock::new;
+            if (oreType == VanillaOreTypes.REDSTONE){
+                return RedstoneOreBlock::new;
+            }else{
+                return UEOreBlock::new;
+            }
         }
     }
 

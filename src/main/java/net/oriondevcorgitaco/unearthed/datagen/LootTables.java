@@ -73,6 +73,7 @@ public class LootTables extends LootTableProvider {
                                 .otherwise(ItemLootEntry.lootTableItem(UEBlocks.PYROXENE)))));
 
         addBlockLoot(UEBlocks.LIGNITE_BRIQUETTES);
+        lootTables.put(UEBlocks.PUDDLE, BlockLootTableAccessor.dropping(Blocks.AIR));
         lootTables.put(UEBlocks.LICHEN, BlockLootTableAccessor.onlyWithShears(UEBlocks.LICHEN));
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
         for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {

@@ -72,7 +72,12 @@ public class RegolithGrassBlock extends GrassBlock {
 
     @Override
     public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
-        return plantable.getPlantType(world, pos) == PlantType.PLAINS;
+        PlantType plantType = plantable.getPlantType(world, pos);
+
+        if (plantType == PlantType.PLAINS || plantType == PlantType.DESERT) {
+            return true;
+        }
+        return super.canSustainPlant(state, world, pos, facing, plantable);
     }
 
     public Block getRegolithBlock() {

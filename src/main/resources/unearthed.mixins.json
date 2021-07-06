@@ -6,6 +6,8 @@
   "refmap": "unearthed.refmap.json",
   "mixins": [
     "server.MixinAbstractFurnaceTileEntity",
+    "server.MixinAnimalEntity",
+    "server.MixinBushBlock",
     "server.MixinEntity",
     "server.MixinFlatGenerationSettings",
     "server.MixinFlowingFluidBlock",
