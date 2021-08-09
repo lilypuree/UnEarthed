@@ -23,7 +23,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.LichenBlock;
 import net.oriondevcorgitaco.unearthed.block.PuddleBlock;
-import net.oriondevcorgitaco.unearthed.compat.DTCompat;
 import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.core.UEItems;
@@ -32,6 +31,8 @@ import net.oriondevcorgitaco.unearthed.item.RegolithItem;
 import net.oriondevcorgitaco.unearthed.util.BlockStatePropertiesMatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 
 @Mod(Unearthed.MOD_ID)
 public class Unearthed {
@@ -54,7 +55,7 @@ public class Unearthed {
         UETags.init();
 
         if (ModList.get().isLoaded("dynamictrees")){
-            DTCompat.addDirtTag();
+        	RegistryHandler.setup(MOD_ID);
         }
     }
 
