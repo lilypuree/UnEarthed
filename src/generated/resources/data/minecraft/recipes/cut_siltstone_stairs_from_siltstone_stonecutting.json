@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:siltstone"
-  },
-  "result": "unearthed:cut_siltstone_stairs",
-  "count": 1
-}

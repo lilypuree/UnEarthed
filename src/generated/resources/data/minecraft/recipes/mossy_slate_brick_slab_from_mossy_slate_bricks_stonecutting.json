@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:mossy_slate_bricks"
-  },
-  "result": "unearthed:mossy_slate_brick_slab",
-  "count": 2
-}

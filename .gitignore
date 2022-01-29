@@ -20,7 +20,4 @@ build
 # other
 eclipse
 run
-
-# Files from Forge MDK
-forge*changelog.txt
-/logs/
+/Common/src/main/resources/assets/unearthed/textures/block/ore_aseprite/

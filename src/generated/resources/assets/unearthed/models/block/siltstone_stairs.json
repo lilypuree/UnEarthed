@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "side": "unearthed:block/siltstone",
-    "bottom": "unearthed:block/siltstone_top",
-    "top": "unearthed:block/siltstone_top"
-  }
-}

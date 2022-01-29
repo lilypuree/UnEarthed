@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:granodiorite"
-  },
-  "result": "unearthed:granodiorite_slab",
-  "count": 2
-}

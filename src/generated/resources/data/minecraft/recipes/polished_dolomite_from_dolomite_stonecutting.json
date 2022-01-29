@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:dolomite"
-  },
-  "result": "unearthed:polished_dolomite",
-  "count": 1
-}

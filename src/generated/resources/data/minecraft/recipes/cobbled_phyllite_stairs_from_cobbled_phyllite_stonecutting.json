@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:cobbled_phyllite"
-  },
-  "result": "unearthed:cobbled_phyllite_stairs",
-  "count": 1
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "side": "unearthed:block/mossy_cobbled_phyllite",
-    "bottom": "unearthed:block/mossy_cobbled_phyllite",
-    "top": "unearthed:block/mossy_cobbled_phyllite"
-  }
-}

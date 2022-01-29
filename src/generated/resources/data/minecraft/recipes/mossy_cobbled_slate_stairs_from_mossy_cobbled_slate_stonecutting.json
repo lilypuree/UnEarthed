@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:mossy_cobbled_slate"
-  },
-  "result": "unearthed:mossy_cobbled_slate_stairs",
-  "count": 1
-}

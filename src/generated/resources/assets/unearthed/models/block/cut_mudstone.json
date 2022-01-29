@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "unearthed:block/cut_mudstone",
-    "bottom": "unearthed:block/cut_mudstone_top",
-    "top": "unearthed:block/cut_mudstone_top"
-  }
-}
