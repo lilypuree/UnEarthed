@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:pumice_slab"
+    ]
+  },
+  "criteria": {
+    "has_pumice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:pumice"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:pumice_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pumice",
+      "has_the_recipe"
+    ]
+  ]
+}

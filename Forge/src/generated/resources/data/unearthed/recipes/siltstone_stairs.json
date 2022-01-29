@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:siltstone"
+    }
+  },
+  "result": {
+    "item": "unearthed:siltstone_stairs",
+    "count": 4
+  }
+}

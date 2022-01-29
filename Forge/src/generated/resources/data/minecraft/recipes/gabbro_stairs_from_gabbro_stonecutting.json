@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:gabbro"
+  },
+  "result": "unearthed:gabbro_stairs",
+  "count": 1
+}

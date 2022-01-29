@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:quartzite_slab"
+    ]
+  },
+  "criteria": {
+    "has_quartzite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:quartzite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:quartzite_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_quartzite",
+      "has_the_recipe"
+    ]
+  ]
+}

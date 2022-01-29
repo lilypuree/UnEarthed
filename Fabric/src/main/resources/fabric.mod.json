@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "Adds decapitated mobs",
+  "authors": [
+    "${mod_author}"
+  ],
+  "logo" : "logo.png",
+  "contact": {
+  },
+  "license": "LGPLv3",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "lilypuree.unearthed.UnearthedFabric"
+    ],
+    "modmenu": [
+      "lilypuree.unearthed.ModMenuIntegration"
+    ]
+  },
+  "mixins": [{
+      "config": "unearthed.mixins.json",
+      "environment": "*"
+    }],
+  "depends": {
+    "fabricloader": ">=0.12.2",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
+  

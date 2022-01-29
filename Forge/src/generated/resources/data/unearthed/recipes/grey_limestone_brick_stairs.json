@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:grey_limestone_bricks"
+    }
+  },
+  "result": {
+    "item": "unearthed:grey_limestone_brick_stairs",
+    "count": 4
+  }
+}

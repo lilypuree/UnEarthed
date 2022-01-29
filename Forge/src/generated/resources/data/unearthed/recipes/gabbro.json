@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ox"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:diorite"
+    },
+    "o": {
+      "item": "unearthed:pyroxene"
+    }
+  },
+  "result": {
+    "item": "unearthed:gabbro",
+    "count": 4
+  }
+}

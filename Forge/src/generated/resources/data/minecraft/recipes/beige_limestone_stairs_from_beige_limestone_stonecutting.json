@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:beige_limestone"
+  },
+  "result": "unearthed:beige_limestone_stairs",
+  "count": 1
+}

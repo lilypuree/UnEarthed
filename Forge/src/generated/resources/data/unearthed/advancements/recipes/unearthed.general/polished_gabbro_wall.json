@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:polished_gabbro_wall"
+    ]
+  },
+  "criteria": {
+    "has_polished_gabbro": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:polished_gabbro"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:polished_gabbro_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_gabbro",
+      "has_the_recipe"
+    ]
+  ]
+}

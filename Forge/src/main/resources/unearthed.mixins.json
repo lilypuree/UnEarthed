@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "lilypuree.unearthed.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "unearthed.refmap.json",
+  "minVersion": "0.8",
+  "mixins": [
+    "server.ButtonBlockInvoker",
+    "server.StairBlockInvoker",
+    "server.PressurePlateBlockInvoker",
+    "server.MixinAbstractFurnaceTileEntity",
+    "server.MixinEntity",
+    "server.MixinSpreadableSnowyDirtBlock"
+  ],
+  "client": [
+    "client.MixinClientWorld"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
