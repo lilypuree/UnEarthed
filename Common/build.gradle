@@ -11,10 +11,6 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    shade
-}
-
 minecraft {
     version(minecraft_version)
     runs {
@@ -29,17 +25,18 @@ minecraft {
         }
     }
 }
-
+configurations {
+    shade
+}
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.4'
-    implementation group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
-
+    shade group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
 }
 
 shadowJar {
     classifier = ''
     configurations = [project.configurations.shade]
-    relocate 'net.openhft', "${project.group}.shadow.net.openhft"
+//    relocate 'net.openhft', "${project.group}.shadow.net.openhft"
 }
 
 processResources {

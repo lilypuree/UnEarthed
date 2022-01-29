@@ -27,8 +27,6 @@ apply plugin: 'maven-publish'
 archivesBaseName = "${mod_name}-forge-${minecraft_version}"
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-
-
 minecraft {
     mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
 
@@ -103,12 +101,10 @@ mixin {
 configurations {
     shade
 }
-
-
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
-    implementation group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
+    shade group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
 
     compileOnly project(":Common")
 }
@@ -122,10 +118,11 @@ processResources {
 }
 
 
+
 shadowJar {
     classifier = ''
     configurations = [project.configurations.shade]
-    relocate 'lib.group', "${project.group}.shadow.lib.group" // ensure repackaged packages have unique names
+//    relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
 }
 
 reobf {
