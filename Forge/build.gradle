@@ -16,10 +16,8 @@ plugins{
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
@@ -100,6 +98,7 @@ mixin {
 
 configurations {
     shade
+    implementation.extendsFrom shade
 }
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
@@ -107,6 +106,21 @@ dependencies {
     shade group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
 
     compileOnly project(":Common")
+}
+
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shade]
+    relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
+    finalizedBy 'reobfShadowJar'
+}
+
+artifacts {
+    shadowJar
+}
+
+reobf {
+    shadowJar { }
 }
 
 tasks.withType(JavaCompile) {
@@ -117,21 +131,7 @@ processResources {
     from project(":Common").sourceSets.main.resources
 }
 
-
-
-shadowJar {
-    classifier = ''
-    configurations = [project.configurations.shade]
-//    relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
-}
-
-reobf {
-    shadowJar { }
-}
-
-// this replaces jar.finalizedBy('reobfJar') in the standard forge mod buildscript
-tasks.build.dependsOn reobfShadowJar
-jar.finalizedBy('reobfShadowJar')
+jar.finalizedBy('reobfJar')
 
 publishing {
     publications {

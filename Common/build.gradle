@@ -7,9 +7,7 @@ plugins {
 
 archivesBaseName = "${mod_name}-common-${minecraft_version}"
 
-repositories {
-    mavenCentral()
-}
+
 
 minecraft {
     version(minecraft_version)
@@ -25,8 +23,12 @@ minecraft {
         }
     }
 }
+repositories {
+    mavenCentral()
+}
 configurations {
     shade
+    implementation.extendsFrom shade
 }
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.4'
@@ -34,9 +36,14 @@ dependencies {
 }
 
 shadowJar {
-    classifier = ''
+    archiveClassifier = ''
     configurations = [project.configurations.shade]
-//    relocate 'net.openhft', "${project.group}.shadow.net.openhft"
+    relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
+    finalizedBy 'reobfShadowJar'
+}
+
+artifacts {
+    shadowJar
 }
 
 processResources {
