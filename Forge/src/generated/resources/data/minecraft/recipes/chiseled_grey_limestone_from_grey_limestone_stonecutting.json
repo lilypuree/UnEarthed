@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:grey_limestone"
-  },
-  "result": "unearthed:chiseled_grey_limestone",
-  "count": 1
-}

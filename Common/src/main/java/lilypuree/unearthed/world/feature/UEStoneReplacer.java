@@ -1,98 +1,99 @@
 package lilypuree.unearthed.world.feature;
 
-import com.google.common.collect.Sets;
-import com.mojang.serialization.Codec;
-import lilypuree.unearthed.core.UETags;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
+import lilypuree.unearthed.Constants;
+import lilypuree.unearthed.world.feature.gen.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.SectionPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import java.util.Set;
+import java.util.*;
 
-public class UEStoneReplacer extends Feature<NoneFeatureConfiguration> {
+public class UEStoneReplacer extends Feature<StoneReplacerConfiguration> {
     public UEStoneReplacer() {
-        super(NoneFeatureConfiguration.CODEC);
+        super(StoneReplacerConfiguration.CODEC);
     }
 
     private boolean isSeedSet = false;
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
+    public boolean place(FeaturePlaceContext<StoneReplacerConfiguration> ctx) {
         WorldGenLevel level = ctx.level();
-
+        StoneReplacerConfiguration config = ctx.config();
         if (!isSeedSet) {
-            ReplacementNoiseSampler.setSeed((int) level.getSeed(), (int) level.getSeed());
+            int seed = (int) level.getSeed();
+            var frequencies = config.getFrequencies();
+            NoiseHolder.setSeed(seed - 193864, frequencies.region());
+            PrimaryNoiseSampler.setSeed(seed + 777261, frequencies.primary());
+            SecondaryNoiseSampler.setSeed(seed + 390271, frequencies.secondary());
+            RoughNoiseSampler.setSeed(seed + 1567241, frequencies.tertiary(), frequencies.unconformity());
+            isSeedSet = true;
         }
+
 
         BlockPos pos = ctx.origin();
+        basePos = pos;
+        int minY = pos.getY();
         ChunkAccess chunkAccess = level.getChunk(pos);
+        NoiseHolder noiseHolder = new NoiseHolder(config, level, pos.getX(), pos.getY(), pos.getZ());
+        int maxHeight = noiseHolder.getMaxHeight(chunkAccess);
 
-        int minY = -8;
-        int maxHeight = Integer.MIN_VALUE;
-        int[][] heights = new int[17][17];
-        ReplacementNoiseSampler[][] noiseSamplers = new ReplacementNoiseSampler[17][17];
-        for (int x = 0; x < 17; x++) {
-            for (int z = 0; z < 17; z++) {
-                int height = 0;
-                if (x < 16 && z < 16) {
-                    height = chunkAccess.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z);
-                } else
-                    height = level.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x + pos.getX(), z + pos.getZ());
-                maxHeight = Math.max(height, maxHeight);
-                noiseSamplers[x][z] = new ReplacementNoiseSampler(x + pos.getX(), z + pos.getZ(), minY, height);
-            }
+        ChunkFiller filler = new ChunkFiller(level.getSeed(), pos, maxHeight - minY + 1);
+        if (Constants.CONFIG.enableDebug()) {
+            filler.fillIn(2, noiseHolder::getRoughNoise);
+            filler.fillEmpty(2, noiseHolder::getStrataNoise);
+            filler.fillInEdgesAndFaces(1);
+            filler.fillInCentersRandom(1);
+        } else {
+            filler.fillIn(16, noiseHolder::getRoughNoise);
+            filler.fillInEdgesAndFaces(8);
+            filler.fillInCenters(8, noiseHolder::getRoughNoise);
+            filler.fillEmpty(8, noiseHolder::getStrataNoise); //fills in the gaps that roughnoise did not fill
+            filler.fillInEdgesAndFaces(4);
+            filler.fillInCenters(4, noiseHolder::getCombinedNoise);
+            filler.fillBiome(4, noiseHolder::getBiomeStrata);
+            filler.fillInEdgesAndFaces(2);
+            filler.fillInCentersFast(2);
+            filler.fillInEdgesAndFaces(1);
+            filler.fillInCentersRandom(1);
         }
-        ChunkFiller filler = new ChunkFiller(level.getSeed(), new BlockPos(pos.getX(), minY, pos.getZ()), maxHeight - minY + 1);
-        filler.run(v -> noiseSamplers[v.getX() - pos.getX()][v.getZ() - pos.getZ()].select(v.getX(), v.getY(), v.getZ()));
-        replaceAll(chunkAccess, minY, noiseSamplers, filler.stateArray);
-//        Set<LevelChunkSection> chunkSections = Sets.newHashSet();
-//        for (int i = chunkAccess.getSectionIndex(minY); i <= chunkAccess.getSectionIndex(maxHeight); i++) {
-//            LevelChunkSection levelChunkSection = chunkAccess.getSection(i);
-//            levelChunkSection.acquire();
-//            chunkSections.add(levelChunkSection);
-//        }
-//        replace(pos, chunkAccess, minY);
-//        for (LevelChunkSection section : chunkSections) {
-//            section.release();
-//        }
+
+//
+        replaceAll(chunkAccess, minY, noiseHolder.getHeights(), filler.results());
         return true;
     }
 
-    private void createChunkFiller() {
-    }
+    BlockPos basePos;
 
-    private void replaceAll(ChunkAccess chunkAccess, int minY, ReplacementNoiseSampler[][] noiseSamplers, ChunkFiller.State[][][] results) {
+    private void replaceAll(ChunkAccess chunkAccess, int minY, int[][] heights, StoneType[][][] results) {
         LevelChunkSection chunkSection = chunkAccess.getSection(chunkAccess.getSectionIndex(minY));
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int posY = minY; posY <= noiseSamplers[x][z].getHeight(); posY++) {
+                int height = heights[x][z];
+                for (int posY = minY; posY <= height; posY++) {
                     int sectionIndex = chunkAccess.getSectionIndex(posY);
                     if (chunkAccess.getSectionIndex(chunkSection.bottomBlockY()) != sectionIndex) {
                         chunkSection = chunkAccess.getSection(sectionIndex);
                     }
+                    if (chunkSection.hasOnlyAir()) continue;
+
                     BlockState block = chunkSection.getBlockState(x, posY & 15, z);
-                    if (replaceable(block)) {
-                        BlockState state = results[x][posY - minY][z].block();
-                        chunkSection.setBlockState(x, posY & 15, z, state);
-                    } else {
-//                        chunkSection.setBlockState(x, posY & 15, z, Blocks.GLASS.defaultBlockState());
+                    if (block.isAir()) continue;
+                    BlockState replaced = results[x][z][posY - minY].replace(block);
+                    if (block != replaced) {
+                        chunkSection.setBlockState(x, posY & 15, z, replaced, false);
                     }
                 }
             }
         }
-    }
-
-    private boolean replaceable(BlockState block) {
-        return block.is(UETags.Blocks.REPLACABLE);
     }
 }

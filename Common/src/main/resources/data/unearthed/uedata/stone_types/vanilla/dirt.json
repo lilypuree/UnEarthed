@@ -1,0 +1,13 @@
+{
+  "base": "minecraft:dirt",
+  "ores": {
+    "minecraft:iron_ore": "minecraft:dirt",
+    "minecraft:coal_ore": "minecraft:dirt",
+    "minecraft:copper_ore": "minecraft:dirt",
+    "minecraft:gold_ore": "minecraft:dirt",
+    "minecraft:lapis_ore": "minecraft:dirt",
+    "minecraft:redstone_ore": "minecraft:dirt",
+    "minecraft:diamond_ore": "minecraft:dirt",
+    "minecraft:emerald_ore": "minecraft:dirt"
+  }
+}

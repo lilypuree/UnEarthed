@@ -1,7 +1,7 @@
 package lilypuree.unearthed.core;
 
 import lilypuree.unearthed.Constants;
-import lilypuree.unearthed.item.RegolithItem;
+import lilypuree.unearthed.misc.RegolithItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
@@ -10,7 +10,6 @@ public class UEItems {
     public static Item IRON_ORE;
     public static Item GOLD_ORE;
     public static Item LIGNITE_BRIQUETTES;
-    public static Item PUDDLE;
     public static Item LICHEN;
     public static Item PYROXENE;
 
@@ -20,7 +19,6 @@ public class UEItems {
         UEItems.IRON_ORE = new Item(properties);
         UEItems.GOLD_ORE = new Item(properties);
         UEItems.REGOLITH = new RegolithItem(properties);
-        UEItems.PUDDLE = new BlockItem(UEBlocks.PUDDLE, new Item.Properties().tab(Constants.ITEM_GROUP).stacksTo(1));
         UEItems.LICHEN = new BlockItem(UEBlocks.LICHEN, properties);
         UEItems.LIGNITE_BRIQUETTES = new BlockItem(UEBlocks.LIGNITE_BRIQUETTES, properties);
     }

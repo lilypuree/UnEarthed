@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "side": "unearthed:block/cobbled_grey_limestone",
-    "bottom": "unearthed:block/cobbled_grey_limestone",
-    "top": "unearthed:block/cobbled_grey_limestone"
-  }
-}

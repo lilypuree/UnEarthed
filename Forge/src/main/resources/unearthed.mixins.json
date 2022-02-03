@@ -5,12 +5,11 @@
   "refmap": "unearthed.refmap.json",
   "minVersion": "0.8",
   "mixins": [
-    "server.ButtonBlockInvoker",
     "server.StairBlockInvoker",
-    "server.PressurePlateBlockInvoker",
     "server.MixinAbstractFurnaceTileEntity",
-    "server.MixinEntity",
-    "server.MixinSpreadableSnowyDirtBlock"
+    "server.MixinSpreadableSnowyDirtBlock",
+    "server.MixinFlowingFluidBlock",
+    "MixinServerLevel"
   ],
   "client": [
     "client.MixinClientWorld"

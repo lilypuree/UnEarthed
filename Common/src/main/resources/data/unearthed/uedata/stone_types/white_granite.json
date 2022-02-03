@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:white_granite",
+  "dirt": "unearthed:white_granite_regolith",
+  "grass": "unearthed:white_granite_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:white_granite_iron_ore",
+    "minecraft:coal_ore": "unearthed:white_granite_coal_ore",
+    "minecraft:copper_ore": "unearthed:white_granite_copper_ore",
+    "minecraft:gold_ore": "unearthed:white_granite_gold_ore",
+    "minecraft:lapis_ore": "unearthed:white_granite_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:white_granite_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:white_granite_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:white_granite_emerald_ore"
+  }
+}

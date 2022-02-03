@@ -1,0 +1,45 @@
+{
+  "primary": {
+    "high": "unearthed:beige_limestone",
+    "stratas": [
+      "unearthed:limestone",
+      "unearthed:grey_limestone",
+      "unearthed:grey_limestone",
+      "unearthed:grey_limestone",
+      "unearthed:phyllite",
+      "unearthed:phyllite",
+      "unearthed:granodiorite",
+      "unearthed:granodiorite",
+      "unearthed:white_granite",
+      "unearthed:weathered_granite",
+      "unearthed:white_granite",
+      "unearthed:granodiorite",
+      "unearthed:phyllite"
+    ],
+    "base": "",
+    "deep": "unearthed:slate",
+    "high_bound": -0.7,
+    "strata_bound": 0.1,
+    "deep_bound": 0.5,
+    "strata_flatness": 0.6
+  },
+  "secondary": {
+    "top_layer_types": [
+      "",
+      "unearthed:limestone",
+      "unearthed:grey_limestone",
+      "unearthed:granodiorite"
+    ],
+    "base": "",
+    "deep": "unearthed:slate",
+    "top_layer_thickness": 50,
+    "deep_layer_depth": 100
+  },
+  "tertiary": [
+    "unearthed:pillow_basalt",
+    "unearthed:weathered_rhyolite",
+    "unearthed:weathered_granite"
+  ],
+  "tertiary_cutoff": 0.992,
+  "unconformity_cutoff": 0
+}

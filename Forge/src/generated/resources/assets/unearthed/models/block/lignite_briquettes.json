@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_top",
-  "textures": {
-    "side": "unearthed:block/lignite_briquettes",
-    "top": "unearthed:block/lignite_briquettes_top"
-  }
-}

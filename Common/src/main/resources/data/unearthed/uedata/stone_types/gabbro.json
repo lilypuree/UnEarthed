@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:gabbro",
+  "dirt": "unearthed:gabbro_regolith",
+  "grass": "unearthed:gabbro_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:gabbro_iron_ore",
+    "minecraft:coal_ore": "unearthed:gabbro_coal_ore",
+    "minecraft:copper_ore": "unearthed:gabbro_copper_ore",
+    "minecraft:gold_ore": "unearthed:gabbro_gold_ore",
+    "minecraft:lapis_ore": "unearthed:gabbro_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:gabbro_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:gabbro_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:gabbro_emerald_ore"
+  }
+}

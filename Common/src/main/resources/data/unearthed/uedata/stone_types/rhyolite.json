@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:rhyolite",
+  "dirt": "unearthed:rhyolite_regolith",
+  "grass": "unearthed:rhyolite_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:rhyolite_iron_ore",
+    "minecraft:coal_ore": "unearthed:rhyolite_coal_ore",
+    "minecraft:copper_ore": "unearthed:rhyolite_copper_ore",
+    "minecraft:gold_ore": "unearthed:rhyolite_gold_ore",
+    "minecraft:lapis_ore": "unearthed:rhyolite_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:rhyolite_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:rhyolite_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:rhyolite_emerald_ore"
+  }
+}

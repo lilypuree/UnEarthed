@@ -1,0 +1,16 @@
+{
+  "base": "unearthed:limestone",
+  "cobble": "unearthed:cobbled_limestone",
+  "dirt": "unearthed:limestone_regolith",
+  "grass": "unearthed:limestone_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:limestone_iron_ore",
+    "minecraft:coal_ore": "unearthed:limestone_coal_ore",
+    "minecraft:copper_ore": "unearthed:limestone_copper_ore",
+    "minecraft:gold_ore": "unearthed:limestone_gold_ore",
+    "minecraft:lapis_ore": "unearthed:limestone_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:limestone_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:limestone_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:limestone_emerald_ore"
+  }
+}

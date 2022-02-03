@@ -1,0 +1,14 @@
+{
+  "base": "unearthed:conglomerate",
+  "dirt": "unearthed:conglomerate",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:conglomerate_iron_ore",
+    "minecraft:coal_ore": "unearthed:conglomerate_coal_ore",
+    "minecraft:copper_ore": "unearthed:conglomerate_copper_ore",
+    "minecraft:gold_ore": "unearthed:conglomerate_gold_ore",
+    "minecraft:lapis_ore": "unearthed:conglomerate_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:conglomerate_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:conglomerate_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:conglomerate_emerald_ore"
+  }
+}

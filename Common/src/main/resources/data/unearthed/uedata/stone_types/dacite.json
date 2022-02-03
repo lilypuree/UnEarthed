@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:dacite",
+  "dirt": "unearthed:dacite",
+  "grass": "unearthed:dacite",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:dacite",
+    "minecraft:coal_ore": "unearthed:dacite",
+    "minecraft:copper_ore": "unearthed:dacite",
+    "minecraft:gold_ore": "unearthed:dacite",
+    "minecraft:lapis_ore": "unearthed:dacite",
+    "minecraft:redstone_ore": "unearthed:dacite",
+    "minecraft:diamond_ore": "unearthed:dacite",
+    "minecraft:emerald_ore": "unearthed:dacite"
+  }
+}

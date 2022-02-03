@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:mudstone",
+  "dirt": "unearthed:mudstone_regolith",
+  "grass": "unearthed:mudstone_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:mudstone_iron_ore",
+    "minecraft:coal_ore": "unearthed:mudstone_coal_ore",
+    "minecraft:copper_ore": "unearthed:mudstone_copper_ore",
+    "minecraft:gold_ore": "unearthed:mudstone_gold_ore",
+    "minecraft:lapis_ore": "unearthed:mudstone_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:mudstone_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:mudstone_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:mudstone_emerald_ore"
+  }
+}

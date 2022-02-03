@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 public class UENames {
 
     public static final ResourceLocation PYROXENE = getName("pyroxene");
-    public static final ResourceLocation PUDDLE = getName("puddle");
     public static final ResourceLocation LICHEN = getName("lichen");
     public static final ResourceLocation LIGNITE_BRIQUETTES = getName("lignite_briquettes");
     public static final ResourceLocation GOLD_ORE = getName("gold_ore");

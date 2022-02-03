@@ -1,0 +1,15 @@
+{
+  "base": "minecraft:andesite",
+  "dirt": "minecraft:andesite",
+  "grass": "unearthed:overgrown_andesite",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:andesite_iron_ore",
+    "minecraft:coal_ore": "unearthed:andesite_coal_ore",
+    "minecraft:copper_ore": "unearthed:andesite_copper_ore",
+    "minecraft:gold_ore": "unearthed:andesite_gold_ore",
+    "minecraft:lapis_ore": "unearthed:andesite_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:andesite_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:andesite_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:andesite_emerald_ore"
+  }
+}

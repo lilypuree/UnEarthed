@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:granodiorite",
+  "dirt": "unearthed:granodiorite_regolith",
+  "grass": "unearthed:granodiorite_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:granodiorite_iron_ore",
+    "minecraft:coal_ore": "unearthed:granodiorite_coal_ore",
+    "minecraft:copper_ore": "unearthed:granodiorite_copper_ore",
+    "minecraft:gold_ore": "unearthed:granodiorite_gold_ore",
+    "minecraft:lapis_ore": "unearthed:granodiorite_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:granodiorite_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:granodiorite_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:granodiorite_emerald_ore"
+  }
+}

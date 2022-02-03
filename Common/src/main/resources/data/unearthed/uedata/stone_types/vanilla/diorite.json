@@ -1,0 +1,15 @@
+{
+  "base": "minecraft:diorite",
+  "dirt": "minecraft:diorite",
+  "grass": "unearthed:overgrown_diorite",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:diorite_iron_ore",
+    "minecraft:coal_ore": "unearthed:diorite_coal_ore",
+    "minecraft:copper_ore": "unearthed:diorite_copper_ore",
+    "minecraft:gold_ore": "unearthed:diorite_gold_ore",
+    "minecraft:lapis_ore": "unearthed:diorite_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:diorite_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:diorite_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:diorite_emerald_ore"
+  }
+}

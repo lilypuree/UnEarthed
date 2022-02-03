@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:grey_limestone"
-  },
-  "result": "unearthed:grey_limestone_pillar",
-  "count": 1
-}

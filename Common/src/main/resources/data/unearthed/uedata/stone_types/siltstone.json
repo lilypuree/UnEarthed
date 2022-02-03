@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:siltstone",
+  "dirt": "unearthed:siltstone_regolith",
+  "grass": "unearthed:siltstone_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:siltstone_iron_ore",
+    "minecraft:coal_ore": "unearthed:siltstone_coal_ore",
+    "minecraft:copper_ore": "unearthed:siltstone_copper_ore",
+    "minecraft:gold_ore": "unearthed:siltstone_gold_ore",
+    "minecraft:lapis_ore": "unearthed:siltstone_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:siltstone_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:siltstone_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:siltstone_emerald_ore"
+  }
+}

@@ -22,5 +22,15 @@ public class UETags {
         public static Tag.Named<Item> IGNEOUS_ITEM;
         public static Tag.Named<Item> METAMORPHIC_ITEM;
         public static Tag.Named<Item> REGOLITH_USABLE;
+
+
+        public static Tag.Named<Item> UNEARTHED_IRON_ORE;
+        public static Tag.Named<Item> UNEARTHED_GOLD_ORE;
+        public static Tag.Named<Item> UNEARTHED_COPPER_ORE;
+        public static Tag.Named<Item> UNEARTHED_COAL_ORE;
+        public static Tag.Named<Item> UNEARTHED_LAPIS_ORE;
+        public static Tag.Named<Item> UNEARTHED_REDSTONE_ORE;
+        public static Tag.Named<Item> UNEARTHED_EMERALD_ORE;
+        public static Tag.Named<Item> UNEARTHED_DIAMOND_ORE;
     }
 }

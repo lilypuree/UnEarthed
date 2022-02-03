@@ -1,0 +1,38 @@
+{
+  "primary": {
+    "high": "unearthed:white_granite",
+    "stratas": [
+      "unearthed:slate",
+      "unearthed:gabbro",
+      "",
+      "unearthed:granodiorite",
+      "unearthed:phyllite",
+      "unearthed:limestone"
+    ],
+    "base": "",
+    "deep": "unearthed:slate",
+    "high_bound": -0.7,
+    "strata_bound": 0.1,
+    "deep_bound": 0.5,
+    "strata_flatness": 0.6
+  },
+  "secondary": {
+    "top_layer_types": [
+      "",
+      "unearthed:conglomerate",
+      "unearthed:siltstone",
+      "unearthed:mudstone"
+    ],
+    "base": "",
+    "deep": "unearthed:slate",
+    "top_layer_thickness": 40,
+    "deep_layer_depth": 100
+  },
+  "tertiary": [
+    "unearthed:pillow_basalt",
+    "unearthed:weathered_rhyolite",
+    "unearthed:dolerite"
+  ],
+  "tertiary_cutoff": 0.992,
+  "unconformity_cutoff": 0
+}

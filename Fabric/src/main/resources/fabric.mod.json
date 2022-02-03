@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "${mod_id}",
+  "id": "unearthed",
   "version": "${version}",
-  "name": "${mod_name}",
-  "description": "Adds decapitated mobs",
+  "name": "Unearthed",
+  "description": "A mod that makes exploring underground interesting. Adds 21 new rocks!\n",
   "authors": [
-    "${mod_author}"
+    "lilypuree"
   ],
-  "logo" : "logo.png",
+  "icon": "logo.png",
   "contact": {
   },
   "license": "LGPLv3",
@@ -16,14 +16,19 @@
     "main": [
       "lilypuree.unearthed.UnearthedFabric"
     ],
+    "client": [
+      "lilypuree.unearthed.ClientInitializer"
+    ],
     "modmenu": [
       "lilypuree.unearthed.ModMenuIntegration"
     ]
   },
-  "mixins": [{
+  "mixins": [
+    {
       "config": "unearthed.mixins.json",
       "environment": "*"
-    }],
+    }
+  ],
   "depends": {
     "fabricloader": ">=0.12.2",
     "fabric": "*",

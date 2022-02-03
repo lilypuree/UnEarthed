@@ -1,7 +1,7 @@
 package lilypuree.unearthed.mixin.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import lilypuree.unearthed.world.LichenColors;
+import lilypuree.unearthed.client.LichenColors;
 import net.minecraft.Util;
 import net.minecraft.client.color.block.BlockTintCache;
 import net.minecraft.client.multiplayer.ClientLevel;

@@ -9,6 +9,6 @@ public class Constants {
 	public static final String MOD_ID = "unearthed";
 	public static final String MOD_NAME = "Unearthed";
 	public static final Logger LOG = LogManager.getLogger(MOD_NAME);
-	public static CommonConfig config;
+	public static CommonConfig CONFIG;
 	public static CreativeModeTab ITEM_GROUP;
 }

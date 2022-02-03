@@ -1,0 +1,14 @@
+{
+  "feature": "unearthed:stone_replacer",
+  "placement": [
+    {
+      "type": "height_range",
+      "height": {
+        "type": "constant",
+        "value": {
+          "absolute" : -8
+        }
+      }
+    }
+  ]
+}

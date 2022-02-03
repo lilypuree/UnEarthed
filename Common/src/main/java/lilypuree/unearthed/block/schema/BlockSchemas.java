@@ -40,7 +40,7 @@ public class BlockSchemas {
 
     public static final BlockSchema WEATHERED_RHYOLITE;
     public static final BlockSchema PILLOW_BASALT;
-    public static final BlockSchema PUMICE;
+//    public static final BlockSchema PUMICE;
     public static final BlockSchema DOLERITE;
 //    public static final BlockSchema MARBLE;
     public static final BlockSchema LIGNITE;
@@ -92,7 +92,7 @@ public class BlockSchemas {
         SCHIST = register("schist", schist, MaterialColor.COLOR_CYAN);
         LIGNITE = registerSand("lignite", decorative, MaterialColor.COLOR_BLACK);
         PILLOW_BASALT = register("pillow_basalt", basic, stone().strength(3.0f, 6.0f));
-        PUMICE = register("pumice", basic, stone().color(MaterialColor.COLOR_BLACK).sound(SoundType.BASALT));
+//        PUMICE = register("pumice", basic, stone().color(MaterialColor.COLOR_BLACK).sound(SoundType.BASALT));
         DACITE = register("dacite", basalt_like, stone().color(MaterialColor.COLOR_LIGHT_GRAY).strength(1.25f, 4.2F).sound(SoundType.BASALT));
 
         //vanilla block schemas

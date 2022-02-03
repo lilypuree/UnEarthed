@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:white_granite"
-  },
-  "result": "unearthed:polished_white_granite_brick_slab",
-  "count": 2
-}

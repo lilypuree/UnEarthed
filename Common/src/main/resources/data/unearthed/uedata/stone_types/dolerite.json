@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:dolerite",
+  "dirt": "unearthed:dolerite",
+  "grass": "unearthed:dolerite",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:dolerite",
+    "minecraft:coal_ore": "unearthed:dolerite",
+    "minecraft:copper_ore": "unearthed:dolerite",
+    "minecraft:gold_ore": "unearthed:dolerite",
+    "minecraft:lapis_ore": "unearthed:dolerite",
+    "minecraft:redstone_ore": "unearthed:dolerite",
+    "minecraft:diamond_ore": "unearthed:dolerite",
+    "minecraft:emerald_ore": "unearthed:dolerite"
+  }
+}

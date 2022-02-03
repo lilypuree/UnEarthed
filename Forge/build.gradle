@@ -82,11 +82,15 @@ minecraft {
     }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
-
 repositories {
     mavenCentral()
     maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 mixin {
@@ -100,12 +104,26 @@ configurations {
     shade
     implementation.extendsFrom shade
 }
+
+configurations {
+    library
+    implementation.extendsFrom library
+    shade.extendsFrom library
+}
+
+minecraft.runs.all {
+    lazyToken('minecraft_classpath') {
+        configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
+    }
+}
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
-    shade group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
+    //shade group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
+    library 'net.openhft:zero-allocation-hashing:0.15'
 
     compileOnly project(":Common")
+    runtimeOnly fg.deobf("curse.maven:shutup-407174:3544525")
 }
 
 shadowJar {
@@ -120,7 +138,7 @@ artifacts {
 }
 
 reobf {
-    shadowJar { }
+    shadowJar {}
 }
 
 tasks.withType(JavaCompile) {

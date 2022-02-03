@@ -1,0 +1,30 @@
+{
+  "base": {
+    "Name": "unearthed:schist",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "dirt": {
+    "Name": "unearthed:schist",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "grass": {
+    "Name": "unearthed:schist",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "ores": {
+    "minecraft:iron_ore": "unearthed:schist",
+    "minecraft:coal_ore": "unearthed:schist",
+    "minecraft:copper_ore": "unearthed:schist",
+    "minecraft:gold_ore": "unearthed:schist",
+    "minecraft:lapis_ore": "unearthed:schist",
+    "minecraft:redstone_ore": "unearthed:schist",
+    "minecraft:diamond_ore": "unearthed:schist",
+    "minecraft:emerald_ore": "unearthed:schist"
+  }
+}

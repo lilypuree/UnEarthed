@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:quartzite",
+  "dirt": "unearthed:quartzite",
+  "grass": "unearthed:quartzite",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:quartzite",
+    "minecraft:coal_ore": "unearthed:quartzite",
+    "minecraft:copper_ore": "unearthed:quartzite",
+    "minecraft:gold_ore": "unearthed:quartzite",
+    "minecraft:lapis_ore": "unearthed:quartzite",
+    "minecraft:redstone_ore": "unearthed:quartzite",
+    "minecraft:diamond_ore": "unearthed:quartzite",
+    "minecraft:emerald_ore": "unearthed:quartzite"
+  }
+}

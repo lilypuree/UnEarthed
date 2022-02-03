@@ -1,0 +1,15 @@
+{
+  "base": "unearthed:pillow_basalt",
+  "dirt": "unearthed:pillow_basalt",
+  "grass": "unearthed:pillow_basalt",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:pillow_basalt",
+    "minecraft:coal_ore": "unearthed:pillow_basalt",
+    "minecraft:copper_ore": "unearthed:pillow_basalt",
+    "minecraft:gold_ore": "unearthed:pillow_basalt",
+    "minecraft:lapis_ore": "unearthed:pillow_basalt",
+    "minecraft:redstone_ore": "unearthed:pillow_basalt",
+    "minecraft:diamond_ore": "unearthed:pillow_basalt",
+    "minecraft:emerald_ore": "unearthed:pillow_basalt"
+  }
+}

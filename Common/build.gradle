@@ -7,8 +7,6 @@ plugins {
 
 archivesBaseName = "${mod_name}-common-${minecraft_version}"
 
-
-
 minecraft {
     version(minecraft_version)
     runs {
@@ -23,6 +21,9 @@ minecraft {
         }
     }
 }
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
 repositories {
     mavenCentral()
 }

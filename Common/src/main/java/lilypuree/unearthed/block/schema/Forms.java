@@ -1,13 +1,8 @@
 package lilypuree.unearthed.block.schema;
 
-import lilypuree.unearthed.block.RegolithBlock;
-import lilypuree.unearthed.block.RegolithGrassBlock;
-import lilypuree.unearthed.block.SixwaySlabBlock;
-import lilypuree.unearthed.block.UEOreBlock;
+import lilypuree.unearthed.block.*;
 import lilypuree.unearthed.block.type.IOreType;
 import lilypuree.unearthed.block.type.VanillaOreTypes;
-import lilypuree.unearthed.mixin.server.ButtonBlockInvoker;
-import lilypuree.unearthed.mixin.server.PressurePlateBlockInvoker;
 import lilypuree.unearthed.mixin.server.StairBlockInvoker;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -82,13 +77,8 @@ public class Forms {
     public static final BlockForm SIXWAY_SLAB = new SimpleForm("slab", SixwaySlabBlock::new);
     public static final BlockForm STAIRS = new StairForm("stairs");
     public static final BlockForm WALLS = new SimpleForm("wall", WallBlock::new);
-    public static final BlockForm PRESSURE_PLATE = new BlockForm("pressure_plate") {
-        @Override
-        public Function<BlockBehaviour.Properties, Block> getBlockCreator(BlockSchema schema, BlockVariant variant) {
-            return properties -> PressurePlateBlockInvoker.invokeInit(PressurePlateBlock.Sensitivity.MOBS, properties);
-        }
-    };
-    public static final BlockForm BUTTON = new SimpleForm("button", ButtonBlockInvoker::invokeInit);
+    public static final BlockForm PRESSURE_PLATE = new SimpleForm("pressure_plate", UEPressurePlateBlock::new);
+    public static final BlockForm BUTTON = new SimpleForm("button", UEButtonBlock::new);
 
     public static final BlockForm IRON_ORE = new OreForm("iron_ore", VanillaOreTypes.IRON);
     public static final BlockForm COAL_ORE = new OreForm("coal_ore", VanillaOreTypes.COAL);

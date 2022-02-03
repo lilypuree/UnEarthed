@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "side": "unearthed:block/polished_granodiorite",
-    "bottom": "unearthed:block/polished_granodiorite",
-    "top": "unearthed:block/polished_granodiorite"
-  }
-}

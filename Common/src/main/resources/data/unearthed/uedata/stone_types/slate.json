@@ -1,0 +1,17 @@
+{
+  "base": "unearthed:slate",
+  "cobble": "unearthed:cobbled_slate",
+  "dirt": "unearthed:slate_regolith",
+  "grass": "unearthed:slate_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:slate_iron_ore",
+    "minecraft:coal_ore": "unearthed:slate_coal_ore",
+    "minecraft:copper_ore": "unearthed:slate_copper_ore",
+    "minecraft:gold_ore": "unearthed:slate_gold_ore",
+    "minecraft:lapis_ore": "unearthed:slate_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:slate_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:slate_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:slate_emerald_ore",
+    "minecraft:mossy_cobblestone": "unearthed:mossy_cobbled_slate"
+  }
+}

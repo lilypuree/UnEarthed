@@ -1,0 +1,17 @@
+{
+  "base": "unearthed:phyllite",
+  "cobble": "unearthed:cobbled_phyllite",
+  "dirt": "unearthed:phyllite_regolith",
+  "grass": "unearthed:phyllite_grassy_regolith",
+  "ores": {
+    "minecraft:iron_ore": "unearthed:phyllite_iron_ore",
+    "minecraft:coal_ore": "unearthed:phyllite_coal_ore",
+    "minecraft:copper_ore": "unearthed:phyllite_copper_ore",
+    "minecraft:gold_ore": "unearthed:phyllite_gold_ore",
+    "minecraft:lapis_ore": "unearthed:phyllite_lapis_ore",
+    "minecraft:redstone_ore": "unearthed:phyllite_redstone_ore",
+    "minecraft:diamond_ore": "unearthed:phyllite_diamond_ore",
+    "minecraft:emerald_ore": "unearthed:phyllite_emerald_ore",
+    "minecraft:mossy_cobblestone": "unearthed:mossy_cobbled_phyllite"
+  }
+}
