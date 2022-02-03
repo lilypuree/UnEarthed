@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_granodiorite_wall_from_polished_granodiorite_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_polished_granodiorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:polished_granodiorite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:polished_granodiorite_wall_from_polished_granodiorite_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_granodiorite",
+      "has_the_recipe"
+    ]
+  ]
+}

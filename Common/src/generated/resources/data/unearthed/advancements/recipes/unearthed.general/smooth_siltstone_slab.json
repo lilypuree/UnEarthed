@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:smooth_siltstone_slab"
+    ]
+  },
+  "criteria": {
+    "has_smooth_siltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:smooth_siltstone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:smooth_siltstone_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_siltstone",
+      "has_the_recipe"
+    ]
+  ]
+}

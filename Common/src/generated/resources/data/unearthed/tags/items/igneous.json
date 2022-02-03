@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:gabbro",
+    "unearthed:granodiorite",
+    "unearthed:rhyolite",
+    "unearthed:white_granite",
+    "unearthed:dacite",
+    "unearthed:dolerite",
+    "unearthed:pillow_basalt",
+    "unearthed:weathered_rhyolite",
+    "minecraft:andesite",
+    "minecraft:diorite",
+    "minecraft:granite",
+    "minecraft:basalt"
+  ]
+}

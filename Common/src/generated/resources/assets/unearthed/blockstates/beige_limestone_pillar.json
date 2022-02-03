@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "unearthed:block/beige_limestone_pillar_x"
+    },
+    "axis=y": {
+      "model": "unearthed:block/beige_limestone_pillar_y"
+    },
+    "axis=z": {
+      "model": "unearthed:block/beige_limestone_pillar_z"
+    }
+  }
+}

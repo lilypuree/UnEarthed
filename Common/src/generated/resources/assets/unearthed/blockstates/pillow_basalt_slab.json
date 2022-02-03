@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "unearthed:block/pillow_basalt_slab_top"
+    },
+    "type=bottom": {
+      "model": "unearthed:block/pillow_basalt_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/pillow_basalt"
+    }
+  }
+}

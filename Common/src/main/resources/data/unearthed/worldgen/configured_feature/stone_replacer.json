@@ -1,0 +1,31 @@
+{
+  "type": "unearthed:stone_replacer",
+  "config": {
+    "frequencies": {
+      "region": 0.0006,
+      "unconformity": 0.0023,
+      "primary": 0.008,
+      "secondary": 0.008,
+      "tertiary": 0.09
+    },
+    "biome_replacers": [
+      {
+        "biomes": [
+          "minecraft:plains"
+        ],
+        "stratum": [
+          {
+            "stone_type": "unearthed:vanilla/dirt",
+            "thickness": 5
+          }
+        ]
+      }
+    ],
+    "regions": [
+      "unearthed:default",
+      "unearthed:limestone",
+      "unearthed:sedimentary",
+      "unearthed:vanilla"
+    ]
+  }
+}

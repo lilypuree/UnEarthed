@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:schist_from_smelting_phyllite"
+    ]
+  },
+  "criteria": {
+    "has_phyllite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:phyllite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:schist_from_smelting_phyllite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_phyllite",
+      "has_the_recipe"
+    ]
+  ]
+}

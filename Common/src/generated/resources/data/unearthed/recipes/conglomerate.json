@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ox",
+    "xo"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:gravel"
+    },
+    "o": {
+      "item": "minecraft:coarse_dirt"
+    }
+  },
+  "result": {
+    "item": "unearthed:conglomerate",
+    "count": 4
+  }
+}

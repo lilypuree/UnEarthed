@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:mossy_cobbled_phyllite"
+    }
+  },
+  "result": {
+    "item": "unearthed:mossy_cobbled_phyllite_slab",
+    "count": 6
+  }
+}

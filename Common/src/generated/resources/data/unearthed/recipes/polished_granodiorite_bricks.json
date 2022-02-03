@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:polished_granodiorite"
+    }
+  },
+  "result": {
+    "item": "unearthed:polished_granodiorite_bricks",
+    "count": 4
+  }
+}

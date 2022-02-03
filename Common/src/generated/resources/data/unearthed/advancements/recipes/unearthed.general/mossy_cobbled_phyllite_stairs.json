@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:mossy_cobbled_phyllite_stairs"
+    ]
+  },
+  "criteria": {
+    "has_mossy_cobbled_phyllite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:mossy_cobbled_phyllite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:mossy_cobbled_phyllite_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mossy_cobbled_phyllite",
+      "has_the_recipe"
+    ]
+  ]
+}

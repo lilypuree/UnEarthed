@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:polished_rhyolite"
+    ]
+  },
+  "criteria": {
+    "has_rhyolite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:rhyolite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:polished_rhyolite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rhyolite",
+      "has_the_recipe"
+    ]
+  ]
+}

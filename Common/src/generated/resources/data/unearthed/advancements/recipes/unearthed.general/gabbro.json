@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:gabbro"
+    ]
+  },
+  "criteria": {
+    "has_gabbro": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:gabbro"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:gabbro"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gabbro",
+      "has_the_recipe"
+    ]
+  ]
+}

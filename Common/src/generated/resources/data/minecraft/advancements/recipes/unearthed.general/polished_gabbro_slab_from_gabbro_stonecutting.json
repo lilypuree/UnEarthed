@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_gabbro_slab_from_gabbro_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_gabbro": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:gabbro"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:polished_gabbro_slab_from_gabbro_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gabbro",
+      "has_the_recipe"
+    ]
+  ]
+}

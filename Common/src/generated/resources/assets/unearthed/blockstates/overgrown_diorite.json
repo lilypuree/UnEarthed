@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "unearthed:block/overgrown_diorite"
+      },
+      {
+        "model": "unearthed:block/overgrown_diorite",
+        "y": 90
+      },
+      {
+        "model": "unearthed:block/overgrown_diorite",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "unearthed:block/overgrown_diorite_snow"
+    }
+  }
+}

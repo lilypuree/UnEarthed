@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:cut_siltstone_stairs"
+    ]
+  },
+  "criteria": {
+    "has_cut_siltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:cut_siltstone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:cut_siltstone_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cut_siltstone",
+      "has_the_recipe"
+    ]
+  ]
+}

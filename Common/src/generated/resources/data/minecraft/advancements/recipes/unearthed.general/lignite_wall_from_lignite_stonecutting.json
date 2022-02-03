@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:lignite_wall_from_lignite_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_lignite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:lignite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:lignite_wall_from_lignite_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lignite",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "unearthed:block/ore/mudstone_iron_ore",
+    "bottom": "unearthed:block/mudstone_top",
+    "top": "unearthed:block/mudstone_top"
+  }
+}

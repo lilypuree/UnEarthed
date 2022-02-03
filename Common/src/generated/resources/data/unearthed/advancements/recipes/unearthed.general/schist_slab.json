@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:schist_slab"
+    ]
+  },
+  "criteria": {
+    "has_schist": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unearthed:schist"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:schist_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schist",
+      "has_the_recipe"
+    ]
+  ]
+}

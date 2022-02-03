@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "unearthed:phyllite"
+    }
+  ],
+  "result": {
+    "item": "unearthed:phyllite_button"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "unearthed:block/lignite_slab_top"
+    },
+    "type=bottom": {
+      "model": "unearthed:block/lignite_slab"
+    },
+    "type=double": {
+      "model": "unearthed:block/lignite"
+    }
+  }
+}

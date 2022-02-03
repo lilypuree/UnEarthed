@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:cobbled_phyllite"
+    }
+  },
+  "result": {
+    "item": "unearthed:cobbled_phyllite_stairs",
+    "count": 4
+  }
+}
