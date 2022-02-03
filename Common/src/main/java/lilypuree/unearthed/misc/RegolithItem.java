@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ public class RegolithItem extends BlockItem {
         super(Blocks.AIR, properties);
     }
 
-    @Nullable
     @Override
     protected BlockState getPlacementState(BlockPlaceContext context) {
         Level world = context.getLevel();
@@ -59,7 +57,7 @@ public class RegolithItem extends BlockItem {
 
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
     }
 
     @Override
