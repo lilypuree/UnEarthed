@@ -1,0 +1,4 @@
+{
+  "primitive_soil": "unearthed:mudstone_grassy_regolith",
+  "acceptable_soils": [ "sand_like", "dirt_like", "gravel_like" ]
+}
