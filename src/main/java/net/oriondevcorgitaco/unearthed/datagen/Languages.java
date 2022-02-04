@@ -33,20 +33,13 @@ public class Languages extends LanguageProvider {
         }
         addBlock(UEBlocks.LIGNITE_BRIQUETTES);
         addBlock(UEBlocks.LICHEN);
-        addBlock(UEBlocks.PUDDLE);
         addItem(UEItems.GOLD_ORE);
         addItem(UEItems.IRON_ORE);
         addItem(UEItems.REGOLITH);
         addBlock(UEBlocks.PYROXENE);
-//        addBlock(UEBlocks.MANTLE_CORE);
-//        addBlock(UEBlocks.VOLCANO);
-//        addBlock(UEBlocks.FAULT);
-//        addBlock(UEBlocks.PLANET_WATER);
-//        addBlock(UEBlocks.PLANET_LAVA);
-//        addBlock(UEBlocks.SURFACE);
+
         add("itemGroup.unearthed", "Unearthed");
-//        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALACTITE, "Beige Limestone Stalactite");
-//        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALAGMITE, "Beige Limestone Stalagmite");
+
     }
 
 
@@ -57,11 +50,6 @@ public class Languages extends LanguageProvider {
     public void addBlock(Block block) {
         add(block, getName(block));
     }
-
-//    public void addBlockItem(Block block, String name) {
-//        add(block.getTranslationKey(), name);
-//        add(Util.makeTranslationKey("item", cap(Registry.ITEM.getKey(block.asItem()).getPath())), name);
-//    }
 
     private String getName(IForgeRegistryEntry<?> entry) {
         String path = entry.getRegistryName().getPath();

@@ -14,7 +14,7 @@
 //import net.minecraft.world.gen.NoiseChunkGenerator;
 //import net.minecraft.world.gen.feature.Feature;
 //import net.minecraft.world.gen.feature.NoFeatureConfig;
-//import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
+//import net.oriondevcorgitaco.unearthed.UnearthedConfig;
 //import net.oriondevcorgitaco.unearthed.core.UETags;
 //import net.oriondevcorgitaco.unearthed.datagen.type.IOreType;
 //import net.oriondevcorgitaco.unearthed.datagen.type.VanillaOreTypes;

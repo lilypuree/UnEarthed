@@ -14,7 +14,7 @@
 //import net.minecraft.world.gen.feature.NoFeatureConfig;
 //import net.oriondevcorgitaco.unearthed.Unearthed;
 //import net.oriondevcorgitaco.unearthed.block.ConfigBlockReader;
-//import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
+//import net.oriondevcorgitaco.unearthed.UnearthedConfig;
 //import net.oriondevcorgitaco.unearthed.util.noise.FNVector3f;
 //import net.oriondevcorgitaco.unearthed.util.noise.FastNoise;
 //

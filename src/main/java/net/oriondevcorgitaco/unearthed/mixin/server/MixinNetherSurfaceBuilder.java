@@ -1,12 +1,11 @@
 package net.oriondevcorgitaco.unearthed.mixin.server;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.NetherSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
+import net.oriondevcorgitaco.unearthed.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

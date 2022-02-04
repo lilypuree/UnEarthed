@@ -22,8 +22,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.oriondevcorgitaco.unearthed.block.BlockGeneratorReference;
 import net.oriondevcorgitaco.unearthed.block.LichenBlock;
-import net.oriondevcorgitaco.unearthed.block.PuddleBlock;
-import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
 import net.oriondevcorgitaco.unearthed.core.UEBlocks;
 import net.oriondevcorgitaco.unearthed.core.UEItems;
 import net.oriondevcorgitaco.unearthed.core.UETags;
@@ -41,9 +39,6 @@ public class Unearthed {
 
 
     public Unearthed() {
-//        UETextureStitcher.setupFolders();
-//        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientConstruction::run);
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::ueCommonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UnearthedConfig.COMMON_CONFIG);
@@ -66,11 +61,8 @@ public class Unearthed {
             LOGGER.debug("UE: Registering blocks...");
             BlockGeneratorReference.ROCK_TYPES.forEach(type -> type.getEntries().forEach(entry -> event.getRegistry().register(entry.createBlock(type).setRegistryName(entry.getId()))));
 
-            SoundType WATER = new SoundType(1.0F, 1.0F, SoundEvents.WET_GRASS_BREAK, SoundEvents.GENERIC_SPLASH, SoundEvents.WET_GRASS_PLACE, SoundEvents.WET_GRASS_HIT, SoundEvents.GENERIC_SPLASH);
-
             event.getRegistry().registerAll(
                     UEBlocks.PYROXENE = new GravelBlock(AbstractBlock.Properties.of(Material.SAND, MaterialColor.COLOR_BLACK).strength(0.6F).sound(SoundType.GRAVEL)).setRegistryName("pyroxene"),
-                    UEBlocks.PUDDLE = new PuddleBlock(AbstractBlock.Properties.of(Material.WATER).noOcclusion().randomTicks().friction(0.98f).instabreak().sound(WATER)).setRegistryName("puddle"),
                     UEBlocks.LICHEN = new LichenBlock(AbstractBlock.Properties.of(Material.PLANT).noOcclusion().randomTicks().strength(0.2f).sound(SoundType.GRASS)).setRegistryName("lichen"),
                     UEBlocks.LIGNITE_BRIQUETTES = new Block(AbstractBlock.Properties.copy(Blocks.COAL_BLOCK)).setRegistryName("lignite_briquettes")
             );
@@ -91,7 +83,6 @@ public class Unearthed {
                     UEItems.IRON_ORE = new Item(properties).setRegistryName("iron_ore"),
                     UEItems.GOLD_ORE = new Item(properties).setRegistryName("gold_ore"),
                     UEItems.REGOLITH = new RegolithItem(properties).setRegistryName("regolith"),
-                    UEItems.PUDDLE = new BlockItem(UEBlocks.PUDDLE, new Item.Properties().tab(UNEARTHED_TAB).stacksTo(1)).setRegistryName("puddle"),
                     UEItems.LICHEN = new BlockItem(UEBlocks.LICHEN, properties).setRegistryName("lichen"),
                     UEItems.LIGNITE_BRIQUETTES = new BlockItem(UEBlocks.LIGNITE_BRIQUETTES, properties).setRegistryName("lignite_briquettes")
             );
@@ -106,5 +97,4 @@ public class Unearthed {
         }
     };
 
-    public static final GameRules.RuleKey<GameRules.BooleanValue> DO_PUDDLE_CREATION = GameRules.register("doPuddleCreation", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
 }

@@ -15,12 +15,6 @@ import net.oriondevcorgitaco.unearthed.world.feature.LichenFeature;
 import net.oriondevcorgitaco.unearthed.world.feature.stonegenerators.NewGenerator;
 
 public class UEFeatures {
-//    public static final Feature<NoFeatureConfig> UNDERGROUND_SANDSTONE = RegistrationHelper.registerFeature("natural_desert_generator", new NaturalDesertGenerator(NoFeatureConfig.CODEC));
-//    public static final Feature<NoFeatureConfig> UNDERGROUND_STONE = RegistrationHelper.registerFeature("natural_generator", new NaturalGenerator(NoFeatureConfig.CODEC));
-//    public static final Feature<NoFeatureConfig> LAYERED_GENERATOR = RegistrationHelper.registerFeature("layered_generator", new LayeredGenerator(NoFeatureConfig.CODEC));
-//    public static final Feature<NoFeatureConfig> ICY_GENERATOR = RegistrationHelper.registerFeature("natural_icy_generator", new NaturalIcyGenerator(NoFeatureConfig.CODEC));
-//    public static final Feature<NoFeatureConfig> MESA = RegistrationHelper.registerFeature("true_mesa_generator", new TrueMesaGenerator(NoFeatureConfig.CODEC));
-
     public static final Feature<NoFeatureConfig> NEW_STONE = RegistrationHelper.registerFeature("new_generator", new NewGenerator(NoFeatureConfig.CODEC));
     public static final Feature<LichenConfig> LICHEN = RegistrationHelper.registerFeature("lichen", new LichenFeature(LichenConfig.CODEC));
 
