@@ -101,7 +101,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
 
     compileOnly 'org.jetbrains:annotations:20.1.0'
-    compileOnly fg.deobf("curse.maven:dynamic_trees-252818:3362786")
+    compileOnly fg.deobf("curse.maven:dynamic_trees-252818:3626059")
 
     shade implementation('net.openhft:zero-allocation-hashing:0.11')
 }
