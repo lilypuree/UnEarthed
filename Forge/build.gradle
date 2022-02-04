@@ -116,10 +116,10 @@ minecraft.runs.all {
         configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
     }
 }
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
-    //shade group: 'net.openhft', name: 'zero-allocation-hashing', version: '0.15'
     library 'net.openhft:zero-allocation-hashing:0.15'
 
     compileOnly project(":Common")
@@ -149,7 +149,9 @@ processResources {
     from project(":Common").sourceSets.main.resources
 }
 
-jar.finalizedBy('reobfJar')
+jar {
+    finalizedBy('reobfJar')
+}
 
 publishing {
     publications {
