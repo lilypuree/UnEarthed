@@ -23,7 +23,7 @@ import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.storage.IServerConfiguration;
 import net.minecraft.world.storage.SaveFormat;
 import net.oriondevcorgitaco.unearthed.UEFeatures;
-import net.oriondevcorgitaco.unearthed.config.UnearthedConfig;
+import net.oriondevcorgitaco.unearthed.UnearthedConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,15 +41,6 @@ import java.util.stream.Collectors;
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
 
-//    private static final ConfiguredFeature<?, ?> NATURAL_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_generator", UEFeatures.UNDERGROUND_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-//    private static final ConfiguredFeature<?, ?> NATURAL_ICY_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_icy_generator", UEFeatures.ICY_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-//    private static final ConfiguredFeature<?, ?> NATURAL_DESERT_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_desert_generator", UEFeatures.UNDERGROUND_SANDSTONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-//    private static final ConfiguredFeature<?, ?> NATURAL_LAYERS_GENERATOR = RegistrationHelper.newConfiguredFeature("natural_layers_generator", UEFeatures.LAYERED_GENERATOR.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-//    private final ConfiguredFeature<?, ?> MESA_GENERATOR = RegistrationHelper.newConfiguredFeature("true_mesa_generator", UEFeatures.MESA.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-
-//    private static final ConfiguredFeature<?, ?> NEW_GENERATOR = RegistrationHelper.newConfiguredFeature("new_generator", UEFeatures.NEW_STONE.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
-
-
     @Shadow
     @Final
     protected DynamicRegistries.Impl registryHolder;
@@ -63,14 +54,6 @@ public class MixinMinecraftServer {
                         removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL_NETHER);
                     }
                 } else if (biome.getBiomeCategory() != Biome.Category.THEEND && biome.getBiomeCategory() != Biome.Category.NONE) {
-//                    if (useDesertCaves(biome))
-//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_DESERT_GENERATOR);
-//                    else if (useIceCaves(biome))
-//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_ICY_GENERATOR);
-//                    else if (useTrueMesas(biome))
-//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, MESA_GENERATOR);
-//                    else
-//                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, NATURAL_GENERATOR);
                     if (biome.getBiomeCategory() == Biome.Category.EXTREME_HILLS) {
                         addFeatureToBiome(biome, GenerationStage.Decoration.VEGETAL_DECORATION, UEFeatures.LICHEN_FEATURE);
                     }
@@ -132,29 +115,4 @@ public class MixinMinecraftServer {
         // Compare the JSON to see if it's the same ConfiguredFeature in the end.
         return configuredFeatureJSON1.equals(configuredFeatureJSON2);
     }
-
-//    private static boolean useTrueMesas(Biome biome) {
-//        boolean trueMesas = UnearthedConfig.trueMesas.get();
-//        if (trueMesas) {
-//            return biome.getCategory() == Biome.Category.MESA;
-//        } else
-//            return false;
-//    }
-//
-//
-//    private static boolean useIceCaves(Biome biome) {
-//        boolean icyCaves = UnearthedConfig.icyCaves.get();
-//        if (icyCaves) {
-//            return biome.getCategory() == Biome.Category.ICY;
-//        } else
-//            return false;
-//    }
-//
-//    private static boolean useDesertCaves(Biome biome) {
-//        boolean desertCaves = UnearthedConfig.desertCaves.get();
-//        if (desertCaves) {
-//            return biome.getCategory() == Biome.Category.DESERT;
-//        } else
-//            return false;
-//    }
 }

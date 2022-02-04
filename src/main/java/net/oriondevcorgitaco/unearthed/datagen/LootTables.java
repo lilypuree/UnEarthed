@@ -73,7 +73,6 @@ public class LootTables extends LootTableProvider {
                                 .otherwise(ItemLootEntry.lootTableItem(UEBlocks.PYROXENE)))));
 
         addBlockLoot(UEBlocks.LIGNITE_BRIQUETTES);
-        lootTables.put(UEBlocks.PUDDLE, BlockLootTableAccessor.dropping(Blocks.AIR));
         lootTables.put(UEBlocks.LICHEN, BlockLootTableAccessor.onlyWithShears(UEBlocks.LICHEN));
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
         for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {
@@ -95,16 +94,7 @@ public class LootTables extends LootTableProvider {
                 IDataProvider.save(GSON, cache, LootTableManager.serialize(lootTable), path);
             } catch (IOException e) {
                 e.printStackTrace();
-//                LOGGER.error("Couldn't write loot table {}", path, e);
             }
         });
-    }
-
-    protected static LootTable.Builder createSimpleTable(String name, Block block) {
-        LootPool.Builder builder = LootPool.lootPool()
-                .name(name)
-                .setRolls(ConstantRange.exactly(1))
-                .add(ItemLootEntry.lootTableItem(block));
-        return LootTable.lootTable().withPool(builder);
     }
 }

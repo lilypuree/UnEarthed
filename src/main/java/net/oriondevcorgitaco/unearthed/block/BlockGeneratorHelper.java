@@ -232,7 +232,7 @@ public class BlockGeneratorHelper {
 
         public Builder createRegolithProperties() {
             AbstractBlock.Properties regolithProp = AbstractBlock.Properties.copy(new Block(defaultProperty));
-            AbstractBlock.Properties grassProp = AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK);
+            AbstractBlock.Properties grassProp = AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK).harvestTool(ToolType.SHOVEL);
             regolithProp.strength(0.6f).sound(SoundType.GRAVEL).harvestTool(ToolType.SHOVEL);
             setProperty(Forms.REGOLITH, regolithProp);
             setProperty(Forms.GRASSY_REGOLITH, grassProp);

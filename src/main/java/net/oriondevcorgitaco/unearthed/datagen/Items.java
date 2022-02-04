@@ -48,24 +48,8 @@ public class Items extends ItemModelProvider {
         simpleItem(UEItems.IRON_ORE);
         blockItemModel(UEBlocks.PYROXENE);
         blockItemModel(UEBlocks.LIGNITE_BRIQUETTES);
-        blockItemModel(UEBlocks.PUDDLE);
-//        blockItemModel(UEBlocks.MANTLE_CORE);
-//        blockItemModel(UEBlocks.SURFACE);
-//        blockItemModel(UEBlocks.VOLCANO);
-//        blockItemModel(UEBlocks.FAULT);
-//        blockItemModel(UEBlocks.PLANET_WATER);
-//        blockItemModel(UEBlocks.PLANET_LAVA);
+
         simpleItem(UEBlocks.LICHEN, modLoc("block/lichen"));
-//
-//        caveWallModel(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_CAVE_WALL);
-//
-//        generated(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALACTITE.getRegistryName().
-//
-//                getPath(), modLoc("block/beige_limestone_stalactite"));
-//
-//        generated(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALAGMITE.getRegistryName().
-//
-//                getPath(), modLoc("block/beige_limestone_stalagmite"));
     }
 
     private void simpleItem(IItemProvider provider) {
@@ -80,11 +64,6 @@ public class Items extends ItemModelProvider {
 
     private void generated(String path, ResourceLocation texture) {
         getBuilder(path).parent(new ModelFile.UncheckedModelFile(mcLoc("item/generated"))).texture("layer0", texture);
-    }
-
-    private void caveWallModel(Block block) {
-        String name = block.getRegistryName().getPath();
-        getBuilder(name).parent(new ModelFile.UncheckedModelFile(modLoc(ModelProvider.BLOCK_FOLDER + "/" + name + "_0")));
     }
 
     private void blockItemModel(Block block) {

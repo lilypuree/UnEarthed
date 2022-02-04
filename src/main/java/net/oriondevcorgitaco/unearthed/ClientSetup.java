@@ -32,7 +32,6 @@ public class ClientSetup {
                 }
             }
         }
-        RenderTypeLookup.setRenderLayer(UEBlocks.PUDDLE, RenderType.translucent());
         RenderTypeLookup.setRenderLayer(UEBlocks.LICHEN, RenderType.cutoutMipped());
     }
 
@@ -51,9 +50,6 @@ public class ClientSetup {
         event.getBlockColors().register((blockstate, reader, pos, i) -> {
             return reader != null && pos != null ? LichenColors.shiftSaturation(reader.getBlockTint(pos, LichenColors.LICHEN_COLOR), pos, blockstate.getValue(ModBlockProperties.WET)) : LichenColors.getLichen();
         }, UEBlocks.LICHEN);
-        event.getBlockColors().register((blockstate, reader, pos, i) -> {
-            return reader != null && pos != null ? ColorHelper.blend(BiomeColors.getAverageWaterColor(reader, pos), 0x7b3f00, 0.25f) : 5670852;
-        }, UEBlocks.PUDDLE);
     }
 
     @SubscribeEvent
@@ -69,10 +65,6 @@ public class ClientSetup {
                 }
             }
         }
-        event.getItemColors().register((stack, color) -> {
-            BlockState state = ((BlockItem) stack.getItem()).getBlock().defaultBlockState();
-            return event.getBlockColors().getColor(state, null, null, color);
-        }, UEItems.PUDDLE);
         event.getItemColors().register((stack, color) -> {
             return LichenColors.getLichen();
         }, UEItems.LICHEN);

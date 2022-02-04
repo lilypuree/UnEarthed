@@ -84,33 +84,33 @@ public class LichenBlock extends VanillaLichenParentBlock implements IWaterLogga
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        boolean isWet = state.getValue(WET);
-        if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
-            worldIn.setBlock(pos, state.setValue(WET, false), 2);
-            isWet = false;
-        } else if (!isWet) {
-            worldIn.setBlock(pos, state.setValue(WET, true), 2);
-            isWet = true;
-        }
-        if (isWet) {
-            if (random.nextInt(4) == 0) {
-                if (!hasEnoughLichen(worldIn, pos, 8, 2, 2)) {
-                    tryGrowth(state, worldIn, pos, random);
-                }
-            }
-            if (random.nextInt(5) == 0) {
-                for (Direction dir : Direction.values()) {
-                    if (state.getValue(getPropertyFor(dir))) {
-                        tryErodeBlock(worldIn, pos.relative(dir));
-                    }
-                }
-            }
-        }
+//        boolean isWet = state.getValue(WET);
+//        if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
+//            worldIn.setBlock(pos, state.setValue(WET, false), 2);
+//            isWet = false;
+//        } else if (!isWet) {
+//            worldIn.setBlock(pos, state.setValue(WET, true), 2);
+//            isWet = true;
+//        }
+//        if (isWet) {
+//            if (random.nextInt(4) == 0) {
+//                if (!hasEnoughLichen(worldIn, pos, 8, 2, 2)) {
+//                    tryGrowth(state, worldIn, pos, random);
+//                }
+//            }
+//            if (random.nextInt(5) == 0) {
+//                for (Direction dir : Direction.values()) {
+//                    if (state.getValue(getPropertyFor(dir))) {
+//                        tryErodeBlock(worldIn, pos.relative(dir));
+//                    }
+//                }
+//            }
+//        }
     }
 
     private static boolean hasWater(IWorldReader worldIn, BlockPos pos) {
         for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
-            if (worldIn.getFluidState(blockpos).is(FluidTags.WATER) || worldIn.getBlockState(blockpos).is(UEBlocks.PUDDLE)) {
+            if (worldIn.getFluidState(blockpos).is(FluidTags.WATER)) {
                 return true;
             }
         }
