@@ -76,6 +76,7 @@ public class UEBlockLoot extends BlockLootTableAccessor {
         }
     }
 
+
     protected static LootTable.Builder createSixwaySlabItemTable(Block slab) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(applyExplosionDecay(slab, LootItem.lootTableItem(slab).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))

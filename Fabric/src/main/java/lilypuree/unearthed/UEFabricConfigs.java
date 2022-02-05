@@ -11,6 +11,7 @@ public class UEFabricConfigs implements ConfigData, CommonConfig {
     private boolean disableCobbleReplacement = false;
     private boolean disableDirtReplacement = false;
     private boolean disableOreReplacement = false;
+    private boolean enableRegolithToDirt = false;
 
     @Override
     public boolean enableDebug() {
@@ -35,5 +36,10 @@ public class UEFabricConfigs implements ConfigData, CommonConfig {
     @Override
     public boolean disableOreReplacement() {
         return disableOreReplacement;
+    }
+
+    @Override
+    public boolean enableRegolithToDirt() {
+        return enableRegolithToDirt;
     }
 }

@@ -10,6 +10,7 @@ public class UEForgeConfigs implements CommonConfig {
     private ForgeConfigSpec.BooleanValue disableCobbleReplacement;
     private ForgeConfigSpec.BooleanValue disableDirtReplacement;
     private ForgeConfigSpec.BooleanValue disableOreReplacement;
+    private ForgeConfigSpec.BooleanValue enableRegolithToDirt;
 
     public UEForgeConfigs() {
         ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
@@ -23,6 +24,9 @@ public class UEForgeConfigs implements CommonConfig {
         disableOreReplacement = COMMON_BUILDER.define("disable_ore", false);
         COMMON_BUILDER.pop();
 
+        COMMON_BUILDER.push("general settings");
+        enableRegolithToDirt = COMMON_BUILDER.define("enable_regolith_to_dirt_recipe", false);
+        COMMON_BUILDER.pop();
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
 
@@ -49,5 +53,10 @@ public class UEForgeConfigs implements CommonConfig {
     @Override
     public boolean disableOreReplacement() {
         return disableOreReplacement.get();
+    }
+
+    @Override
+    public boolean enableRegolithToDirt() {
+        return enableRegolithToDirt.get();
     }
 }

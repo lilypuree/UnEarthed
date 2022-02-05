@@ -7,7 +7,9 @@
     "server.MixinAbstractFurnaceTileEntity",
     "server.MixinFlowingFluidBlock",
     "server.MixinSpreadableSnowyDirtBlock",
-    "ServerResourcesMixin"
+    "ServerResourcesMixin",
+    "server.MaterialRuleListMixin",
+    "server.RecipeManagerMixin"
   ],
   "client": [
     "client.MixinClientWorld"

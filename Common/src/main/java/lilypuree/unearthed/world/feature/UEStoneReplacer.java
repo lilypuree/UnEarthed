@@ -46,7 +46,7 @@ public class UEStoneReplacer extends Feature<StoneReplacerConfiguration> {
         ChunkAccess chunkAccess = level.getChunk(pos);
         NoiseHolder noiseHolder = new NoiseHolder(config, level, pos.getX(), minY, pos.getZ());
         int maxHeight = noiseHolder.getMaxHeight(chunkAccess);
-
+        if (maxHeight <= minY) return false;
         ChunkFiller filler = new ChunkFiller(level.getSeed(), new BlockPos(pos.getX(), minY, pos.getZ()), maxHeight - minY + 1);
         if (Constants.CONFIG.enableDebug()) {
             filler.fillIn(2, noiseHolder::getRoughNoise);

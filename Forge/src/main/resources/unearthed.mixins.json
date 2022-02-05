@@ -9,6 +9,7 @@
     "server.MixinAbstractFurnaceTileEntity",
     "server.MixinSpreadableSnowyDirtBlock",
     "server.MixinFlowingFluidBlock",
+    "server.RecipeManagerMixin",
     "MixinServerLevel"
   ],
   "client": [
