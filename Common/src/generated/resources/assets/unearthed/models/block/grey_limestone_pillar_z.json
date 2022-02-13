@@ -1,0 +1,7 @@
+{
+  "parent": "unearthed:block/beam_z",
+  "textures": {
+    "side": "unearthed:block/grey_limestone_pillar_side",
+    "end": "unearthed:block/grey_limestone_pillar_end"
+  }
+}

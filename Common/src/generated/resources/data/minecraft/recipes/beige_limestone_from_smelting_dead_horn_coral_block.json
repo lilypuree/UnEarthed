@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:dead_horn_coral_block"
+  },
+  "result": "unearthed:beige_limestone",
+  "experience": 0.1,
+  "cookingtime": 200
+}

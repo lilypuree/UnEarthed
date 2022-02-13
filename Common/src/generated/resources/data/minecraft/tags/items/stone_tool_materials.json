@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:cobbled_phyllite",
+    "unearthed:cobbled_slate",
+    "unearthed:gabbro",
+    "unearthed:granodiorite",
+    "unearthed:rhyolite",
+    "unearthed:white_granite",
+    "unearthed:cobbled_limestone",
+    "unearthed:cobbled_beige_limestone",
+    "unearthed:cobbled_grey_limestone"
+  ]
+}

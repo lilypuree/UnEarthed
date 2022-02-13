@@ -1,0 +1,940 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_0_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "secondary_facing": "west"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_0_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "down"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "secondary_facing": "north"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "south"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "up"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "secondary_facing": "east"
+      },
+      "apply": {
+        "model": "unearthed:block/schist_slab_part_1_1_1",
+        "x": 90,
+        "y": 90
+      }
+    }
+  ]
+}

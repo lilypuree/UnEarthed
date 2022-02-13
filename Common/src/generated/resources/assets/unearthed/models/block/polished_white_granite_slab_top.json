@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "unearthed:block/polished_white_granite",
+    "bottom": "unearthed:block/polished_white_granite",
+    "top": "unearthed:block/polished_white_granite"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:phyllite",
+    "unearthed:slate",
+    "unearthed:quartzite",
+    "unearthed:schist",
+    "minecraft:blackstone"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:white_granite"
+  },
+  "result": "unearthed:chiseled_polished_white_granite",
+  "count": 1
+}

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:phyllite_copper_ore",
+    "unearthed:slate_copper_ore",
+    "unearthed:gabbro_copper_ore",
+    "unearthed:granodiorite_copper_ore",
+    "unearthed:rhyolite_copper_ore",
+    "unearthed:white_granite_copper_ore",
+    "unearthed:limestone_copper_ore",
+    "unearthed:beige_limestone_copper_ore",
+    "unearthed:grey_limestone_copper_ore",
+    "unearthed:siltstone_copper_ore",
+    "unearthed:mudstone_copper_ore",
+    "unearthed:conglomerate_copper_ore",
+    "unearthed:sandstone_copper_ore"
+  ]
+}
