@@ -32,7 +32,6 @@ public class Variants {
     public static BlockVariant BASIC;
     public static BlockVariant PILLAR_BLOCK;
 
-    public static BlockVariant VANILLA;
     public static BlockVariant REGOLITHS;
     public static BlockVariant SANDSTONE;
     public static BlockVariant SCHIST;
@@ -91,7 +90,6 @@ public class Variants {
         BRICK = new ComplexVariant("", "bricks", false, Forms.BLOCK).setDerivative();
         PILLAR_BLOCK = new ComplexVariant("", "pillar", false, Forms.BEAM).setDerivative();
 
-        VANILLA = new BlockVariant("", ores);
         List<BlockForm> sandstone = new ArrayList<>();
         sandstone.addAll(ores);
         sandstone.addAll(regoliths);

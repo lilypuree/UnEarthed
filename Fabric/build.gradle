@@ -40,6 +40,7 @@ dependencies {
     modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
     modImplementation "curse.maven:modmenu-308702:3570652"
     modImplementation "curse.maven:shutup-401978:3545078"
+    modImplementation "curse.maven:mores-538295:3624060"
 
     shade 'net.openhft:zero-allocation-hashing:0.15'
     include('net.openhft:zero-allocation-hashing:0.15')

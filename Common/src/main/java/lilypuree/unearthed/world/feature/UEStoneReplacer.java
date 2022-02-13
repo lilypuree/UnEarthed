@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -39,7 +40,6 @@ public class UEStoneReplacer extends Feature<StoneReplacerConfiguration> {
             isSeedSet = true;
         }
 
-
         BlockPos pos = ctx.origin();
         basePos = pos;
         int minY = Math.max(pos.getY(), level.getMinBuildHeight());
@@ -66,8 +66,6 @@ public class UEStoneReplacer extends Feature<StoneReplacerConfiguration> {
             filler.fillInEdgesAndFaces(1);
             filler.fillInCentersRandom(1);
         }
-
-//
         replaceAll(chunkAccess, minY, noiseHolder.getHeights(), filler.results());
         return true;
     }

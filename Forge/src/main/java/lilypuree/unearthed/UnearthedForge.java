@@ -1,6 +1,9 @@
 package lilypuree.unearthed;
 
 
+import com.ordana.mores.Mores;
+import lilypuree.unearthed.block.type.IOreType;
+import lilypuree.unearthed.block.type.VanillaOreTypes;
 import lilypuree.unearthed.misc.UEDataLoaders;
 import lilypuree.unearthed.core.*;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +27,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Mod(Constants.MOD_ID)
 public class UnearthedForge implements CommonHelper {
@@ -38,6 +45,7 @@ public class UnearthedForge implements CommonHelper {
         modbus.addGenericListener(Block.class, (RegistryEvent.Register<Block> e) -> Registration.registerBlocks(new RegistryHelperForge<>(e.getRegistry())));
         modbus.addGenericListener(Item.class, (RegistryEvent.Register<Item> e) -> Registration.registerItems(new RegistryHelperForge<>(e.getRegistry())));
         modbus.addGenericListener(Feature.class, (RegistryEvent.Register<Feature<?>> e) -> Registration.registerFeatures(new RegistryHelperForge<>(e.getRegistry())));
+        modbus.addGenericListener(Block.class, this::onMissingMappings);
 
         MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent e) -> {
             e.addListener(UEDataLoaders.STONE_TYPE_LOADER);
@@ -47,7 +55,7 @@ public class UnearthedForge implements CommonHelper {
 
     public void commonSetup(FMLCommonSetupEvent event) {
         CommonMod.commonSetup();
-       }
+    }
 
     public static class RegistryHelperForge<T extends IForgeRegistryEntry<T>> implements RegistryHelper<T> {
         IForgeRegistry<T> registry;
@@ -80,5 +88,26 @@ public class UnearthedForge implements CommonHelper {
                 return stack.get();
             }
         };
+    }
+
+
+    public void onMissingMappings(RegistryEvent.MissingMappings<Block> event) {
+        var registry = event.getRegistry();
+        Map<String, Block> blockMap = new HashMap<>();
+        String[] vanillaStones = new String[]{"andesite", "diorite", "granite"};
+        for (IOreType oreType : VanillaOreTypes.values()) {
+            for (String stone : vanillaStones) {
+                String oreName = stone + "_" + oreType.getName() + "_ore";
+                Block moreBlock = registry.getValue(new ResourceLocation("mores", oreName));
+                blockMap.put(oreName, moreBlock);
+            }
+        }
+
+        event.getMappings(Constants.MOD_ID).forEach(mapping -> {
+            String path = mapping.key.getPath();
+            if (blockMap.containsKey(path)) {
+                mapping.remap(blockMap.get(path));
+            }
+        });
     }
 }

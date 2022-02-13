@@ -40,7 +40,6 @@ shadowJar {
     archiveClassifier = ''
     configurations = [project.configurations.shade]
     relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
-    finalizedBy 'reobfShadowJar'
 }
 
 artifacts {

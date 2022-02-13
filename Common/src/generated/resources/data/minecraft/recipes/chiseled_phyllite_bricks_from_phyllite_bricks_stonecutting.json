@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:phyllite_bricks"
-  },
-  "result": "unearthed:chiseled_phyllite_bricks",
-  "count": 1
-}

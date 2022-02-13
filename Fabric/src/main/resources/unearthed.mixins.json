@@ -9,7 +9,8 @@
     "server.MixinSpreadableSnowyDirtBlock",
     "ServerResourcesMixin",
     "server.MaterialRuleListMixin",
-    "server.RecipeManagerMixin"
+    "server.RecipeManagerMixin",
+    "server.OreConfigurationMixin"
   ],
   "client": [
     "client.MixinClientWorld"

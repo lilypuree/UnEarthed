@@ -10,7 +10,8 @@
     "server.MixinSpreadableSnowyDirtBlock",
     "server.MixinFlowingFluidBlock",
     "server.RecipeManagerMixin",
-    "MixinServerLevel"
+    "MixinServerLevel",
+    "server.OreConfigurationMixin"
   ],
   "client": [
     "client.MixinClientWorld"

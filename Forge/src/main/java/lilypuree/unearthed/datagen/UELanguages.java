@@ -37,6 +37,7 @@ public class UELanguages extends LanguageProvider {
         addItem(UEItems.REGOLITH);
         addBlock(UEBlocks.PYROXENE);
         add("itemGroup.unearthed", "Unearthed");
+        add("itemGroup.unearthed.general", "Unearthed");
 //        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALACTITE, "Beige Limestone Stalactite");
 //        addBlockItem(BlockGeneratorReferenceOld.BEIGE_LIMESTONE_STALAGMITE, "Beige Limestone Stalagmite");
     }

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:dolerite"
-  },
-  "result": "unearthed:dolerite_slab",
-  "count": 2
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "unearthed:slate_bricks"
-  },
-  "result": "unearthed:cracked_slate_bricks",
-  "experience": 0.1,
-  "cookingtime": 200
-}

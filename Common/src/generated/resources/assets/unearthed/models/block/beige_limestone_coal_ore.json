@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "unearthed:block/ore/beige_limestone_coal_ore",
-    "bottom": "unearthed:block/beige_limestone_top",
-    "top": "unearthed:block/beige_limestone_top"
-  }
-}

@@ -15,7 +15,7 @@ buildscript {
 plugins{
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
-
+apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
@@ -123,6 +123,7 @@ dependencies {
     library 'net.openhft:zero-allocation-hashing:0.15'
 
     compileOnly project(":Common")
+    implementation fg.deobf("curse.maven:mores-556697:3593783")
     runtimeOnly fg.deobf("curse.maven:shutup-407174:3544525")
 }
 

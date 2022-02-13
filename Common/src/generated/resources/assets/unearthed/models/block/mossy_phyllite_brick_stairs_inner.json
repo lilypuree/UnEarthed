@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "side": "unearthed:block/mossy_phyllite_bricks",
-    "bottom": "unearthed:block/mossy_phyllite_bricks",
-    "top": "unearthed:block/mossy_phyllite_bricks"
-  }
-}

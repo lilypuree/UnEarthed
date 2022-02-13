@@ -1,5 +1,6 @@
 package lilypuree.unearthed.mixin.server;
 
+import lilypuree.unearthed.Constants;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.NoiseChunk;
@@ -14,7 +15,8 @@ public class MaterialRuleListMixin {
 
     @Inject(method = "apply", at = @At("HEAD"), cancellable = true)
     private void onDoFill(NoiseChunk chunk, int posX, int posY, int posZ, CallbackInfoReturnable<BlockState> cir) {
-        if (posX < 0) cir.setReturnValue(Blocks.AIR.defaultBlockState());
-        if (posX == -1) cir.setReturnValue(Blocks.GLASS.defaultBlockState());
+        if (Constants.CONFIG.enableDebug()) {
+            if (posX < 0) cir.setReturnValue(Blocks.AIR.defaultBlockState());
+        }
     }
 }

@@ -22,6 +22,9 @@
       }
     ],
     "regions": [
+      "unearthed:default",
+      "unearthed:limestone",
+      "unearthed:vanilla",
       "unearthed:sedimentary"
     ]
   }

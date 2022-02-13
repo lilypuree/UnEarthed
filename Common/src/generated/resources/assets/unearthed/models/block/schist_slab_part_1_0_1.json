@@ -1,9 +1,0 @@
-{
-  "parent": "unearthed:block/block_part_1_0_1",
-  "textures": {
-    "particle": "unearthed:block/schist_side",
-    "side": "unearthed:block/schist_side",
-    "top": "unearthed:block/schist_end",
-    "bottom": "unearthed:block/schist_end"
-  }
-}

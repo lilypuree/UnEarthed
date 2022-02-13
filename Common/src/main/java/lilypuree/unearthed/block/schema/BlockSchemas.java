@@ -69,7 +69,7 @@ public class BlockSchemas {
         List<BlockVariant> limestone = create(ALL_BASE_BLOCKS, COBBLED, BRICKS, PILLAR_BLOCK, CHISELED_FULL);
         List<BlockVariant> beige_limestone = create(SEDIMENTARY, COBBLED, BRICKS, PILLAR_BLOCK, CHISELED);
 
-        List<BlockVariant> intrusive = create(VANILLA, OVERGROWN);
+        List<BlockVariant> intrusive = create(OVERGROWN);
 
         PHYLLITE = register("phyllite", stone_like, MaterialColor.COLOR_LIGHT_GRAY);
         SLATE = register("slate", stone_like, MaterialColor.COLOR_GRAY);
