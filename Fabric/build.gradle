@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'idea'
 }
+
 repositories {
     mavenCentral()
     maven {
@@ -18,7 +19,6 @@ repositories {
         }
     }
 }
-
 
 archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
 
@@ -42,19 +42,19 @@ dependencies {
     modImplementation "curse.maven:shutup-401978:3545078"
     modImplementation "curse.maven:mores-538295:3624060"
 
-    shade 'net.openhft:zero-allocation-hashing:0.15'
-//    include('net.openhft:zero-allocation-hashing:0.15')
+    shade('net.openhft:zero-allocation-hashing:0.15') { transitive false }
 }
 
 shadowJar {
-    archiveClassifier = ''
-    configurations = [project.configurations.shade]
+    archiveClassifier = 'shadow'
     relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
-
+    configurations = [project.configurations.shade]
 }
 
-artifacts {
-    shadowJar
+remapJar {
+    dependsOn(shadowJar)
+    input.set(shadowJar.archiveFile)
+    archiveClassifier = ""
 }
 
 loom {
@@ -71,16 +71,6 @@ loom {
             ideConfigGenerated(true)
             runDir("run")
         }
-    }
-}
-
-
-processResources {
-    from project(":Common").sourceSets.main.resources
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
     }
 }
 
