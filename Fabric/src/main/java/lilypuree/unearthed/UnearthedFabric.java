@@ -1,8 +1,11 @@
 package lilypuree.unearthed;
 
+import lilypuree.unearthed.compat.StoneTypeCallback;
 import lilypuree.unearthed.core.Registration;
 import lilypuree.unearthed.core.RegistryHelper;
 import lilypuree.unearthed.core.UENames;
+import lilypuree.unearthed.misc.StoneTypeCodecJsonDataManager;
+import lilypuree.unearthed.world.feature.gen.StoneType;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -56,6 +59,16 @@ public class UnearthedFabric implements ModInitializer, CommonHelper {
         public void register(T entry, ResourceLocation name) {
             Registry.register(registry, name, entry);
         }
+    }
+
+    @Override
+    public StoneTypeCodecJsonDataManager getStoneTypeManager() {
+        return new StoneTypeCodecJsonDataManager() {
+            @Override
+            public boolean fireEvent(StoneType stoneType) {
+                return StoneTypeCallback.EVENT.invoker().apply(stoneType);
+            }
+        };
     }
 
     @Override

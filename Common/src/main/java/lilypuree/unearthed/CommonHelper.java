@@ -2,6 +2,7 @@ package lilypuree.unearthed;
 
 
 import lilypuree.unearthed.Constants;
+import lilypuree.unearthed.misc.StoneTypeCodecJsonDataManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.CreativeModeTab;
@@ -25,4 +26,6 @@ public interface CommonHelper {
     default Tag.Named<Item> createItem(String name) {
         return createItem(new ResourceLocation(Constants.MOD_ID, name));
     }
+
+    StoneTypeCodecJsonDataManager getStoneTypeManager();
 }

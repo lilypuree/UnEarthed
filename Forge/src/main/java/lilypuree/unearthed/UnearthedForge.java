@@ -4,8 +4,11 @@ package lilypuree.unearthed;
 import com.ordana.mores.Mores;
 import lilypuree.unearthed.block.type.IOreType;
 import lilypuree.unearthed.block.type.VanillaOreTypes;
+import lilypuree.unearthed.compat.StoneTypeEvent;
+import lilypuree.unearthed.misc.StoneTypeCodecJsonDataManager;
 import lilypuree.unearthed.misc.UEDataLoaders;
 import lilypuree.unearthed.core.*;
+import lilypuree.unearthed.world.feature.gen.StoneType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -17,7 +20,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.EventBus;
+import net.minecraftforge.eventbus.api.BusBuilder;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -90,6 +96,17 @@ public class UnearthedForge implements CommonHelper {
         };
     }
 
+    @Override
+    public StoneTypeCodecJsonDataManager getStoneTypeManager() {
+        return new StoneTypeCodecJsonDataManager() {
+            @Override
+            public boolean fireEvent(StoneType stoneType) {
+                StoneTypeEvent event = new StoneTypeEvent(stoneType);
+                MinecraftForge.EVENT_BUS.post(event);
+                return !event.isCanceled();
+            }
+        };
+    }
 
     public void onMissingMappings(RegistryEvent.MissingMappings<Block> event) {
         var registry = event.getRegistry();

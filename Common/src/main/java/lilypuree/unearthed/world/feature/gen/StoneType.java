@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lilypuree.unearthed.Constants;
+import lilypuree.unearthed.compat.IStoneType;
 import lilypuree.unearthed.core.UETags;
 import lilypuree.unearthed.misc.UEDataLoaders;
 import net.minecraft.core.Registry;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class StoneType {
+public class StoneType implements IStoneType {
     public static final StoneType EMPTY = new StoneType(null);
     public static final StoneType NO_REPLACE = new StoneType(null) {
         @Override
@@ -43,7 +44,7 @@ public class StoneType {
             BLOCK_OR_BLOCKSTATE_CODEC.optionalFieldOf("cobble").forGetter(state -> Optional.ofNullable(state.cobbleBlock)),
             BLOCK_OR_BLOCKSTATE_CODEC.optionalFieldOf("dirt").forGetter(state -> Optional.ofNullable(state.dirtReplace)),
             BLOCK_OR_BLOCKSTATE_CODEC.optionalFieldOf("grass").forGetter(state -> Optional.ofNullable(state.grassReplace)),
-            Codec.unboundedMap(ResourceLocation.CODEC, BLOCK_OR_BLOCKSTATE_CODEC).optionalFieldOf("ores", Collections.emptyMap()).forGetter(StoneType::getOreMap),
+            Codec.unboundedMap(ResourceLocation.CODEC, BLOCK_OR_BLOCKSTATE_CODEC).optionalFieldOf("ores", Collections.emptyMap()).forGetter(StoneType::getOreMapInner),
             Codec.BOOL.optionalFieldOf("ignore_biome", false).forGetter(state -> state.ignoreBiome)
     ).apply(instance, StoneType::new));
 
@@ -52,16 +53,11 @@ public class StoneType {
         this.cobbleBlock = Constants.CONFIG.disableCobbleReplacement() ? null : cobbleBlock.orElse(null);
         this.dirtReplace = Constants.CONFIG.disableDirtReplacement() ? null : dirtReplace.orElse(null);
         this.grassReplace = Constants.CONFIG.disableDirtReplacement() ? null : grassReplace.orElse(null);
-        if (Constants.CONFIG.disableOreReplacement()) {
-            this.oreMap = ImmutableMap.<Block, BlockState>builder().build();
-        } else {
-            ImmutableMap.Builder<Block, BlockState> builder = ImmutableMap.builder();
-            oreMap.forEach((key, blockState) -> {
-                Block block = Registry.BLOCK.get(key);
-                builder.put(block, blockState);
-            });
-            this.oreMap = builder.build();
-        }
+        this.oreMap = new HashMap<>();
+        oreMap.forEach((key, blockState) -> {
+            Block block = Registry.BLOCK.get(key);
+            this.oreMap.put(block, blockState);
+        });
         this.ignoreBiome = ignoreBiome;
     }
 
@@ -70,7 +66,7 @@ public class StoneType {
         this.cobbleBlock = baseBlock;
         this.dirtReplace = baseBlock;
         this.grassReplace = baseBlock;
-        this.oreMap = ImmutableMap.<Block, BlockState>builder().build();
+        this.oreMap = Collections.emptyMap();
         this.ignoreBiome = false;
     }
 
@@ -84,11 +80,11 @@ public class StoneType {
 //    }
 
     private final BlockState baseBlock;
-    private final BlockState cobbleBlock;
-    private final BlockState dirtReplace;
-    private final BlockState grassReplace;
-    private final ImmutableMap<Block, BlockState> oreMap;
-    private final boolean ignoreBiome;
+    private BlockState cobbleBlock;
+    private BlockState dirtReplace;
+    private BlockState grassReplace;
+    private Map<Block, BlockState> oreMap;
+    private boolean ignoreBiome;
 
     public boolean ignoresBiome() {
         return ignoreBiome;
@@ -102,12 +98,60 @@ public class StoneType {
         }
     }
 
-    private Map<ResourceLocation, BlockState> getOreMap() {
+    private Map<ResourceLocation, BlockState> getOreMapInner() {
         Map<ResourceLocation, BlockState> newMap = new HashMap<>();
         oreMap.forEach((block, state) -> {
             newMap.put(Registry.BLOCK.getKey(block), state);
         });
         return newMap;
+    }
+
+    public void toImmutable() {
+        if (Constants.CONFIG.disableOreReplacement()) {
+            this.oreMap = Collections.emptyMap();
+        } else {
+            this.oreMap = ImmutableMap.<Block, BlockState>builder().putAll(oreMap).build();
+        }
+    }
+
+    @Override
+    public BlockState getBaseBlock() {
+        return baseBlock;
+    }
+
+    @Override
+    public BlockState getCobbleBlock() {
+        return cobbleBlock;
+    }
+
+    @Override
+    public void setCobbleBlock(BlockState cobbleBlock) {
+        this.cobbleBlock = cobbleBlock;
+    }
+
+    @Override
+    public BlockState getDirtReplace() {
+        return dirtReplace;
+    }
+
+    @Override
+    public void setDirtReplace(BlockState dirtReplace) {
+        this.dirtReplace = dirtReplace;
+    }
+
+    @Override
+    public BlockState getGrassReplace() {
+        return grassReplace;
+    }
+
+    @Override
+    public void setGrassReplace(BlockState grassReplace) {
+        this.grassReplace = grassReplace;
+    }
+
+    @Override
+    public Map<Block, BlockState> getOreMap() {
+        return oreMap;
     }
 
     public BlockState replace(BlockState original) {

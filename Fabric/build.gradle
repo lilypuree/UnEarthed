@@ -43,13 +43,14 @@ dependencies {
     modImplementation "curse.maven:mores-538295:3624060"
 
     shade 'net.openhft:zero-allocation-hashing:0.15'
-    include('net.openhft:zero-allocation-hashing:0.15')
+//    include('net.openhft:zero-allocation-hashing:0.15')
 }
 
 shadowJar {
     archiveClassifier = ''
     configurations = [project.configurations.shade]
     relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
+
 }
 
 artifacts {

@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 public class ClientInitializer implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+
         ClientCommon.initRenderLayers(BlockRenderLayerMap.INSTANCE::putBlock);
         ClientCommon.blockColors(ColorProviderRegistry.BLOCK::register);
         ClientCommon.itemColors(ColorProviderRegistry.ITEM::register, (state, color) -> ColorProviderRegistry.BLOCK.get(state.getBlock()).getColor(state, null, null, color));

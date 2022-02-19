@@ -9,10 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Optional;
 
 public class UEDataLoaders {
-    public static final CodecJsonDataManager<StoneType> STONE_TYPE_LOADER = new CodecJsonDataManager<>(
-            "uedata/stone_types", StoneType.DIRECT_CODEC, Constants.LOG);
+    public static CodecJsonDataManager<StoneType> STONE_TYPE_LOADER;
     public static final CodecJsonDataManager<StoneRegion> REGION_LOADER = new CodecJsonDataManager<>(
             "uedata/regions", StoneRegion.CODEC, Constants.LOG);
+
+    public static void init(StoneTypeCodecJsonDataManager stoneTypeManager) {
+        STONE_TYPE_LOADER = stoneTypeManager;
+    }
 
     private static StoneType getStoneType(ResourceLocation rl) {
         return STONE_TYPE_LOADER.getData().get(rl);
