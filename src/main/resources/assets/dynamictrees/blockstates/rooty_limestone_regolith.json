@@ -1,6 +1,0 @@
-{
-  "multipart": [
-    {   "apply": { "model": "unearthed:block/limestone_regolith" }},
-    {	"apply": { "model": "dynamictrees:block/roots" }}
-  ]
-}
