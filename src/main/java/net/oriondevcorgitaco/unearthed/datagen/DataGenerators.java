@@ -1,11 +1,14 @@
 package net.oriondevcorgitaco.unearthed.datagen;
 
+import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
+import com.ferreusveritas.dynamictrees.blocks.rootyblocks.SoilProperties;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.oriondevcorgitaco.unearthed.Unearthed;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -24,6 +27,9 @@ public class DataGenerators {
             generator.addProvider(new Items(generator, event.getExistingFileHelper()));
             generator.addProvider(new Languages(generator, "en_us"));
             generator.addProvider(new Languages(generator, "en_gb"));
+        }
+        if (ModList.get().isLoaded("dynamictrees")) {
+            GatherDataHelper.gatherBlockStateAndModelData(Unearthed.MOD_ID, event, SoilProperties.REGISTRY);
         }
     }
 }

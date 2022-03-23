@@ -66,7 +66,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'unearthed', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
+            args '--mod', 'unearthed', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0], '--existing-mod', 'dynamictrees'
 
             source sourceSets.main
         }

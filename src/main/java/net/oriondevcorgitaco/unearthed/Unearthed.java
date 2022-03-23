@@ -43,15 +43,15 @@ public class Unearthed {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UnearthedConfig.COMMON_CONFIG);
         BlockStatePropertiesMatch.init();
+
+        if (ModList.get().isLoaded("dynamictrees")) {
+            RegistryHandler.setup(MOD_ID);
+        }
     }
 
     public void ueCommonSetup(FMLCommonSetupEvent event) {
         BlockGeneratorReference.init();
         UETags.init();
-
-        if (ModList.get().isLoaded("dynamictrees")){
-        	RegistryHandler.setup(MOD_ID);
-        }
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
