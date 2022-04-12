@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "unearthed:block/ore/siltstone_copper_ore",
-    "bottom": "unearthed:block/siltstone_top",
-    "top": "unearthed:block/siltstone_top"
-  }
-}

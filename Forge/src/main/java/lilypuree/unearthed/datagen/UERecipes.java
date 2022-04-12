@@ -10,6 +10,7 @@ import lilypuree.unearthed.core.UETags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -167,7 +168,7 @@ public class UERecipes extends RecipeProviderAccessor {
         stoneSmeltingRecipeOf(BlockSchemas.LIMESTONE.getBaseBlock(), Blocks.DEAD_BRAIN_CORAL);
     }
 
-    private static void addOreRecipes(Consumer<FinishedRecipe> consumer, Tag<Item> oreTag, IOreType oreType) {
+    private static void addOreRecipes(Consumer<FinishedRecipe> consumer, TagKey<Item> oreTag, IOreType oreType) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(oreTag), oreType.getSmeltResult(), oreType.getExperience(), oreType.getSmeltTime())
                 .unlockedBy("has_" + oreType.getName() + "_ore", has(oreTag)).group(getItemName(oreType.getSmeltResult()))
                 .save(consumer, getItemName(oreType.getSmeltResult()) + "_from_smelting_" + oreType.getName() + "_ore");

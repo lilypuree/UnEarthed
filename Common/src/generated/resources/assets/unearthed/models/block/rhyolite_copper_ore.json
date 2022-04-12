@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "unearthed:block/ore/rhyolite_copper_ore"
-  }
-}

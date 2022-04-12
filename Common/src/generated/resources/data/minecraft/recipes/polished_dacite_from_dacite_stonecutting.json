@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:dacite"
-  },
-  "result": "unearthed:polished_dacite",
-  "count": 1
-}

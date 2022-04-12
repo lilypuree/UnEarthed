@@ -1,7 +1,7 @@
 package lilypuree.unearthed.client;
 
+import lilypuree.hyle.util.noise.FastNoiseLite;
 import lilypuree.unearthed.util.ColorHelper;
-import lilypuree.unearthed.util.noise.FastNoiseLite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ColorResolver;

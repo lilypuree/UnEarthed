@@ -2,6 +2,7 @@ package lilypuree.unearthed.block.schema;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -16,10 +17,10 @@ import java.util.function.BiConsumer;
 
 public class BlockSchema {
     private String name;
+    private Block defaultBlock = Blocks.STONE;
     private Multimap<BlockVariant, SchemaEntry> variantEntries;
     private Map<BlockVariant, SchemaEntry> variantBaseEntries;
     private SchemaEntry baseEntry;
-    private Block defaultBlock = Blocks.STONE;
 
     private BlockSchema(String name, Multimap<BlockVariant, SchemaEntry> entries) {
         this.name = name;
@@ -105,7 +106,17 @@ public class BlockSchema {
 
         public Builder defaultProperty(BlockBehaviour.Properties defaultProperty) {
             this.defaultProperty = defaultProperty;
-            this.dummyBlockBehavior = new Block(defaultProperty);
+            this.dummyBlockBehavior = new BlockBehaviour(defaultProperty) {
+                @Override
+                public Item asItem() {
+                    return null;
+                }
+
+                @Override
+                protected Block asBlock() {
+                    return null;
+                }
+            };
             for (BlockVariant variant : variants) {
                 for (BlockForm form : variant.getForms()) {
                     entries.put(variant, new SchemaEntry(name, variant, form, defaultProperty));

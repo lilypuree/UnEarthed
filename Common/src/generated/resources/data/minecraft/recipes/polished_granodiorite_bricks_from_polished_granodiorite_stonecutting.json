@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:polished_granodiorite"
-  },
-  "result": "unearthed:polished_granodiorite_bricks",
-  "count": 1
-}

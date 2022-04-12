@@ -12,9 +12,6 @@ public class UENames {
     public static final ResourceLocation IRON_ORE = getName("iron_ore");
     public static final ResourceLocation REGOLITH = getName("regolith");
 
-
-    public static final ResourceLocation STONE_REPLACER = getName("stone_replacer");
-
     private static ResourceLocation getName(String name) {
         return new ResourceLocation(Constants.MOD_ID, name);
     }

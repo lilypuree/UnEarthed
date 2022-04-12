@@ -18,7 +18,6 @@ public class BlockSchemas {
     private static float stoneResistance = 6.0f;
     private static float miscResistance = 0.5f;
     private static BlockBehaviour.Properties stoneProperty = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(stoneHardness, stoneResistance);
-    private static BlockBehaviour dummyBehavior = new Block(stoneProperty);
 
     public static List<BlockSchema> ROCK_TYPES = new ArrayList<>();
 
@@ -88,19 +87,21 @@ public class BlockSchemas {
         QUARTZITE = register("quartzite", basic, MaterialColor.QUARTZ);
         WEATHERED_RHYOLITE = register("weathered_rhyolite", basic);
         DOLERITE = register("dolerite", basic, MaterialColor.COLOR_BROWN);
-//        MARBLE = register("marble", decorative, MaterialColor.SNOW);
         SCHIST = register("schist", schist, MaterialColor.COLOR_CYAN);
         LIGNITE = registerSand("lignite", decorative, MaterialColor.COLOR_BLACK);
         PILLOW_BASALT = register("pillow_basalt", basic, stone().strength(3.0f, 6.0f));
-//        PUMICE = register("pumice", basic, stone().color(MaterialColor.COLOR_BLACK).sound(SoundType.BASALT));
         DACITE = register("dacite", basalt_like, stone().color(MaterialColor.COLOR_LIGHT_GRAY).strength(1.25f, 4.2F).sound(SoundType.BASALT));
 
-        //vanilla block schemas
+//        vanilla block schemas
         GRANITE = registerDefault("granite", intrusive, Blocks.GRANITE);
         DIORITE = registerDefault("diorite", intrusive, Blocks.DIORITE);
         ANDESITE = registerDefault("andesite", intrusive, Blocks.ANDESITE);
         SANDSTONE = registerDefault("sandstone", List.of(Variants.SANDSTONE), Blocks.SANDSTONE);
         STONE = registerDefault("stone", List.of(Variants.REGOLITHS), Blocks.STONE);
+
+
+        //        PUMICE = register("pumice", basic, stone().color(MaterialColor.COLOR_BLACK).sound(SoundType.BASALT));
+//        MARBLE = register("marble", decorative, MaterialColor.SNOW);
     }
 
     private static BlockSchema register(String name, List<BlockVariant> variants) {
@@ -132,7 +133,7 @@ public class BlockSchemas {
     }
 
     private static BlockBehaviour.Properties stone() {
-        return BlockBehaviour.Properties.copy(dummyBehavior);
+        return BlockBehaviour.Properties.copy(Blocks.STONE);
     }
 
     private static BlockBehaviour.Properties sandStone() {

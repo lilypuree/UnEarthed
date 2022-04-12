@@ -1,12 +1,16 @@
+plugins {
+    id 'fabric-loom' version '0.10-SNAPSHOT' apply false
+    id "com.matthewprenger.cursegradle" version "$cursegradle_version" apply false
+}
 subprojects {
     apply plugin: 'java'
     
     java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-    java.withSourcesJar()
-    java.withJavadocJar()
+//    java.withSourcesJar()
+//    java.withJavadocJar()
         
     jar {
-        archiveClassifier = 'slim'
+        archiveClassifier = ''
         manifest {
             attributes([
                 'Specification-Title'     : mod_name,
@@ -42,5 +46,32 @@ subprojects {
     
         it.options.encoding = 'UTF-8'
         it.options.release = 17
+    }
+
+    def isForge = project.name == 'Forge'
+    if (project.name != 'Common') {
+        apply plugin: 'com.matthewprenger.cursegradle'
+        if (!isForge) apply plugin: 'fabric-loom'
+        def changelogFile = rootProject.file('CHANGELOG.md').text
+
+        curseforge {
+            apiKey = "$System.env.CURSEFORGEKEY"
+            project {
+                id = project.projectId
+                releaseType = project.releaseType
+                changelogType = 'markdown'
+                changelog = changelogFile
+                addGameVersion project.minecraft_version
+                addGameVersion project.name
+                mainArtifact(isForge ? jar : remapJar)
+                relations {
+                    requiredDependency 'hyle'
+                }
+            }
+            options {
+                debug = false
+                forgeGradleIntegration = isForge
+            }
+        }
     }
 }

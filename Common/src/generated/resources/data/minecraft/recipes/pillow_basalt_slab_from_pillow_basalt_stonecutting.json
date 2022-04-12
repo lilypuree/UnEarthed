@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:pillow_basalt"
-  },
-  "result": "unearthed:pillow_basalt_slab",
-  "count": 2
-}

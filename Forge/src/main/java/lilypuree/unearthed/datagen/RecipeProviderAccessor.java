@@ -18,6 +18,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -263,11 +264,11 @@ public abstract class RecipeProviderAccessor implements DataProvider {
         UpgradeRecipeBuilder.smithing(Ingredient.of($$1), Ingredient.of(net.minecraft.world.item.Items.NETHERITE_INGOT), $$2).unlocks("has_netherite_ingot", has(net.minecraft.world.item.Items.NETHERITE_INGOT)).save($$0, getItemName($$2) + "_smithing");
     }
 
-    private static void planksFromLog(Consumer<FinishedRecipe> $$0, ItemLike $$1, Tag<Item> $$2) {
+    private static void planksFromLog(Consumer<FinishedRecipe> $$0, ItemLike $$1, TagKey<Item> $$2) {
         ShapelessRecipeBuilder.shapeless($$1, 4).requires($$2).group("planks").unlockedBy("has_log", has($$2)).save($$0);
     }
 
-    private static void planksFromLogs(Consumer<FinishedRecipe> $$0, ItemLike $$1, Tag<Item> $$2) {
+    private static void planksFromLogs(Consumer<FinishedRecipe> $$0, ItemLike $$1, TagKey<Item> $$2) {
         ShapelessRecipeBuilder.shapeless($$1, 4).requires($$2).group("planks").unlockedBy("has_logs", has($$2)).save($$0);
     }
 
@@ -382,7 +383,7 @@ public abstract class RecipeProviderAccessor implements DataProvider {
         return inventoryTrigger(ItemPredicate.Builder.item().of(item).build());
     }
 
-    public static InventoryChangeTrigger.TriggerInstance has(Tag<Item> itemTag) {
+    public static InventoryChangeTrigger.TriggerInstance has(TagKey<Item> itemTag) {
         return inventoryTrigger(ItemPredicate.Builder.item().of(itemTag).build());
     }
 

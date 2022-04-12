@@ -7,8 +7,6 @@
     "server.MixinAbstractFurnaceTileEntity",
     "server.MixinFlowingFluidBlock",
     "server.MixinSpreadableSnowyDirtBlock",
-    "ServerResourcesMixin",
-    "server.MaterialRuleListMixin",
     "server.RecipeManagerMixin",
     "server.OreConfigurationMixin"
   ],

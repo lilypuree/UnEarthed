@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "side": "unearthed:block/phyllite_bricks",
-    "bottom": "unearthed:block/phyllite_bricks",
-    "top": "unearthed:block/phyllite_bricks"
-  }
-}

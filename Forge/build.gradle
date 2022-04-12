@@ -15,11 +15,9 @@ buildscript {
 plugins{
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
-apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 archivesBaseName = "${mod_name}-forge-${minecraft_version}"
@@ -40,7 +38,6 @@ minecraft {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Client'
-            arg "--mixin=unearthed.mixins.json"
 
             mods {
                 modClientRun {
@@ -54,8 +51,6 @@ minecraft {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Server'
-            arg "--mixin=unearthed.mixins.json"
-
 
             property 'forge.logging.console.level', 'debug'
 
@@ -91,6 +86,9 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    flatDir{
+        dirs 'lib'
+    }
 }
 
 mixin {
@@ -100,46 +98,15 @@ mixin {
     debug.verbose = true
 }
 
-configurations {
-    shade
-    implementation.extendsFrom shade
-}
-
-configurations {
-    library
-    implementation.extendsFrom library
-    shade.extendsFrom library
-}
-
-minecraft.runs.all {
-    lazyToken('minecraft_classpath') {
-        configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
-    }
-}
-
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
-    library 'net.openhft:zero-allocation-hashing:0.15'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     compileOnly project(":Common")
-    implementation fg.deobf("curse.maven:mores-556697:3593783")
+    implementation fg.deobf("curse.maven:mores-556697:3681536")
     runtimeOnly fg.deobf("curse.maven:shutup-407174:3544525")
-}
 
-shadowJar {
-    archiveClassifier = ''
-    configurations = [project.configurations.shade]
-    relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
-    finalizedBy 'reobfShadowJar'
-}
-
-artifacts {
-    shadowJar
-}
-
-reobf {
-    shadowJar {}
+    implementation  fg.deobf("curse.maven:hyle-609850:${hyle_forge}")
 }
 
 tasks.withType(JavaCompile) {
@@ -148,10 +115,6 @@ tasks.withType(JavaCompile) {
 
 processResources {
     from project(":Common").sourceSets.main.resources
-}
-
-jar {
-    finalizedBy('reobfJar')
 }
 
 publishing {

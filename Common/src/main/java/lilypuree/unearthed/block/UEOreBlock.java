@@ -1,6 +1,5 @@
 package lilypuree.unearthed.block;
 
-import lilypuree.unearthed.core.UETags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -45,7 +44,7 @@ public class UEOreBlock extends OreBlock {
     }
 
     @Override
-    protected void popExperience(ServerLevel serverLevel, BlockPos pos, int amount) {
+    public void popExperience(ServerLevel serverLevel, BlockPos pos, int amount) {
         if (serverLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             ExperienceOrb.award(serverLevel, Vec3.atCenterOf(pos), amount);
         }

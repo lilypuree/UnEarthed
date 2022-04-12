@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "unearthed:mudstone"
-  },
-  "result": "unearthed:mudstone_slab",
-  "count": 2
-}

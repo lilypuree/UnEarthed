@@ -8,6 +8,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.ColorResolver;
@@ -28,7 +29,6 @@ import java.util.function.Supplier;
 @Mixin(ClientLevel.class)
 public abstract class MixinClientWorld {
 
-
     @Mutable
     @Final
     @Shadow
@@ -37,7 +37,7 @@ public abstract class MixinClientWorld {
     @Shadow public abstract int calculateBlockTint(BlockPos $$0, ColorResolver $$1);
 
     @Inject(at = @At("RETURN"), method = "<init>")
-    private void addLichenColorCaches(ClientPacketListener clientPlayNetHandler, ClientLevel.ClientLevelData clientWorldInfo, ResourceKey<Level> key, DimensionType type, int viewDistance, int serverSimulationDistance, Supplier<ProfilerFiller> profiler, LevelRenderer renderer, boolean isDebug, long seed, CallbackInfo ci) {
+    private void addLichenColorCaches(ClientPacketListener clientPlayNetHandler, ClientLevel.ClientLevelData clientWorldInfo, ResourceKey<Level> key, Holder<DimensionType> type, int viewDistance, int serverSimulationDistance, Supplier<ProfilerFiller> profiler, LevelRenderer renderer, boolean isDebug, long seed, CallbackInfo ci) {
         tintCaches = Util.make(new Object2ObjectArrayMap<>(tintCaches.size() + 1), map -> {
             map.putAll(tintCaches);
             map.put(LichenColors.LICHEN_COLOR, new BlockTintCache(i->this.calculateBlockTint(i, LichenColors.LICHEN_COLOR)));

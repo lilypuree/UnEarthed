@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_top",
-  "textures": {
-    "side": "unearthed:block/side/overgrown_diorite_snow",
-    "top": "minecraft:block/grass_block_top"
-  }
-}

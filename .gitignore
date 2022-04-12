@@ -21,3 +21,6 @@ build
 eclipse
 run
 /Common/src/main/resources/assets/unearthed/textures/block/ore_aseprite/
+/Common/libs/
+/Fabric/lib/
+/Forge/lib/

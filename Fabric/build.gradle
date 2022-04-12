@@ -1,6 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.10-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'fabric-loom'
     id 'maven-publish'
     id 'idea'
 }
@@ -18,14 +17,12 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    flatDir {
+        dirs 'lib'
+    }
 }
 
 archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
-
-configurations {
-    shade
-    implementation.extendsFrom shade
-}
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
@@ -38,23 +35,11 @@ dependencies {
     implementation project(":Common")
 
     modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
-    modImplementation "curse.maven:modmenu-308702:3570652"
-    modImplementation "curse.maven:shutup-401978:3545078"
-    modImplementation "curse.maven:mores-538295:3624060"
+    modImplementation "curse.maven:modmenu-308702:3668801"
+    modImplementation "curse.maven:shutup-401978:3677546"
+    modImplementation "curse.maven:mores-538295:3681534"
 
-    shade('net.openhft:zero-allocation-hashing:0.15') { transitive false }
-}
-
-shadowJar {
-    archiveClassifier = 'shadow'
-    relocate 'net.openhft', "${project.group}.shadow.net.openhft" // ensure repackaged packages have unique names
-    configurations = [project.configurations.shade]
-}
-
-remapJar {
-    dependsOn(shadowJar)
-    input.set(shadowJar.archiveFile)
-    archiveClassifier = ""
+    modImplementation "curse.maven:hyle-609850:${hyle_fabric}"
 }
 
 loom {

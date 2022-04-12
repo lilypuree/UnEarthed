@@ -2,10 +2,14 @@ package lilypuree.unearthed.core;
 
 import lilypuree.unearthed.Constants;
 import lilypuree.unearthed.block.schema.BlockSchemas;
+import lilypuree.unearthed.misc.BlockStatePropertiesMatch;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class Registration {
     public static void registerBlocks(RegistryHelper<Block> helper) {
@@ -37,8 +41,9 @@ public class Registration {
         Constants.LOG.info("UE: Items registered!");
     }
 
-    public static void registerFeatures(RegistryHelper<Feature<?>> helper){
-        UEFeatures.init();
-        helper.register(UEFeatures.STONE_REPLACER, UENames.STONE_REPLACER);
+    public static void registerLootConditions() {
+        BlockStatePropertiesMatch.BLOCK_STATE_PROPERTIES_MATCH = new LootItemConditionType(new BlockStatePropertiesMatch.BSPSerializer());
+        ResourceLocation id = new ResourceLocation(Constants.MOD_ID, "block_state_properties_match");
+        Registry.register(Registry.LOOT_CONDITION_TYPE, id, BlockStatePropertiesMatch.BLOCK_STATE_PROPERTIES_MATCH);
     }
 }
