@@ -36,7 +36,6 @@ public class UnearthedForge implements CommonHelper {
 
     public void commonSetup(FMLCommonSetupEvent event) {
         CommonMod.commonSetup();
-        event.enqueueWork(Registration::registerLootConditions);
     }
 
     public static class RegistryHelperForge<T extends IForgeRegistryEntry<T>> implements RegistryHelper<T> {

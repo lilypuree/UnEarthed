@@ -24,7 +24,6 @@ public class UnearthedFabric implements ModInitializer, CommonHelper {
         CommonMod.init(this);
         Registration.registerBlocks(new RegistryHelperFabric<>(Registry.BLOCK));
         Registration.registerItems(new RegistryHelperFabric<>(Registry.ITEM));
-        Registration.registerLootConditions();
 
         CommonMod.commonSetup();
     }

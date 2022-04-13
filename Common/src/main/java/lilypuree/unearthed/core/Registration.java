@@ -41,9 +41,5 @@ public class Registration {
         Constants.LOG.info("UE: Items registered!");
     }
 
-    public static void registerLootConditions() {
-        BlockStatePropertiesMatch.BLOCK_STATE_PROPERTIES_MATCH = new LootItemConditionType(new BlockStatePropertiesMatch.BSPSerializer());
-        ResourceLocation id = new ResourceLocation(Constants.MOD_ID, "block_state_properties_match");
-        Registry.register(Registry.LOOT_CONDITION_TYPE, id, BlockStatePropertiesMatch.BLOCK_STATE_PROPERTIES_MATCH);
-    }
+
 }
