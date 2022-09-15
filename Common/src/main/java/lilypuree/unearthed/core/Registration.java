@@ -3,13 +3,15 @@ package lilypuree.unearthed.core;
 import lilypuree.unearthed.Constants;
 import lilypuree.unearthed.block.schema.BlockSchemas;
 import lilypuree.unearthed.misc.BlockStatePropertiesMatch;
+import lilypuree.unearthed.misc.HoeDig;
+import lilypuree.unearthed.platform.Services;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class Registration {
     public static void registerBlocks(RegistryHelper<Block> helper) {
@@ -26,12 +28,13 @@ public class Registration {
 
     public static void registerItems(RegistryHelper<Item> helper) {
         Constants.LOG.debug("UE: Registering items...");
-        Item.Properties properties = new Item.Properties().tab(Constants.ITEM_GROUP);
+        CreativeModeTab tab = Services.PLATFORM.createModTab("general", () -> new ItemStack(Registry.ITEM.get(new ResourceLocation(Constants.MOD_ID, "chiseled_limestone"))));
+        Item.Properties properties = new Item.Properties().tab(tab);
 
         BlockSchemas.ROCK_TYPES.forEach(schema -> schema.entries().forEach(entry -> {
             helper.register(new BlockItem(entry.getBlock(), properties), entry.getId());
         }));
-        UEItems.init();
+        UEItems.init(tab);
         helper.register(UEItems.LICHEN, UENames.LICHEN);
         helper.register(UEItems.PYROXENE, UENames.PYROXENE);
         helper.register(UEItems.LIGNITE_BRIQUETTES, UENames.LIGNITE_BRIQUETTES);
@@ -41,5 +44,9 @@ public class Registration {
         Constants.LOG.info("UE: Items registered!");
     }
 
+    public static void registerLootConditions() {
+        BlockStatePropertiesMatch.init();
+        HoeDig.init();
+    }
 
 }

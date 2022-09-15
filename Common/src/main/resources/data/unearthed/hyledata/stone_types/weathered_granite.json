@@ -3,6 +3,7 @@
   "dirt": "unearthed:weathered_rhyolite",
   "grass": "unearthed:weathered_rhyolite",
   "ores": {
+    "minecraft:stone_slab": "unearthed:white_granite_slab",
     "minecraft:iron_ore": "unearthed:white_granite_iron_ore",
     "minecraft:coal_ore": "unearthed:white_granite_coal_ore",
     "minecraft:copper_ore": "unearthed:white_granite_copper_ore",

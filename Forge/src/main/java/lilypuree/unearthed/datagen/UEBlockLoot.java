@@ -6,9 +6,8 @@ import lilypuree.unearthed.block.type.IOreType;
 import lilypuree.unearthed.block.type.VanillaOreTypes;
 import lilypuree.unearthed.core.UEBlocks;
 import lilypuree.unearthed.core.UEItems;
-import lilypuree.unearthed.core.UETags;
 import lilypuree.unearthed.misc.BlockStatePropertiesMatch;
-import net.minecraft.advancements.critereon.ItemPredicate;
+import lilypuree.unearthed.misc.HoeDig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -22,15 +21,11 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.function.BiConsumer;
 
 public class UEBlockLoot extends BlockLootTableAccessor {
-    private static final LootItemCondition.Builder HOES = MatchTool.toolMatches(ItemPredicate.Builder.item().of(UETags.Items.REGOLITH_USABLE));
-
-
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
 
@@ -46,7 +41,7 @@ public class UEBlockLoot extends BlockLootTableAccessor {
                 } else if (form instanceof Forms.OreForm oreForm) {
                     add(block, getOreDrop(block, oreForm.getOreType()));
                 } else if (form == Forms.GRASSY_REGOLITH) {
-                    add(block, regolithGrassBlock(block, UEItems.REGOLITH, Blocks.DIRT));
+                    add(block, regolithGrassBlock(block, UEItems.REGOLITH, Blocks.AIR));
                 } else if (form == Forms.REGOLITH) {
                     add(block, b -> createSingleItemTableWithSilkTouch(b, UEItems.REGOLITH));
                 } else if (form == Forms.OVERGROWN_ROCK) {
@@ -86,6 +81,6 @@ public class UEBlockLoot extends BlockLootTableAccessor {
     public static LootTable.Builder regolithGrassBlock(Block block, ItemLike noSilkTouch, ItemLike withHoe) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(block).when(HAS_SILK_TOUCH)
-                        .otherwise(LootItem.lootTableItem(withHoe).when(HOES).otherwise(applyExplosionCondition(block, LootItem.lootTableItem(noSilkTouch))))));
+                        .otherwise(LootItem.lootTableItem(withHoe).when(HoeDig.builder()).otherwise(applyExplosionCondition(block, LootItem.lootTableItem(noSilkTouch))))));
     }
 }

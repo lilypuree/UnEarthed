@@ -1,5 +1,7 @@
 package lilypuree.unearthed.block.schema;
 
+import lilypuree.unearthed.platform.Services;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -18,6 +20,8 @@ public class BlockSchemas {
     private static float stoneResistance = 6.0f;
     private static float miscResistance = 0.5f;
     private static BlockBehaviour.Properties stoneProperty = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(stoneHardness, stoneResistance);
+    private static final SoundType OVERGROWN_SOUND = Services.PLATFORM.createSoundType(1.0F, 1.0F, () -> SoundEvents.STONE_BREAK, () -> SoundEvents.GRASS_STEP, () -> SoundEvents.STONE_PLACE, () -> SoundEvents.STONE_HIT, () -> SoundEvents.GRASS_FALL);
+
 
     public static List<BlockSchema> ROCK_TYPES = new ArrayList<>();
 
@@ -39,9 +43,9 @@ public class BlockSchemas {
 
     public static final BlockSchema WEATHERED_RHYOLITE;
     public static final BlockSchema PILLOW_BASALT;
-//    public static final BlockSchema PUMICE;
+    //    public static final BlockSchema PUMICE;
     public static final BlockSchema DOLERITE;
-//    public static final BlockSchema MARBLE;
+    //    public static final BlockSchema MARBLE;
     public static final BlockSchema LIGNITE;
     public static final BlockSchema QUARTZITE;
 
@@ -93,9 +97,9 @@ public class BlockSchemas {
         DACITE = register("dacite", basalt_like, stone().color(MaterialColor.COLOR_LIGHT_GRAY).strength(1.25f, 4.2F).sound(SoundType.BASALT));
 
 //        vanilla block schemas
-        GRANITE = registerDefault("granite", intrusive, Blocks.GRANITE);
-        DIORITE = registerDefault("diorite", intrusive, Blocks.DIORITE);
-        ANDESITE = registerDefault("andesite", intrusive, Blocks.ANDESITE);
+        GRANITE = registerIntrusive("granite", intrusive, Blocks.GRANITE);
+        DIORITE = registerIntrusive("diorite", intrusive, Blocks.DIORITE);
+        ANDESITE = registerIntrusive("andesite", intrusive, Blocks.ANDESITE);
         SANDSTONE = registerDefault("sandstone", List.of(Variants.SANDSTONE), Blocks.SANDSTONE);
         STONE = registerDefault("stone", List.of(Variants.REGOLITHS), Blocks.STONE);
 
@@ -114,6 +118,15 @@ public class BlockSchemas {
 
     private static BlockSchema registerSand(String name, List<BlockVariant> variants, MaterialColor color) {
         return register(name, variants, sandStone().color(color));
+    }
+
+
+    private static BlockSchema registerIntrusive(String name, List<BlockVariant> variants, Block defaultBlock) {
+        BlockSchema schema = BlockSchema.builder(name, variants).defaultProperty(BlockBehaviour.Properties.copy(defaultBlock))
+                .setProperty(Forms.OVERGROWN_ROCK, BlockBehaviour.Properties.copy(defaultBlock).randomTicks().sound(OVERGROWN_SOUND)).build();
+        schema.setDefaultBlock(defaultBlock);
+        ROCK_TYPES.add(schema);
+        return schema;
     }
 
     private static BlockSchema registerDefault(String name, List<BlockVariant> variants, Block defaultBlock) {

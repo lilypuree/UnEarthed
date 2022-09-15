@@ -3,6 +3,7 @@
   "dirt": "unearthed:granodiorite_regolith",
   "grass": "unearthed:granodiorite_grassy_regolith",
   "ores": {
+    "minecraft:stone_slab": "unearthed:granodiorite_slab",
     "minecraft:iron_ore": "unearthed:granodiorite_iron_ore",
     "minecraft:coal_ore": "unearthed:granodiorite_coal_ore",
     "minecraft:copper_ore": "unearthed:granodiorite_copper_ore",

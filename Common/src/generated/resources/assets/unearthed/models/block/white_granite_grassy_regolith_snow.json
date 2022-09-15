@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "unearthed:block/side/white_granite_grassy_regolith_snow",
+    "bottom": "minecraft:block/grass_block_top",
+    "top": "unearthed:block/white_granite_regolith"
+  }
+}

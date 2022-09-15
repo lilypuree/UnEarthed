@@ -64,6 +64,5 @@ public class UEItemTagsProvider extends ItemTagsProvider {
                 tag(ItemTags.STONE_TOOL_MATERIALS).add(type.getBaseBlock().asItem());
             }
         }
-        tag(UETags.Items.REGOLITH_USABLE).add(Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE);
     }
 }

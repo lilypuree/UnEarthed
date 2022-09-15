@@ -3,6 +3,7 @@
   "dirt": "unearthed:mudstone_regolith",
   "grass": "unearthed:mudstone_grassy_regolith",
   "ores": {
+    "minecraft:stone_slab": "unearthed:mudstone_slab",
     "minecraft:iron_ore": "unearthed:mudstone_iron_ore",
     "minecraft:coal_ore": "unearthed:mudstone_coal_ore",
     "minecraft:copper_ore": "unearthed:mudstone_copper_ore",

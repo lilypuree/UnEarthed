@@ -20,9 +20,6 @@ public class UETags {
         public static TagKey<Block> SEDIMENTARY_TAG;
         public static TagKey<Block> IGNEOUS_TAG;
         public static TagKey<Block> METAMORPHIC_TAG;
-        public static TagKey<Block> REPLACABLE;
-        public static TagKey<Block> REPLACE_GRASS;
-        public static TagKey<Block> REPLACE_DIRT;
 
         public static void init(){
             UETags.Blocks.IGNEOUS_TAG = create("igneous");
@@ -41,8 +38,6 @@ public class UETags {
         public static TagKey<Item> SEDIMENTARY_ITEM;
         public static TagKey<Item> IGNEOUS_ITEM;
         public static TagKey<Item> METAMORPHIC_ITEM;
-        public static TagKey<Item> REGOLITH_USABLE;
-
 
         public static TagKey<Item> UNEARTHED_IRON_ORE;
         public static TagKey<Item> UNEARTHED_GOLD_ORE;
@@ -57,7 +52,6 @@ public class UETags {
             UETags.Items.IGNEOUS_ITEM = create("igneous");
             UETags.Items.METAMORPHIC_ITEM = create("metamorphic");
             UETags.Items.SEDIMENTARY_ITEM = create("sedimentary");
-            UETags.Items.REGOLITH_USABLE = create("regolith_usable");
             UETags.Items.REGOLITH_TAG = create("regolith");
             UETags.Items.UNEARTHED_IRON_ORE = create("iron_ore");
             UETags.Items.UNEARTHED_COAL_ORE = create("coal_ore");

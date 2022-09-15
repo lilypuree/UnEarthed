@@ -3,6 +3,7 @@
   "dirt": "unearthed:white_granite_regolith",
   "grass": "unearthed:white_granite_grassy_regolith",
   "ores": {
+    "minecraft:stone_slab": "unearthed:white_granite_slab",
     "minecraft:iron_ore": "unearthed:white_granite_iron_ore",
     "minecraft:coal_ore": "unearthed:white_granite_coal_ore",
     "minecraft:copper_ore": "unearthed:white_granite_copper_ore",

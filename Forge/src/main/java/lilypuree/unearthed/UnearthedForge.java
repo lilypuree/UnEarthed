@@ -4,9 +4,7 @@ package lilypuree.unearthed;
 import lilypuree.unearthed.core.Registration;
 import lilypuree.unearthed.core.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,12 +16,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.function.Supplier;
-
 @Mod(Constants.MOD_ID)
-public class UnearthedForge implements CommonHelper {
+public class UnearthedForge {
     public UnearthedForge() {
-        CommonMod.init(this);
+        CommonSetup.init();
         Constants.CONFIG = new UEForgeConfigs();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UEForgeConfigs.COMMON_CONFIG);
 
@@ -35,7 +31,8 @@ public class UnearthedForge implements CommonHelper {
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
-        CommonMod.commonSetup();
+        CommonSetup.commonSetup();
+        Registration.registerLootConditions();
     }
 
     public static class RegistryHelperForge<T extends IForgeRegistryEntry<T>> implements RegistryHelper<T> {
@@ -49,15 +46,5 @@ public class UnearthedForge implements CommonHelper {
         public void register(T entry, ResourceLocation name) {
             registry.register(entry.setRegistryName(name));
         }
-    }
-
-    @Override
-    public CreativeModeTab creativeModeTab(ResourceLocation name, Supplier<ItemStack> stack) {
-        return new CreativeModeTab(-1, name.getNamespace() + "." + name.getPath()) {
-            @Override
-            public ItemStack makeIcon() {
-                return stack.get();
-            }
-        };
     }
 }

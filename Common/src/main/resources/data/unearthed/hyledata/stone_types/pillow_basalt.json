@@ -3,6 +3,7 @@
   "dirt": "unearthed:pillow_basalt",
   "grass": "unearthed:pillow_basalt",
   "ores": {
+    "minecraft:stone_slab": "unearthed:pillow_basalt_slab",
     "minecraft:iron_ore": "unearthed:pillow_basalt",
     "minecraft:coal_ore": "unearthed:pillow_basalt",
     "minecraft:copper_ore": "unearthed:pillow_basalt",

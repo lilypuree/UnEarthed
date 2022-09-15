@@ -3,6 +3,7 @@
   "dirt": "minecraft:diorite",
   "grass": "unearthed:overgrown_diorite",
   "ores": {
+    "minecraft:stone_slab": "minecraft:diorite_slab",
     "minecraft:iron_ore": "mores:diorite_iron_ore",
     "minecraft:coal_ore": "mores:diorite_coal_ore",
     "minecraft:copper_ore": "mores:diorite_copper_ore",

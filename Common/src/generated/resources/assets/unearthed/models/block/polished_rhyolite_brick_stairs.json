@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "side": "unearthed:block/polished_rhyolite_bricks",
+    "bottom": "unearthed:block/polished_rhyolite_bricks",
+    "top": "unearthed:block/polished_rhyolite_bricks"
+  }
+}

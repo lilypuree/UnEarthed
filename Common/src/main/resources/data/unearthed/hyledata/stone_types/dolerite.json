@@ -3,6 +3,7 @@
   "dirt": "unearthed:dolerite",
   "grass": "unearthed:dolerite",
   "ores": {
+    "minecraft:stone_slab": "unearthed:dolerite_slab",
     "minecraft:iron_ore": "unearthed:dolerite",
     "minecraft:coal_ore": "unearthed:dolerite",
     "minecraft:copper_ore": "unearthed:dolerite",

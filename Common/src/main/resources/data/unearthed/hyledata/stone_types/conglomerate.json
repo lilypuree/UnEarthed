@@ -2,6 +2,7 @@
   "base": "unearthed:conglomerate",
   "dirt": "unearthed:conglomerate",
   "ores": {
+    "minecraft:stone_slab": "unearthed:conglomerate_slab",
     "minecraft:iron_ore": "unearthed:conglomerate_iron_ore",
     "minecraft:coal_ore": "unearthed:conglomerate_coal_ore",
     "minecraft:copper_ore": "unearthed:conglomerate_copper_ore",

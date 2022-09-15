@@ -3,6 +3,7 @@ package lilypuree.unearthed.core;
 import lilypuree.unearthed.Constants;
 import lilypuree.unearthed.misc.RegolithItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
 public class UEItems {
@@ -13,9 +14,9 @@ public class UEItems {
     public static Item LICHEN;
     public static Item PYROXENE;
 
-    public static void init() {
-        Item.Properties properties = new Item.Properties().tab(Constants.ITEM_GROUP);
-        UEItems.PYROXENE = new BlockItem(UEBlocks.PYROXENE, new Item.Properties().tab(Constants.ITEM_GROUP).fireResistant());
+    public static void init(CreativeModeTab tab) {
+        Item.Properties properties = new Item.Properties().tab(tab);
+        UEItems.PYROXENE = new BlockItem(UEBlocks.PYROXENE, new Item.Properties().tab(tab).fireResistant());
         UEItems.IRON_ORE = new Item(properties);
         UEItems.GOLD_ORE = new Item(properties);
         UEItems.REGOLITH = new RegolithItem(properties);

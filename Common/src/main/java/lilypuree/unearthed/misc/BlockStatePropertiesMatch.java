@@ -23,6 +23,9 @@ import java.util.Set;
 
 public class BlockStatePropertiesMatch implements LootItemCondition {
 
+    public static void init(){
+
+    }
     public static LootItemConditionType BLOCK_STATE_PROPERTIES_MATCH = Registry.register(Registry.LOOT_CONDITION_TYPE, new ResourceLocation(Constants.MOD_ID, "block_state_properties_match"), new LootItemConditionType(new BSPSerializer()));
     private final Block block;
     private final String propertyNameA;

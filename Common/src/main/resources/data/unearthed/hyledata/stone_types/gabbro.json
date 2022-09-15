@@ -3,6 +3,7 @@
   "dirt": "unearthed:gabbro_regolith",
   "grass": "unearthed:gabbro_grassy_regolith",
   "ores": {
+    "minecraft:stone_slab": "unearthed:gabbro_slab",
     "minecraft:iron_ore": "unearthed:gabbro_iron_ore",
     "minecraft:coal_ore": "unearthed:gabbro_coal_ore",
     "minecraft:copper_ore": "unearthed:gabbro_copper_ore",

@@ -45,7 +45,7 @@ public class UEBlockStates extends BlockStateProvider {
         String grassName = block.getRegistryName().getPath();
         ModelFile grassyBlock = overlayBlock(grassName, baseTexture, grass_top, modLoc("block/side/" + grassName + "_side"), grass_overlay, true);
         String snowName = block.getRegistryName().getPath() + "_snow";
-        ModelFile snowyBlock = models().cubeTop(snowName, modLoc("block/side/" + snowName), grass_top);
+        ModelFile snowyBlock = models().cubeBottomTop(snowName, modLoc("block/side/" + snowName), grass_top, baseTexture);
 
         getVariantBuilder(block).partialState().with(BlockStateProperties.SNOWY, false).modelForState()
                 .modelFile(grassyBlock).nextModel().modelFile(grassyBlock).rotationY(90).nextModel().modelFile(grassyBlock).rotationY(180).modelFile(grassyBlock).rotationY(270).addModel()

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "unearthed:block/granodiorite",
+    "bottom": "unearthed:block/granodiorite",
+    "top": "unearthed:block/granodiorite"
+  }
+}

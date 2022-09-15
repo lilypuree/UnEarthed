@@ -51,10 +51,20 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
 
                 if (form == Forms.BUTTON) {
                     tag(BlockTags.BUTTONS).add(block);
+                } else if (form == Forms.REGOLITH) {
+                    tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block);
+                } else if (form == Forms.GRASSY_REGOLITH) {
+                    tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block);
+                    tag(BlockTags.MINEABLE_WITH_HOE).add(block);
                 } else {
                     tag(BlockTags.MINEABLE_WITH_PICKAXE).add(block);
                 }
 
+                if (form == Forms.OVERGROWN_ROCK || form == Forms.GRASSY_REGOLITH){
+                    tag(BlockTags.DIRT).add(block);
+                    tag(BlockTags.ANIMALS_SPAWNABLE_ON).add(block);
+                    tag(BlockTags.VALID_SPAWN).add(block);
+                }
 
                 if (form instanceof Forms.OreForm) {
                     IOreType oreType = ((Forms.OreForm) form).getOreType();
@@ -93,10 +103,6 @@ public class UEBlockTagsProvider extends BlockTagsProvider {
                 } else if (form == Forms.REGOLITH || form == Forms.GRASSY_REGOLITH) {
                     tag(UETags.Blocks.REGOLITH_TAG).add(block);
                     tag(BlockTags.DIRT).add(block);
-                    if (form == Forms.GRASSY_REGOLITH) {
-                        tag(BlockTags.ANIMALS_SPAWNABLE_ON).add(block);
-                        tag(BlockTags.VALID_SPAWN).add(block);
-                    }
                 } else if (entry.getVariant() == Variants.COBBLED && form.isBaseForm()) {
                     tag(Tags.Blocks.COBBLESTONE).add(block);
                 }

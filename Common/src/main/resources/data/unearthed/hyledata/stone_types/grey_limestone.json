@@ -4,6 +4,7 @@
   "dirt": "unearthed:grey_limestone_regolith",
   "grass": "unearthed:grey_limestone_grassy_regolith",
   "ores": {
+    "minecraft:stone_slab": "unearthed:grey_limestone_slab",
     "minecraft:iron_ore": "unearthed:grey_limestone_iron_ore",
     "minecraft:coal_ore": "unearthed:grey_limestone_coal_ore",
     "minecraft:copper_ore": "unearthed:grey_limestone_copper_ore",

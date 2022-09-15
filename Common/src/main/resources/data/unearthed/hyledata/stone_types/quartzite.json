@@ -3,6 +3,7 @@
   "dirt": "unearthed:quartzite",
   "grass": "unearthed:quartzite",
   "ores": {
+    "minecraft:stone_slab": "unearthed:quartzite_slab",
     "minecraft:iron_ore": "unearthed:quartzite",
     "minecraft:coal_ore": "unearthed:quartzite",
     "minecraft:copper_ore": "unearthed:quartzite",
