@@ -47,10 +47,8 @@ public class RegolithGrassBlock extends GrassBlock {
                     BlockState blockState = worldIn.getBlockState(blockpos);
                     if (blockState.getBlock() instanceof RegolithBlock && regolithToGrassMap.containsKey(blockState.getBlock()) && canPropagate(blockState, worldIn, blockpos)) {
                         worldIn.setBlockAndUpdate(blockpos, regolithToGrassMap.get(blockState.getBlock()).defaultBlockState());
-                        worldIn.setBlockAndUpdate(blockpos.above(), Blocks.AIR.defaultBlockState());
                     } else if (blockState.is(Blocks.DIRT) && canPropagate(blockState, worldIn, blockpos)) {
                         worldIn.setBlockAndUpdate(blockpos, Blocks.GRASS_BLOCK.defaultBlockState());
-                        worldIn.setBlockAndUpdate(blockpos.above(), Blocks.AIR.defaultBlockState());
                     }
                 }
             }
