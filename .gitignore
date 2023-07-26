@@ -20,7 +20,7 @@ build
 # other
 eclipse
 run
-/Common/src/main/resources/assets/unearthed/textures/block/ore_aseprite/
-/Common/libs/
+/main/main/main/resources/assets/unearthed/textures/block/ore_aseprite/
+/main/libs/
 /Fabric/lib/
 /Forge/lib/

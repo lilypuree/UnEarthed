@@ -1,16 +1,21 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        maven {
-            name = 'Sponge Snapshots'
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://maven.parchmentmc.org' }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            switch (requested.id.toString()) {
+                case "net.minecraftforge.gradle": {
+                    useModule("${requested.id}:ForgeGradle:${requested.version}")
+                    break
+                }
+                case "org.spongepowered.mixin": {
+                    useModule("org.spongepowered:mixingradle:${requested.version}")
+                    break;
+                }
+            }
         }
     }
 }
-
-rootProject.name = 'Unearthed'
-include("Common", "Fabric", "Forge")
