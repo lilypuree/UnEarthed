@@ -449,7 +449,7 @@
   "item.unearthed.slate_slab": "板岩台阶",
   "item.unearthed.slate_stairs": "板岩楼梯",
   "item.unearthed.slate_wall": "板岩墙",
-  "itemGroup.unearthed": "出土",
+  "itemGroup.unearthed.general": "出土",
   "block.unearthed.andesite_coal_ore": "安山岩煤矿石",
   "block.unearthed.andesite_diamond_ore": "安山岩钻石矿石",
   "block.unearthed.andesite_emerald_ore": "安山岩钻石矿石",

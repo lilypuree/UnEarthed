@@ -413,5 +413,5 @@
   "item.unearthed.gold_ore": "Gold Ore",
   "item.unearthed.iron_ore": "Iron Ore",
   "item.unearthed.regolith": "Regolith",
-  "itemGroup.unearthed": "Unearthed"
+  "itemGroup.unearthed.general": "Unearthed"
 }
