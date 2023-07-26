@@ -101,6 +101,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    mavenCentral()
     maven { url 'https://www.jitpack.io' }
     maven {
         name = "Shedaniel Maven" //REI + Cloth Config
@@ -135,7 +136,7 @@ dependencies {
     library fg.deobf('net.openhft:zero-allocation-hashing:0.15')
 
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    implementation fg.deobf('com.github.Mysticpasta1:Hyle:3a29e2bcc0')
+    implementation fg.deobf('com.github.Mysticpasta1:Hyle:a175616061')
 }
 
 mixin {
