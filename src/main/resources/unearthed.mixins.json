@@ -5,12 +5,12 @@
   "refmap": "unearthed.refmap.json",
   "minVersion": "0.8",
   "mixins": [
-    "server.StairBlockInvoker",
     "server.MixinAbstractFurnaceTileEntity",
-    "server.MixinSpreadableSnowyDirtBlock",
     "server.MixinFlowingFluidBlock",
+    "server.MixinSpreadableSnowyDirtBlock",
+    "server.OreConfigurationMixin",
     "server.RecipeManagerMixin",
-    "server.OreConfigurationMixin"
+    "server.StairBlockInvoker"
   ],
   "client": [
     "client.MixinClientWorld"

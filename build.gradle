@@ -4,6 +4,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
     id 'eclipse'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 archivesBaseName = archivesBaseName
@@ -112,31 +113,17 @@ repositories {
     }
 }
 
-configurations {
-    shade
-    implementation.extendsFrom shade
-}
-
-configurations {
-    library
-    implementation.extendsFrom library
-    shade.extendsFrom library
-}
-
-minecraft.runs.all {
-    lazyToken('minecraft_classpath') {
-        configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
-    }
-}
+jarJar.enable()
+tasks.named("jarJar") {}
 
 dependencies {
     // Base
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    library fg.deobf('net.openhft:zero-allocation-hashing:0.15')
-
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    implementation fg.deobf('com.github.Mysticpasta1:Hyle:a175616061')
+    implementation fg.deobf('com.github.Mysticpasta1:Hyle:2dbd62c992')
+    implementation group: "net.openhft", name: "zero-allocation-hashing", version: "0.16"
+    jarJar (group: "net.openhft", name: "zero-allocation-hashing", version: "[0.16, )")
 }
 
 mixin {
@@ -165,6 +152,8 @@ jar.finalizedBy('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            from components.java
+            jarJar.component(it)
             artifact jar
         }
     }
