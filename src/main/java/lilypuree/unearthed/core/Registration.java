@@ -6,6 +6,7 @@
 package lilypuree.unearthed.core;
 
 import java.util.Objects;
+
 import lilypuree.unearthed.Constants;
 import lilypuree.unearthed.block.LichenBlock;
 import lilypuree.unearthed.block.schema.BlockSchemas;
@@ -91,13 +92,13 @@ public class Registration {
         LICHEN = BLOCKS.register("lichen", () -> new LichenBlock(Properties.of().noOcclusion().randomTicks().strength(0.2F).sound(SoundType.GRASS)));
         PYROXENE = BLOCKS.register("pyroxene", () -> new GravelBlock(Properties.of().strength(0.6F).sound(SoundType.GRAVEL)));
         LIGNITE_BRIQUETTES = BLOCKS.register("lignite_briquettes", () -> new Block(Properties.copy(Blocks.COAL_BLOCK)));
-        tab = Services.PLATFORM.createModTab("general", () -> new ItemStack((ItemLike)Objects.requireNonNull((Item)ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("unearthed", "chiseled_limestone")))));
+        tab = Services.PLATFORM.createModTab("general", () -> new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("unearthed", "chiseled_limestone")))));
         modeTab = CREATIVE_TABS.register("general", () -> tab);
-        PYROXENE_ITEM = ITEMS.register("pyroxene", () -> new BlockItem((Block)PYROXENE.get(), (new Item.Properties()).fireResistant()));
+        PYROXENE_ITEM = ITEMS.register("pyroxene", () -> new BlockItem(PYROXENE.get(), (new Item.Properties()).fireResistant()));
         IRON_ORE = ITEMS.register("iron_ore", () -> new Item(new Item.Properties()));
         GOLD_ORE = ITEMS.register("gold_ore", () -> new Item(new Item.Properties()));
         REGOLITH = ITEMS.register("regolith", () -> new RegolithItem(new Item.Properties()));
-        LICHEN_ITEM = ITEMS.register("lichen", () -> new BlockItem((Block)LICHEN.get(), new Item.Properties()));
-        LIGNITE_BRIQUETTES_ITEM = ITEMS.register("lignite_briquettes", () -> new BlockItem((Block)LIGNITE_BRIQUETTES.get(), new Item.Properties()));
+        LICHEN_ITEM = ITEMS.register("lichen", () -> new BlockItem(LICHEN.get(), new Item.Properties()));
+        LIGNITE_BRIQUETTES_ITEM = ITEMS.register("lignite_briquettes", () -> new BlockItem(LIGNITE_BRIQUETTES.get(), new Item.Properties()));
     }
 }

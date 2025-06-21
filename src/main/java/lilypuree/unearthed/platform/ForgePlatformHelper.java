@@ -37,7 +37,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public static final List<Supplier<? extends ItemLike>> MAIN_ITEMS = new ArrayList();
 
     public CreativeModeTab createModTab(String name, Supplier<ItemStack> icon) {
-        return CreativeModeTab.builder().title(Component.translatable("unearthed." + name)).icon(icon).displayItems((pParameters, pOutput) -> {
+        return CreativeModeTab.builder().title(Component.translatable("itemGroup.unearthed." + name)).icon(icon).displayItems((pParameters, pOutput) -> {
             MAIN_BLOCKS.forEach((itemLike) -> pOutput.accept(itemLike.get()));
             MAIN_ITEMS.forEach((itemLike) -> pOutput.accept(itemLike.get()));
         }).build();

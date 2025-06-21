@@ -1,8 +1,31 @@
 {
   "replace": false,
   "values": [
-    "unearthed:igneous",
-    "unearthed:metamorphic",
-    "unearthed:sedimentary"
+    "unearthed:gabbro",
+    "unearthed:granodiorite",
+    "unearthed:rhyolite",
+    "unearthed:white_granite",
+    "unearthed:dacite",
+    "unearthed:dolerite",
+    "unearthed:pillow_basalt",
+    "unearthed:weathered_rhyolite",
+    "minecraft:andesite",
+    "minecraft:diorite",
+    "minecraft:granite",
+    "minecraft:basalt",
+    "unearthed:phyllite",
+    "unearthed:slate",
+    "unearthed:quartzite",
+    "unearthed:schist",
+    "minecraft:blackstone",
+    "unearthed:siltstone",
+    "unearthed:mudstone",
+    "unearthed:lignite",
+    "unearthed:limestone",
+    "unearthed:beige_limestone",
+    "unearthed:grey_limestone",
+    "unearthed:conglomerate",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone"
   ]
 }
