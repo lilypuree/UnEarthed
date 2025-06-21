@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -153,7 +152,7 @@ public class BlockSchema {
                 } else if (form == Forms.GRASSY_REGOLITH) {
                     entry.property = BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK);
                 } else if (form == Forms.BUTTON) {
-                    entry.property = BlockBehaviour.Properties.of(Material.DECORATION).noCollission().strength(0.5f);
+                    entry.property = BlockBehaviour.Properties.of().noCollission().strength(0.5f);
                 } else if (form == Forms.PRESSURE_PLATE) {
                     entry.property = newProperty().noCollission().strength(0.5F);
                 }

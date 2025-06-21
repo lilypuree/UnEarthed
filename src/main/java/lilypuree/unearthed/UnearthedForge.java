@@ -10,18 +10,18 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Constants.MOD_ID)
 public class UnearthedForge {
-    public UnearthedForge() {
+    public UnearthedForge(FMLJavaModLoadingContext context) {
         CommonSetup.init();
         Constants.CONFIG = new UEForgeConfigs();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UEForgeConfigs.COMMON_CONFIG);
-        IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
+        context.registerConfig(ModConfig.Type.COMMON, UEForgeConfigs.COMMON_CONFIG);
+        IEventBus modbus = context.getModEventBus();
         Registration.init(modbus);
+        Registration.registerLootConditions(modbus);
         modbus.addListener(this::commonSetup);
 
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
         CommonSetup.commonSetup();
-        Registration.registerLootConditions();
     }
 }

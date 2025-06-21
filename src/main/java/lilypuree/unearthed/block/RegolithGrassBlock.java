@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.lighting.LayerLightEngine;
+import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -72,7 +72,7 @@ public class RegolithGrassBlock extends GrassBlock {
         } else if (blockstate.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LayerLightEngine.getLightBlockInto(worldReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(worldReader, blockpos));
+            int i = LightEngine.getLightBlockInto(worldReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(worldReader, blockpos));
             return i < worldReader.getMaxLightLevel();
         }
     }

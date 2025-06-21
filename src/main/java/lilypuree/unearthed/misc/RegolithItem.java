@@ -54,17 +54,8 @@ public class RegolithItem extends BlockItem {
         return this.getOrCreateDescriptionId();
     }
 
-
-
     @Override
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (this.allowedIn(group)) {
-            items.add(new ItemStack(this));
-        }
     }
 
     @Override

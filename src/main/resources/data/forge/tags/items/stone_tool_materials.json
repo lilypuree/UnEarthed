@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:igneous",
+    "unearthed:metamorphic",
+    "unearthed:sedimentary"
+  ]
+}

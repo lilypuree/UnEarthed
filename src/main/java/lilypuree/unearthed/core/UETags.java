@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class UETags {
 
@@ -28,7 +29,7 @@ public class UETags {
 
         }
         private static TagKey<Block> create(String name){
-            return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(Constants.MOD_ID, name));
+            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name));
         }
     }
 
@@ -63,7 +64,7 @@ public class UETags {
         }
 
         private static TagKey<Item> create(String name){
-            return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Constants.MOD_ID, name));
+            return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name));
         }
     }
 }

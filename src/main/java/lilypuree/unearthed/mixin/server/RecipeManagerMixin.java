@@ -26,10 +26,10 @@ public class RecipeManagerMixin {
     private void onApply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller filler, CallbackInfo ci, Map<RecipeType<?>, ImmutableMap.Builder<ResourceLocation, Recipe<?>>> recipeMap, ImmutableMap.Builder<ResourceLocation, Recipe<?>> byNameMapBuilder) {
 
         if (Constants.CONFIG.enableRegolithToDirt()) {
-            ResourceLocation location = new ResourceLocation(Constants.MOD_ID, "dirt_from_regolith");
+            ResourceLocation location = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "dirt_from_regolith");
             NonNullList<Ingredient> nonNullList = NonNullList.create();
             nonNullList.add(Ingredient.of(Registration.REGOLITH.get()));
-            Recipe<?> regolithToDirt = new ShapelessRecipe(location, "", new ItemStack(Items.DIRT), nonNullList);
+            Recipe<?> regolithToDirt = new ShapelessRecipe(location, "", CraftingBookCategory.BUILDING, new ItemStack(Items.DIRT), nonNullList);
 
             recipeMap.computeIfAbsent(regolithToDirt.getType(), x -> ImmutableMap.builder()).put(location, regolithToDirt);
             byNameMapBuilder.put(location, regolithToDirt);

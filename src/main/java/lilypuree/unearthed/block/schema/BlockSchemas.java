@@ -6,8 +6,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class BlockSchemas {
     private static float cobbleHardness = 2.0f;
     private static float stoneResistance = 6.0f;
     private static float miscResistance = 0.5f;
-    private static BlockBehaviour.Properties stoneProperty = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(stoneHardness, stoneResistance);
+    private static BlockBehaviour.Properties stoneProperty = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(stoneHardness, stoneResistance);
     private static final SoundType OVERGROWN_SOUND = Services.PLATFORM.createSoundType(1.0F, 1.0F, () -> SoundEvents.STONE_BREAK, () -> SoundEvents.GRASS_STEP, () -> SoundEvents.STONE_PLACE, () -> SoundEvents.STONE_HIT, () -> SoundEvents.GRASS_FALL);
 
 
@@ -74,27 +72,27 @@ public class BlockSchemas {
 
         List<BlockVariant> intrusive = create(OVERGROWN);
 
-        PHYLLITE = register("phyllite", stone_like, MaterialColor.COLOR_LIGHT_GRAY);
-        SLATE = register("slate", stone_like, MaterialColor.COLOR_GRAY);
+        PHYLLITE = register("phyllite", stone_like);
+        SLATE = register("slate", stone_like);
 
         GABBRO = register("gabbro", blackstone_like);
-        GRANODIORITE = register("granodiorite", blackstone_like, MaterialColor.COLOR_LIGHT_GRAY);
-        RHYOLITE = register("rhyolite", blackstone_like, MaterialColor.COLOR_ORANGE);
-        WHITE_GRANITE = register("white_granite", blackstone_like, MaterialColor.QUARTZ);
+        GRANODIORITE = register("granodiorite", blackstone_like);
+        RHYOLITE = register("rhyolite", blackstone_like);
+        WHITE_GRANITE = register("white_granite", blackstone_like);
         LIMESTONE = register("limestone", limestone);
-        BEIGE_LIMESTONE = register("beige_limestone", beige_limestone, MaterialColor.TERRACOTTA_WHITE);
-        GREY_LIMESTONE = register("grey_limestone", limestone, MaterialColor.CLAY);
-        SILTSTONE = registerSand("siltstone", sandstone_like, MaterialColor.TERRACOTTA_ORANGE);
-        MUDSTONE = registerSand("mudstone", mudstone, MaterialColor.TERRACOTTA_RED);
-        CONGLOMERATE = registerSand("conglomerate", secondary, MaterialColor.DIRT);
+        BEIGE_LIMESTONE = register("beige_limestone", beige_limestone);
+        GREY_LIMESTONE = register("grey_limestone", limestone);
+        SILTSTONE = registerSand("siltstone", sandstone_like);
+        MUDSTONE = registerSand("mudstone", mudstone);
+        CONGLOMERATE = registerSand("conglomerate", secondary);
 
-        QUARTZITE = register("quartzite", basic, MaterialColor.QUARTZ);
+        QUARTZITE = register("quartzite", basic);
         WEATHERED_RHYOLITE = register("weathered_rhyolite", basic);
-        DOLERITE = register("dolerite", basic, MaterialColor.COLOR_BROWN);
-        SCHIST = register("schist", schist, MaterialColor.COLOR_CYAN);
-        LIGNITE = registerSand("lignite", decorative, MaterialColor.COLOR_BLACK);
+        DOLERITE = register("dolerite", basic);
+        SCHIST = register("schist", schist);
+        LIGNITE = registerSand("lignite", decorative);
         PILLOW_BASALT = register("pillow_basalt", basic, stone().strength(3.0f, 6.0f));
-        DACITE = register("dacite", basalt_like, stone().color(MaterialColor.COLOR_LIGHT_GRAY).strength(1.25f, 4.2F).sound(SoundType.BASALT));
+        DACITE = register("dacite", basalt_like, stone().strength(1.25f, 4.2F).sound(SoundType.BASALT));
 
 //        vanilla block schemas
         GRANITE = registerIntrusive("granite", intrusive, Blocks.GRANITE);
@@ -102,22 +100,14 @@ public class BlockSchemas {
         ANDESITE = registerIntrusive("andesite", intrusive, Blocks.ANDESITE);
         SANDSTONE = registerDefault("sandstone", List.of(Variants.SANDSTONE), Blocks.SANDSTONE);
         STONE = registerDefault("stone", List.of(Variants.REGOLITHS), Blocks.STONE);
-
-
-        //        PUMICE = register("pumice", basic, stone().color(MaterialColor.COLOR_BLACK).sound(SoundType.BASALT));
-//        MARBLE = register("marble", decorative, MaterialColor.SNOW);
     }
 
     private static BlockSchema register(String name, List<BlockVariant> variants) {
         return register(name, variants, stoneProperty);
     }
 
-    private static BlockSchema register(String name, List<BlockVariant> variants, MaterialColor color) {
-        return register(name, variants, stone().color(color));
-    }
-
-    private static BlockSchema registerSand(String name, List<BlockVariant> variants, MaterialColor color) {
-        return register(name, variants, sandStone().color(color));
+    private static BlockSchema registerSand(String name, List<BlockVariant> variants) {
+        return register(name, variants, sandStone());
     }
 
 
@@ -150,6 +140,6 @@ public class BlockSchemas {
     }
 
     private static BlockBehaviour.Properties sandStone() {
-        return BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(0.8f);
+        return BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(0.8f);
     }
 }

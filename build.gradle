@@ -121,7 +121,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    implementation fg.deobf('com.github.Mysticpasta1:Hyle:2dbd62c992')
+    implementation fg.deobf('com.github.Mysticpasta1:Hyle:4d8243770b')
     implementation group: "net.openhft", name: "zero-allocation-hashing", version: "0.16"
     jarJar (group: "net.openhft", name: "zero-allocation-hashing", version: "[0.16, )")
 }
