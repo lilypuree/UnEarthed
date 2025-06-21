@@ -9,7 +9,6 @@
     "server.MixinFlowingFluidBlock",
     "server.MixinSpreadableSnowyDirtBlock",
     "server.OreConfigurationMixin",
-    "server.RecipeManagerMixin",
     "server.StairBlockInvoker"
   ],
   "client": [
