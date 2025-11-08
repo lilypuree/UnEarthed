@@ -108,6 +108,16 @@ repositories {
         name = "Shedaniel Maven" //REI + Cloth Config
         url "https://maven.shedaniel.me/"
     }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
     flatDir {
         dir 'libs'
     }
@@ -122,6 +132,8 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
     implementation fg.deobf('com.github.Mysticpasta1:Hyle:4d82437')
+    compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.118"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.118"))
     minecraftLibrary group: "net.openhft", name: "zero-allocation-hashing", version: "0.16"
     jarJar (group: "net.openhft", name: "zero-allocation-hashing", version: "[0.16, )")
 }
