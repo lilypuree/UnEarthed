@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:mossy_slate_brick_wall_from_mossy_slate_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_mossy_slate_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:mossy_slate_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:mossy_slate_brick_wall_from_mossy_slate_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mossy_slate_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ox"
+  ],
+  "key": {
+    "x": {
+      "item": "unearthed:limestone"
+    },
+    "o": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "result": {
+    "item": "unearthed:grey_limestone",
+    "count": 4
+  }
+}

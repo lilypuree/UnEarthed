@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:siltstone"
+  },
+  "result": "unearthed:cut_siltstone_slab",
+  "count": 2
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:chiseled_limestone"
+    ]
+  },
+  "criteria": {
+    "has_limestone_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:limestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:chiseled_limestone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_limestone_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

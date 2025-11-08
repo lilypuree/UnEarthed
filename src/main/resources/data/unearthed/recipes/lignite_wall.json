@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:lignite"
+    }
+  },
+  "result": {
+    "item": "unearthed:lignite_wall",
+    "count": 6
+  }
+}

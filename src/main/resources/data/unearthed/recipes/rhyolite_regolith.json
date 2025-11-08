@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "item": "unearthed:rhyolite"
+    }
+  ],
+  "result": {
+    "item": "unearthed:rhyolite_regolith",
+    "count": 8
+  }
+}

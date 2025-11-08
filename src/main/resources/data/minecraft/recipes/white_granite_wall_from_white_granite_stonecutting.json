@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:white_granite"
+  },
+  "result": "unearthed:white_granite_wall",
+  "count": 1
+}

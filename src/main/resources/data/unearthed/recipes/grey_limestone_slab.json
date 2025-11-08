@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:grey_limestone"
+    }
+  },
+  "result": {
+    "item": "unearthed:grey_limestone_slab",
+    "count": 6
+  }
+}

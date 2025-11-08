@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:conglomerate"
+  },
+  "result": "unearthed:polished_conglomerate_wall",
+  "count": 1
+}

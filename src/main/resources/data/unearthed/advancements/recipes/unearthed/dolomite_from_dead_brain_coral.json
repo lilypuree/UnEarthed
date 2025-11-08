@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:dolomite_from_dead_brain_coral"
+    ]
+  },
+  "criteria": {
+    "has_dead_brain_coral": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:dead_brain_coral"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:dolomite_from_dead_brain_coral"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dead_brain_coral",
+      "has_the_recipe"
+    ]
+  ]
+}

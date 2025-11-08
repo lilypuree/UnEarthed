@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_granodiorite_bricks_from_granodiorite_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_granodiorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:granodiorite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:polished_granodiorite_bricks_from_granodiorite_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_granodiorite",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "item": "unearthed:quartzite"
+    }
+  ],
+  "result": {
+    "item": "unearthed:quartzite_regolith",
+    "count": 8
+  }
+}

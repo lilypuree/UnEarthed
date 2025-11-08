@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:dolerite_wall_from_dolerite_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_dolerite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:dolerite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:dolerite_wall_from_dolerite_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dolerite",
+      "has_the_recipe"
+    ]
+  ]
+}

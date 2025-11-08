@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:beige_limestone_slab"
+    ]
+  },
+  "criteria": {
+    "has_beige_limestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:beige_limestone"
+          }
+        ]
+      }
+    },
+    "has_chiseled_beige_limestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:chiseled_beige_limestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:beige_limestone_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beige_limestone",
+      "has_chiseled_beige_limestone",
+      "has_the_recipe"
+    ]
+  ]
+}

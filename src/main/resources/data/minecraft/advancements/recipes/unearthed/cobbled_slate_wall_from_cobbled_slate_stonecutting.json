@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:cobbled_slate_wall_from_cobbled_slate_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_cobbled_slate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:cobbled_slate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:cobbled_slate_wall_from_cobbled_slate_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_slate",
+      "has_the_recipe"
+    ]
+  ]
+}

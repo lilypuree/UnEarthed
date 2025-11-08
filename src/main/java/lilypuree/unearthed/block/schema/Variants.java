@@ -28,7 +28,8 @@ public class Variants {
     public static BlockVariant CRACKED_POLISHED_BRICKS;
     public static BlockVariant PILLAR;
     public static BlockVariant POLISHED_PILLAR;
-
+    public static BlockVariant VANILLA;
+    public static BlockVariant KIMBERLITE;
     public static BlockVariant BASIC;
     public static BlockVariant PILLAR_BLOCK;
 
@@ -60,12 +61,15 @@ public class Variants {
         ALL_BLOCKS_PLUS = new BlockVariant("", stoneLike);
         ALL_BASE_BLOCKS = new BlockVariant("", secondary);
 
+        VANILLA = new BlockVariant("", ores);
 
         BASIC = new BlockVariant("", baseBlocks);
         SEDIMENTARY = new BlockVariant("", secondary).sideTop();
 
         COBBLED = new BlockVariant("cobbled", baseBlocks);
         MOSSY_COBBLED = new BlockVariant("mossy_cobbled", baseBlocks);
+
+        KIMBERLITE = new BlockVariant("", Forms.BLOCK, Forms.SLAB, Forms.STAIRS, Forms.WALLS, Forms.KIMBERLITE_DIAMOND_ORE, Forms.REGOLITH, Forms.GRASSY_REGOLITH);
 
         POLISHED = new BlockVariant("polished", baseBlocks).setDerivative();
         POLISHED_NOWALL = new BlockVariant("polished", noWall).setDerivative();

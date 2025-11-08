@@ -5,6 +5,8 @@
     "unearthed:slate",
     "unearthed:quartzite",
     "unearthed:schist",
+    "unearthed:dolomite",
+    "unearthed:marble",
     "minecraft:blackstone"
   ]
 }

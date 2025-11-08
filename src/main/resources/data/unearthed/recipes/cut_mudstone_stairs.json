@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:cut_mudstone"
+    }
+  },
+  "result": {
+    "item": "unearthed:cut_mudstone_stairs",
+    "count": 4
+  }
+}

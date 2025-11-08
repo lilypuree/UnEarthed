@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:rhyolite"
+  },
+  "result": "unearthed:polished_rhyolite_wall",
+  "count": 1
+}

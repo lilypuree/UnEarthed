@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:cobbled_beige_limestone_wall_from_cobbled_beige_limestone_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_cobbled_beige_limestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:cobbled_beige_limestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:cobbled_beige_limestone_wall_from_cobbled_beige_limestone_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_beige_limestone",
+      "has_the_recipe"
+    ]
+  ]
+}

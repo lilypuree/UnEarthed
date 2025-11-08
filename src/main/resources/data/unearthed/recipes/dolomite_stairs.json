@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:dolomite"
+    }
+  },
+  "result": {
+    "item": "unearthed:dolomite_stairs",
+    "count": 4
+  }
+}

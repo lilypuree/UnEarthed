@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:polished_rhyolite_bricks"
+    }
+  },
+  "result": {
+    "item": "unearthed:polished_rhyolite_brick_wall",
+    "count": 6
+  }
+}

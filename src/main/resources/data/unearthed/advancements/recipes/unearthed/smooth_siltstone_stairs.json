@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:smooth_siltstone_stairs"
+    ]
+  },
+  "criteria": {
+    "has_smooth_siltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:smooth_siltstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:smooth_siltstone_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_siltstone",
+      "has_the_recipe"
+    ]
+  ]
+}

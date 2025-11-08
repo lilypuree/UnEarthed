@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "tag": "unearthed:regolith"
+    },
+    {
+      "item": "unearthed:siltstone"
+    }
+  ],
+  "result": {
+    "item": "unearthed:siltstone_regolith",
+    "count": 8
+  }
+}

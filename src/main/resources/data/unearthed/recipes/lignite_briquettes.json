@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:lignite"
+    },
+    "*": {
+      "item": "minecraft:clay"
+    }
+  },
+  "result": {
+    "item": "unearthed:lignite_briquettes"
+  }
+}

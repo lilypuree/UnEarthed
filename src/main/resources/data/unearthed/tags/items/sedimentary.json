@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:conglomerate",
+    "unearthed:beige_limestone",
+    "unearthed:limestone",
+    "unearthed:grey_limestone",
+    "unearthed:siltstone",
+    "unearthed:mudstone",
+    "unearthed:lignite",
+    "minecraft:sandstone",
+    "minecraft:stone",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone"
+  ]
+}

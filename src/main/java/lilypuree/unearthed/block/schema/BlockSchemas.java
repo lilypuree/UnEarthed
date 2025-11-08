@@ -41,12 +41,13 @@ public class BlockSchemas {
 
     public static final BlockSchema WEATHERED_RHYOLITE;
     public static final BlockSchema PILLOW_BASALT;
-    //    public static final BlockSchema PUMICE;
+    public static final BlockSchema PUMICE;
     public static final BlockSchema DOLERITE;
-    //    public static final BlockSchema MARBLE;
+    public static final BlockSchema MARBLE;
     public static final BlockSchema LIGNITE;
     public static final BlockSchema QUARTZITE;
-
+    public static final BlockSchema KIMBERLITE;
+    public static final BlockSchema DOLOMITE;
 
     public static final BlockSchema GRANITE;
     public static final BlockSchema DIORITE;
@@ -56,6 +57,9 @@ public class BlockSchemas {
 
     static {
         List<BlockVariant> basic = create(BASIC);
+
+        List<BlockVariant> kimberlite = create(Variants.KIMBERLITE);
+
         List<BlockVariant> stone_like = create(ALL_BLOCKS_PLUS, COBBLED, MOSSY_COBBLED, BRICKS, MOSSY_BRICKS, CRACKED_BRICKS, CHISELED_BRICKS);
         List<BlockVariant> blackstone_like = create(ALL_BLOCKS_PLUS, POLISHED, POLISHED_BRICKS, CHISELED_POLISHED, CRACKED_POLISHED_BRICKS);
 
@@ -70,7 +74,8 @@ public class BlockSchemas {
         List<BlockVariant> limestone = create(ALL_BASE_BLOCKS, COBBLED, BRICKS, PILLAR_BLOCK, CHISELED_FULL);
         List<BlockVariant> beige_limestone = create(SEDIMENTARY, COBBLED, BRICKS, PILLAR_BLOCK, CHISELED);
 
-        List<BlockVariant> intrusive = create(OVERGROWN);
+        List<BlockVariant> vanilla_like = create(BASIC, VANILLA);
+        List<BlockVariant> intrusive = create(OVERGROWN, VANILLA);
 
         PHYLLITE = register("phyllite", stone_like);
         SLATE = register("slate", stone_like);
@@ -85,14 +90,18 @@ public class BlockSchemas {
         SILTSTONE = registerSand("siltstone", sandstone_like);
         MUDSTONE = registerSand("mudstone", mudstone);
         CONGLOMERATE = registerSand("conglomerate", secondary);
+        KIMBERLITE = register("kimberlite", kimberlite);
+        MARBLE = register("marble", decorative);
+        PUMICE = register("pumice", basic);
 
-        QUARTZITE = register("quartzite", basic);
+        QUARTZITE = register("quartzite", basic); //Need Copper Texture for Ores
         WEATHERED_RHYOLITE = register("weathered_rhyolite", basic);
         DOLERITE = register("dolerite", basic);
         SCHIST = register("schist", schist);
         LIGNITE = registerSand("lignite", decorative);
         PILLOW_BASALT = register("pillow_basalt", basic, stone().strength(3.0f, 6.0f));
         DACITE = register("dacite", basalt_like, stone().strength(1.25f, 4.2F).sound(SoundType.BASALT));
+        DOLOMITE = register("dolomite", secondary);
 
 //        vanilla block schemas
         GRANITE = registerIntrusive("granite", intrusive, Blocks.GRANITE);

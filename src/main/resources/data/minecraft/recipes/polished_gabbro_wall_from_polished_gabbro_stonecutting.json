@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "unearthed:polished_gabbro"
+  },
+  "result": "unearthed:polished_gabbro_wall",
+  "count": 1
+}

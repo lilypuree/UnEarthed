@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:siltstone_regolith"
+    ]
+  },
+  "criteria": {
+    "has_siltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:siltstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:siltstone_regolith"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_siltstone",
+      "has_the_recipe"
+    ]
+  ]
+}

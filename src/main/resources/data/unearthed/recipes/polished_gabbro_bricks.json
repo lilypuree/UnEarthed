@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "unearthed:polished_gabbro"
+    }
+  },
+  "result": {
+    "item": "unearthed:polished_gabbro_bricks",
+    "count": 4
+  }
+}

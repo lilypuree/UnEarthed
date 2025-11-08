@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "unearthed:mudstone_regolith"
+    ]
+  },
+  "criteria": {
+    "has_mudstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "unearthed:mudstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "unearthed:mudstone_regolith"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mudstone",
+      "has_the_recipe"
+    ]
+  ]
+}
