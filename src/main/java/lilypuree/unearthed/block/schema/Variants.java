@@ -8,6 +8,8 @@ import java.util.List;
 public class Variants {
 
     public static BlockVariant ALL_BLOCKS_PLUS;
+    public static BlockVariant ALL_BLOCKS_NO_ORES;
+    public static BlockVariant SECONDARY_NO_ORES;
     public static BlockVariant ALL_BASE_BLOCKS;
     public static BlockVariant SEDIMENTARY;
     public static BlockVariant COBBLED;
@@ -52,12 +54,22 @@ public class Variants {
         stoneLike.addAll(ores);
         stoneLike.addAll(regoliths);
 
+        List<BlockForm> stoneLikeNoOres = new ArrayList<>();
+        stoneLikeNoOres.addAll(fullBlocks);
+        stoneLikeNoOres.addAll(regoliths);
+
         List<BlockForm> secondary = new ArrayList<>();
         secondary.addAll(baseBlocks);
         secondary.addAll(ores);
         secondary.addAll(regoliths);
 
+        List<BlockForm> secondaryNoOres = new ArrayList<>();
+        secondaryNoOres.addAll(baseBlocks);
+        secondaryNoOres.addAll(regoliths);
 
+
+        ALL_BLOCKS_NO_ORES = new BlockVariant("", stoneLikeNoOres);
+        SECONDARY_NO_ORES = new BlockVariant("", secondaryNoOres);
         ALL_BLOCKS_PLUS = new BlockVariant("", stoneLike);
         ALL_BASE_BLOCKS = new BlockVariant("", secondary);
 
