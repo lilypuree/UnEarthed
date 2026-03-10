@@ -131,7 +131,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    implementation fg.deobf('com.github.Mysticpasta1:Hyle:4d82437')
+    implementation fg.deobf('com.github.Mysticpasta1:Hyle:bdedff5d8f')
     compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.118"))
     runtimeOnly(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.118"))
     minecraftLibrary group: "net.openhft", name: "zero-allocation-hashing", version: "0.16"
