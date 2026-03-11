@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class BlockSchemas {
     private static float cobbleHardness = 2.0f;
     private static float stoneResistance = 6.0f;
     private static float miscResistance = 0.5f;
-    private static BlockBehaviour.Properties stoneProperty = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(stoneHardness, stoneResistance);
+    private static BlockBehaviour.Properties stoneProperty = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(stoneHardness, stoneResistance).mapColor(MapColor.STONE);
     private static final SoundType OVERGROWN_SOUND = Services.PLATFORM.createSoundType(1.0F, 1.0F, () -> SoundEvents.STONE_BREAK, () -> SoundEvents.GRASS_STEP, () -> SoundEvents.STONE_PLACE, () -> SoundEvents.STONE_HIT, () -> SoundEvents.GRASS_FALL);
 
 
@@ -150,6 +151,6 @@ public class BlockSchemas {
     }
 
     private static BlockBehaviour.Properties sandStone() {
-        return BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(0.8f);
+        return BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(0.8f).mapColor(MapColor.SAND);
     }
 }
