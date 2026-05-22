@@ -1,0 +1,18 @@
+{
+  "type": "hyle:deepslate_replacer",
+  "config": {
+    "frequencies": {
+      "region": 0.0006,
+      "unconformity": 0.0023,
+      "primary": 0.008,
+      "secondary": 0.008,
+      "tertiary": 0.09
+    },
+    "regions": [
+      "unearthed:deep_default",
+      "unearthed:deep_limestone",
+      "unearthed:deep_sedimentary",
+      "unearthed:deep_vanilla"
+    ]
+  }
+}

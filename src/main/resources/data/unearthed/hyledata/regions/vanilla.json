@@ -9,7 +9,7 @@
       "unearthed:vanilla/diorite"
     ],
     "base": "",
-    "deep": "unearthed:vanilla/granite",
+    "deep": "",
     "high_bound": -0.7,
     "strata_bound": 0.1,
     "deep_bound": 0.5,
@@ -20,7 +20,7 @@
       ""
     ],
     "base": "",
-    "deep": "unearthed:vanilla/diorite",
+    "deep": "",
     "top_layer_thickness": 40,
     "deep_layer_depth": 100
   },

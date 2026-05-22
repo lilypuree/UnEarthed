@@ -7,6 +7,10 @@
     "unearthed:dolomite",
     "unearthed:schist",
     "unearthed:marble",
-    "minecraft:blackstone"
+    "minecraft:blackstone",
+    "unearthed:dark_slate",
+    "unearthed:cobbled_dark_slate",
+    "unearthed:deep_phyllite",
+    "unearthed:cobbled_deep_phyllite"
   ]
 }

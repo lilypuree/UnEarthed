@@ -9,6 +9,15 @@
     "unearthed:grey_limestone",
     "unearthed:conglomerate",
     "minecraft:sandstone",
-    "minecraft:red_sandstone"
+    "minecraft:red_sandstone",
+    "unearthed:deep_beige_limestone",
+    "unearthed:cobbled_deep_beige_limestone",
+    "unearthed:deep_conglomerate",
+    "unearthed:deep_grey_limestone",
+    "unearthed:cobbled_deep_grey_limestone",
+    "unearthed:deep_limestone",
+    "unearthed:cobbled_deep_limestone",
+    "unearthed:deep_mudstone",
+    "unearthed:deep_siltstone"
   ]
 }

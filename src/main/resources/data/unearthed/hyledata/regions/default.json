@@ -10,7 +10,7 @@
       "unearthed:limestone"
     ],
     "base": "",
-    "deep": "unearthed:slate",
+    "deep": "",
     "high_bound": -0.7,
     "strata_bound": 0.1,
     "deep_bound": 0.5,
@@ -24,7 +24,7 @@
       "unearthed:mudstone"
     ],
     "base": "",
-    "deep": "unearthed:slate",
+    "deep": "",
     "top_layer_thickness": 40,
     "deep_layer_depth": 100
   },

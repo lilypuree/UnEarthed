@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "unearthed:dark_slate",
+    "unearthed:deep_beige_limestone",
+    "unearthed:deep_conglomerate",
+    "unearthed:deep_gabbro",
+    "unearthed:deep_granodiorite",
+    "unearthed:deep_grey_limestone",
+    "unearthed:deep_limestone",
+    "unearthed:deep_mudstone",
+    "unearthed:deep_phyllite",
+    "unearthed:deep_rhyolite",
+    "unearthed:deep_siltstone",
+    "unearthed:deep_weathered_rhyolite",
+    "unearthed:deep_white_granite"
+  ]
+}

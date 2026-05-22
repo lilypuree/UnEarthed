@@ -50,6 +50,21 @@ public class BlockSchemas {
     public static final BlockSchema KIMBERLITE;
     public static final BlockSchema DOLOMITE;
 
+    public static final BlockSchema DARK_SLATE;
+    public static final BlockSchema DEEP_BEIGE_LIMESTONE;
+    public static final BlockSchema DEEP_CONGLOMERATE;
+    public static final BlockSchema DEEP_GABBRO;
+    public static final BlockSchema DEEP_GRANODIORITE;
+    public static final BlockSchema DEEP_GREY_LIMESTONE;
+    public static final BlockSchema DEEP_LIMESTONE;
+    public static final BlockSchema DEEP_MUDSTONE;
+    public static final BlockSchema DEEP_PHYLLITE;
+    public static final BlockSchema DEEP_RHYOLITE;
+    public static final BlockSchema DEEP_SILTSTONE;
+    public static final BlockSchema DEEP_WEATHERED_RHYOLITE;
+    public static final BlockSchema DEEP_WHITE_GRANITE;
+    public static final BlockSchema COBBLED_DEEPSLATE;
+
     public static final BlockSchema GRANITE;
     public static final BlockSchema DIORITE;
     public static final BlockSchema ANDESITE;
@@ -104,6 +119,22 @@ public class BlockSchemas {
         PILLOW_BASALT = register("pillow_basalt", basic, stone().strength(3.0f, 6.0f));
         DACITE = register("dacite", basalt_like, stone().strength(1.25f, 4.2F).sound(SoundType.BASALT));
         DOLOMITE = register("dolomite", secondary_no_ores);
+
+//        deep variant schemas
+        DARK_SLATE = register("dark_slate", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_BEIGE_LIMESTONE = register("deep_beige_limestone", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_GREY_LIMESTONE = register("deep_grey_limestone", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_LIMESTONE = register("deep_limestone", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_PHYLLITE = register("deep_phyllite", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_CONGLOMERATE = register("deep_conglomerate", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_GABBRO = register("deep_gabbro", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_GRANODIORITE = register("deep_granodiorite", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_MUDSTONE = register("deep_mudstone", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_RHYOLITE = register("deep_rhyolite", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_SILTSTONE = register("deep_siltstone", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_WEATHERED_RHYOLITE = register("deep_weathered_rhyolite", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_WHITE_GRANITE = register("deep_white_granite", create(new BlockVariant("", Forms.BLOCK)));
+        COBBLED_DEEPSLATE = register("cobbled_deepslate", create(new BlockVariant("", Forms.BLOCK)));
 
 //        vanilla block schemas
         GRANITE = registerIntrusive("granite", intrusive, Blocks.GRANITE);

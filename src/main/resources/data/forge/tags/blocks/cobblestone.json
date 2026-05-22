@@ -5,6 +5,12 @@
     "unearthed:cobbled_slate",
     "unearthed:cobbled_limestone",
     "unearthed:cobbled_beige_limestone",
-    "unearthed:cobbled_grey_limestone"
+    "unearthed:cobbled_grey_limestone",
+    "unearthed:cobbled_dark_slate",
+    "unearthed:cobbled_deep_beige_limestone",
+    "unearthed:cobbled_deep_grey_limestone",
+    "unearthed:cobbled_deep_limestone",
+    "unearthed:cobbled_deep_phyllite",
+    "unearthed:cobbled_deepslate"
   ]
 }

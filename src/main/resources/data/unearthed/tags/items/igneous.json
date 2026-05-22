@@ -17,6 +17,11 @@
     "minecraft:andesite",
     "minecraft:diorite",
     "minecraft:granite",
-    "minecraft:basalt"
+    "minecraft:basalt",
+    "unearthed:deep_gabbro",
+    "unearthed:deep_granodiorite",
+    "unearthed:deep_rhyolite",
+    "unearthed:deep_white_granite",
+    "unearthed:deep_weathered_rhyolite"
   ]
 }
