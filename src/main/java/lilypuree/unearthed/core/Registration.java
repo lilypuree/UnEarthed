@@ -42,8 +42,6 @@ public class Registration {
     public static final CreativeModeTab tab;
     public static RegistryObject<CreativeModeTab> modeTab;
     public static final RegistryObject<Item> PYROXENE_ITEM;
-    public static final RegistryObject<Item> IRON_ORE;
-    public static final RegistryObject<Item> GOLD_ORE;
     public static final RegistryObject<Item> REGOLITH;
     public static final RegistryObject<Item> LICHEN_ITEM;
     public static final RegistryObject<Item> LIGNITE_BRIQUETTES_ITEM;
@@ -72,8 +70,6 @@ public class Registration {
             ForgePlatformHelper.addToMainTabItems(item);
         }));
         ForgePlatformHelper.addToMainTabItems(PYROXENE_ITEM);
-        ForgePlatformHelper.addToMainTabItems(IRON_ORE);
-        ForgePlatformHelper.addToMainTabItems(GOLD_ORE);
         ForgePlatformHelper.addToMainTabItems(REGOLITH);
         ForgePlatformHelper.addToMainTabItems(LICHEN_ITEM);
         ForgePlatformHelper.addToMainTabItems(LIGNITE_BRIQUETTES_ITEM);
@@ -95,8 +91,6 @@ public class Registration {
         tab = Services.PLATFORM.createModTab("general", () -> new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("unearthed", "chiseled_limestone")))));
         modeTab = CREATIVE_TABS.register("general", () -> tab);
         PYROXENE_ITEM = ITEMS.register("pyroxene", () -> new BlockItem(PYROXENE.get(), (new Item.Properties()).fireResistant()));
-        IRON_ORE = ITEMS.register("iron_ore", () -> new Item(new Item.Properties()));
-        GOLD_ORE = ITEMS.register("gold_ore", () -> new Item(new Item.Properties()));
         REGOLITH = ITEMS.register("regolith", () -> new RegolithItem(new Item.Properties()));
         LICHEN_ITEM = ITEMS.register("lichen", () -> new BlockItem(LICHEN.get(), new Item.Properties()));
         LIGNITE_BRIQUETTES_ITEM = ITEMS.register("lignite_briquettes", () -> new BlockItem(LIGNITE_BRIQUETTES.get(), new Item.Properties()));

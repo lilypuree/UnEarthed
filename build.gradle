@@ -105,6 +105,9 @@ repositories {
     mavenCentral()
     maven { url 'https://www.jitpack.io' }
     maven {
+        url = "https://www.cursemaven.com"
+    }
+    maven {
         name = "Shedaniel Maven" //REI + Cloth Config
         url "https://maven.shedaniel.me/"
     }
@@ -132,6 +135,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
     implementation fg.deobf('com.github.Mysticpasta1:Hyle:bdedff5d8f')
+    implementation fg.deobf("curse.maven:projecte-226410:4901949")
     compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.118"))
     runtimeOnly(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.118"))
     minecraftLibrary group: "net.openhft", name: "zero-allocation-hashing", version: "0.16"
