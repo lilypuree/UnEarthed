@@ -1,18 +1,29 @@
 {
-  "replace": false,
-  "values": [
-    "unearthed:phyllite_iron_ore",
-    "unearthed:slate_iron_ore",
-    "unearthed:gabbro_iron_ore",
-    "unearthed:granodiorite_iron_ore",
-    "unearthed:rhyolite_iron_ore",
-    "unearthed:white_granite_iron_ore",
-    "unearthed:limestone_iron_ore",
-    "unearthed:beige_limestone_iron_ore",
-    "unearthed:grey_limestone_iron_ore",
-    "unearthed:siltstone_iron_ore",
-    "unearthed:mudstone_iron_ore",
-    "unearthed:conglomerate_iron_ore",
-    "unearthed:sandstone_iron_ore"
-  ]
+    "replace":  false,
+    "values":  [
+                   "unearthed:phyllite_iron_ore",
+                   "unearthed:slate_iron_ore",
+                   "unearthed:gabbro_iron_ore",
+                   "unearthed:granodiorite_iron_ore",
+                   "unearthed:rhyolite_iron_ore",
+                   "unearthed:white_granite_iron_ore",
+                   "unearthed:limestone_iron_ore",
+                   "unearthed:beige_limestone_iron_ore",
+                   "unearthed:grey_limestone_iron_ore",
+                   "unearthed:siltstone_iron_ore",
+                   "unearthed:mudstone_iron_ore",
+                   "unearthed:conglomerate_iron_ore",
+                   "unearthed:sandstone_iron_ore",
+                   "unearthed:dark_slate_iron_ore",
+                   "unearthed:deep_beige_limestone_iron_ore",
+                   "unearthed:deep_conglomerate_iron_ore",
+                   "unearthed:deep_gabbro_iron_ore",
+                   "unearthed:deep_granodiorite_iron_ore",
+                   "unearthed:deep_grey_limestone_iron_ore",
+                   "unearthed:deep_limestone_iron_ore",
+                   "unearthed:deep_mudstone_iron_ore",
+                   "unearthed:deep_phyllite_iron_ore",
+                   "unearthed:deep_siltstone_iron_ore",
+                   "unearthed:deep_white_granite_iron_ore"
+               ]
 }

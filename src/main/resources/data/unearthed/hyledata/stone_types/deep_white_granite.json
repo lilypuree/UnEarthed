@@ -1,8 +1,17 @@
 {
-  "base": "minecraft:deep_white_granite",
+  "base": "unearthed:deep_white_granite",
   "deepslate": "unearthed:deep_white_granite",
   "cobble": "",
   "dirt": "",
   "grass": "",
-  "ores": {}
+  "ores": {
+    "minecraft:deepslate_iron_ore": "unearthed:deep_white_granite_iron_ore",
+    "minecraft:deepslate_coal_ore": "unearthed:deep_white_granite_coal_ore",
+    "minecraft:deepslate_copper_ore": "unearthed:deep_white_granite_copper_ore",
+    "minecraft:deepslate_gold_ore": "unearthed:deep_white_granite_gold_ore",
+    "minecraft:deepslate_lapis_ore": "unearthed:deep_white_granite_lapis_ore",
+    "minecraft:deepslate_redstone_ore": "unearthed:deep_white_granite_redstone_ore",
+    "minecraft:deepslate_diamond_ore": "unearthed:deep_white_granite_diamond_ore",
+    "minecraft:deepslate_emerald_ore": "unearthed:deep_white_granite_emerald_ore"
+  }
 }

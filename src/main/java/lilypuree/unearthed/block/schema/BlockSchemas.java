@@ -121,19 +121,19 @@ public class BlockSchemas {
         DOLOMITE = register("dolomite", secondary_no_ores);
 
 //        deep variant schemas
-        DARK_SLATE = register("dark_slate", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
-        DEEP_BEIGE_LIMESTONE = register("deep_beige_limestone", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
-        DEEP_GREY_LIMESTONE = register("deep_grey_limestone", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
-        DEEP_LIMESTONE = register("deep_limestone", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
-        DEEP_PHYLLITE = register("deep_phyllite", create(new BlockVariant("", Forms.BLOCK), new BlockVariant("cobbled", Forms.BLOCK)));
-        DEEP_CONGLOMERATE = register("deep_conglomerate", create(new BlockVariant("", Forms.BLOCK)));
-        DEEP_GABBRO = register("deep_gabbro", create(new BlockVariant("", Forms.BLOCK)));
-        DEEP_GRANODIORITE = register("deep_granodiorite", create(new BlockVariant("", Forms.BLOCK)));
-        DEEP_MUDSTONE = register("deep_mudstone", create(new BlockVariant("", Forms.BLOCK)));
+        DARK_SLATE = register("dark_slate", create(DEEP_ORES, new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_BEIGE_LIMESTONE = register("deep_beige_limestone", create(DEEP_ORES, new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_GREY_LIMESTONE = register("deep_grey_limestone", create(DEEP_ORES, new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_LIMESTONE = register("deep_limestone", create(DEEP_ORES, new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_PHYLLITE = register("deep_phyllite", create(DEEP_ORES, new BlockVariant("cobbled", Forms.BLOCK)));
+        DEEP_CONGLOMERATE = register("deep_conglomerate", create(DEEP_ORES));
+        DEEP_GABBRO = register("deep_gabbro", create(DEEP_ORES));
+        DEEP_GRANODIORITE = register("deep_granodiorite", create(DEEP_ORES));
+        DEEP_MUDSTONE = register("deep_mudstone", create(DEEP_ORES));
         DEEP_RHYOLITE = register("deep_rhyolite", create(new BlockVariant("", Forms.BLOCK)));
-        DEEP_SILTSTONE = register("deep_siltstone", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_SILTSTONE = register("deep_siltstone", create(DEEP_ORES));
         DEEP_WEATHERED_RHYOLITE = register("deep_weathered_rhyolite", create(new BlockVariant("", Forms.BLOCK)));
-        DEEP_WHITE_GRANITE = register("deep_white_granite", create(new BlockVariant("", Forms.BLOCK)));
+        DEEP_WHITE_GRANITE = register("deep_white_granite", create(DEEP_ORES));
         COBBLED_DEEPSLATE = register("cobbled_deepslate", create(new BlockVariant("", Forms.BLOCK)));
 
 //        vanilla block schemas

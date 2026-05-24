@@ -4,5 +4,14 @@
   "cobble": "",
   "dirt": "",
   "grass": "",
-  "ores": {}
+  "ores": {
+    "minecraft:iron_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:coal_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:copper_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:gold_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:lapis_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:redstone_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:diamond_ore": "unearthed:deep_weathered_rhyolite",
+    "minecraft:emerald_ore": "unearthed:deep_weathered_rhyolite"
+  }
 }

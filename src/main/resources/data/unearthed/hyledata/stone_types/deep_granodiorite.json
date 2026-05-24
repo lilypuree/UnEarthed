@@ -4,5 +4,14 @@
   "cobble": "",
   "dirt": "",
   "grass": "",
-  "ores": {}
+  "ores": {
+    "minecraft:deepslate_iron_ore": "unearthed:deep_granodiorite_iron_ore",
+    "minecraft:deepslate_coal_ore": "unearthed:deep_granodiorite_coal_ore",
+    "minecraft:deepslate_copper_ore": "unearthed:deep_granodiorite_copper_ore",
+    "minecraft:deepslate_gold_ore": "unearthed:deep_granodiorite_gold_ore",
+    "minecraft:deepslate_lapis_ore": "unearthed:deep_granodiorite_lapis_ore",
+    "minecraft:deepslate_redstone_ore": "unearthed:deep_granodiorite_redstone_ore",
+    "minecraft:deepslate_diamond_ore": "unearthed:deep_granodiorite_diamond_ore",
+    "minecraft:deepslate_emerald_ore": "unearthed:deep_granodiorite_emerald_ore"
+  }
 }

@@ -1,18 +1,29 @@
 {
-  "replace": false,
-  "values": [
-    "unearthed:phyllite_lapis_ore",
-    "unearthed:slate_lapis_ore",
-    "unearthed:gabbro_lapis_ore",
-    "unearthed:granodiorite_lapis_ore",
-    "unearthed:white_granite_lapis_ore",
-    "unearthed:rhyolite_lapis_ore",
-    "unearthed:conglomerate_lapis_ore",
-    "unearthed:beige_limestone_lapis_ore",
-    "unearthed:limestone_lapis_ore",
-    "unearthed:grey_limestone_lapis_ore",
-    "unearthed:siltstone_lapis_ore",
-    "unearthed:mudstone_lapis_ore",
-    "unearthed:sandstone_lapis_ore"
-  ]
+    "replace":  false,
+    "values":  [
+                   "unearthed:phyllite_lapis_ore",
+                   "unearthed:slate_lapis_ore",
+                   "unearthed:gabbro_lapis_ore",
+                   "unearthed:granodiorite_lapis_ore",
+                   "unearthed:white_granite_lapis_ore",
+                   "unearthed:rhyolite_lapis_ore",
+                   "unearthed:conglomerate_lapis_ore",
+                   "unearthed:beige_limestone_lapis_ore",
+                   "unearthed:limestone_lapis_ore",
+                   "unearthed:grey_limestone_lapis_ore",
+                   "unearthed:siltstone_lapis_ore",
+                   "unearthed:mudstone_lapis_ore",
+                   "unearthed:sandstone_lapis_ore",
+                   "unearthed:dark_slate_lapis_ore",
+                   "unearthed:deep_beige_limestone_lapis_ore",
+                   "unearthed:deep_conglomerate_lapis_ore",
+                   "unearthed:deep_gabbro_lapis_ore",
+                   "unearthed:deep_granodiorite_lapis_ore",
+                   "unearthed:deep_grey_limestone_lapis_ore",
+                   "unearthed:deep_limestone_lapis_ore",
+                   "unearthed:deep_mudstone_lapis_ore",
+                   "unearthed:deep_phyllite_lapis_ore",
+                   "unearthed:deep_siltstone_lapis_ore",
+                   "unearthed:deep_white_granite_lapis_ore"
+               ]
 }

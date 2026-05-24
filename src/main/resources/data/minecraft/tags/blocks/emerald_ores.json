@@ -1,18 +1,29 @@
 {
-  "replace": false,
-  "values": [
-    "unearthed:phyllite_emerald_ore",
-    "unearthed:slate_emerald_ore",
-    "unearthed:gabbro_emerald_ore",
-    "unearthed:granodiorite_emerald_ore",
-    "unearthed:rhyolite_emerald_ore",
-    "unearthed:white_granite_emerald_ore",
-    "unearthed:limestone_emerald_ore",
-    "unearthed:beige_limestone_emerald_ore",
-    "unearthed:grey_limestone_emerald_ore",
-    "unearthed:siltstone_emerald_ore",
-    "unearthed:mudstone_emerald_ore",
-    "unearthed:conglomerate_emerald_ore",
-    "unearthed:sandstone_emerald_ore"
-  ]
+    "replace":  false,
+    "values":  [
+                   "unearthed:phyllite_emerald_ore",
+                   "unearthed:slate_emerald_ore",
+                   "unearthed:gabbro_emerald_ore",
+                   "unearthed:granodiorite_emerald_ore",
+                   "unearthed:rhyolite_emerald_ore",
+                   "unearthed:white_granite_emerald_ore",
+                   "unearthed:limestone_emerald_ore",
+                   "unearthed:beige_limestone_emerald_ore",
+                   "unearthed:grey_limestone_emerald_ore",
+                   "unearthed:siltstone_emerald_ore",
+                   "unearthed:mudstone_emerald_ore",
+                   "unearthed:conglomerate_emerald_ore",
+                   "unearthed:sandstone_emerald_ore",
+                   "unearthed:dark_slate_emerald_ore",
+                   "unearthed:deep_beige_limestone_emerald_ore",
+                   "unearthed:deep_conglomerate_emerald_ore",
+                   "unearthed:deep_gabbro_emerald_ore",
+                   "unearthed:deep_granodiorite_emerald_ore",
+                   "unearthed:deep_grey_limestone_emerald_ore",
+                   "unearthed:deep_limestone_emerald_ore",
+                   "unearthed:deep_mudstone_emerald_ore",
+                   "unearthed:deep_phyllite_emerald_ore",
+                   "unearthed:deep_siltstone_emerald_ore",
+                   "unearthed:deep_white_granite_emerald_ore"
+               ]
 }

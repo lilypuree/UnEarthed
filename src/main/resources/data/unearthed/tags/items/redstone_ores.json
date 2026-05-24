@@ -1,18 +1,29 @@
 {
-  "replace": false,
-  "values": [
-    "unearthed:phyllite_redstone_ore",
-    "unearthed:slate_redstone_ore",
-    "unearthed:gabbro_redstone_ore",
-    "unearthed:granodiorite_redstone_ore",
-    "unearthed:white_granite_redstone_ore",
-    "unearthed:rhyolite_redstone_ore",
-    "unearthed:conglomerate_redstone_ore",
-    "unearthed:beige_limestone_redstone_ore",
-    "unearthed:limestone_redstone_ore",
-    "unearthed:grey_limestone_redstone_ore",
-    "unearthed:siltstone_redstone_ore",
-    "unearthed:mudstone_redstone_ore",
-    "unearthed:sandstone_redstone_ore"
-  ]
+    "replace":  false,
+    "values":  [
+                   "unearthed:phyllite_redstone_ore",
+                   "unearthed:slate_redstone_ore",
+                   "unearthed:gabbro_redstone_ore",
+                   "unearthed:granodiorite_redstone_ore",
+                   "unearthed:white_granite_redstone_ore",
+                   "unearthed:rhyolite_redstone_ore",
+                   "unearthed:conglomerate_redstone_ore",
+                   "unearthed:beige_limestone_redstone_ore",
+                   "unearthed:limestone_redstone_ore",
+                   "unearthed:grey_limestone_redstone_ore",
+                   "unearthed:siltstone_redstone_ore",
+                   "unearthed:mudstone_redstone_ore",
+                   "unearthed:sandstone_redstone_ore",
+                   "unearthed:dark_slate_redstone_ore",
+                   "unearthed:deep_beige_limestone_redstone_ore",
+                   "unearthed:deep_conglomerate_redstone_ore",
+                   "unearthed:deep_gabbro_redstone_ore",
+                   "unearthed:deep_granodiorite_redstone_ore",
+                   "unearthed:deep_grey_limestone_redstone_ore",
+                   "unearthed:deep_limestone_redstone_ore",
+                   "unearthed:deep_mudstone_redstone_ore",
+                   "unearthed:deep_phyllite_redstone_ore",
+                   "unearthed:deep_siltstone_redstone_ore",
+                   "unearthed:deep_white_granite_redstone_ore"
+               ]
 }

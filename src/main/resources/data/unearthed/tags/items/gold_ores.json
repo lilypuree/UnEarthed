@@ -1,19 +1,30 @@
 {
-  "replace": false,
-  "values": [
-    "unearthed:phyllite_gold_ore",
-    "unearthed:slate_gold_ore",
-    "unearthed:gabbro_gold_ore",
-    "unearthed:granodiorite_gold_ore",
-    "unearthed:white_granite_gold_ore",
-    "unearthed:rhyolite_gold_ore",
-    "unearthed:conglomerate_gold_ore",
-    "unearthed:beige_limestone_gold_ore",
-    "unearthed:limestone_gold_ore",
-    "unearthed:grey_limestone_gold_ore",
-    "unearthed:siltstone_gold_ore",
-    "unearthed:mudstone_gold_ore",
-    "unearthed:sandstone_gold_ore",
-    "unearthed:gold_ore"
-  ]
+    "replace":  false,
+    "values":  [
+                   "unearthed:phyllite_gold_ore",
+                   "unearthed:slate_gold_ore",
+                   "unearthed:gabbro_gold_ore",
+                   "unearthed:granodiorite_gold_ore",
+                   "unearthed:white_granite_gold_ore",
+                   "unearthed:rhyolite_gold_ore",
+                   "unearthed:conglomerate_gold_ore",
+                   "unearthed:beige_limestone_gold_ore",
+                   "unearthed:limestone_gold_ore",
+                   "unearthed:grey_limestone_gold_ore",
+                   "unearthed:siltstone_gold_ore",
+                   "unearthed:mudstone_gold_ore",
+                   "unearthed:sandstone_gold_ore",
+                   "unearthed:gold_ore",
+                   "unearthed:dark_slate_gold_ore",
+                   "unearthed:deep_beige_limestone_gold_ore",
+                   "unearthed:deep_conglomerate_gold_ore",
+                   "unearthed:deep_gabbro_gold_ore",
+                   "unearthed:deep_granodiorite_gold_ore",
+                   "unearthed:deep_grey_limestone_gold_ore",
+                   "unearthed:deep_limestone_gold_ore",
+                   "unearthed:deep_mudstone_gold_ore",
+                   "unearthed:deep_phyllite_gold_ore",
+                   "unearthed:deep_siltstone_gold_ore",
+                   "unearthed:deep_white_granite_gold_ore"
+               ]
 }

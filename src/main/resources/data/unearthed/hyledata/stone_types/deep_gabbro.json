@@ -4,5 +4,14 @@
   "cobble": "",
   "dirt": "",
   "grass": "",
-  "ores": {}
+  "ores": {
+    "minecraft:deepslate_iron_ore": "unearthed:deep_gabbro_iron_ore",
+    "minecraft:deepslate_coal_ore": "unearthed:deep_gabbro_coal_ore",
+    "minecraft:deepslate_copper_ore": "unearthed:deep_gabbro_copper_ore",
+    "minecraft:deepslate_gold_ore": "unearthed:deep_gabbro_gold_ore",
+    "minecraft:deepslate_lapis_ore": "unearthed:deep_gabbro_lapis_ore",
+    "minecraft:deepslate_redstone_ore": "unearthed:deep_gabbro_redstone_ore",
+    "minecraft:deepslate_diamond_ore": "unearthed:deep_gabbro_diamond_ore",
+    "minecraft:deepslate_emerald_ore": "unearthed:deep_gabbro_emerald_ore"
+  }
 }

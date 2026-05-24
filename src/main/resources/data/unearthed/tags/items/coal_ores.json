@@ -1,18 +1,29 @@
 {
-  "replace": false,
-  "values": [
-    "unearthed:phyllite_coal_ore",
-    "unearthed:slate_coal_ore",
-    "unearthed:gabbro_coal_ore",
-    "unearthed:granodiorite_coal_ore",
-    "unearthed:white_granite_coal_ore",
-    "unearthed:rhyolite_coal_ore",
-    "unearthed:conglomerate_coal_ore",
-    "unearthed:beige_limestone_coal_ore",
-    "unearthed:limestone_coal_ore",
-    "unearthed:grey_limestone_coal_ore",
-    "unearthed:siltstone_coal_ore",
-    "unearthed:mudstone_coal_ore",
-    "unearthed:sandstone_coal_ore"
-  ]
+    "replace":  false,
+    "values":  [
+                   "unearthed:phyllite_coal_ore",
+                   "unearthed:slate_coal_ore",
+                   "unearthed:gabbro_coal_ore",
+                   "unearthed:granodiorite_coal_ore",
+                   "unearthed:white_granite_coal_ore",
+                   "unearthed:rhyolite_coal_ore",
+                   "unearthed:conglomerate_coal_ore",
+                   "unearthed:beige_limestone_coal_ore",
+                   "unearthed:limestone_coal_ore",
+                   "unearthed:grey_limestone_coal_ore",
+                   "unearthed:siltstone_coal_ore",
+                   "unearthed:mudstone_coal_ore",
+                   "unearthed:sandstone_coal_ore",
+                   "unearthed:dark_slate_coal_ore",
+                   "unearthed:deep_beige_limestone_coal_ore",
+                   "unearthed:deep_conglomerate_coal_ore",
+                   "unearthed:deep_gabbro_coal_ore",
+                   "unearthed:deep_granodiorite_coal_ore",
+                   "unearthed:deep_grey_limestone_coal_ore",
+                   "unearthed:deep_limestone_coal_ore",
+                   "unearthed:deep_mudstone_coal_ore",
+                   "unearthed:deep_phyllite_coal_ore",
+                   "unearthed:deep_siltstone_coal_ore",
+                   "unearthed:deep_white_granite_coal_ore"
+               ]
 }
